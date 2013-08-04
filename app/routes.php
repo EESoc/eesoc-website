@@ -11,6 +11,17 @@
 |
 */
 
+Route::get('sign_in', 'SessionsController@getNew');
+Route::post('sign_in', array('before' => 'csrf', 'uses' => 'SessionsController@postCreate'));
+
+Route::get('users/{username}', 'UsersController@getShow');
+
+Route::group(array('prefix' => 'admin'), function() {
+
+
+
+});
+
 Route::get('/', function()
 {
 	return View::make('hello');
