@@ -12,6 +12,7 @@
     <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/bootstrap-glyphicons.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
   </head>
 
   <body>

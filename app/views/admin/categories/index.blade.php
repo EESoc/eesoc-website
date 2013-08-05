@@ -8,11 +8,13 @@
     </a>
     <h1>Categories</h1>
   </div>
-  <div class="list-group">
+  <div class="list-group category-list">
     @foreach($categories as $category)
       <a href="{{ URL::route('admin.categories.edit', $category->id) }}" class="list-group-item">
-        <h4>{{ $category->name }}</h4>
-        {{{ $category->description }}}
+        <h3>
+          {{{ $category->name }}}
+          <small>/{{{ $category->slug }}}</small>
+        </h3>
       </a>
     @endforeach
   </div>

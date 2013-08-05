@@ -34,13 +34,12 @@ class AdminCategoriesController extends AdminController {
 		$inputs = array(
 			'name' => Input::get('name'),
 			'slug' => Input::get('slug'),
-			'description' => Input::get('description')
+			'description' => Input::get('description'),
 		);
 
 		$rules = array(
 			'name' => 'required',
 			'slug' => 'unique:categories',
-			'description' => 'required'
 		);
 
 		$validator = Validator::make($inputs, $rules);
@@ -92,13 +91,12 @@ class AdminCategoriesController extends AdminController {
 		$inputs = array(
 			'name' => Input::get('name'),
 			'slug' => Input::get('slug'),
-			'description' => Input::get('description')
+			'description' => Input::get('description'),
 		);
 
 		$rules = array(
 			'name' => 'required',
 			'slug' => "unique:categories,slug,{$category->id}",
-			'description' => 'required'
 		);
 
 		$validator = Validator::make($inputs, $rules);
