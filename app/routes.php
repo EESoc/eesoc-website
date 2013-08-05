@@ -21,7 +21,9 @@ Route::group(array('prefix' => 'admin'), function() {
 
 	Route::get('/', 'AdminController@getDashboard');
 
-	Route::resource('categories', 'AdminCategoriesController');
+	Route::resource('categories', 'AdminCategoriesController', array('except' => array('show')));
+
+    Route::resource('users', 'AdminUsersController');
 
 });
 

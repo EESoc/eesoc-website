@@ -6,7 +6,7 @@
       <div class="page-header">
         <h1>Editing Category</h1>
       </div>
-      {{ Form::model($category, array('route' => array('admin.categories.update', $category->id), 'method' => 'put')) }}
+      {{ Form::model($category, array('route' => array('admin.categories.update', $category->id), 'method' => 'patch')) }}
         @include('admin.categories.form')
       {{ Form::close() }}
       @if ($category->is_deletable())

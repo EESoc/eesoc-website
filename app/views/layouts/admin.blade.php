@@ -30,7 +30,7 @@
             <li><a href="#">Posts</a></li>
             <li><a href="#">Pages</a></li>
             <li {{ str_contains(Route::currentRouteName(), 'admin.categories') ? 'class="active"' : '' }}><a href="{{ URL::route('admin.categories.index') }}">Categories</a></li>
-            <li><a href="#">Users</a></li>
+            <li {{ str_contains(Route::currentRouteName(), 'admin.users') ? 'class="active"' : '' }}><a href="{{ URL::route('admin.users.index') }}">Users</a></li>
           </ul>
           {{ Form::open(array('action' => 'SessionsController@deleteDestroy', 'method' => 'delete', 'class' => 'navbar-form pull-right')) }}
             <button type="submit" class="btn btn-default">Sign Out</button>

@@ -54,4 +54,20 @@ class User extends Eloquent implements UserInterface {
 		return ((int) $this->is_admin === 1);
 	}
 
+	public function recordSignIn()
+	{
+		$this->last_sign_in_at = new DateTime;
+		return $this->save();
+	}
+
+	public function scopeAdmin($query)
+	{
+		return $query->where('is_admin', '=', true);
+	}
+
+	public function scopeNonAdmin($query)
+	{
+		return $query->where('is_admin', '=', false);
+	}
+
 }
