@@ -6,7 +6,7 @@ class User extends Eloquent implements UserInterface {
 
 	private $imperialCollegeUser;
 
-	public static function findOrCreateFromLDAP($username)
+	public static function findOrCreateWithLDAP($username)
 	{
 		$username = strtolower($username);
 

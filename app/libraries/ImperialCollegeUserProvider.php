@@ -11,13 +11,13 @@ class ImperialCollegeUserProvider implements Illuminate\Auth\UserProviderInterfa
 
 	public function retrieveByID($identifier)
 	{
-		return $this->createModel()->findOrCreateFromLDAP($identifier);
+		return $this->createModel()->findOrCreateWithLDAP($identifier);
 	}
 
 	public function retrieveByCredentials(array $credentials)
 	{
 		if (isset($credentials['username'])) {
-			$this->createModel()->findOrCreateFromLDAP($credentials['username']);
+			$this->createModel()->findOrCreateWithLDAP($credentials['username']);
 		}
 
 		$query = $this->createModel()->newQuery();
