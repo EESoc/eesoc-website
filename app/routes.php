@@ -23,7 +23,8 @@ Route::group(array('prefix' => 'admin'), function() {
 
 	Route::resource('categories', 'AdminCategoriesController', array('except' => array('show')));
 
-    Route::resource('users', 'AdminUsersController');
+    Route::resource('users', 'AdminUsersController', array('only' => array('index')));
+    Route::controller('users', 'AdminUsersController');
 
 });
 

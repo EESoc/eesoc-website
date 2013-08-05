@@ -9,75 +9,73 @@ class AdminUsersController extends AdminController {
 	 */
 	public function index()
 	{
+		$userInstance = new User;
+		$usersQuery = $userInstance->newQuery();
+
+		switch (Input::get('filter')) {
+			case 'admins':
+				$usersQuery->admin();
+				break;
+			case 'non-admins':
+				$usersQuery->nonAdmin();
+				break;
+			case 'members':
+				// @todo
+				break;
+			case 'non-members':
+				// @todo
+				break;
+		}
+
 		return View::make('admin.users.index')
-			->with('users', User::all())
+			->with('users', $usersQuery->get())
 			->with('everybody_count', User::count())
 			->with('admins_count', User::admin()->count())
 			->with('non_admins_count', User::nonAdmin()->count());
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
+	public function getSynchronize()
 	{
-		//
+		
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
+	public function putSynchronize()
 	{
-		//
+		$user = User::where('username', '=', $username)->firstOrFail();
+		echo 'do something';
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
+	public function putPromote($username)
 	{
-		//
+		$user = User::where('username', '=', $username)->firstOrFail();
+		
+		if ($user->id === Auth::user()->id) {
+			return Redirect::back()->with('danger', 'You cannot promote yourself');
+		} else if ($user->isAdmin()) {
+			return Redirect::back()->with('danger', "{$user->username} is already an Admin");
+		} else {
+			$user->is_admin = true;
+			$user->save();
+
+			return Redirect::back()->with('success', "{$user->username} has been successfully promoted to Admin");
+		}
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
+	public function putDemote($username)
 	{
-		//
-	}
+		$user = User::where('username', '=', $username)->firstOrFail();
+		
+		if ($user->id === Auth::user()->id) {
+			return Redirect::back()->with('danger', 'You cannot demote yourself');
+		} else if ( ! $user->isAdmin()) {
+			return Redirect::back()->with('danger', "{$user->username} is already a Non-Admin");
+		} else {
+			$user->is_admin = false;
+			$user->save();
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
+			return Redirect::back()->with('success', "{$user->username} has been successfully demoted from Admin");
+		}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
 	}
 
 }

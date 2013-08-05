@@ -50,7 +50,7 @@
         <footer id="credits" class="col-lg-12">
           <hr>
           &copy; {{ date('Y') }}
-          Written by <a href="#">Jian Yuan Lee</a>
+          Code by <a href="#">Jian Yuan Lee</a>
         </footer>
       </div>
     </div>

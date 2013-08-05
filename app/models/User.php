@@ -4,6 +4,8 @@ use Illuminate\Auth\UserInterface;
 
 class User extends Eloquent implements UserInterface {
 
+	private $imperialCollegeUser;
+
 	public static function synchronizeUser($username)
 	{
 		$username = strtolower($username);
@@ -41,12 +43,25 @@ class User extends Eloquent implements UserInterface {
 
 	public function imperialCollegeUser()
 	{
-		return new ImperialCollegeUser($this->username);
+		if ( ! isset($this->imperialCollegeUser)) {
+			$this->imperialCollegeUser = new ImperialCollegeUser($this->username);
+		}
+
+		return $this->imperialCollegeUser;
 	}
 
 	public function checkPassword($password)
 	{
 		return $this->imperialCollegeUser()->checkPassword($password);
+	}
+
+	public function synchronizeWithLDAP()
+	{
+		$this->username = $this->imperialCollegeUser()->username;
+		$this->name     = $this->imperialCollegeUser()->name;
+		$this->email    = $this->imperialCollegeUser()->email;
+		$this->extras   = implode("\n", $this->imperialCollegeUser()->info);
+		return $this->save();
 	}
 
 	public function isAdmin()
