@@ -25,7 +25,6 @@ Route::group(array('prefix' => 'admin'), function() {
 
 });
 
-Route::get('/', function()
-{
+Route::get('/', function() {
 	return View::make('hello');
 });

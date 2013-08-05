@@ -7,12 +7,7 @@
     </div>
     {{ Form::open(array('action' => 'SessionsController@postCreate')) }}
 
-      @if (Session::has('danger'))
-        <div class="alert alert-danger">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          {{ Session::get('danger') }}
-        </div>
-      @endif
+      @include('shared.flashes')
 
       <div class="form-group {{ $errors->first('username', 'has-error') }}">
         {{ Form::label('username', 'IC Username', array('class' => 'control-label')) }}
