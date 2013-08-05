@@ -14,4 +14,9 @@ class User extends Eloquent implements UserInterface {
 		return null;
 	}
 
+	public function is_admin()
+	{
+		return ($this->is_admin === 1);
+	}
+
 }

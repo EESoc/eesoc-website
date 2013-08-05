@@ -11,8 +11,6 @@
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
-
-    <link href="signin.css" rel="stylesheet">
   </head>
 
   <body>

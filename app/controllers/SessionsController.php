@@ -2,6 +2,13 @@
 
 class SessionsController extends BaseController {
 
+	public function __construct()
+	{
+		$this->beforeFilter('auth', array('only' => array('deleteDestroy')));
+		$this->beforeFilter('guest', array('except' => array('deleteDestroy')));
+		$this->beforeFilter('csrf', array('on' => array('post', 'put', 'delete')));
+	}
+
 	public function getNew()
 	{
 		return View::make('sessions.new');
@@ -31,6 +38,12 @@ class SessionsController extends BaseController {
 		} else {
 			return Redirect::action('SessionsController@getNew')->withInput()->withErrors($validator);
 		}
+	}
+
+	public function deleteDestroy()
+	{
+		Auth::logout();
+		return Redirect::to('/')->with('success', 'You have successfully signed out');
 	}
 
 }
