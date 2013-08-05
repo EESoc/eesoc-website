@@ -6,12 +6,12 @@ class User extends Eloquent implements UserInterface {
 
 	private $imperialCollegeUser;
 
-	public static function synchronizeUser($username)
+	public static function findOrCreateFromLDAP($username)
 	{
 		$username = strtolower($username);
 
-		$imperialUser = new ImperialCollegeUser($username);
-		if ( ! $imperialUser->exists()) {
+		$imperialCollegeUser = new ImperialCollegeUser($username);
+		if ( ! $imperialCollegeUser->exists()) {
 			return null;
 		}
 
@@ -21,12 +21,8 @@ class User extends Eloquent implements UserInterface {
 			$user = new static;
 		}
 
-		$user->username = $imperialUser->username;
-		$user->name     = $imperialUser->name;
-		$user->email    = $imperialUser->email;
-		$user->extras   = implode("\n", $imperialUser->info);
-
-		$user->save();
+		$user->setImperialCollegeUser($imperialCollegeUser);
+		$user->synchronizeWithLDAP();
 
 		return $user;
 	}
@@ -41,7 +37,12 @@ class User extends Eloquent implements UserInterface {
 		return null;
 	}
 
-	public function imperialCollegeUser()
+	public function setImperialCollegeUser($imperialCollegeUser)
+	{
+		$this->imperialCollegeUser = $imperialCollegeUser;
+	}
+
+	public function getImperialCollegeUser()
 	{
 		if ( ! isset($this->imperialCollegeUser)) {
 			$this->imperialCollegeUser = new ImperialCollegeUser($this->username);
@@ -52,15 +53,15 @@ class User extends Eloquent implements UserInterface {
 
 	public function checkPassword($password)
 	{
-		return $this->imperialCollegeUser()->checkPassword($password);
+		return $this->getImperialCollegeUser()->checkPassword($password);
 	}
 
 	public function synchronizeWithLDAP()
 	{
-		$this->username = $this->imperialCollegeUser()->username;
-		$this->name     = $this->imperialCollegeUser()->name;
-		$this->email    = $this->imperialCollegeUser()->email;
-		$this->extras   = implode("\n", $this->imperialCollegeUser()->info);
+		$this->username = $this->getImperialCollegeUser()->username;
+		$this->name     = $this->getImperialCollegeUser()->name;
+		$this->email    = $this->getImperialCollegeUser()->email;
+		$this->extras   = implode("\n", $this->getImperialCollegeUser()->info);
 		return $this->save();
 	}
 
