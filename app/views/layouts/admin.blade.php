@@ -46,7 +46,14 @@
       @include('shared.flashes')
       @yield('content')
 
-    </div> <!-- /container -->
+      <div class="row">
+        <footer id="credits" class="col-lg-12">
+          <hr>
+          &copy; {{ date('Y') }}
+          Written by <a href="#">Jian Yuan Lee</a>
+        </footer>
+      </div>
+    </div>
 
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
