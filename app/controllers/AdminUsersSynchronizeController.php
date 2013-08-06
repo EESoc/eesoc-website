@@ -2,7 +2,7 @@
 
 class AdminUsersSynchronizeController extends AdminController {
 
-	const KEY_EACTIVITIES_SESSION = 'eactivities_cookie_jar';
+	const KEY_EACTIVITIES_SESSION = 'eactivities_session';
 
 	public function getSignIn()
 	{

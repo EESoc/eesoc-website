@@ -2,8 +2,8 @@
 
 Imperial College London EESoc's Offical Website Source Code
 
-### Technologies Used
-* [Laravel PHP Framework](http://laravel.com/)
+### Major Technologies Used
+* [Laravel 4](http://laravel.com/)
 * [Bootstrap 3](http://getbootstrap.com/)
 
 ### Installation
@@ -12,4 +12,5 @@ Imperial College London EESoc's Offical Website Source Code
 3. Install Composer by running `curl -sS https://getcomposer.org/installer | php`
 4. Run `php composer.phar install` to download and install dependencies.
 5. Run `php artisan migrate` to run database migrations (make sure database has already been created).
-6. Enjoy!
+6. If you're on PHP 5.4, run `php artisan serve` to start the built-in web server.
+7. Enjoy!
