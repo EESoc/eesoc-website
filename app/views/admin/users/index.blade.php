@@ -6,7 +6,7 @@
       <div class="page-header">
         <div class="pull-right btn-group">
           <a href="{{ URL::action('AdminUsersSynchronizeController@getSignIn') }}" class="btn btn-default btn-info btn-large">
-            <span class="glyphicon glyphicon-download-alt"></span>
+            <span class="glyphicon glyphicon-refresh"></span>
             Synchronize with eActivities
           </a>
         </div>
@@ -106,6 +106,7 @@
           </tr>
         @endforeach
       </table>
+      {{ $users->appends($paginator_appends)->links() }}
     </div>
   </div>
 @stop

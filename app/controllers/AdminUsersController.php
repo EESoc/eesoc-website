@@ -2,6 +2,8 @@
 
 class AdminUsersController extends AdminController {
 
+	const USERS_PER_PAGE = 20;
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -12,7 +14,10 @@ class AdminUsersController extends AdminController {
 		$userInstance = new User;
 		$usersQuery = $userInstance->newQuery();
 
-		switch (Input::get('filter')) {
+		$paginator_appends = array(
+			'filter' => Input::get('filter')
+		);
+		switch ($paginator_appends['filter']) {
 			case 'admins':
 				$usersQuery->admin();
 				break;
@@ -25,13 +30,17 @@ class AdminUsersController extends AdminController {
 			case 'non-members':
 				// @todo
 				break;
+			default:
+				$paginator_appends['filter'] = null;
+				break;
 		}
 
 		return View::make('admin.users.index')
-			->with('users', $usersQuery->get())
+			->with('users', $usersQuery->paginate(self::USERS_PER_PAGE))
 			->with('everybody_count', User::count())
 			->with('admins_count', User::admin()->count())
-			->with('non_admins_count', User::nonAdmin()->count());
+			->with('non_admins_count', User::nonAdmin()->count())
+			->with('paginator_appends', $paginator_appends);
 	}
 
 

@@ -1,9 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-  <div class="page-header">
-    <h1>Synchronize with eActivities</h1>
-  </div>
+  @include('admin.users.synchronize.header')
   {{ Form::open(array('action' => 'AdminUsersSynchronizeController@postSignIn', 'class' => 'form-horizontal')) }}
     <fieldset>
       <legend>Sign in to eActivities</legend>

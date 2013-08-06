@@ -1,35 +1,55 @@
 <?php
-use Zend\Http\Client;
-use Zend\Http\Client\Cookies;
-use Zend\Http\Response;
-use Zend\Http\Request;
+
+use Guzzle\Http\Client;
+use Guzzle\Http\Message\Response;
+use Guzzle\Plugin\Cookie\Cookie;
+use Guzzle\Plugin\Cookie\CookiePlugin;
+use Guzzle\Plugin\Cookie\CookieJar\CookieJarInterface;
+use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
 
 class EActivitiesClient {
 
 	const URL_BASE = 'https://eactivities.union.imperial.ac.uk/';
-	const URL_ADMIN_CSP_DETAILS = 'https://eactivities.union.imperial.ac.uk/admin/csp/details';
-	const URL_AJAX_HANDLER = 'https://eactivities.union.imperial.ac.uk/common/ajax_handler.php';
-	const URL_MEMBERS_REPORT = 'https://eactivities.union.imperial.ac.uk/common/data_handler.php?id=%d&type=csv&name=Members_Report';
+	const PATH_COMMON_AJAX_HANDLER = '/common/ajax_handler.php';
+	const PATH_ADMIN_CSP_DETAILS = '/admin/csp/details';
+	const PATH_MEMBERS_REPORT = '/common/data_handler.php?id=%d&type=csv&name=Members_Report';
+
+	const COOKIE_SESSION = 'ICU_eActivities';
 
 	protected $client;
 
+	protected $cookie_jar;
+
 	public function __construct(Client $client)
 	{
+		$client->setSslVerification(false);
+		$client->setBaseUrl(self::URL_BASE);
+
+		$this->cookie_jar = new ArrayCookieJar();
+		$cookiePlugin = new CookiePlugin($this->cookie_jar);
+		$client->addSubscriber($cookiePlugin);
+
 		$this->client = $client;
-		$this->client->setOptions(array(
-			'sslverifypeer' => false,
-			'keepalive' => true
-		));
 	}
 
-	public function getCookies()
+	public function getSessionId()
 	{
-		return $this->client->getCookies();
+		foreach ($this->cookie_jar->all() as $cookie) {
+			if ($cookie->getName() == self::COOKIE_SESSION) {
+				return $cookie->getValue();
+			}
+		}
+
+		return null;
 	}
 
-	public function setCookies($cookies)
+	public function setSessionId($session_id)
 	{
-		$this->client->setCookies($cookies);
+		$cookie = new Cookie(array(
+			'name' => self::COOKIE_SESSION,
+			'value' => $session_id,
+			'domain' => 'eactivities.union.imperial.ac.uk'));
+		$this->cookie_jar->add($cookie);
 	}
 
 	public function signIn($username, $password)
@@ -47,10 +67,10 @@ class EActivitiesClient {
 	public function isSignedIn(Response $response = null)
 	{
 		if ( ! isset($response)) {
-			$response = $this->openPage(static::URL_BASE);
+			$response = $this->getPageResponse('/');
 		}
 
-		return ($response->isSuccess() && str_contains($response->getBody(), 'Log out'));
+		return ($response->isSuccessful() && str_contains($response->getBody(), 'Log out'));
 	}
 
 	public function getCurrentAndOtherRoles()
@@ -83,7 +103,7 @@ class EActivitiesClient {
 
 	public function getMembersList()
 	{
-		$response = $this->openPage(static::URL_ADMIN_CSP_DETAILS);
+		$response = $this->getPageResponse(self::PATH_ADMIN_CSP_DETAILS);
 		if ( ! $this->isSignedIn($response)) {
 			return null; // @todo raise exception?
 		}
@@ -95,11 +115,8 @@ class EActivitiesClient {
 		if (isset($output_array[1])) {
 			$file_id = $output_array[1];
 
-			$this->client->resetParameters();
-			$this->client->setUri(sprintf(static::URL_MEMBERS_REPORT, $file_id));
-			$this->client->setMethod(Request::METHOD_POST);
-
-			$response = $this->client->send();
+			$request = $this->client->post(sprintf(self::PATH_MEMBERS_REPORT, $file_id));
+			$response = $request->send();
 			$body = $response->getBody();
 
 			$result = explode("\n", trim($body));
@@ -107,7 +124,11 @@ class EActivitiesClient {
 			// Get header
 			$headers = str_getcsv(array_shift($result));
 			$headers = array_map(function($original) {
-				return Str::snake(Str::camel($original));
+				if ($original === 'CID') {
+					return 'cid';
+				} else {
+					return Str::snake(Str::camel($original));
+				}
 			}, $headers);
 
 			// Format rows
@@ -144,33 +165,16 @@ class EActivitiesClient {
 		));
 	}
 
-	protected function getClubSocietyPageResponse()
+	protected function getPageResponse($path = null)
 	{
-		return $this->openPage(static::URL_ADMIN_CSP_DETAILS);
-	}
-
-	protected function getBasePageResponse()
-	{
-		return $this->openPage(static::URL_BASE);
-	}
-
-	protected function openPage($url)
-	{
-		$this->client->resetParameters();
-		$this->client->setUri($url);
-		$this->client->setMethod(Request::METHOD_GET);
-
-		return $this->client->send();
+		$request = $this->client->get($path);
+		return $request->send();
 	}
 
 	protected function getAjaxHandlerResponse($params)
 	{
-		$this->client->resetParameters();
-		$this->client->setUri(static::URL_AJAX_HANDLER);
-		$this->client->setMethod(Request::METHOD_POST);
-		$this->client->setParameterPost($params);
-
-		return $this->client->send();
+		$request = $this->client->post(self::PATH_COMMON_AJAX_HANDLER, array(), $params);
+		return $request->send();
 	}
 
 }
