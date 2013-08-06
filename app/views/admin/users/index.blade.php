@@ -12,40 +12,54 @@
         </div>
         <h1>Users</h1>
       </div>
-      <ul class="nav nav-pills">
-        <li
-          @if ( ! in_array(Input::get('filter'), array('admins', 'non-admins', 'members', 'non-members')))
-            class="active"
-          @endif
-        >
-          <a href="{{ URL::route('admin.users.index') }}">
-            <span class="badge pull-right">{{ $everybody_count }}</span>
-            Everybody
-          </a>
-        </li>
-        <li {{ (Input::get('filter') === 'admins') ? 'class="active"' : '' }}>
-          <a href="{{ URL::route('admin.users.index', array('filter' => 'admins')) }}">
-            <span class="badge pull-right">{{ $admins_count }}</span>
-            Admins
-          </a>
-        </li>
-        <li {{ (Input::get('filter') === 'non-admins') ? 'class="active"' : '' }}>
-          <a href="{{ URL::route('admin.users.index', array('filter' => 'non-admins')) }}">
-            <span class="badge pull-right">{{ $non_admins_count }}</span>
-            Non-Admins
-          </a>
-        </li>
-        <li {{ (Input::get('filter') === 'members') ? 'class="active"' : '' }}>
-          <a href="{{ URL::route('admin.users.index', array('filter' => 'members')) }}">
-            Members
-          </a>
-        </li>
-        <li {{ (Input::get('filter') === 'non-members') ? 'class="active"' : '' }}>
-          <a href="{{ URL::route('admin.users.index', array('filter' => 'non-members')) }}">
-            Non-Members
-          </a>
-        </li>
-      </ul>
+      <div class="row filters">
+        {{ Form::open(array('method' => 'get', 'class' => 'form-inline')) }}
+          <div class="col-lg-3 form-group {{ ( !! Input::get('query')) ? 'has-success' : '' }}">
+            {{ Form::text('query', Input::get('query'), array('class' => 'form-control', 'placeholder' => 'Search Query')) }}
+          </div>
+          <div class="col-lg-1">
+            <button type="submit" class="btn btn-default">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </div>
+        {{ Form::close() }}
+        <div class="col-lg-8">
+          <ul class="nav nav-pills pull-right">
+            <li
+              @if ( ! Input::get('query') && ! in_array(Input::get('filter'), array('admins', 'non-admins', 'members', 'non-members')))
+                class="active"
+              @endif
+            >
+              <a href="{{ URL::route('admin.users.index') }}">
+                <span class="badge pull-right">{{ $everybody_count }}</span>
+                Everybody
+              </a>
+            </li>
+            <li {{ (Input::get('filter') === 'admins') ? 'class="active"' : '' }}>
+              <a href="{{ URL::route('admin.users.index', array('filter' => 'admins')) }}">
+                <span class="badge pull-right">{{ $admins_count }}</span>
+                Admins
+              </a>
+            </li>
+            <li {{ (Input::get('filter') === 'non-admins') ? 'class="active"' : '' }}>
+              <a href="{{ URL::route('admin.users.index', array('filter' => 'non-admins')) }}">
+                <span class="badge pull-right">{{ $non_admins_count }}</span>
+                Non-Admins
+              </a>
+            </li>
+            <li {{ (Input::get('filter') === 'members') ? 'class="active"' : '' }}>
+              <a href="{{ URL::route('admin.users.index', array('filter' => 'members')) }}">
+                Members
+              </a>
+            </li>
+            <li {{ (Input::get('filter') === 'non-members') ? 'class="active"' : '' }}>
+              <a href="{{ URL::route('admin.users.index', array('filter' => 'non-members')) }}">
+                Non-Members
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
       <hr>
       <table class="table table-striped table-hover users-table">
         <thead>

@@ -11,36 +11,47 @@ class AdminUsersController extends AdminController {
 	 */
 	public function index()
 	{
-		$userInstance = new User;
-		$usersQuery = $userInstance->newQuery();
+		$user_instance = new User;
+		$users_query = $user_instance->newQuery();
 
-		$paginator_appends = array(
-			'filter' => Input::get('filter')
+		$request_params = array(
+			'filter' => Input::get('filter'),
+			'query' => Input::get('query'),
 		);
-		switch ($paginator_appends['filter']) {
-			case 'admins':
-				$usersQuery->admin();
-				break;
-			case 'non-admins':
-				$usersQuery->nonAdmin();
-				break;
-			case 'members':
-				// @todo
-				break;
-			case 'non-members':
-				// @todo
-				break;
-			default:
-				$paginator_appends['filter'] = null;
-				break;
+
+		if ( ! empty($request_params['filter'])) {
+			switch ($request_params['filter']) {
+				case 'admins':
+					$users_query->admin();
+					break;
+				case 'non-admins':
+					$users_query->nonAdmin();
+					break;
+				case 'members':
+					// @todo
+					break;
+				case 'non-members':
+					// @todo
+					break;
+				default:
+					$request_params['filter'] = null;
+					break;
+			}
+		}
+
+		if ( ! empty($request_params['query'])) {
+			$users_query
+				->where('username', 'like', "%{$request_params['query']}%")
+				->orWhere('email', 'like', "%{$request_params['query']}%")
+				->orWhere('name', 'like', "%{$request_params['query']}%");
 		}
 
 		return View::make('admin.users.index')
-			->with('users', $usersQuery->paginate(self::USERS_PER_PAGE))
+			->with('users', $users_query->paginate(self::USERS_PER_PAGE))
 			->with('everybody_count', User::count())
 			->with('admins_count', User::admin()->count())
 			->with('non_admins_count', User::nonAdmin()->count())
-			->with('paginator_appends', $paginator_appends);
+			->with('paginator_appends', $request_params);
 	}
 
 
