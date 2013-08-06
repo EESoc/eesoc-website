@@ -18,12 +18,12 @@ class SessionsController extends BaseController {
 	{
 		$inputs = array(
 			'username' => strtolower(Input::get('username')),
-			'password' => Input::get('password')
+			'password' => Input::get('password'),
 		);
 
 		$rules = array(
 			'username' => 'required',
-			'password' => 'required'
+			'password' => 'required',
 		);
 
 		$validator = Validator::make($inputs, $rules);

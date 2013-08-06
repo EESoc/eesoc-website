@@ -32,7 +32,7 @@ class Category extends Eloquent {
 
 	}
 
-	public function is_deletable()
+	public function isDeletable()
 	{
 		return ($this->id !== 1);
 	}

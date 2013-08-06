@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('sign_in', 'SessionsController@getNew');
-Route::post('sign_in', array('before' => 'csrf', 'uses' => 'SessionsController@postCreate'));
-Route::delete('sign_out', array('before' => 'csrf', 'uses' => 'SessionsController@deleteDestroy'));
+Route::get('sign-in', 'SessionsController@getNew');
+Route::post('sign-in', array('before' => 'csrf', 'uses' => 'SessionsController@postCreate'));
+Route::delete('sign-out', array('before' => 'csrf', 'uses' => 'SessionsController@deleteDestroy'));
 
 Route::get('users/{username}', 'UsersController@getShow');
 
@@ -24,6 +24,7 @@ Route::group(array('prefix' => 'admin'), function() {
 	Route::resource('categories', 'AdminCategoriesController', array('except' => array('show')));
 
     Route::resource('users', 'AdminUsersController', array('only' => array('index')));
+    Route::controller('users/synchronize', 'AdminUsersSynchronizeController');
     Route::controller('users', 'AdminUsersController');
 
 });

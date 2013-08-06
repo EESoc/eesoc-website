@@ -5,7 +5,7 @@
     <div class="col-lg-12">
       <div class="page-header">
         <div class="pull-right btn-group">
-          <a href="#" class="btn btn-default btn-info btn-large">
+          <a href="{{ URL::action('AdminUsersSynchronizeController@getSignIn') }}" class="btn btn-default btn-info btn-large">
             <span class="glyphicon glyphicon-download-alt"></span>
             Synchronize with eActivities
           </a>

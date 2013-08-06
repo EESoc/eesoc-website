@@ -34,16 +34,6 @@ class AdminUsersController extends AdminController {
 			->with('non_admins_count', User::nonAdmin()->count());
 	}
 
-	public function getSynchronize()
-	{
-		
-	}
-
-	public function putSynchronize()
-	{
-		$user = User::where('username', '=', $username)->firstOrFail();
-		echo 'do something';
-	}
 
 	public function putPromote($username)
 	{

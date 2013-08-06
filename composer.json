@@ -3,7 +3,9 @@
 	"description": "The Laravel Framework.",
 	"keywords": ["framework", "laravel"],
 	"require": {
-		"laravel/framework": "4.0.*"
+		"laravel/framework": "4.0.*",
+		"guzzle/guzzle": "3.7.*@dev",
+		"zendframework/zend-http": "2.3.*@dev"
 	},
 	"autoload": {
 		"classmap": [

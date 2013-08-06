@@ -9,7 +9,7 @@
       {{ Form::model($category, array('route' => array('admin.categories.update', $category->id), 'method' => 'patch')) }}
         @include('admin.categories.form')
       {{ Form::close() }}
-      @if ($category->is_deletable())
+      @if ($category->isDeletable())
         {{ Form::open(array('route' => array('admin.categories.destroy', $category->id), 'method' => 'delete')) }}
           <button type="submit" class="btn btn-danger btn-large pull-right">
             <span class="glyphicon glyphicon-remove"></span>
