@@ -21,14 +21,14 @@ class ImperialCollegeUser {
     {
         $instance = new static($username);
 
-        if ( ! $instance->exists()) {
+        if ( ! $instance->exist()) {
             throw new ModelNotFoundException;
         }
 
         return $instance;
     }
 
-    public function exists()
+    public function exist()
     {
         return ( !! ldap_get_name($this->username));
     }

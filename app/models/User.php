@@ -11,7 +11,7 @@ class User extends Eloquent implements UserInterface {
 		$username = strtolower($username);
 
 		$imperialCollegeUser = new ImperialCollegeUser($username);
-		if ( ! $imperialCollegeUser->exists()) {
+		if ( ! $imperialCollegeUser->exist()) {
 			return null;
 		}
 

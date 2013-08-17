@@ -14,3 +14,7 @@ Imperial College London EESoc's Offical Website Source Code
 5. Run `php artisan migrate` to run database migrations (make sure database has already been created).
 6. If you're on PHP 5.4, run `php artisan serve` to start the built-in web server.
 7. Enjoy!
+
+### Commands
+
+- `php artisan admin:become <imperial-college-login>` - Promotes a user to admin.
