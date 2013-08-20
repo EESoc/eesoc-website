@@ -32,7 +32,8 @@ class AdminUsersSynchronizeController extends AdminController {
 					->with('danger', 'Invalid password');
 			}
 		} else {
-			return Redirect::action('AdminUsersSynchronizeController@getSignIn')->withErrors($validator);
+			return Redirect::action('AdminUsersSynchronizeController@getSignIn')
+				->withErrors($validator);
 		}
 	}
 
@@ -88,9 +89,8 @@ class AdminUsersSynchronizeController extends AdminController {
 
 			$user->name = "{$member['first_name']} {$member['last_name']}";
 			$user->email = $member['email'];
-			// $user->cid = $member['cid'];
-			// $user->is_member = true;
-			// @todo membership
+			$user->cid = $member['cid'];
+			$user->is_member = true;
 			$user->save();
 		}
 
@@ -113,7 +113,8 @@ class AdminUsersSynchronizeController extends AdminController {
 
 	private function createSignInAgainRedirection()
 	{
-		return Redirect::action('AdminUsersSynchronizeController@getSignIn')->with('danger', 'Session expired. Please sign in again');
+		return Redirect::action('AdminUsersSynchronizeController@getSignIn')
+			->with('danger', 'Session expired. Please sign in again');
 	}
 
 }

@@ -4,7 +4,34 @@ use Illuminate\Auth\UserInterface;
 
 class User extends Eloquent implements UserInterface {
 
+	public static $FILTER_TO_FUNCTION_MAP = array(
+		'admins'      => 'admin',
+		'non-admins'  => 'nonAdmin',
+		'members'     => 'member',
+		'non-members' => 'nonMember',
+	);
+
 	private $imperialCollegeUser;
+
+	public function scopeAdmin($query)
+	{
+		return $query->where('is_admin', '=', true);
+	}
+
+	public function scopeNonAdmin($query)
+	{
+		return $query->where('is_admin', '=', false);
+	}
+
+	public function scopeMember($query)
+	{
+		return $query->where('is_member', '=', true);
+	}
+
+	public function scopeNonMember($query)
+	{
+		return $query->where('is_member', '=', false);
+	}
 
 	public static function findOrCreateWithLDAP($username)
 	{
@@ -74,16 +101,6 @@ class User extends Eloquent implements UserInterface {
 	{
 		$this->last_sign_in_at = new DateTime;
 		return $this->save();
-	}
-
-	public function scopeAdmin($query)
-	{
-		return $query->where('is_admin', '=', true);
-	}
-
-	public function scopeNonAdmin($query)
-	{
-		return $query->where('is_admin', '=', false);
 	}
 
 }

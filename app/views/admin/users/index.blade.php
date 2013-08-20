@@ -49,11 +49,13 @@
             </li>
             <li {{ (Input::get('filter') === 'members') ? 'class="active"' : '' }}>
               <a href="{{ URL::route('admin.users.index', array('filter' => 'members')) }}">
+                <span class="badge pull-right">{{ $members_count }}</span>
                 Members
               </a>
             </li>
             <li {{ (Input::get('filter') === 'non-members') ? 'class="active"' : '' }}>
               <a href="{{ URL::route('admin.users.index', array('filter' => 'non-members')) }}">
+                <span class="badge pull-right">{{ $non_members_count }}</span>
                 Non-Members
               </a>
             </li>

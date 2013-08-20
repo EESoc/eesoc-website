@@ -5,7 +5,7 @@ class AdminUsersController extends AdminController {
 	const USERS_PER_PAGE = 20;
 
 	/**
-	 * Display a listing of the resource.
+	 * Display a list of users. Able to apply filters and search query.
 	 *
 	 * @return Response
 	 */
@@ -16,26 +16,14 @@ class AdminUsersController extends AdminController {
 
 		$request_params = array(
 			'filter' => Input::get('filter'),
-			'query' => Input::get('query'),
+			'query'  => Input::get('query'),
 		);
 
 		if ( ! empty($request_params['filter'])) {
-			switch ($request_params['filter']) {
-				case 'admins':
-					$users_query->admin();
-					break;
-				case 'non-admins':
-					$users_query->nonAdmin();
-					break;
-				case 'members':
-					// @todo
-					break;
-				case 'non-members':
-					// @todo
-					break;
-				default:
-					$request_params['filter'] = null;
-					break;
+			if (isset(User::$FILTER_TO_FUNCTION_MAP[$request_params['filter']])) {
+				$users_query->{User::$FILTER_TO_FUNCTION_MAP[$request_params['filter']]}();
+			} else {
+				$request_params['filter'] = null;
 			}
 		}
 
@@ -48,42 +36,59 @@ class AdminUsersController extends AdminController {
 
 		return View::make('admin.users.index')
 			->with('users', $users_query->paginate(self::USERS_PER_PAGE))
-			->with('everybody_count', User::count())
-			->with('admins_count', User::admin()->count())
-			->with('non_admins_count', User::nonAdmin()->count())
+			->with('everybody_count',   User::count())
+			->with('admins_count',      User::admin()->count())
+			->with('non_admins_count',  User::nonAdmin()->count())
+			->with('members_count',     User::member()->count())
+			->with('non_members_count', User::nonMember()->count())
 			->with('paginator_appends', $request_params);
 	}
 
-
+	/**
+	 * Promotes a user to admin.
+	 *
+	 * @return Response
+	 */
 	public function putPromote($username)
 	{
 		$user = User::where('username', '=', $username)->firstOrFail();
 		
 		if ($user->id === Auth::user()->id) {
-			return Redirect::back()->with('danger', 'You cannot promote yourself');
+			return Redirect::back()
+				->with('danger', 'You cannot promote yourself');
 		} else if ($user->isAdmin()) {
-			return Redirect::back()->with('danger', "{$user->username} is already an Admin");
+			return Redirect::back()
+				->with('danger', "{$user->username} is already an Admin");
 		} else {
 			$user->is_admin = true;
 			$user->save();
 
-			return Redirect::back()->with('success', "{$user->username} has been successfully promoted to Admin");
+			return Redirect::back()
+				->with('success', "{$user->username} has been successfully promoted to Admin");
 		}
 	}
 
+	/**
+	 * Demotes a user from admin.
+	 *
+	 * @return Response
+	 */
 	public function putDemote($username)
 	{
 		$user = User::where('username', '=', $username)->firstOrFail();
 		
 		if ($user->id === Auth::user()->id) {
-			return Redirect::back()->with('danger', 'You cannot demote yourself');
+			return Redirect::back()
+				->with('danger', 'You cannot demote yourself');
 		} else if ( ! $user->isAdmin()) {
-			return Redirect::back()->with('danger', "{$user->username} is already a Non-Admin");
+			return Redirect::back()
+				->with('danger', "{$user->username} is already a Non-Admin");
 		} else {
 			$user->is_admin = false;
 			$user->save();
 
-			return Redirect::back()->with('success', "{$user->username} has been successfully demoted from Admin");
+			return Redirect::back()
+				->with('success', "{$user->username} has been successfully demoted from Admin");
 		}
 
 	}

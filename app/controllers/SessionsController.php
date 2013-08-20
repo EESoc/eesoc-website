@@ -34,17 +34,22 @@ class SessionsController extends BaseController {
 				$userProfileURL = URL::action('UsersController@getShow', array('username' => $inputs['username']));
 				return Redirect::intended($userProfileURL);
 			} else {
-				return Redirect::action('SessionsController@getNew')->withInput()->with('danger', 'Invalid username and/or password');
+				return Redirect::action('SessionsController@getNew')
+					->withInput()
+					->with('danger', 'Invalid username and/or password');
 			}
 		} else {
-			return Redirect::action('SessionsController@getNew')->withInput()->withErrors($validator);
+			return Redirect::action('SessionsController@getNew')
+				->withInput()
+				->withErrors($validator);
 		}
 	}
 
 	public function deleteDestroy()
 	{
 		Auth::logout();
-		return Redirect::to('/')->with('success', 'You have successfully signed out');
+		return Redirect::to('/')
+			->with('success', 'You have successfully signed out');
 	}
 
 }
