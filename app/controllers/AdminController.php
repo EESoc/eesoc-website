@@ -8,6 +8,11 @@ class AdminController extends BaseController {
 		$this->beforeFilter('csrf', array('on' => array('post', 'put', 'delete')));
 	}
 
+	/**
+	 * Display admin dashboard.
+	 *
+	 * @return Response
+	 */
 	public function getDashboard()
 	{
 		return View::make('admin.dashboard');

@@ -9,11 +9,21 @@ class SessionsController extends BaseController {
 		$this->beforeFilter('csrf', array('on' => array('post', 'put', 'delete')));
 	}
 
+	/**
+	 * Display sign in from.
+	 *
+	 * @return Response
+	 */
 	public function getNew()
 	{
 		return View::make('sessions.new');
 	}
 
+	/**
+	 * Validate credentials and sign in user.
+	 *
+	 * @return Response
+	 */
 	public function postCreate()
 	{
 		$inputs = array(
@@ -45,6 +55,11 @@ class SessionsController extends BaseController {
 		}
 	}
 
+	/**
+	 * Sign out action.
+	 *
+	 * @return Response
+	 */
 	public function deleteDestroy()
 	{
 		Auth::logout();

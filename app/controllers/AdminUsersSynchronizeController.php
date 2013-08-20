@@ -4,11 +4,21 @@ class AdminUsersSynchronizeController extends AdminController {
 
 	const KEY_EACTIVITIES_SESSION = 'eactivities_session';
 
+	/**
+	 * Display eActivities sign in forom.
+	 *
+	 * @return Response
+	 */
 	public function getSignIn()
 	{
 		return View::make('admin.users.synchronize.sign_in');
 	}
 
+	/**
+	 * Validate eActivities sign in credentials.
+	 *
+	 * @return Response
+	 */
 	public function postSignIn()
 	{
 		$inputs = array(
@@ -37,6 +47,11 @@ class AdminUsersSynchronizeController extends AdminController {
 		}
 	}
 
+	/**
+	 * Display signed in user's club and society roles.
+	 *
+	 * @return Response
+	 */
 	public function getRoles()
 	{
 		$client = $this->createEActivitiesClient();
@@ -51,6 +66,11 @@ class AdminUsersSynchronizeController extends AdminController {
 			->with('other_roles', $roles['others']);
 	}
 
+	/**
+	 * Select a club and society role.
+	 *
+	 * @return Response
+	 */
 	public function putSelectRole()
 	{
 		$client = $this->createEActivitiesClient();
@@ -72,6 +92,11 @@ class AdminUsersSynchronizeController extends AdminController {
 		}
 	}
 
+	/**
+	 * Perform members list synchronization.
+	 *
+	 * @return Response
+	 */
 	public function postPerform()
 	{
 		$client = $this->createEActivitiesClient();
@@ -100,6 +125,11 @@ class AdminUsersSynchronizeController extends AdminController {
 			->with('success', 'Successfully synchronized users from eActivities');
 	}
 
+	/**
+	 * Creates an eActivities API client.
+	 *
+	 * @return EActivitiesClient
+	 */
 	private function createEActivitiesClient()
 	{
 		$client = new EActivitiesClient(new Guzzle\Http\Client);
@@ -111,6 +141,11 @@ class AdminUsersSynchronizeController extends AdminController {
 		return $client;
 	}
 
+	/**
+	 * Redirect response if user's eActivities session expired.
+	 *
+	 * @return Response
+	 */
 	private function createSignInAgainRedirection()
 	{
 		return Redirect::action('AdminUsersSynchronizeController@getSignIn')

@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('sign-in', 'SessionsController@getNew');
-Route::post('sign-in', array('before' => 'csrf', 'uses' => 'SessionsController@postCreate'));
-Route::delete('sign-out', array('before' => 'csrf', 'uses' => 'SessionsController@deleteDestroy'));
+Route::get('sign-in',     'SessionsController@getNew');
+Route::post('sign-in',    'SessionsController@postCreate');
+Route::delete('sign-out', 'SessionsController@deleteDestroy');
 
 Route::get('users/{username}', 'UsersController@getShow');
 
@@ -32,3 +32,7 @@ Route::group(array('prefix' => 'admin'), function() {
 Route::get('/', function() {
 	return View::make('hello');
 });
+
+Route::any('{path}', function($path) {
+	return View::make('hello');
+})->where('path', '.*');
