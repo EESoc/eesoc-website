@@ -144,7 +144,7 @@ class EActivitiesClient {
 
 			return $result;
 		} else {
-			return null;
+			return array();
 		}
 	}
 

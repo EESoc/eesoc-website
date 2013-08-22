@@ -28,19 +28,12 @@ class AdminUsersController extends AdminController {
 		}
 
 		if ( ! empty($request_params['query'])) {
-			$users_query
-				->where('username', 'like', "%{$request_params['query']}%")
-				->orWhere('email', 'like', "%{$request_params['query']}%")
-				->orWhere('name', 'like', "%{$request_params['query']}%");
+			$users_query->searching($request_params['query']);
 		}
 
 		return View::make('admin.users.index')
 			->with('users', $users_query->paginate(self::USERS_PER_PAGE))
-			->with('everybody_count',   User::count())
-			->with('admins_count',      User::admin()->count())
-			->with('non_admins_count',  User::nonAdmin()->count())
-			->with('members_count',     User::member()->count())
-			->with('non_members_count', User::nonMember()->count())
+			->with(User::statistics())
 			->with('paginator_appends', $request_params);
 	}
 

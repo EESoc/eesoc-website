@@ -105,16 +105,21 @@ class AdminUsersSynchronizeController extends AdminController {
 		}
 
 		$members = $client->getMembersList();
+
+		// Reset membership status
+		User::resetMemberships();
+
 		foreach ($members as $member) {
+			// Find or create
 			$user = User::where('username', '=', $member['login'])->first();
 			if ( ! $user) {
 				$user = new User;
 				$user->username = $member['login'];
 			}
 
-			$user->name = "{$member['first_name']} {$member['last_name']}";
-			$user->email = $member['email'];
-			$user->cid = $member['cid'];
+			$user->name 	   = "{$member['first_name']} {$member['last_name']}";
+			$user->email 		 = $member['email'];
+			$user->cid 			 = $member['cid'];
 			$user->is_member = true;
 			$user->save();
 		}

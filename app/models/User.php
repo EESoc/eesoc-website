@@ -33,6 +33,24 @@ class User extends Eloquent implements UserInterface {
 		return $query->where('is_member', '=', false);
 	}
 
+	public function scopeAlphabetically($query)
+	{
+		return $this->scopeAlphabeticallyUsing($query, 'username');
+	}
+
+	public function scopeAlphabeticallyUsing($query, $column)
+	{
+		return $query->orderBy($column);
+	}
+
+	public function scopeSearching($query, $searching)
+	{
+		return $query
+			->where('username', 'like', "%{$searching}%")
+			->orWhere('email', 'like', "%{$searching}%")
+			->orWhere('name', 'like', "%{$searching}%");
+	}
+
 	public static function findOrCreateWithLDAP($username)
 	{
 		$username = strtolower($username);
@@ -52,6 +70,23 @@ class User extends Eloquent implements UserInterface {
 		$user->synchronizeWithLDAP();
 
 		return $user;
+	}
+
+	public static function resetMemberships()
+	{
+		$user = new static;
+		return $user->update(array('is_member' => false));
+	}
+
+	public static function statistics()
+	{
+		return array(
+			'everybody_count'   => static::count(),
+			'admins_count'      => static::admin()->count(),
+			'non_admins_count'  => static::nonAdmin()->count(),
+			'members_count'     => static::member()->count(),
+			'non_members_count' => static::nonMember()->count(),
+		);
 	}
 
 	public function getAuthIdentifier()
@@ -94,7 +129,7 @@ class User extends Eloquent implements UserInterface {
 
 	public function isAdmin()
 	{
-		return ((int) $this->is_admin === 1);
+		return (bool) $this->is_admin;
 	}
 
 	public function recordSignIn()
