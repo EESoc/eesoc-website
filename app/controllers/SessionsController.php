@@ -4,9 +4,10 @@ class SessionsController extends BaseController {
 
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->beforeFilter('auth', array('only' => array('deleteDestroy')));
 		$this->beforeFilter('guest', array('except' => array('deleteDestroy')));
-		$this->beforeFilter('csrf', array('on' => array('post', 'put', 'delete')));
 	}
 
 	/**
