@@ -1,17 +1,29 @@
 <?php
+namespace Admin;
 
-class AdminUsersSynchronizeController extends AdminController {
+use App;
+use Auth;
+use EActivitiesClient;
+use Guzzle\Http\Client as HttpClient;
+use Input;
+use Redirect;
+use Session;
+use User;
+use Validator;
+use View;
+
+class UsersEActivitiesController extends BaseController {
 
 	const KEY_EACTIVITIES_SESSION = 'eactivities_session';
 
 	/**
-	 * Display eActivities sign in forom.
+	 * Display eActivities sign in form.
 	 *
 	 * @return Response
 	 */
 	public function getSignIn()
 	{
-		return View::make('admin.users.synchronize.sign_in');
+		return View::make('admin.users.eactivities.sign_in');
 	}
 
 	/**
@@ -35,14 +47,14 @@ class AdminUsersSynchronizeController extends AdminController {
 			$client = $this->createEActivitiesClient();
 			if ($client->signIn(Auth::user()->username, $inputs['password'])) {
 				Session::put(self::KEY_EACTIVITIES_SESSION, $client->getSessionId());
-				return Redirect::action('AdminUsersSynchronizeController@getRoles')
+				return Redirect::action('Admin\UsersEActivitiesController@getRoles')
 					->with('success', 'You have successfully signed in to eActivities');
 			} else {
-				return Redirect::action('AdminUsersSynchronizeController@getSignIn')
+				return Redirect::action('Admin\UsersEActivitiesController@getSignIn')
 					->with('danger', 'Invalid password');
 			}
 		} else {
-			return Redirect::action('AdminUsersSynchronizeController@getSignIn')
+			return Redirect::action('Admin\UsersEactivitiesController@getSignIn')
 				->withErrors($validator);
 		}
 	}
@@ -61,7 +73,7 @@ class AdminUsersSynchronizeController extends AdminController {
 
 		$roles = $client->getCurrentAndOtherRoles();
 
-		return View::make('admin.users.synchronize.roles')
+		return View::make('admin.users.eactivities.roles')
 			->with('current_role', $roles['current'])
 			->with('other_roles', $roles['others']);
 	}
@@ -84,10 +96,10 @@ class AdminUsersSynchronizeController extends AdminController {
 		if (isset($roles['others'][$role_id])) {
 			$client->changeRole($role_id);
 			$roles = $client->getCurrentAndOtherRoles();
-			return Redirect::action('AdminUsersSynchronizeController@getRoles')
+			return Redirect::action('Admin\UsersEActivitiesController@getRoles')
 				->with('success', 'Successfully changed role and society to '.$roles['current']);
 		} else {
-			return Redirect::action('AdminUsersSynchronizeController@getRoles')
+			return Redirect::action('Admin\UsersEActivitiesController@getRoles')
 				->with('danger', 'Cannot change role');
 		}
 	}
@@ -117,9 +129,9 @@ class AdminUsersSynchronizeController extends AdminController {
 				$user->username = $member['login'];
 			}
 
-			$user->name 	   = "{$member['first_name']} {$member['last_name']}";
-			$user->email 		 = $member['email'];
-			$user->cid 			 = $member['cid'];
+			$user->name      = "{$member['first_name']} {$member['last_name']}";
+			$user->email     = $member['email'];
+			$user->cid       = $member['cid'];
 			$user->is_member = true;
 			$user->save();
 		}
@@ -137,7 +149,7 @@ class AdminUsersSynchronizeController extends AdminController {
 	 */
 	private function createEActivitiesClient()
 	{
-		$http_client = new Guzzle\Http\Client;
+		$http_client = new HttpClient;
 
 		if (App::environment() === 'local') {
 			$http_client->setSslVerification(false);
@@ -159,7 +171,7 @@ class AdminUsersSynchronizeController extends AdminController {
 	 */
 	private function createSignInAgainRedirection()
 	{
-		return Redirect::action('AdminUsersSynchronizeController@getSignIn')
+		return Redirect::action('Admin\UsersEActivitiesController@getSignIn')
 			->with('danger', 'Session expired. Please sign in again');
 	}
 

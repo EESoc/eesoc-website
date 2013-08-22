@@ -19,13 +19,13 @@ Route::get('users/{username}', 'UsersController@getShow');
 
 Route::group(array('prefix' => 'admin'), function() {
 
-	Route::get('/', 'AdminController@getDashboard');
+	Route::get('/', 'Admin\DashboardController@getShow');
 
-	Route::resource('categories', 'AdminCategoriesController', array('except' => array('show')));
+	Route::resource('categories', 'Admin\CategoriesController', array('except' => array('show')));
 
-    Route::resource('users', 'AdminUsersController', array('only' => array('index')));
-    Route::controller('users', 'AdminUsersController');
-    Route::controller('users/synchronize', 'AdminUsersSynchronizeController');
+	Route::controller('users/eactivities', 'Admin\UsersEActivitiesController');
+	Route::controller('users', 'Admin\UsersController');
+	Route::resource('users', 'Admin\UsersController', array('only' => array('index')));
 
 });
 

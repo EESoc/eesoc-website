@@ -5,7 +5,7 @@
     <div class="col-lg-12">
       <div class="page-header">
         <div class="pull-right btn-group">
-          <a href="{{ URL::action('AdminUsersSynchronizeController@getSignIn') }}" class="btn btn-default btn-info btn-large">
+          <a href="{{ URL::action('Admin\UsersEActivitiesController@getSignIn') }}" class="btn btn-default btn-info btn-large">
             <span class="glyphicon glyphicon-refresh"></span>
             Synchronize with eActivities
           </a>
@@ -79,7 +79,11 @@
             <td>
               {{{ $user->username }}}
               @if ($user->isAdmin())
-                <span class="label">Admin</span>
+                <span class="label label-primary">Admin</span>
+			  @elseif ($user->isMember())
+				<span class="label label-success">Member</span>
+			  @else
+				<span class="label label-danger">Non-Member</span>
               @endif
             </td>
             <td>
@@ -98,14 +102,14 @@
               @else
                 <div class="btn-toolbar">
                   @if ($user->isAdmin())
-                    {{ Form::open(array('action' => array('AdminUsersController@putDemote', $user->username), 'method' => 'put')) }}
+                    {{ Form::open(array('action' => array('Admin\UsersController@putDemote', $user->username), 'method' => 'put')) }}
                       <button type="submit" class="btn btn-danger btn-mini">
                         <span class="glyphicon glyphicon-certificate"></span>
                         Demote from Admin
                       </button>
                     {{ Form::close() }}
                   @else
-                    {{ Form::open(array('action' => array('AdminUsersController@putPromote', $user->username), 'method' => 'put')) }}
+                    {{ Form::open(array('action' => array('Admin\UsersController@putPromote', $user->username), 'method' => 'put')) }}
                       <button type="submit" class="btn btn-warning btn-mini">
                         <span class="glyphicon glyphicon-certificate"></span>
                         Promote to Admin

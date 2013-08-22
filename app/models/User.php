@@ -51,6 +51,11 @@ class User extends Eloquent implements UserInterface {
 			->orWhere('name', 'like', "%{$searching}%");
 	}
 
+	public function scopeAdminsFirst($query)
+	{
+		return $query->orderBy('is_admin', 'DESC');
+	}
+
 	public static function findOrCreateWithLDAP($username)
 	{
 		$username = strtolower($username);
@@ -130,6 +135,11 @@ class User extends Eloquent implements UserInterface {
 	public function isAdmin()
 	{
 		return (bool) $this->is_admin;
+	}
+
+	public function isMember()
+	{
+		return (bool) $this->is_member;
 	}
 
 	public function recordSignIn()

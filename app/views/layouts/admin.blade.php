@@ -29,8 +29,8 @@
           <ul class="nav navbar-nav">
             <li><a href="#">Posts</a></li>
             <li><a href="#">Pages</a></li>
-            <li {{ str_contains(Route::currentRouteAction(), 'AdminCategoriesController') ? 'class="active"' : '' }}><a href="{{ URL::route('admin.categories.index') }}">Categories</a></li>
-            <li {{ str_contains(Route::currentRouteAction(), 'AdminUsers') ? 'class="active"' : '' }}><a href="{{ URL::route('admin.users.index') }}">Users</a></li>
+            <li {{ str_contains(Route::currentRouteAction(), 'Admin\CategoriesController') ? 'class="active"' : '' }}><a href="{{ URL::route('admin.categories.index') }}">Categories</a></li>
+            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Users') ? 'class="active"' : '' }}><a href="{{ URL::route('admin.users.index') }}">Users</a></li>
           </ul>
           {{ Form::open(array('action' => 'SessionsController@deleteDestroy', 'method' => 'delete', 'class' => 'navbar-form pull-right')) }}
             <button type="submit" class="btn btn-default">Sign Out</button>

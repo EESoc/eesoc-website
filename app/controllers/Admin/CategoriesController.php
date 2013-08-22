@@ -1,6 +1,13 @@
 <?php
+namespace Admin;
 
-class AdminCategoriesController extends AdminController {
+use Category;
+use Input;
+use Redirect;
+use Validator;
+use View;
+
+class CategoriesController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-  @include('admin.users.synchronize.header')
+  @include('admin.users.eactivities.header')
   <h2>Now, select your society and role&hellip;</h2>
   <hr>
   <h3>Selected Role:</h3>
@@ -18,7 +18,7 @@
       <div class="well">
         <h4>
           {{{ $role }}}
-          {{ Form::open(array('action' => 'AdminUsersSynchronizeController@putSelectRole', 'method' => 'put')) }}
+          {{ Form::open(array('action' => 'Admin\UsersEActivitiesController@putSelectRole', 'method' => 'put')) }}
             {{ Form::hidden('role_id', $role_id) }}
             <button type="submit" class="btn btn-info">Select</button>
           {{ Form::close() }}
@@ -26,7 +26,7 @@
       </div>
     @endforeach
   @endif
-  {{ Form::open(array('action' => 'AdminUsersSynchronizeController@postPerform')) }}
+  {{ Form::open(array('action' => 'Admin\UsersEActivitiesController@postPerform')) }}
     <button type="submit" class="btn btn-primary btn-large btn-block">
       <span class="glyphicon glyphicon-refresh"></span>
       Perform Synchronization

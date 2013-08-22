@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-  @include('admin.users.synchronize.header')
-  {{ Form::open(array('action' => 'AdminUsersSynchronizeController@postSignIn', 'class' => 'form-horizontal')) }}
+  @include('admin.users.eactivities.header')
+  {{ Form::open(array('action' => 'Admin\UsersEActivitiesController@postSignIn', 'class' => 'form-horizontal')) }}
     <fieldset>
       <legend>Sign in to eActivities</legend>
       <div class="form-group">

@@ -1,6 +1,13 @@
 <?php
+namespace Admin;
 
-class AdminUsersController extends AdminController {
+use Auth;
+use Input;
+use Redirect;
+use User;
+use View;
+
+class UsersController extends BaseController {
 
 	const USERS_PER_PAGE = 20;
 
@@ -30,6 +37,8 @@ class AdminUsersController extends AdminController {
 		if ( ! empty($request_params['query'])) {
 			$users_query->searching($request_params['query']);
 		}
+
+		$users_query->adminsFirst();
 
 		return View::make('admin.users.index')
 			->with('users', $users_query->paginate(self::USERS_PER_PAGE))
