@@ -137,13 +137,19 @@ class AdminUsersSynchronizeController extends AdminController {
 	 */
 	private function createEActivitiesClient()
 	{
-		$client = new EActivitiesClient(new Guzzle\Http\Client);
+		$http_client = new Guzzle\Http\Client;
 
-		if (Session::has(self::KEY_EACTIVITIES_SESSION)) {
-			$client->setSessionId(Session::get(self::KEY_EACTIVITIES_SESSION));
+		if (App::environment() === 'local') {
+			$http_client->setSslVerification(false);
 		}
 
-		return $client;
+		$eactivities_client = new EActivitiesClient($http_client);
+
+		if (Session::has(self::KEY_EACTIVITIES_SESSION)) {
+			$eactivities_client->setSessionId(Session::get(self::KEY_EACTIVITIES_SESSION));
+		}
+
+		return $eactivities_client;
 	}
 
 	/**

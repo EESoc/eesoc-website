@@ -9,12 +9,13 @@ use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
 
 class EActivitiesClient {
 
-	const URL_BASE = 'https://eactivities.union.imperial.ac.uk/';
-	const PATH_COMMON_AJAX_HANDLER = '/common/ajax_handler.php';
-	const PATH_ADMIN_CSP_DETAILS = '/admin/csp/details';
-	const PATH_MEMBERS_REPORT = '/common/data_handler.php?id=%d&type=csv&name=Members_Report';
+	public static $URL_BASE = 'https://eactivities.union.imperial.ac.uk/';
 
-	const COOKIE_SESSION = 'ICU_eActivities';
+	public static $PATH_COMMON_AJAX_HANDLER = '/common/ajax_handler.php';
+	public static $PATH_ADMIN_CSP_DETAILS   = '/admin/csp/details';
+	public static $PATH_MEMBERS_REPORT      = '/common/data_handler.php?id=%d&type=csv&name=Members_Report';
+
+	public static $NAME_SESSION_COOKIE = 'ICU_eActivities';
 
 	protected $client;
 
@@ -22,8 +23,7 @@ class EActivitiesClient {
 
 	public function __construct(Client $client)
 	{
-		$client->setSslVerification(false);
-		$client->setBaseUrl(self::URL_BASE);
+		$client->setBaseUrl(self::$URL_BASE);
 
 		$this->cookie_jar = new ArrayCookieJar();
 		$cookiePlugin = new CookiePlugin($this->cookie_jar);
@@ -35,7 +35,7 @@ class EActivitiesClient {
 	public function getSessionId()
 	{
 		foreach ($this->cookie_jar->all() as $cookie) {
-			if ($cookie->getName() == self::COOKIE_SESSION) {
+			if ($cookie->getName() == self::$NAME_SESSION_COOKIE) {
 				return $cookie->getValue();
 			}
 		}
@@ -46,7 +46,7 @@ class EActivitiesClient {
 	public function setSessionId($session_id)
 	{
 		$cookie = new Cookie(array(
-			'name' => self::COOKIE_SESSION,
+			'name' => self::$NAME_SESSION_COOKIE,
 			'value' => $session_id,
 			'domain' => 'eactivities.union.imperial.ac.uk'));
 		$this->cookie_jar->add($cookie);
@@ -70,7 +70,7 @@ class EActivitiesClient {
 			$response = $this->getPageResponse('/');
 		}
 
-		return ($response->isSuccessful() && str_contains($response->getBody(), 'Log out'));
+		return ($response->isSuccessful() && strpos($response->getBody(), 'Log out') !== false);
 	}
 
 	public function getCurrentAndOtherRoles()
@@ -92,10 +92,8 @@ class EActivitiesClient {
 		}
 
 		preg_match_all('/<span class="changerole" onclick="changeRole\(this, \'(\d+)\'\)">([^<]+)<\/span>/', $body, $output_array);
-		if (isset($output_array[1])) {
-			foreach ($output_array[1] as $key => $role_key) {
-				$result['others'][$role_key] = $output_array[2][$key];
-			}
+		foreach ($output_array[1] as $key => $role_key) {
+			$result['others'][$role_key] = $output_array[2][$key];
 		}
 
 		return $result;
@@ -103,7 +101,7 @@ class EActivitiesClient {
 
 	public function getMembersList()
 	{
-		$response = $this->getPageResponse(self::PATH_ADMIN_CSP_DETAILS);
+		$response = $this->getPageResponse(self::$PATH_ADMIN_CSP_DETAILS);
 		if ( ! $this->isSignedIn($response)) {
 			return null; // @todo raise exception?
 		}
@@ -115,7 +113,7 @@ class EActivitiesClient {
 		if (isset($output_array[1])) {
 			$file_id = $output_array[1];
 
-			$request = $this->client->post(sprintf(self::PATH_MEMBERS_REPORT, $file_id));
+			$request = $this->client->post(sprintf(self::$PATH_MEMBERS_REPORT, $file_id));
 			$response = $request->send();
 			$body = $response->getBody();
 
@@ -173,7 +171,7 @@ class EActivitiesClient {
 
 	protected function getAjaxHandlerResponse($params)
 	{
-		$request = $this->client->post(self::PATH_COMMON_AJAX_HANDLER, array(), $params);
+		$request = $this->client->post(self::$PATH_COMMON_AJAX_HANDLER, array(), $params);
 		return $request->send();
 	}
 
