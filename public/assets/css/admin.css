@@ -4,6 +4,10 @@ body, h1, h2, h3, h4, h5, h6 {
   font-family: 'Open Sans', sans-serif;
 }
 
+.highlight {
+    background-color: #FFFF88;
+}
+
 .category-list h3 {
   margin-top: 10px;
 }
@@ -12,10 +16,10 @@ body, h1, h2, h3, h4, h5, h6 {
   margin: 60px 0 40px;
 }
 
-.users-table > tbody > tr > td {
+/*.users-table > tbody > tr > td {
   line-height: 2 !important;
 }
 
 .users-table form {
   display: inline;
-}
+}*/

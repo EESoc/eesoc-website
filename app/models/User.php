@@ -61,6 +61,15 @@ class User extends Eloquent implements UserInterface {
 		return $query->orderBy('is_admin', 'DESC');
 	}
 
+	public function scopeInGroup($query, $group)
+	{
+		if ( ! ($group instanceof StudentGroup)) {
+			$group = StudentGroup::findOrFail($group);
+		}
+
+		return $query->whereIn('student_group_id', $group->related_group_ids);
+	}
+
 	public static function findOrCreateWithLDAP($username)
 	{
 		$username = strtolower($username);

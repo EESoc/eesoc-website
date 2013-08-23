@@ -5,6 +5,7 @@ use Auth;
 use Input;
 use Redirect;
 use Response;
+use StudentGroup;
 use User;
 use View;
 
@@ -19,32 +20,38 @@ class UsersController extends BaseController {
 	 */
 	public function index()
 	{
-		$user_instance = new User;
-		$users_query = $user_instance->newQuery();
+		$users = User::with('studentGroup')->adminsFirst();
 
 		$request_params = array(
-			'filter' => Input::get('filter'),
-			'query'  => Input::get('query'),
+			'filter'   => Input::get('filter'),
+			'query'    => Input::get('query'),
+			'group_id' => Input::get('group_id'),
 		);
 
 		if ( ! empty($request_params['filter'])) {
 			if (isset(User::$FILTER_TO_FUNCTION_MAP[$request_params['filter']])) {
-				$users_query->{User::$FILTER_TO_FUNCTION_MAP[$request_params['filter']]}();
+				$users->{User::$FILTER_TO_FUNCTION_MAP[$request_params['filter']]}();
 			} else {
 				$request_params['filter'] = null;
 			}
 		}
 
 		if ( ! empty($request_params['query'])) {
-			$users_query->searching($request_params['query']);
+			$users->searching($request_params['query']);
 		}
 
-		$users_query->adminsFirst();
+		$selected_group = null;
+		if ( ! empty($request_params['group_id'])) {
+			$selected_group = StudentGroup::findOrFail($request_params['group_id']);
+			$users->inGroup($selected_group);
+		}
 
 		return View::make('admin.users.index')
-			->with('users', $users_query->paginate(self::USERS_PER_PAGE))
+			->with('users', $users->paginate(self::USERS_PER_PAGE))
 			->with(User::statistics())
-			->with('paginator_appends', $request_params);
+			->with('request_params', $request_params)
+			->with('groups', StudentGroup::with('children')->root()->alphabetically()->get())
+			->with('selected_group', $selected_group);
 	}
 
 	public function getImage($username)

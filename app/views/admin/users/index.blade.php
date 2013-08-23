@@ -1,74 +1,105 @@
 @extends('layouts.admin')
 
 @section('content')
+  <div class="page-header">
+    <div class="pull-right btn-group">
+      <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-refresh"></span>
+        Sync Users
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="{{ URL::action('Admin\UsersEActivitiesController@getBegin') }}">eActivities</a></li>
+        <li><a href="{{ URL::action('Admin\UsersEEPeopleController@getBegin') }}">EEPeople</a></li>
+      </ul>
+    </div>
+    <h1>Users</h1>
+  </div>
   <div class="row">
-    <div class="col-lg-12">
-      <div class="page-header">
-        <div class="pull-right btn-group">
-          <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-            <span class="glyphicon glyphicon-refresh"></span>
-            Sync Users
+    <div class="col-lg-3">
+      <ul class="nav nav-pills nav-stacked">
+        <li
+          @if (
+            ! in_array(Input::get('filter'), array('admins', 'non-admins', 'members', 'non-members')) &&
+            ! Input::get('group_id')
+          )
+            class="active"
+          @endif
+        >
+          <a href="{{ URL::route('admin.users.index') }}">
+            <span class="badge pull-right">{{ $everybody_count }}</span>
+            Everybody
+          </a>
+        </li>
+        <li class="
+          dropdown
+          @if (Input::get('group_id'))
+            active
+          @endif
+        ">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            @if ($selected_group)
+              {{$selected_group->name}}
+            @else
+              Year Groups
+            @endif
             <span class="caret"></span>
-          </button>
+          </a>
           <ul class="dropdown-menu">
-            <li><a href="{{ URL::action('Admin\UsersEActivitiesController@getBegin') }}">eActivities</a></li>
-            <li><a href="{{ URL::action('Admin\UsersEEPeopleController@getBegin') }}">EEPeople</a></li>
+            @include('admin.users.groups_list', ['groups' => $groups, 'level' => 0])
           </ul>
-        </div>
-        <h1>Users</h1>
-      </div>
-      <div class="row filters">
-        {{ Form::open(array('method' => 'get', 'class' => 'form-inline')) }}
-          <div class="col-lg-3 form-group {{ ( !! Input::get('query')) ? 'has-success' : '' }}">
+        </li>
+        <li {{ (Input::get('filter') === 'admins') ? 'class="active"' : '' }}>
+          <a href="{{ URL::route('admin.users.index', array('filter' => 'admins')) }}">
+            <span class="badge pull-right">{{ $admins_count }}</span>
+            Admins
+          </a>
+        </li>
+        <li {{ (Input::get('filter') === 'non-admins') ? 'class="active"' : '' }}>
+          <a href="{{ URL::route('admin.users.index', array('filter' => 'non-admins')) }}">
+            <span class="badge pull-right">{{ $non_admins_count }}</span>
+            Non-Admins
+          </a>
+        </li>
+        <li {{ (Input::get('filter') === 'members') ? 'class="active"' : '' }}>
+          <a href="{{ URL::route('admin.users.index', array('filter' => 'members')) }}">
+            <span class="badge pull-right">{{ $members_count }}</span>
+            Members
+          </a>
+        </li>
+        <li {{ (Input::get('filter') === 'non-members') ? 'class="active"' : '' }}>
+          <a href="{{ URL::route('admin.users.index', array('filter' => 'non-members')) }}">
+            <span class="badge pull-right">{{ $non_members_count }}</span>
+            Non-Members
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-9">
+      {{ Form::open(array('method' => 'get', 'class' => 'form-inline')) }}
+        @foreach ($request_params as $key => $value)
+          @if ( ! empty($value))
+            {{ Form::hidden($key, $value) }}
+          @endif
+        @endforeach
+        <div class="form-group {{ ( !! Input::get('query')) ? 'has-success' : '' }}">
+          <div class="input-group">
             {{ Form::text('query', Input::get('query'), array('class' => 'form-control', 'placeholder' => 'Search Query')) }}
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </span>
           </div>
-          <div class="col-lg-1">
-            <button type="submit" class="btn btn-default">
-              <span class="glyphicon glyphicon-search"></span>
-            </button>
-          </div>
-        {{ Form::close() }}
-        <div class="col-lg-8">
-          <ul class="nav nav-pills pull-right">
-            <li
-              @if ( ! Input::get('query') && ! in_array(Input::get('filter'), array('admins', 'non-admins', 'members', 'non-members')))
-                class="active"
-              @endif
-            >
-              <a href="{{ URL::route('admin.users.index') }}">
-                <span class="badge pull-right">{{ $everybody_count }}</span>
-                Everybody
-              </a>
-            </li>
-            <li {{ (Input::get('filter') === 'admins') ? 'class="active"' : '' }}>
-              <a href="{{ URL::route('admin.users.index', array('filter' => 'admins')) }}">
-                <span class="badge pull-right">{{ $admins_count }}</span>
-                Admins
-              </a>
-            </li>
-            <li {{ (Input::get('filter') === 'non-admins') ? 'class="active"' : '' }}>
-              <a href="{{ URL::route('admin.users.index', array('filter' => 'non-admins')) }}">
-                <span class="badge pull-right">{{ $non_admins_count }}</span>
-                Non-Admins
-              </a>
-            </li>
-            <li {{ (Input::get('filter') === 'members') ? 'class="active"' : '' }}>
-              <a href="{{ URL::route('admin.users.index', array('filter' => 'members')) }}">
-                <span class="badge pull-right">{{ $members_count }}</span>
-                Members
-              </a>
-            </li>
-            <li {{ (Input::get('filter') === 'non-members') ? 'class="active"' : '' }}>
-              <a href="{{ URL::route('admin.users.index', array('filter' => 'non-members')) }}">
-                <span class="badge pull-right">{{ $non_members_count }}</span>
-                Non-Members
-              </a>
-            </li>
-          </ul>
         </div>
-      </div>
+      {{ Form::close() }}
       <hr>
-      <table class="table table-striped table-hover users-table">
+      <table
+        class="table table-striped table-hover users-table"
+        @if ( ! empty($request_params['query']))
+          data-highlight="{{{ $request_params['query'] }}}"
+        @endif
+      >
         <thead>
           <tr>
             <th>#</th>
@@ -77,14 +108,14 @@
             <th class="text-right">Actions</th>
           </tr>
         </thead>
-        @foreach($users as $user)
+        @foreach ($users as $user)
           <tr>
-            <td>{{ $user->id }}</td>            <td>
+            <td>{{ $user->id }}</td>
+            <td>
               <div class="media">
                 @if ($user->has_image)
-                  <a class="pull-left" href="#">
-                    <img class="media-object" src="data:image/png;base64,{{base64_encode($user->image_blob)}}" width="81" height="108" alt="{{{ $user->name }}}">
-                    <!--<img src="{{ URL::action('Admin\UsersController@getImage', $user->username) }}" width="37" height="50">-->
+                  <a class="pull-left" href="{{ URL::action('Admin\UsersController@getImage', $user->username) }}">
+                    <img class="media-object" src="{{ URL::action('Admin\UsersController@getImage', $user->username) }}" width="81" height="108" alt="{{{ $user->name }}}">
                   </a>
                 @endif
                 <div class="media-body">
@@ -113,13 +144,6 @@
               @else
                 {{ Carbon::createFromTimestamp(strtotime($user->last_sign_in_at))->diffForHumans() }}
               @endif
-              <!--
-                @if ($user->first_sign_in_at === null)
-                  <span class="glyphicon glyphicon-remove text-danger"></span>
-                @else
-                  <span class="glyphicon glyphicon-ok text-success"></span>
-                @endif
-              -->
             </td>
             <td class="text-right">
               @if ($user->id === Auth::user()->id)
@@ -133,7 +157,9 @@
 
                   <div class="btn-group btn-group-sm">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                      Edit <span class="caret"></span>
+                      <span class="glyphicon glyphicon-wrench"></span>
+                      Edit
+                      <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
                       <li>
@@ -157,7 +183,7 @@
           </tr>
         @endforeach
       </table>
-      {{ $users->appends($paginator_appends)->links() }}
+      {{ $users->appends($request_params)->links() }}
     </div>
   </div>
 @stop

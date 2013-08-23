@@ -48,7 +48,7 @@ Route::filter('auth.admin', function()
 	if (Auth::guest())
 	{
 		$signInURL = URL::action('SessionsController@getNew');
-		return Redirect::guest($signInURL)->with('notice', 'You need to be signed in before you can continue');
+		return Redirect::guest($signInURL)->with('info', 'You need to be signed in before you can continue');
 	}
 
 	if ( ! Auth::user()->is_admin)

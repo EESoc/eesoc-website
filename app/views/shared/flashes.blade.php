@@ -1,5 +1,5 @@
 <?php
-  $flash_types = array('success', 'warning', 'notice', 'danger');
+  $flash_types = array('success', 'warning', 'info', 'danger');
 ?>
 @foreach($flash_types as $type)
   @if (Session::has($type))

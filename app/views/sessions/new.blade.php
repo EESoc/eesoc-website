@@ -21,7 +21,7 @@
         {{ $errors->first('password', '<span class="help-block">:message</span>') }}
       </div>
 
-      {{ Form::submit('Sign In', array('class' => 'btn btn-primary btn-large btn-block')) }}
+      {{ Form::submit('Sign In', array('class' => 'btn btn-primary btn-large btn-block', 'data-loading-text' => 'Signing in&hellip;')) }}
 
     {{ Form::close() }}
   </div>
