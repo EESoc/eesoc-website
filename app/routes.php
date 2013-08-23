@@ -24,8 +24,9 @@ Route::group(array('prefix' => 'admin'), function() {
 	Route::resource('categories', 'Admin\CategoriesController', array('except' => array('show')));
 
 	Route::controller('users/eactivities', 'Admin\UsersEActivitiesController');
-	Route::controller('users', 'Admin\UsersController');
-	Route::resource('users', 'Admin\UsersController', array('only' => array('index')));
+	Route::controller('users/eepeople',    'Admin\UsersEEPeopleController');
+	Route::controller('users',             'Admin\UsersController');
+	Route::resource  ('users',             'Admin\UsersController', array('only' => array('index')));
 
 });
 

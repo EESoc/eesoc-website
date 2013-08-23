@@ -21,7 +21,8 @@ class Client {
 	public static $PARAMS_STUDENT_GROUP_INDEX = array('g' => 'NIL');
 	public static $PARAMS_PERSON = array('s' => 'NIL', 'id' => null);
 	public static $REGEX_STUDENT_GROUPS = '/<li><a class="mylink" HREF=pplsg.asp\?g=(?P<group_id>[\w]{2})>\s*(?P<group_name>.+?)\s*<\/a><\/li>/';
-	public static $REGEX_STUDENTS_IN_GROUP = '/<tr><td class="contentwrap2"><a class="mylink" HREF=person.asp\?f=sg&c=(?P<group_id>[\w]{2})&s=NIL&id=(?P<person_id>\d+)#start >(?P<short_name>.+?)<\/a>&nbsp;&nbsp;<\/td><td class="contentwrap2"><a class="mylink" HREF=pplsg.asp\?g=NIL>(?P<student_category>.+?)<\/a><\/td><\/tr>/';
+
+	public static $REGEX_PERSON_IDS_IN_GROUP = '/person\.asp.+?id=(?P<person_id>\d+)/';
 
 	public static $COOKIE_SESSION_NAMES = array('ASP.NET_SessionId', 'ASPSESSIONIDCABDSQSB');
 
@@ -72,7 +73,7 @@ class Client {
 	public function getStudentGroups()
 	{
 		$response = $this->getPageResponse(self::$PATH_STUDENT_GROUP, self::$PARAMS_STUDENT_GROUP_INDEX);
-		$body = $response->getBody();
+		$body = (string) $response->getBody();
 
 		preg_match_all(self::$REGEX_STUDENT_GROUPS, $body, $output_array);
 
@@ -89,34 +90,29 @@ class Client {
 		return $result;
 	}
 
-	public function getStudentsInGroup($group_id)
+	public function getStudentIdsInGroup($group_id)
 	{
 		$response = $this->getPageResponse(self::$PATH_STUDENT_GROUP, array('g' => $group_id));
-		$body = $response->getBody();
+		$body = (string) $response->getBody();
 
-		preg_match_all(self::$REGEX_STUDENTS_IN_GROUP, $body, $output_array);
+		preg_match_all(self::$REGEX_PERSON_IDS_IN_GROUP, $body, $output_array);
 
 		$result = array();
 
 		$matches_count = count($output_array[0]);
 		for ($i = 0; $i < $matches_count; ++$i) {
-			$result[] = array(
-				'id' => $output_array['person_id'][$i],
-				'short_name' => $output_array['short_name'][$i],
-				'group_id' => $output_array['group_id'][$i],
-				'student_category' => $output_array['student_category'][$i],
-			);
+			$result[] = $output_array['person_id'][$i];
 		}
 
 		return $result;
 	}
 
-	public function getStudent($student_id)
+	public function getPerson($student_id)
 	{
 		$params = self::$PARAMS_PERSON;
 		$params['id'] = $student_id;
 		$response = $this->getPageResponse(self::$PATH_PERSON, $params);
-		$body = $response->getBody();
+		$body = (string) $response->getBody();
 
 		if (strpos($body, 'EE ID does not exist or Person is Ex-Directory.') !== false) {
 			return false;
@@ -152,7 +148,7 @@ class Client {
 
 		$image_response = $this->client->get($output_array[1])->send();
 		$result['image_content_type'] = $image_response->getContentType();
-		$result['image_blob'] = (string) $image_response->getBody();
+		$result['image_blob'] = $image_response->getBody();
 
 		return $result;
 	}

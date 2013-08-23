@@ -78,9 +78,9 @@
             <td>{{ $user->id }}</td>
             <td>
               {{{ $user->username }}}
-              @if ($user->isAdmin())
+              @if ($user->is_admin)
                 <span class="label label-primary">Admin</span>
-              @elseif ($user->isMember())
+              @elseif ($user->is_member)
                 <span class="label label-success">Member</span>
               @else
                 <span class="label label-danger">Non-Member</span>
@@ -112,7 +112,7 @@
                     </button>
                     <ul class="dropdown-menu" role="menu">
                       <li>
-                        @if ($user->isAdmin())
+                        @if ($user->is_admin)
                           <a href="{{ URL::action('Admin\UsersController@putDemote', $user->username) }}" data-method="put">
                             <span class="glyphicon glyphicon-star-empty"></span>
                             Demote from Admin

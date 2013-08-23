@@ -13,6 +13,11 @@ class User extends Eloquent implements UserInterface {
 
 	private $imperialCollegeUser;
 
+	public function studentGroup()
+	{
+		return $this->belongsTo('StudentGroup');
+	}
+
 	public function scopeAdmin($query)
 	{
 		return $query->where('is_admin', '=', true);
@@ -130,16 +135,6 @@ class User extends Eloquent implements UserInterface {
 		$this->email    = $this->getImperialCollegeUser()->email;
 		$this->extras   = implode("\n", $this->getImperialCollegeUser()->info);
 		return $this->save();
-	}
-
-	public function isAdmin()
-	{
-		return (bool) $this->is_admin;
-	}
-
-	public function isMember()
-	{
-		return (bool) $this->is_member;
 	}
 
 	public function recordSignIn()

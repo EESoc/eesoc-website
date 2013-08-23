@@ -58,7 +58,7 @@ class UsersController extends BaseController {
 		if ($user->id === Auth::user()->id) {
 			return Redirect::back()
 				->with('danger', 'You cannot promote yourself');
-		} else if ($user->isAdmin()) {
+		} else if ($user->is_admin) {
 			return Redirect::back()
 				->with('danger', "{$user->username} is already an Admin");
 		} else {
@@ -82,7 +82,7 @@ class UsersController extends BaseController {
 		if ($user->id === Auth::user()->id) {
 			return Redirect::back()
 				->with('danger', 'You cannot demote yourself');
-		} else if ( ! $user->isAdmin()) {
+		} else if ( ! $user->is_admin) {
 			return Redirect::back()
 				->with('danger', "{$user->username} is already a Non-Admin");
 		} else {

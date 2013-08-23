@@ -51,7 +51,7 @@ Route::filter('auth.admin', function()
 		return Redirect::guest($signInURL)->with('notice', 'You need to be signed in before you can continue');
 	}
 
-	if ( ! Auth::user()->isAdmin())
+	if ( ! Auth::user()->is_admin)
 	{
 		App::abort(401, 'You are not authorized');
 	}

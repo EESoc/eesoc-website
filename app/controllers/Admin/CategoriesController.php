@@ -117,7 +117,7 @@ class CategoriesController extends BaseController {
 	{
 		$category = Category::findOrFail($id);
 
-		if ($category->isDeletable()) {
+		if ($category->is_deletable) {
 			$category->delete();
 
 			return Redirect::route('admin.categories.index')->with('success', 'Category has been successfully deleted');
