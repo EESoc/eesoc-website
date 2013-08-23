@@ -145,6 +145,12 @@ class User extends Eloquent implements UserInterface {
 	public function recordSignIn()
 	{
 		$this->last_sign_in_at = new DateTime;
+
+		// First time signing in
+		if ( ! $this->first_sign_in_at) {
+			$this->first_sign_in_at = $this->last_sign_in_at;
+		}
+
 		return $this->save();
 	}
 

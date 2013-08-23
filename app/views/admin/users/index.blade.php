@@ -90,7 +90,7 @@
               {{{ $user->name }}}
             </td>
             <td class="text-center">
-              @if ($user->last_sign_in_at === null)
+              @if ($user->first_sign_in_at === null)
                 <span class="glyphicon glyphicon-remove text-danger"></span>
               @else
                 <span class="glyphicon glyphicon-ok text-success"></span>
@@ -100,9 +100,14 @@
               @if ($user->id === Auth::user()->id)
                 It's me :-)
               @else
-                <div class="btn-toolbar">
-                  <div class="btn-group text-left">
-                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                <div class="btn-group btn-group-sm">
+                  <a href="mailto:{{{ $user->email }}}" class="btn btn-default">
+                    <span class="glyphicon glyphicon-envelope"></span>
+                    Email
+                  </a>
+
+                  <div class="btn-group btn-group-sm">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                       Edit <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
@@ -121,11 +126,6 @@
                       </li>
                     </ul>
                   </div>
-
-                  <a href="mailto:{{{ $user->email }}}" class="btn btn-primary btn-sm">
-                    <span class="glyphicon glyphicon-envelope"></span>
-                    Email
-                  </a>
                 </div>
               @endif
             </td>
