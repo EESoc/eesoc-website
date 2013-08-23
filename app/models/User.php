@@ -70,6 +70,11 @@ class User extends Eloquent implements UserInterface {
 		return $query->whereIn('student_group_id', $group->related_group_ids);
 	}
 
+	public function scopeHasImage($query)
+	{
+		return $query->whereNotNull('image_blob');
+	}
+
 	public static function findOrCreateWithLDAP($username)
 	{
 		$username = strtolower($username);

@@ -111,4 +111,10 @@ class UsersController extends BaseController {
 
 	}
 
+	public function getWall()
+	{
+		return View::make('admin.users.wall')
+			->with('users', User::adminsFirst()->hasImage()->get());
+	}
+
 }
