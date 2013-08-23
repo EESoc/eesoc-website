@@ -80,10 +80,10 @@
               {{{ $user->username }}}
               @if ($user->isAdmin())
                 <span class="label label-primary">Admin</span>
-			  @elseif ($user->isMember())
-				<span class="label label-success">Member</span>
-			  @else
-				<span class="label label-danger">Non-Member</span>
+              @elseif ($user->isMember())
+                <span class="label label-success">Member</span>
+              @else
+                <span class="label label-danger">Non-Member</span>
               @endif
             </td>
             <td>
@@ -101,22 +101,28 @@
                 It's me :-)
               @else
                 <div class="btn-toolbar">
-                  @if ($user->isAdmin())
-                    {{ Form::open(array('action' => array('Admin\UsersController@putDemote', $user->username), 'method' => 'put')) }}
-                      <button type="submit" class="btn btn-danger btn-mini">
-                        <span class="glyphicon glyphicon-certificate"></span>
-                        Demote from Admin
-                      </button>
-                    {{ Form::close() }}
-                  @else
-                    {{ Form::open(array('action' => array('Admin\UsersController@putPromote', $user->username), 'method' => 'put')) }}
-                      <button type="submit" class="btn btn-warning btn-mini">
-                        <span class="glyphicon glyphicon-certificate"></span>
-                        Promote to Admin
-                      </button>
-                    {{ Form::close() }}
-                  @endif
-                  <a href="mailto:{{{ $user->email }}}" class="btn btn-primary btn-mini">
+                  <div class="btn-group text-left">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                      Edit <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li>
+                        @if ($user->isAdmin())
+                          <a href="{{ URL::action('Admin\UsersController@putDemote', $user->username) }}" data-method="put">
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            Demote from Admin
+                          </a>
+                        @else
+                          <a href="{{ URL::action('Admin\UsersController@putPromote', $user->username) }}" data-method="put">
+                            <span class="glyphicon glyphicon-star"></span>
+                            Promote to Admin
+                          </a>
+                        @endif
+                      </li>
+                    </ul>
+                  </div>
+
+                  <a href="mailto:{{{ $user->email }}}" class="btn btn-primary btn-sm">
                     <span class="glyphicon glyphicon-envelope"></span>
                     Email
                   </a>

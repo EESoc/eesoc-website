@@ -9,23 +9,36 @@
     <title>{{{ isset($page_title) ? $page_title.' | ' : '' }}}EESoc Administration</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/bootstrap-glyphicons.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="{{ asset('assets/js/html5shiv.js') }}"></script>
+      <script src="{{ asset('assets/js/respond.min.js') }}"></script>
+    <![endif]-->
+
+    <meta content="_token" name="csrf-param" />
+    <meta content="{{ csrf_token() }}" name="csrf-token" />
+
   </head>
 
   <body>
 
-    <div class="navbar">
+    <nav class="navbar navbar-default" role="navigation">
       <div class="container">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a href="#" class="navbar-brand">EESoc</a>
-        <div class="nav-collapse collapse navbar-responsive-collapse">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="#" class="navbar-brand">EESoc</a>
+        </div>
+        <div class="collapse navbar-collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
             <li><a href="#">Posts</a></li>
             <li><a href="#">Pages</a></li>
@@ -40,7 +53,7 @@
           </p>
         </div>
       </div>
-    </div>
+    </nav>
     <div class="container">
 
       @include('shared.flashes')
@@ -57,6 +70,7 @@
 
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/laravel-ujs.js') }}"></script>
     @yield('javascript_for_page')
 
   </body>
