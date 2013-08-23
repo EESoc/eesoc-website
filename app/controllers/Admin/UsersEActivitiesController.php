@@ -16,6 +16,18 @@ class UsersEActivitiesController extends BaseController {
 
 	const KEY_EACTIVITIES_SESSION = 'eactivities_session';
 
+	private $client;
+
+	public function getBegin()
+	{
+		$this->client = $this->createEActivitiesClient();
+		if ($this->client->isSignedIn()) {
+			return $this->getRoles();
+		} else {
+			return $this->getSignIn();
+		}
+	}
+
 	/**
 	 * Display eActivities sign in form.
 	 *
@@ -66,9 +78,9 @@ class UsersEActivitiesController extends BaseController {
 	 */
 	public function getRoles()
 	{
-		$client = $this->createEActivitiesClient();
-		if ( ! $client->isSignedIn()) {
-			return $this->createSignInAgainRedirection();
+		$client = $this->getEActivitiesClientEnsureSignedIn();
+		if ($client instanceof Response) {
+			return $client;
 		}
 
 		$roles = $client->getCurrentAndOtherRoles();
@@ -85,9 +97,9 @@ class UsersEActivitiesController extends BaseController {
 	 */
 	public function putSelectRole()
 	{
-		$client = $this->createEActivitiesClient();
-		if ( ! $client->isSignedIn()) {
-			return $this->createSignInAgainRedirection();
+		$client = $this->getEActivitiesClientEnsureSignedIn();
+		if ($client instanceof Response) {
+			return $client;
 		}
 
 		$role_id = (int) Input::get('role_id');
@@ -111,9 +123,9 @@ class UsersEActivitiesController extends BaseController {
 	 */
 	public function postPerform()
 	{
-		$client = $this->createEActivitiesClient();
-		if ( ! $client->isSignedIn()) {
-			return $this->createSignInAgainRedirection();
+		$client = $this->getEActivitiesClientEnsureSignedIn();
+		if ($client instanceof Response) {
+			return $client;
 		}
 
 		$members = $client->getMembersList();
@@ -165,11 +177,29 @@ class UsersEActivitiesController extends BaseController {
 	}
 
 	/**
+	 * Get existing eActivities client if already created, ensuring user is signed in.
+	 *
+	 * @return mixed
+	 */
+	private function getEActivitiesClientEnsureSignedIn()
+	{
+		if ( ! $this->client) {
+			$this->client = $this->createEActivitiesClient();
+		}
+
+		if ( ! $this->client->isSignedIn()) {
+			return $this->createSessionExpiredResponse();
+		} else {
+			return $this->client;
+		}
+	}
+
+	/**
 	 * Redirect response if user's eActivities session expired.
 	 *
 	 * @return Response
 	 */
-	private function createSignInAgainRedirection()
+	private function createSessionExpiredResponse()
 	{
 		return Redirect::action('Admin\UsersEActivitiesController@getSignIn')
 			->with('danger', 'Session expired. Please sign in again');

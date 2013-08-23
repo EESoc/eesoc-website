@@ -5,7 +5,8 @@
 	"require": {
 		"laravel/framework": "4.0.*",
 		"loic-sharma/profiler": "dev-master",
-		"guzzle/guzzle": "3.7.*@dev"
+		"guzzle/guzzle": "3.7.*@dev",
+		"nesbot/Carbon": "*"
 	},
 	"autoload": {
 		"classmap": [

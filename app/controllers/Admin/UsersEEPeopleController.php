@@ -8,10 +8,16 @@ use EEPeople\Client as EEPeopleClient;
 use Guzzle\Http\Client as HttpClient;
 use ImperialCollegeLogin;
 use Input;
+use Redirect;
 use Validator;
 use View;
 
 class UsersEEPeopleController extends BaseController {
+
+	public function getBegin()
+	{
+		return $this->getSignIn();
+	}
 
 	/**
 	 * Display EEPeople sign in form.
@@ -29,7 +35,8 @@ class UsersEEPeopleController extends BaseController {
 	 * @return Response
 	 */
 	public function postSignInAndPerform()
-	{		$inputs = array(
+	{
+		$inputs = array(
 			'password' => Input::get('password'),
 		);
 
@@ -56,6 +63,11 @@ class UsersEEPeopleController extends BaseController {
 			return Redirect::action('Admin\UsersEEPeopleController@getSignIn')
 				->withErrors($validator);
 		}
+	}
+
+	public function getStudentsCount()
+	{
+		return $this->createEEPeopleClient()->getStudentsCount();
 	}
 
 	/**

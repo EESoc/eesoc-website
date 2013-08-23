@@ -46,6 +46,7 @@ class Synchronizer {
 		
 		foreach ($official_groups as $group) {
 			$student_ids = $this->client->getStudentIdsInGroup($group->group_id);
+
 			foreach ($student_ids as $student_id) {
 				$this->synchronizeStudent($student_id, $group);
 			}
@@ -63,17 +64,16 @@ class Synchronizer {
 		}
 
 		$user->studentGroup()->associate($group);
+		$user->eepeople_id        = $person['id'];
+		$user->name               = $person['name'];
 		$user->tutor_name         = $person['tutor_name'];
 		$user->email              = $person['email'];
-		$user->image_content_type = $person['image_content_type'];
-		$user->image_blob         = $person['image_blob'];
-		$user->eepeople_extras    = json_encode(array(
-			'category_id'         => $person['category_id'],
-			'category_name'       => $person['category_name'],
-			'research_group_id'   => $person['research_group_id'],
-			'research_group_name' => $person['research_group_name'],
-		));
-		$user->synchronizeWithLDAP();
+
+		if ( ! $user->image_content_type || ! $user->image_blob) {
+			$image = $this->client->getImageOfPerson($person);
+			$user->image_content_type = $image['content_type'];
+			$user->image_blob         = $image['blob'];
+		}
 
 		return $user->save();
 	}

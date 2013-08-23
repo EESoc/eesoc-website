@@ -5,10 +5,15 @@
     <div class="col-lg-12">
       <div class="page-header">
         <div class="pull-right btn-group">
-          <a href="{{ URL::action('Admin\UsersEActivitiesController@getSignIn') }}" class="btn btn-default btn-info btn-large">
+          <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
             <span class="glyphicon glyphicon-refresh"></span>
-            Synchronize with eActivities
-          </a>
+            Sync Users
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="{{ URL::action('Admin\UsersEActivitiesController@getBegin') }}">eActivities</a></li>
+            <li><a href="{{ URL::action('Admin\UsersEEPeopleController@getBegin') }}">EEPeople</a></li>
+          </ul>
         </div>
         <h1>Users</h1>
       </div>
@@ -67,34 +72,52 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Username</th>
-            <th>Name</th>
-            <th class="text-center">Signed In At Least Once?</th>
+            <th>Person</th>
+            <th class="text-center">Last Active</th>
             <th class="text-right">Actions</th>
           </tr>
         </thead>
         @foreach($users as $user)
           <tr>
-            <td>{{ $user->id }}</td>
-            <td>
-              {{{ $user->username }}}
-              @if ($user->is_admin)
-                <span class="label label-primary">Admin</span>
-              @elseif ($user->is_member)
-                <span class="label label-success">Member</span>
-              @else
-                <span class="label label-danger">Non-Member</span>
-              @endif
-            </td>
-            <td>
-              {{{ $user->name }}}
+            <td>{{ $user->id }}</td>            <td>
+              <div class="media">
+                @if ($user->has_image)
+                  <a class="pull-left" href="#">
+                    <img class="media-object" src="data:image/png;base64,{{base64_encode($user->image_blob)}}" width="81" height="108" alt="{{{ $user->name }}}">
+                    <!--<img src="{{ URL::action('Admin\UsersController@getImage', $user->username) }}" width="37" height="50">-->
+                  </a>
+                @endif
+                <div class="media-body">
+                  <h4 class="media-heading">
+                    {{{ $user->name }}}
+                    <small>{{{ $user->username }}}</small>
+                  </h4>
+                  <p>{{{ $user->studentGroup->name }}}</p>
+                  <p>
+                    @if ($user->is_admin)
+                      <span class="label label-primary">Admin</span>
+                    @elseif ($user->is_member)
+                      <span class="label label-success">Member</span>
+                    @else
+                      <span class="label label-danger">Non-Member</span>
+                    @endif
+                  </p>
+                </div>
+              </div>
             </td>
             <td class="text-center">
               @if ($user->first_sign_in_at === null)
                 <span class="glyphicon glyphicon-remove text-danger"></span>
               @else
-                <span class="glyphicon glyphicon-ok text-success"></span>
+                {{ Carbon::createFromTimestamp(strtotime($user->last_sign_in_at))->diffForHumans() }}
               @endif
+              <!--
+                @if ($user->first_sign_in_at === null)
+                  <span class="glyphicon glyphicon-remove text-danger"></span>
+                @else
+                  <span class="glyphicon glyphicon-ok text-success"></span>
+                @endif
+              -->
             </td>
             <td class="text-right">
               @if ($user->id === Auth::user()->id)

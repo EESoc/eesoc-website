@@ -4,6 +4,7 @@ namespace Admin;
 use Auth;
 use Input;
 use Redirect;
+use Response;
 use User;
 use View;
 
@@ -44,6 +45,14 @@ class UsersController extends BaseController {
 			->with('users', $users_query->paginate(self::USERS_PER_PAGE))
 			->with(User::statistics())
 			->with('paginator_appends', $request_params);
+	}
+
+	public function getImage($username)
+	{
+		$user = User::where('username', '=', $username)->firstOrFail();
+		return Response::make($user->image_blob, 200, array(
+			'Content-Type' => $user->image_content_type,
+		));
 	}
 
 	/**

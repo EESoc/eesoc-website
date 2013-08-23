@@ -146,7 +146,14 @@ class User extends Eloquent implements UserInterface {
 			$this->first_sign_in_at = $this->last_sign_in_at;
 		}
 
+		$this->sign_in_count++;
+
 		return $this->save();
+	}
+
+	public function getHasImageAttribute()
+	{
+		return ! empty($this->image_blob);
 	}
 
 }

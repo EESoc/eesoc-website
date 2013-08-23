@@ -182,6 +182,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
 		'Profiler' => 'Profiler\Facades\Profiler',
+		'Carbon'   => 'Carbon\Carbon',
 
 	),
 

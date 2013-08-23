@@ -36,6 +36,8 @@ class Client {
 	{
 		$client->setBaseUrl(self::$URL_BASE);
 
+		$client->setDefaultOption('exceptions', false);
+
 		$this->cookie_jar = new ArrayCookieJar();
 		$cookiePlugin = new CookiePlugin($this->cookie_jar);
 		$client->addSubscriber($cookiePlugin);
@@ -91,7 +93,7 @@ class Client {
 	}
 
 	public function getStudentIdsInGroup($group_id)
-	{
+	{return ['10038'];
 		$response = $this->getPageResponse(self::$PATH_STUDENT_GROUP, array('g' => $group_id));
 		$body = (string) $response->getBody();
 
@@ -101,7 +103,7 @@ class Client {
 
 		$matches_count = count($output_array[0]);
 		for ($i = 0; $i < $matches_count; ++$i) {
-			$result[] = $output_array['person_id'][$i];
+			$result[] = (int) $output_array['person_id'][$i];
 		}
 
 		return $result;
@@ -120,7 +122,9 @@ class Client {
 
 		$result = array();
 
-		preg_match('/<h2><font color="black"><b>(.+?)<\/font><\/b><\/h2>/', $body, $output_array);
+		$result['id'] = (int) $student_id;
+
+		preg_match('/<h2><font color="black"><b>.+?\s(.+?)<\/font><\/b><\/h2>/', $body, $output_array); // Remove Mr, Miss, etc...
 		$result['name'] = $output_array[1];
 
 		preg_match('/Student Group: <a class="mylink" HREF="pplsg.asp\?g=([\w]{2})">\s*(.+?)\s*<\/A>/', $body, $output_array);
@@ -145,12 +149,34 @@ class Client {
 		$result['email'] = $output_array[1];
 
 		preg_match('/<img src="(.+?)" width=135 height=165 alt="Photo" border=0 align="RIGHT">/', $body, $output_array);
-
-		$image_response = $this->client->get($output_array[1])->send();
-		$result['image_content_type'] = $image_response->getContentType();
-		$result['image_blob'] = $image_response->getBody();
+		$result['image_path'] = $output_array[1];
 
 		return $result;
+	}
+
+	public function getImageOfPerson($person)
+	{
+		$result = array();
+
+		$image_response = $this->client->get($person['image_path'])->send();
+		if ($image_response->isSuccessful()) {
+			$result['content_type'] = $image_response->getContentType();
+			$result['blob']         = $image_response->getBody(); // Original Size: 324x432
+		} else {
+			$result['content_type'] = null;
+			$result['blob']         = null;
+		}
+
+		return $result;
+	}
+
+	public function getStudentsCount()
+	{
+		$sum = 0;
+		foreach ($this->getStudentGroups() as $group) {
+			$sum += count($this->getStudentIdsInGroup($group['id']));
+		}
+		return $sum;
 	}
 
 	protected function getPageResponse($path = null, $query = null)
