@@ -5,3 +5,4 @@ composer.phar
 /app/config/database.php
 /bootstrap/start.php
 *.sqlite
+/.idea

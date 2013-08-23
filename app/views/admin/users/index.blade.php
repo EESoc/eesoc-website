@@ -92,7 +92,9 @@
                     {{{ $user->name }}}
                     <small>{{{ $user->username }}}</small>
                   </h4>
-                  <p>{{{ $user->studentGroup->name }}}</p>
+                  @if ($user->studentGroup)
+                    <p>{{{ $user->studentGroup->name }}}</p>
+                  @endif
                   <p>
                     @if ($user->is_admin)
                       <span class="label label-primary">Admin</span>
