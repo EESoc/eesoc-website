@@ -93,7 +93,7 @@ class Client {
 	}
 
 	public function getStudentIdsInGroup($group_id)
-	{return ['10038'];
+	{
 		$response = $this->getPageResponse(self::$PATH_STUDENT_GROUP, array('g' => $group_id));
 		$body = (string) $response->getBody();
 

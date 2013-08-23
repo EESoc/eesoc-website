@@ -25,6 +25,8 @@ class EActivitiesClient {
 	{
 		$client->setBaseUrl(self::$URL_BASE);
 
+		$client->setDefaultOption('exceptions', false);
+
 		$this->cookie_jar = new ArrayCookieJar();
 		$cookiePlugin = new CookiePlugin($this->cookie_jar);
 		$client->addSubscriber($cookiePlugin);
