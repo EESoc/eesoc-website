@@ -124,8 +124,13 @@ class Client {
 
 		$result['id'] = (int) $student_id;
 
-		preg_match('/<h2><font color="black"><b>.+?\s(.+?)<\/font><\/b><\/h2>/', $body, $output_array); // Remove Mr, Miss, etc...
-		$result['name'] = $output_array[1];
+		preg_match('/<h2><font color="black"><b>\s*(.+?)\s*<\/font><\/b><\/h2>/', $body, $output_array);
+		$result['name'] = @$output_array[1];
+		foreach (array('Mr', 'Mrs', 'Miss', 'Ms', 'Dr') as $title) {
+			if (strpos($result['name'], $title) === 0) {
+				$result['name'] = substr(strstr($result['name'], ' '), 1);
+			}
+		}
 
 		preg_match('/Student Group: <a class="mylink" HREF="pplsg.asp\?g=([\w]{2})">\s*(.+?)\s*<\/A>/', $body, $output_array);
 		$result['group_id'] = @$output_array[1];
@@ -146,7 +151,7 @@ class Client {
 		$result['research_group_name'] = @$output_array[2];
 
 		preg_match('/<br>Username: (.+?)<br>/', $body, $output_array);
-		$result['username'] = $output_array[1];
+		$result['username'] = @$output_array[1];
 
 		preg_match('/<a class="mylink" href="mailto:(.+?)">.+?<\/a>/', $body, $output_array);
 		$result['email'] = @$output_array[1];

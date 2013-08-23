@@ -12,3 +12,4 @@
 */
 
 Artisan::add(new BecomeAdminCommand);
+Artisan::add(new SyncEEPeopleCommand);
