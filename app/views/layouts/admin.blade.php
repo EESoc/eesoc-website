@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="//code.jquery.com/jquery.js"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/laravel-ujs.js') }}"></script>
     @yield('javascript_for_page')
