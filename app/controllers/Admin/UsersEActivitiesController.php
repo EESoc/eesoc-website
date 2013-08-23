@@ -163,9 +163,7 @@ class UsersEActivitiesController extends BaseController {
 	{
 		$http_client = new HttpClient;
 
-		if (App::environment() === 'local') {
-			$http_client->setSslVerification(false);
-		}
+		$http_client->setSslVerification(false);
 
 		$eactivities_client = new EActivitiesClient($http_client);
 
