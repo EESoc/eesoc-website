@@ -133,6 +133,9 @@ class Client {
 
 		preg_match('/<br>Tutor: (.+?)<br>/', $body, $output_array);
 		$result['tutor_name'] = @$output_array[1];
+		if ($result['tutor_name'] === '<br>') {
+			$result['tutor_name'] = null;
+		}
 
 		preg_match('/Category: <a class="mylink" HREF="pplsc.asp\?c=(\w+?)">\s*(.+?)\s*<\/A>/', $body, $output_array);
 		$result['category_id'] = @$output_array[1];
@@ -146,10 +149,10 @@ class Client {
 		$result['username'] = $output_array[1];
 
 		preg_match('/<a class="mylink" href="mailto:(.+?)">.+?<\/a>/', $body, $output_array);
-		$result['email'] = $output_array[1];
+		$result['email'] = @$output_array[1];
 
 		preg_match('/<img src="(.+?)" width=135 height=165 alt="Photo" border=0 align="RIGHT">/', $body, $output_array);
-		$result['image_path'] = $output_array[1];
+		$result['image_path'] = @$output_array[1];
 
 		return $result;
 	}

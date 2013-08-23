@@ -1,6 +1,7 @@
 <?php
 namespace EEPeople;
 
+use ImperialCollegeUser;
 use StudentGroup;
 use User;
 
@@ -57,6 +58,11 @@ class Synchronizer {
 	{
 		$person = $this->client->getPerson($student_id);
 
+		// Skip this person if no email
+		if ( ! $person['email']) {
+			return false;
+		}
+
 		$user = User::where('username', '=', $person['username'])->first();
 		if ( ! $user) {
 			$user = new User;
@@ -64,10 +70,10 @@ class Synchronizer {
 		}
 
 		$user->studentGroup()->associate($group);
-		$user->eepeople_id        = $person['id'];
-		$user->name               = $person['name'];
-		$user->tutor_name         = $person['tutor_name'];
-		$user->email              = $person['email'];
+		$user->eepeople_id = $person['id'];
+		$user->tutor_name  = $person['tutor_name'];
+		$user->name        = $person['name'];
+		$user->email       = $person['email'];
 
 		if ( ! $user->image_content_type || ! $user->image_blob) {
 			$image = $this->client->getImageOfPerson($person);
