@@ -50,10 +50,11 @@ class User extends Eloquent implements UserInterface {
 
 	public function scopeSearching($query, $searching)
 	{
-		return $query
-			->where('username', 'like', "%{$searching}%")
-			->orWhere('email', 'like', "%{$searching}%")
-			->orWhere('name', 'like', "%{$searching}%");
+		return $query->where(function($query) use ($searching) {
+			$query->where('username', 'like', "%{$searching}%")
+				->orWhere('email', 'like', "%{$searching}%")
+				->orWhere('name', 'like', "%{$searching}%");
+		});
 	}
 
 	public function scopeAdminsFirst($query)

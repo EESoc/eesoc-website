@@ -4,7 +4,7 @@
 	"keywords": ["framework", "laravel"],
 	"require": {
 		"laravel/framework": "4.0.*",
-		"loic-sharma/profiler": "dev-master",
+		"loic-sharma/profiler": "1.1.*",
 		"guzzle/guzzle": "3.7.*@dev",
 		"nesbot/Carbon": "*"
 	},

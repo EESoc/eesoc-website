@@ -123,9 +123,6 @@
                     {{{ $user->name }}}
                     <small>{{{ $user->username }}}</small>
                   </h4>
-                  @if ($user->studentGroup)
-                    <p>{{{ $user->studentGroup->name }}}</p>
-                  @endif
                   <p>
                     @if ($user->is_admin)
                       <span class="label label-primary">Admin</span>
@@ -135,6 +132,12 @@
                       <span class="label label-danger">Non-Member</span>
                     @endif
                   </p>
+                  @if ($user->studentGroup)
+                    <p>{{{ $user->studentGroup->name }}}</p>
+                  @endif
+                  @if ($user->cid)
+                    <p><small>CID: {{{ $user->cid }}}</small></p>
+                  @endif
                 </div>
               </div>
             </td>
