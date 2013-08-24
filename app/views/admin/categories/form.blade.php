@@ -5,9 +5,8 @@
 </div>
 <div class="form-group {{ $errors->first('slug', 'has-error') }}">
   {{ Form::label('slug', 'Slug', array('class' => 'control-label')) }}
-  {{ Form::text('slug', null, array('class' => 'form-control input-large')) }}
+  {{ Form::text('slug', null, array('class' => 'form-control input-large', 'data-slugify' => '#name')) }}
   {{ $errors->first('slug', '<span class="help-block">:message</span>') }}
-  <p class="help-block">Leave blank for default</p>
 </div>
 <div class="form-group {{ $errors->first('description', 'has-error') }}">
   {{ Form::label('description', 'Description', array('class' => 'control-label')) }}

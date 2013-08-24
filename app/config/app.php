@@ -115,6 +115,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
 		'Profiler\ProfilerServiceProvider',
+		'Robbo\Presenter\PresenterServiceProvider',
 
 	),
 

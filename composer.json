@@ -6,7 +6,8 @@
 		"laravel/framework": "4.0.*",
 		"loic-sharma/profiler": "1.1.*",
 		"guzzle/guzzle": "3.7.*@dev",
-		"nesbot/Carbon": "*"
+		"nesbot/Carbon": "*",
+		"robclancy/presenter": "1.1.*"
 	},
 	"autoload": {
 		"classmap": [
@@ -15,7 +16,8 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"app/tests/TestCase.php",
+			"app/presenters"
 		]
 	},
 	"scripts": {

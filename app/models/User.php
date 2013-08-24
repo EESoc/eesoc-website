@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Auth\UserInterface;
+use Robbo\Presenter\PresentableInterface;
 
-class User extends Eloquent implements UserInterface {
+class User extends Eloquent implements UserInterface, PresentableInterface {
 
 	public static $FILTER_TO_FUNCTION_MAP = array(
 		'admins'      => 'admin',
@@ -169,6 +170,21 @@ class User extends Eloquent implements UserInterface {
 	public function getHasImageAttribute()
 	{
 		return ! empty($this->image_blob);
+	}
+
+	public function getHasEmailAttribute()
+	{
+		return ! empty($this->email);
+	}
+
+	/**
+	 * Return a created presenter.
+	 *
+	 * @return Robbo\Presenter\Presenter
+	*/
+	public function getPresenter()
+	{
+		return new UserPresenter($this);
 	}
 
 }

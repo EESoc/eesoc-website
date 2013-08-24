@@ -114,8 +114,8 @@
             <td>
               <div class="media">
                 @if ($user->has_image)
-                  <a class="pull-left" href="{{ URL::action('Admin\UsersController@getImage', $user->username) }}">
-                    <img class="media-object" src="{{ URL::action('Admin\UsersController@getImage', $user->username) }}" width="81" height="108" alt="{{{ $user->name }}}">
+                  <a class="pull-left" href="{{{ $user->image_url }}}">
+                    <img class="media-object" src="{{{ $user->image_url }}}" width="81" height="108" alt="{{{ $user->name }}}">
                   </a>
                 @endif
                 <div class="media-body">
@@ -123,15 +123,7 @@
                     {{{ $user->name }}}
                     <small>{{{ $user->username }}}</small>
                   </h4>
-                  <p>
-                    @if ($user->is_admin)
-                      <span class="label label-primary">Admin</span>
-                    @elseif ($user->is_member)
-                      <span class="label label-success">Member</span>
-                    @else
-                      <span class="label label-danger">Non-Member</span>
-                    @endif
-                  </p>
+                  <p>{{ $user->role_label }}</p>
                   @if ($user->studentGroup)
                     <p>{{{ $user->studentGroup->name }}}</p>
                   @endif
@@ -142,21 +134,19 @@
               </div>
             </td>
             <td class="text-center">
-              @if ($user->first_sign_in_at === null)
-                <span class="glyphicon glyphicon-remove text-danger"></span>
-              @else
-                {{ Carbon::createFromTimestamp(strtotime($user->last_sign_in_at))->diffForHumans() }}
-              @endif
+              {{ $user->last_active }}
             </td>
             <td class="text-right">
               @if ($user->id === Auth::user()->id)
                 It's me :-)
               @else
                 <div class="btn-group btn-group-sm">
-                  <a href="mailto:{{{ $user->email }}}" class="btn btn-default">
-                    <span class="glyphicon glyphicon-envelope"></span>
-                    Email
-                  </a>
+                  @if ($user->has_email)
+                    <a href="{{{ $user->email_url }}}" class="btn btn-default">
+                      <span class="glyphicon glyphicon-envelope"></span>
+                      Email
+                    </a>
+                  @endif
 
                   <div class="btn-group btn-group-sm">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -167,12 +157,12 @@
                     <ul class="dropdown-menu" role="menu">
                       <li>
                         @if ($user->is_admin)
-                          <a href="{{ URL::action('Admin\UsersController@putDemote', $user->username) }}" data-method="put">
+                          <a href="{{{ $user->demotion_url }}}" data-method="put">
                             <span class="glyphicon glyphicon-star-empty"></span>
                             Demote from Admin
                           </a>
                         @else
-                          <a href="{{ URL::action('Admin\UsersController@putPromote', $user->username) }}" data-method="put">
+                          <a href="{{{ $user->promotion_url }}}" data-method="put">
                             <span class="glyphicon glyphicon-star"></span>
                             Promote to Admin
                           </a>

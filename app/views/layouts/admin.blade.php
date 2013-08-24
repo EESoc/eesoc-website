@@ -72,6 +72,7 @@
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/laravel-ujs.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.highlight.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.slugify.js') }}"></script>
     <script src="{{ asset('assets/js/admin.js') }}"></script>
     @yield('javascript_for_page')
 
