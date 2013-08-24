@@ -21,8 +21,13 @@ Route::group(array('prefix' => 'admin'), function() {
 
 	Route::get('/', 'Admin\DashboardController@getShow');
 
+	// Categories
 	Route::resource('categories', 'Admin\CategoriesController', array('except' => array('show')));
 
+	// Contents
+	Route::resource('contents', 'Admin\ContentsController', array('except' => array('show')));
+
+	// Users
 	Route::controller('users/eactivities', 'Admin\UsersEActivitiesController');
 	Route::controller('users/eepeople',    'Admin\UsersEEPeopleController');
 	Route::controller('users',             'Admin\UsersController');

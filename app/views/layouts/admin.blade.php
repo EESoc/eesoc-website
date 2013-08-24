@@ -42,6 +42,7 @@
           <ul class="nav navbar-nav">
             <li><a href="#">Posts</a></li>
             <li><a href="#">Pages</a></li>
+            <li><a href="{{ URL::route('admin.contents.index') }}">Contents</a></li>
             <li {{ str_contains(Route::currentRouteAction(), 'Admin\CategoriesController') ? 'class="active"' : '' }}><a href="{{ URL::route('admin.categories.index') }}">Categories</a></li>
             <li {{ str_contains(Route::currentRouteAction(), 'Admin\Users') ? 'class="active"' : '' }}><a href="{{ URL::route('admin.users.index') }}">Users</a></li>
           </ul>
