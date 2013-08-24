@@ -12,6 +12,7 @@
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap-wysihtml5.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -74,6 +75,8 @@
     <script src="{{ asset('assets/js/laravel-ujs.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.highlight.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.slugify.js') }}"></script>
+    <script src="{{ asset('assets/js/wysihtml5-0.3.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap-wysihtml5.js') }}"></script>
     <script src="{{ asset('assets/js/admin.js') }}"></script>
     @yield('javascript_for_page')
 
