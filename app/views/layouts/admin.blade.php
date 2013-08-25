@@ -12,7 +12,6 @@
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/bootstrap-wysihtml5.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -43,9 +42,15 @@
           <ul class="nav navbar-nav">
             <li><a href="#">Posts</a></li>
             <li><a href="#">Pages</a></li>
-            <li><a href="{{ URL::route('admin.contents.index') }}">Contents</a></li>
-            <li {{ str_contains(Route::currentRouteAction(), 'Admin\CategoriesController') ? 'class="active"' : '' }}><a href="{{ URL::route('admin.categories.index') }}">Categories</a></li>
-            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Users') ? 'class="active"' : '' }}><a href="{{ URL::route('admin.users.index') }}">Users</a></li>
+            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Contents') ? 'class="active"' : '' }}>
+              <a href="{{ URL::route('admin.contents.index') }}">Contents</a>
+            </li>
+            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Categories') ? 'class="active"' : '' }}>
+              <a href="{{ URL::route('admin.categories.index') }}">Categories</a>
+            </li>
+            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Users') ? 'class="active"' : '' }}>
+              <a href="{{ URL::route('admin.users.index') }}">Users</a>
+            </li>
           </ul>
           {{ Form::open(array('action' => 'SessionsController@deleteDestroy', 'method' => 'delete', 'class' => 'navbar-form pull-right')) }}
             <button type="submit" class="btn btn-default">Sign Out</button>
@@ -75,8 +80,7 @@
     <script src="{{ asset('assets/js/laravel-ujs.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.highlight.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.slugify.js') }}"></script>
-    <script src="{{ asset('assets/js/wysihtml5-0.3.0.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-wysihtml5.js') }}"></script>
+    <script src="{{ asset('assets/js/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('assets/js/admin.js') }}"></script>
     @yield('javascript_for_page')
 

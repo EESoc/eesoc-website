@@ -15,7 +15,7 @@
           <a href="{{ URL::route('admin.contents.edit', $content->id) }}" class="list-group-item">
             <h3>
               {{{ $content->name }}}
-              <small>/{{{ $content->slug }}}</small>
+              <small>{{{ $content->template_code }}}</small>
             </h3>
           </a>
         @endforeach

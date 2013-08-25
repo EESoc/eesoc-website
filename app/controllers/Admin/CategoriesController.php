@@ -46,7 +46,7 @@ class CategoriesController extends BaseController {
 
 		$rules = array(
 			'name' => 'required',
-			'slug' => 'unique:categories',
+			'slug' => 'required|unique:categories',
 		);
 
 		$validator = Validator::make($inputs, $rules);
@@ -92,7 +92,7 @@ class CategoriesController extends BaseController {
 
 		$rules = array(
 			'name' => 'required',
-			'slug' => "unique:categories,slug,{$category->id}",
+			'slug' => "required|unique:categories,slug,{$category->id}",
 		);
 
 		$validator = Validator::make($inputs, $rules);

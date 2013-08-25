@@ -1,3 +1,14 @@
+@section('javascript_for_page')
+<script>
+CKEDITOR.editorConfig = function(config) {
+  config.filebrowserBrowseUrl = '{{{ url("admin/elfinder/ckeditor") }}}';
+};
+</script>
+<script>
+  CKEDITOR.inline('content');
+</script>
+@stop
+
 <div class="form-group {{ $errors->first('name', 'has-error') }}">
   {{ Form::label('name', 'Name', array('class' => 'control-label')) }}
   {{ Form::text('name', null, array('class' => 'form-control input-large')) }}
@@ -10,7 +21,11 @@
 </div>
 <div class="form-group {{ $errors->first('content', 'has-error') }}">
   {{ Form::label('content', 'Content', array('class' => 'control-label')) }}
-  {{ Form::textarea('content', null, array('class' => 'form-control input-large', 'data-wysiwyg' => true)) }}
+  <div class="panel panel-default">
+    <div class="panel-body">
+      {{ Form::textarea('content', null, array('class' => 'form-control input-large', 'data-wysiwyg' => true)) }}
+    </div>
+  </div>
   {{ $errors->first('content', '<span class="help-block">:message</span>') }}
 </div>
 <button type="submit" class="btn btn-primary btn-large pull-left">

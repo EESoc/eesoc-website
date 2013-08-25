@@ -181,7 +181,7 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	 * Return a created presenter.
 	 *
 	 * @return Robbo\Presenter\Presenter
-	*/
+	 */
 	public function getPresenter()
 	{
 		return new UserPresenter($this);

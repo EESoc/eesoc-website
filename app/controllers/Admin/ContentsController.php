@@ -2,6 +2,9 @@
 namespace Admin;
 
 use Content;
+use Input;
+use Redirect;
+use Validator;
 use View;
 
 class ContentsController extends \BaseController {
@@ -35,7 +38,26 @@ class ContentsController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$rules = array(
+			'name'    => 'required',
+			'slug'    => 'required|unique:contents',
+			'content' => 'required',
+		);
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->passes()) {
+			$category = new Content;
+			$category->fill(Input::all());
+			$category->save();
+
+			return Redirect::route('admin.contents.index')
+				->with('success', 'Content has been successfully created');
+		} else {
+			return Redirect::route('admin.contents.create')
+				->withInput()
+				->withErrors($validator);
+		}
 	}
 
 	/**
@@ -57,7 +79,8 @@ class ContentsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		return View::make('admin.contents.edit')
+			->with('content', Content::findOrFail($id));
 	}
 
 	/**
@@ -68,7 +91,27 @@ class ContentsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$content = Content::findOrFail($id);
+
+		$rules = array(
+			'name'    => 'required',
+			'slug' => "required|unique:contents,slug,{$content->id}",
+			'content' => 'required',
+		);
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->passes()) {
+			$content->fill(Input::all());
+			$content->save();
+
+			return Redirect::route('admin.contents.index')
+				->with('success', 'Content has been successfully updated');
+		} else {
+			return Redirect::route('admin.contents.edit', $content->id)
+				->withInput()
+				->withErrors($validator);
+		}
 	}
 
 	/**

@@ -17,7 +17,7 @@ Route::delete('sign-out', 'SessionsController@deleteDestroy');
 
 Route::get('users/{username}', 'UsersController@getShow');
 
-Route::group(array('prefix' => 'admin'), function() {
+Route::group(array('before' => 'auth.admin', 'prefix' => 'admin'), function() {
 
 	Route::get('/', 'Admin\DashboardController@getShow');
 
@@ -32,6 +32,11 @@ Route::group(array('prefix' => 'admin'), function() {
 	Route::controller('users/eepeople',    'Admin\UsersEEPeopleController');
 	Route::controller('users',             'Admin\UsersController');
 	Route::resource  ('users',             'Admin\UsersController', array('only' => array('index')));
+
+	// elFinder
+	Route::get('elfinder', 'TSF\ElfinderLaravel\ElfinderController@showIndex');
+	Route::any('elfinder/connector', 'TSF\ElfinderLaravel\ElfinderController@showConnector');
+	Route::get('elfinder/ckeditor', 'TSF\ElfinderLaravel\ElfinderController@showCKEditor');
 
 });
 

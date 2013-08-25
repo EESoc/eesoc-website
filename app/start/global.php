@@ -70,14 +70,6 @@ App::down(function()
 	return Response::make("Be right back!", 503);
 });
 
-/**
- * Imperial Auth Extension
- */
-Auth::extend('imperialcollege', function() {
-	$userProvider = new ImperialCollegeUserProvider(Config::get('auth.model'));
-	return new Illuminate\Auth\Guard($userProvider, App::make('session'));
-});
-
 /*
 |--------------------------------------------------------------------------
 | Require The Filters File
@@ -90,3 +82,8 @@ Auth::extend('imperialcollege', function() {
 */
 
 require app_path().'/filters.php';
+
+/*
+ * Core extensions
+ */
+require app_path().'/extensions.php';

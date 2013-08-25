@@ -4,11 +4,12 @@
 	"keywords": ["framework", "laravel"],
 	"require": {
 		"php": ">=5.4.0",
-		"laravel/framework": "4.0.*",
+		"laravel/framework": "4.1.*",
 		"loic-sharma/profiler": "1.1.*",
 		"guzzle/guzzle": "3.7.*@dev",
 		"nesbot/Carbon": "*",
-		"robclancy/presenter": "1.1.*"
+		"robclancy/presenter": "1.2.*",
+		"tsf/elfinder-laravel": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

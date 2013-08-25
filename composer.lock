@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "e4931c73e07ac9cbccdc849156d563dc",
+    "hash": "288ee07bc71211d0e0e6e8f9767e4e46",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -585,12 +585,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "898c7c7831096d36a0701fe29e8c9952ceabd2c8"
+                "reference": "efef3c29068b9a91953db439780007bcb46f0a29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/898c7c7831096d36a0701fe29e8c9952ceabd2c8",
-                "reference": "898c7c7831096d36a0701fe29e8c9952ceabd2c8",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/efef3c29068b9a91953db439780007bcb46f0a29",
+                "reference": "efef3c29068b9a91953db439780007bcb46f0a29",
                 "shasum": ""
             },
             "require": {
@@ -669,7 +669,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-08-23 17:19:06"
+            "time": "2013-08-25 02:15:08"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -712,16 +712,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "4.0.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "cce2374cee09672d975afd1af6287dc96d5d3041"
+                "reference": "65c7827090355c4145794f158e7743bc2264865d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/cce2374cee09672d975afd1af6287dc96d5d3041",
-                "reference": "cce2374cee09672d975afd1af6287dc96d5d3041",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/65c7827090355c4145794f158e7743bc2264865d",
+                "reference": "65c7827090355c4145794f158e7743bc2264865d",
                 "shasum": ""
             },
             "require": {
@@ -733,6 +733,7 @@
                 "nesbot/carbon": "1.*",
                 "patchwork/utf8": "1.1.*",
                 "php": ">=5.3.0",
+                "phpseclib/phpseclib": "0.3.x",
                 "predis/predis": "0.8.*",
                 "swiftmailer/swiftmailer": "5.0.*",
                 "symfony/browser-kit": "2.3.*",
@@ -787,7 +788,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.0-dev"
+                    "dev-master": "4.1-dev"
                 }
             },
             "autoload": {
@@ -820,7 +821,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2013-08-23 03:27:17"
+            "time": "2013-08-23 03:27:47"
         },
         {
             "name": "loic-sharma/profiler",
@@ -1058,17 +1059,91 @@
             "time": "2013-08-19 09:37:02"
         },
         {
+            "name": "phpseclib/phpseclib",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpseclib/phpseclib.git",
+                "reference": "df45abcda0b54ecba92775c7d873b1698c6d00d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/df45abcda0b54ecba92775c7d873b1698c6d00d8",
+                "reference": "df45abcda0b54ecba92775c7d873b1698c6d00d8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "suggest": {
+                "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.",
+                "ext-mcrypt": "Install the Mcrypt extension in order to speed up a wide variety of cryptographic operations.",
+                "pear-pear/PHP_Compat": "Install PHP_Compat to get phpseclib working on PHP >= 4.3.3."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Crypt": "phpseclib/",
+                    "File": "phpseclib/",
+                    "Math": "phpseclib/",
+                    "Net": "phpseclib/"
+                },
+                "files": [
+                    "phpseclib/Crypt/Random.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "phpseclib/"
+            ],
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Wigginton",
+                    "email": "terrafrost@php.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Secure Communications Library - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.",
+            "homepage": "http://phpseclib.sourceforge.net",
+            "keywords": [
+                "BigInteger",
+                "aes",
+                "asn.1",
+                "asn1",
+                "crypto",
+                "cryptography",
+                "encryption",
+                "rsa",
+                "security",
+                "sftp",
+                "signature",
+                "signing",
+                "ssh",
+                "x.509",
+                "x509"
+            ],
+            "time": "2013-08-21 04:52:15"
+        },
+        {
             "name": "predis/predis",
             "version": "0.8.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nrk/predis.git",
-                "reference": "v0.8.4"
+                "reference": "cb18d67b6ab6b8e567c1ab50fe999d1d624f9884"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/v0.8.4",
-                "reference": "v0.8.4",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/cb18d67b6ab6b8e567c1ab50fe999d1d624f9884",
+                "reference": "cb18d67b6ab6b8e567c1ab50fe999d1d624f9884",
                 "shasum": ""
             },
             "require": {
@@ -1144,16 +1219,16 @@
         },
         {
             "name": "robclancy/presenter",
-            "version": "1.1.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robclancy/presenter.git",
-                "reference": "30d5a738e973be116473f76b6684cd1e6bb991a3"
+                "reference": "dd237809b9bf0d0e58c6e121e8c90dccd91331be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robclancy/presenter/zipball/30d5a738e973be116473f76b6684cd1e6bb991a3",
-                "reference": "30d5a738e973be116473f76b6684cd1e6bb991a3",
+                "url": "https://api.github.com/repos/robclancy/presenter/zipball/dd237809b9bf0d0e58c6e121e8c90dccd91331be",
+                "reference": "dd237809b9bf0d0e58c6e121e8c90dccd91331be",
                 "shasum": ""
             },
             "require": {
@@ -1167,7 +1242,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -1185,12 +1260,13 @@
                     "email": "mail@robertclancy.net"
                 }
             ],
-            "description": "This is a simple class to help make a Presenter for your objects.",
+            "description": "This is a simple library to help make a Presenter for your objects.",
             "keywords": [
                 "decorator",
-                "laravel"
+                "laravel",
+                "presenter"
             ],
-            "time": "2013-07-14 15:39:01"
+            "time": "2013-08-14 00:14:05"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1937,6 +2013,43 @@
             "description": "Symfony Translation Component",
             "homepage": "http://symfony.com",
             "time": "2013-08-21 07:58:38"
+        },
+        {
+            "name": "tsf/elfinder-laravel",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marianperca/elfinder-laravel.git",
+                "reference": "a0fbb5964c21e81ff70b2123133311f3c5ef23db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marianperca/elfinder-laravel/zipball/a0fbb5964c21e81ff70b2123133311f3c5ef23db",
+                "reference": "a0fbb5964c21e81ff70b2123133311f3c5ef23db",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.1.x",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/elFinder"
+                ],
+                "psr-0": {
+                    "TSF\\ElfinderLaravel": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Marian Perca",
+                    "email": "marian.perca@gmail.com"
+                }
+            ],
+            "description": "A Laravel Bundle to integrate elFinder 2.0",
+            "time": "2013-08-06 09:44:57"
         }
     ],
     "packages-dev": [
@@ -1947,7 +2060,8 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "guzzle/guzzle": 20
+        "guzzle/guzzle": 20,
+        "tsf/elfinder-laravel": 20
     },
     "platform": {
         "php": ">=5.4.0"

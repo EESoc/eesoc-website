@@ -7,7 +7,7 @@ class BaseController extends \BaseController {
 	{
 		parent::__construct();
 
-		$this->beforeFilter('auth.admin');
+		$this->beforeFilter('csrf', array('on' => array('post', 'put', 'delete')));
 	}
 
 }

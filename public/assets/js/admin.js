@@ -18,8 +18,4 @@ $(function() {
       })
       .removeClass('slugify-locked');
   });
-
-  $('[data-wysiwyg]').each(function() {
-    $(this).wysihtml5();
-  });
 });
