@@ -36,23 +36,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="#" class="navbar-brand">EESoc</a>
+          <a href="{{ URL::to('/') }}" class="navbar-brand">EESoc</a>
         </div>
         <div class="collapse navbar-collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#">Posts</a></li>
-            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Pages') ? 'class="active"' : '' }}>
-              <a href="{{ URL::route('admin.pages.index') }}">Pages</a>
-            </li>
-            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Contents') ? 'class="active"' : '' }}>
-              <a href="{{ URL::route('admin.contents.index') }}">Contents</a>
-            </li>
-            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Categories') ? 'class="active"' : '' }}>
-              <a href="{{ URL::route('admin.categories.index') }}">Categories</a>
-            </li>
-            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Users') ? 'class="active"' : '' }}>
-              <a href="{{ URL::route('admin.users.index') }}">Users</a>
-            </li>
           </ul>
           {{ Form::open(array('action' => 'SessionsController@deleteDestroy', 'method' => 'delete', 'class' => 'navbar-form pull-right')) }}
             <button type="submit" class="btn btn-default">Sign Out</button>
@@ -80,10 +67,6 @@
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/laravel-ujs.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.highlight.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.slugify.js') }}"></script>
-    <script src="{{ asset('assets/js/ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ asset('assets/js/admin.js') }}"></script>
     @yield('javascript_for_page')
 
   </body>

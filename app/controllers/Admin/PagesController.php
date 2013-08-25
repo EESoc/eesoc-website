@@ -1,13 +1,13 @@
 <?php
 namespace Admin;
 
-use Content;
+use Page;
 use Input;
 use Redirect;
 use Validator;
 use View;
 
-class ContentsController extends BaseController {
+class PagesController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -16,8 +16,8 @@ class ContentsController extends BaseController {
 	 */
 	public function index()
 	{
-		return View::make('admin.contents.index')
-			->with('contents', Content::alphabetically()->get());
+		return View::make('admin.pages.index')
+			->with('pages', Page::all());
 	}
 
 	/**
@@ -27,8 +27,8 @@ class ContentsController extends BaseController {
 	 */
 	public function create()
 	{
-		return View::make('admin.contents.create')
-			->with('content', new Content);
+		return View::make('admin.pages.create')
+			->with('page', new Page);
 	}
 
 	/**
@@ -40,21 +40,21 @@ class ContentsController extends BaseController {
 	{
 		$rules = array(
 			'name'    => 'required',
-			'slug'    => 'required|unique:contents',
+			'slug'    => 'unique:pages',
 			'content' => 'required',
 		);
 
 		$validator = Validator::make(Input::all(), $rules);
 
 		if ($validator->passes()) {
-			$content = new Content;
-			$content->fill(Input::all());
-			$content->save();
+			$page = new Page;
+			$page->fill(Input::all());
+			$page->save();
 
-			return Redirect::route('admin.contents.index')
-				->with('success', 'Content has been successfully created');
+			return Redirect::route('admin.pages.index')
+				->with('success', 'Page has been successfully created');
 		} else {
-			return Redirect::route('admin.contents.create')
+			return Redirect::route('admin.pages.create')
 				->withInput()
 				->withErrors($validator);
 		}
@@ -68,8 +68,8 @@ class ContentsController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		return View::make('admin.contents.edit')
-			->with('content', Content::findOrFail($id));
+		return View::make('admin.pages.edit')
+			->with('page', Page::findOrFail($id));
 	}
 
 	/**
@@ -80,24 +80,24 @@ class ContentsController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$content = Content::findOrFail($id);
+		$page = Page::findOrFail($id);
 
 		$rules = array(
 			'name'    => 'required',
-			'slug' => "required|unique:contents,slug,{$content->id}",
+			'slug'    => "unique:pages,slug,{$page->id}",
 			'content' => 'required',
 		);
 
 		$validator = Validator::make(Input::all(), $rules);
 
 		if ($validator->passes()) {
-			$content->fill(Input::all());
-			$content->save();
+			$page->fill(Input::all());
+			$page->save();
 
-			return Redirect::route('admin.contents.index')
-				->with('success', 'Content has been successfully updated');
+			return Redirect::route('admin.pages.index')
+				->with('success', 'Page has been successfully updated');
 		} else {
-			return Redirect::route('admin.contents.edit', $content->id)
+			return Redirect::route('admin.pages.edit', $page->id)
 				->withInput()
 				->withErrors($validator);
 		}
@@ -111,16 +111,16 @@ class ContentsController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$content = Content::findOrFail($id);
+		$page = Page::findOrFail($id);
 
-		if ($content->is_deletable) {
-			$content->delete();
+		if ($page->is_deletable) {
+			$page->delete();
 
-			return Redirect::route('admin.contents.index')
-				->with('success', 'Content has been successfully deleted');
+			return Redirect::route('admin.pages.index')
+				->with('success', 'Page has been successfully deleted');
 		} else {
-			return Redirect::route('admin.contents.index')
-				->with('danger', 'This content cannot be deleted');
+			return Redirect::route('admin.pages.index')
+				->with('danger', 'This page cannot be deleted');
 		}
 	}
 

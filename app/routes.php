@@ -27,6 +27,9 @@ Route::group(array('before' => 'auth.admin', 'prefix' => 'admin'), function() {
 	// Contents
 	Route::resource('contents', 'Admin\ContentsController', array('except' => array('show')));
 
+	// Pages
+	Route::resource('pages', 'Admin\PagesController', array('except' => array('show')));
+
 	// Users
 	Route::controller('users/eactivities', 'Admin\UsersEActivitiesController');
 	Route::controller('users/eepeople',    'Admin\UsersEEPeopleController');
@@ -40,10 +43,18 @@ Route::group(array('before' => 'auth.admin', 'prefix' => 'admin'), function() {
 
 });
 
-Route::get('/', function() {
-	return View::make('hello');
-});
+// Route::get('/', function() {
+// 	return View::make('hello');
+// });
 
 Route::any('{path}', function($path) {
-	return View::make('hello');
+	$path = rtrim($path, '/');
+	$page = Page::where('slug', '=', $path)->first();
+
+	if ( ! $page) {
+		App::abort(404);
+	}
+
+	return View::make('page')
+		->with('page', $page);
 })->where('path', '.*');
