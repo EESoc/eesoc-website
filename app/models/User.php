@@ -53,8 +53,8 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	{
 		return $query->where(function($query) use ($searching) {
 			$query->where('username', 'like', "%{$searching}%")
-				->orWhere('email', 'like', "%{$searching}%")
-				->orWhere('name', 'like', "%{$searching}%");
+				->orWhere('email',    'like', "%{$searching}%")
+				->orWhere('name',     'like', "%{$searching}%");
 		});
 	}
 

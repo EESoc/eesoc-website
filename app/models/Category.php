@@ -14,21 +14,21 @@ class Category extends Eloquent {
 			$category->position = Category::max('position') + 1;
 		});
 
-		Category::saving(function($category) {
-			if (empty($category->slug)) {
-				$num = 0;
-				$slug = Str::slug($category->name);
+		// Category::saving(function($category) {
+		// 	if (empty($category->slug)) {
+		// 		$num = 0;
+		// 		$slug = Str::slug($category->name);
 
-				do {
-					$category->slug = $slug;
-					if ($num > 0) {
-						$category->slug .= "-{$num}";
-					}
+		// 		do {
+		// 			$category->slug = $slug;
+		// 			if ($num > 0) {
+		// 				$category->slug .= "-{$num}";
+		// 			}
 
-					$num++;
-				} while (Category::where('id', '<>', $category->id)->where('slug', '=', $category->slug)->first());
-			}
-		});
+		// 			$num++;
+		// 		} while (Category::where('id', '<>', $category->id)->where('slug', '=', $category->slug)->first());
+		// 	}
+		// });
 
 	}
 

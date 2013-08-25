@@ -122,7 +122,17 @@ class ContentsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$content = Content::findOrFail($id);
+
+		if ($content->is_deletable) {
+			$content->delete();
+
+			return Redirect::route('admin.contents.index')
+				->with('success', 'Content has been successfully deleted');
+		} else {
+			return Redirect::route('admin.contents.index')
+				->with('danger', 'This content cannot be deleted');
+		}
 	}
 
 }
