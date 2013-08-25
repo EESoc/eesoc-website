@@ -17,7 +17,7 @@ class ContentsController extends \BaseController {
 	public function index()
 	{
 		return View::make('admin.contents.index')
-			->with('contents', Content::all());
+			->with('contents', Content::alphabetically()->get());
 	}
 
 	/**

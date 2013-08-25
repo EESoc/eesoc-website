@@ -11,6 +11,11 @@ class Content extends Eloquent implements PresentableInterface {
 		return static::where('slug', '=', $slug)->first();
 	}
 
+	public function scopeAlphabetically($query)
+	{
+		return $query->orderBy('name');
+	}
+
 	public function getIsDeletableAttribute()
 	{
 		return true;

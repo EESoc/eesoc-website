@@ -1,11 +1,8 @@
 @section('javascript_for_page')
 <script>
-CKEDITOR.editorConfig = function(config) {
-  config.filebrowserBrowseUrl = '{{{ url("admin/elfinder/ckeditor") }}}';
-};
-</script>
-<script>
-  CKEDITOR.inline('content');
+  CKEDITOR.inline('content', {
+    filebrowserBrowseUrl: '{{ URL::action('TSF\ElfinderLaravel\ElfinderController@showCKEditor') }}'
+  });
 </script>
 @stop
 
