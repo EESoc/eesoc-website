@@ -32,6 +32,12 @@ class StudentGroup extends Eloquent {
 		return $query->orderBy('name');
 	}
 
+	/**
+	 * Return an array of related group ids.
+	 * Will do this recursively into its children.
+	 * 
+	 * @return array
+	 */
 	public function getRelatedGroupIdsAttribute()
 	{
 		$group_ids = array();

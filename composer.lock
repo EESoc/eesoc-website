@@ -975,12 +975,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "3d467ca18ec08c5df2d5cad5c51442be148a7f21"
+                "reference": "1e5e280ae88a27effa2ae4aa2bd088494ed8594f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/3d467ca18ec08c5df2d5cad5c51442be148a7f21",
-                "reference": "3d467ca18ec08c5df2d5cad5c51442be148a7f21",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/1e5e280ae88a27effa2ae4aa2bd088494ed8594f",
+                "reference": "1e5e280ae88a27effa2ae4aa2bd088494ed8594f",
                 "shasum": ""
             },
             "require": {
@@ -1011,7 +1011,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2013-08-04 14:15:12"
+            "time": "2013-08-25 17:11:40"
         },
         {
             "name": "patchwork/utf8",
@@ -1740,12 +1740,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation.git",
-                "reference": "6518848c01bd4ef0c71463afdc284dfb1d71f63a"
+                "reference": "fdf130fe65457aedbc4639a22f4ef9d3be5c002c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/6518848c01bd4ef0c71463afdc284dfb1d71f63a",
-                "reference": "6518848c01bd4ef0c71463afdc284dfb1d71f63a",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/fdf130fe65457aedbc4639a22f4ef9d3be5c002c",
+                "reference": "fdf130fe65457aedbc4639a22f4ef9d3be5c002c",
                 "shasum": ""
             },
             "require": {
@@ -1781,7 +1781,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "http://symfony.com",
-            "time": "2013-08-23 15:31:47"
+            "time": "2013-08-26 05:49:51"
         },
         {
             "name": "symfony/http-kernel",
@@ -1966,12 +1966,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Translation.git",
-                "reference": "c2d964f4cc1149643bb382a1b0ccd6dd2b662af8"
+                "reference": "65f888291f0896ad492f9abc6dc05c998373aded"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Translation/zipball/c2d964f4cc1149643bb382a1b0ccd6dd2b662af8",
-                "reference": "c2d964f4cc1149643bb382a1b0ccd6dd2b662af8",
+                "url": "https://api.github.com/repos/symfony/Translation/zipball/65f888291f0896ad492f9abc6dc05c998373aded",
+                "reference": "65f888291f0896ad492f9abc6dc05c998373aded",
                 "shasum": ""
             },
             "require": {
@@ -2012,7 +2012,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "http://symfony.com",
-            "time": "2013-08-21 07:58:38"
+            "time": "2013-08-26 05:49:51"
         },
         {
             "name": "tsf/elfinder-laravel",

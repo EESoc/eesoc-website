@@ -32,6 +32,11 @@ class Category extends Eloquent {
 
 	}
 
+	/**
+	 * Return is deletable attribute.
+	 * 
+	 * @return boolean
+	 */
 	public function getIsDeletableAttribute()
 	{
 		return ((int) $this->id !== 1);

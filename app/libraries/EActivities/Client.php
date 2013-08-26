@@ -1,13 +1,16 @@
 <?php
+namespace EActivities;
 
-use Guzzle\Http\Client;
+use Guzzle\Http\Client as Http_Client;
 use Guzzle\Http\Message\Response;
 use Guzzle\Plugin\Cookie\Cookie;
-use Guzzle\Plugin\Cookie\CookiePlugin;
-use Guzzle\Plugin\Cookie\CookieJar\CookieJarInterface;
 use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
+use Guzzle\Plugin\Cookie\CookieJar\CookieJarInterface;
+use Guzzle\Plugin\Cookie\CookiePlugin;
+use ImperialCollegeCredential;
+use Str;
 
-class EActivitiesClient {
+class Client {
 
 	public static $URL_BASE = 'https://eactivities.union.imperial.ac.uk/';
 
@@ -21,7 +24,10 @@ class EActivitiesClient {
 
 	protected $cookie_jar;
 
-	public function __construct(Client $client)
+	/**
+	 * @param Http_Client $client
+	 */
+	public function __construct(Http_Client $client)
 	{
 		$client->setBaseUrl(self::$URL_BASE);
 
@@ -34,6 +40,11 @@ class EActivitiesClient {
 		$this->client = $client;
 	}
 
+	/**
+	 * Get session Id
+	 * 
+	 * @return string
+	 */
 	public function getSessionId()
 	{
 		foreach ($this->cookie_jar->all() as $cookie) {
@@ -45,6 +56,11 @@ class EActivitiesClient {
 		return null;
 	}
 
+	/**
+	 * Set session Id
+	 * 
+	 * @param string $session_id
+	 */
 	public function setSessionId($session_id)
 	{
 		$cookie = new Cookie(array(
@@ -54,18 +70,31 @@ class EActivitiesClient {
 		$this->cookie_jar->add($cookie);
 	}
 
-	public function signIn($username, $password)
+	/**
+	 * Sign in a given credential
+	 * 
+	 * @param  ImperialCollegeCredential $credential
+	 * @return boolean
+	 */
+	public function signIn(ImperialCollegeCredential $credential)
 	{
 		$response = $this->getAjaxHandlerResponse(array(
 			'ajax' => 'login',
-			'name' => $username,
-			'pass' => $password,
+			'name' => $credential->getUsername(),
+			'pass' => $credential->getPassword(),
 			'objid' => '1'
 		));
 
 		return $this->isSignedIn();
 	}
 
+	/**
+	 * Check if user is signed in.
+	 * Will check the response of the root page if no response is given.
+	 * 
+	 * @param  Response  $response
+	 * @return boolean
+	 */
 	public function isSignedIn(Response $response = null)
 	{
 		if ( ! isset($response)) {
@@ -75,6 +104,11 @@ class EActivitiesClient {
 		return ($response->isSuccessful() && strpos($response->getBody(), 'Log out') !== false);
 	}
 
+	/**
+	 * Get user's currently selected and other roles
+	 * 
+	 * @return array
+	 */
 	public function getCurrentAndOtherRoles()
 	{
 		$response = $this->getAjaxHandlerResponse(array(
@@ -101,6 +135,11 @@ class EActivitiesClient {
 		return $result;
 	}
 
+	/**
+	 * Download and parse members report file
+	 * 
+	 * @return array
+	 */
 	public function getMembersList()
 	{
 		$response = $this->getPageResponse(self::$PATH_ADMIN_CSP_DETAILS);
@@ -148,6 +187,12 @@ class EActivitiesClient {
 		}
 	}
 
+	/**
+	 * Change user's role
+	 * 
+	 * @param  integer|string $role_id
+	 * @return Response
+	 */
 	public function changeRole($role_id)
 	{
 		return $this->getAjaxHandlerResponse(array(
@@ -157,6 +202,12 @@ class EActivitiesClient {
 		));
 	}
 
+	/**
+	 * Activate tabs
+	 * 
+	 * @param  integer|string $navigate
+	 * @return Response
+	 */
 	protected function activateTabs($navigate)
 	{
 		return $this->getAjaxHandlerResponse(array(
@@ -165,12 +216,24 @@ class EActivitiesClient {
 		));
 	}
 
+	/**
+	 * Send a GET request
+	 * 
+	 * @param  integer $path
+	 * @return Response
+	 */
 	protected function getPageResponse($path = null)
 	{
 		$request = $this->client->get($path);
 		return $request->send();
 	}
 
+	/**
+	 * Send a POST request to the ajax handler
+	 * 
+	 * @param  array $params
+	 * @return Response
+	 */
 	protected function getAjaxHandlerResponse($params)
 	{
 		$request = $this->client->post(self::$PATH_COMMON_AJAX_HANDLER, array(), $params);

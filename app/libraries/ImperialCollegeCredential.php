@@ -1,6 +1,6 @@
 <?php
 
-class ImperialCollegeLogin {
+class ImperialCollegeCredential {
 
 	private $username;
 	private $password;
