@@ -1,13 +1,13 @@
 /*!
  * elFinder - file manager for web
- * Version 2.0.2 (2013-08-01)
+ * Version 2.1 (Nightly: 916091e) (2013-08-20)
  * http://elfinder.org
  * 
- * Copyright 2009-2012, Studio 42
+ * Copyright 2009-2013, Studio 42
  * Licensed under a 3 clauses BSD license
  */
 
-/* File: /Users/marian/projects/elFinder/css/commands.css */
+/* File: /home/osc/elFinder-build/elFinder/css/commands.css */
 /******************************************************************/
 /*                          COMMANDS STYLES                       */
 /******************************************************************/
@@ -265,7 +265,7 @@
 
 
 
-/* File: /Users/marian/projects/elFinder/css/common.css */
+/* File: /home/osc/elFinder-build/elFinder/css/common.css */
 /*********************************************/
 /*            COMMON ELFINDER STUFFS         */
 /*********************************************/
@@ -363,7 +363,7 @@
 
 
 
-/* File: /Users/marian/projects/elFinder/css/contextmenu.css */
+/* File: /home/osc/elFinder-build/elFinder/css/contextmenu.css */
 /* menu and submenu */
 .elfinder-contextmenu,
 .elfinder-contextmenu-sub {
@@ -434,7 +434,7 @@
 	margin:0 1px;
 }
 
-/* File: /Users/marian/projects/elFinder/css/cwd.css */
+/* File: /home/osc/elFinder-build/elFinder/css/cwd.css */
 /******************************************************************/
 /*                     CURRENT DIRECTORY STYLES                   */
 /******************************************************************/
@@ -672,7 +672,7 @@
 
 
 
-/* File: /Users/marian/projects/elFinder/css/dialog.css */
+/* File: /home/osc/elFinder-build/elFinder/css/dialog.css */
 /*********************************************/
 /*                DIALOGS STYLES             */
 /*********************************************/
@@ -918,7 +918,7 @@
 
 
 
-/* File: /Users/marian/projects/elFinder/css/fonts.css */
+/* File: /home/osc/elFinder-build/elFinder/css/fonts.css */
 .elfinder-contextmenu .elfinder-contextmenu-item span { font-size:.76em; }
 
 .elfinder-cwd-view-icons .elfinder-cwd-filename { font-size:.7em; }
@@ -942,7 +942,7 @@
 .elfinder-drag-num { font-size:12px; }
 
 
-/* File: /Users/marian/projects/elFinder/css/navbar.css */
+/* File: /home/osc/elFinder-build/elFinder/css/navbar.css */
 /*********************************************/
 /*              NAVIGATION PANEL             */
 /*********************************************/
@@ -1094,9 +1094,9 @@
 
 
 
-/* File: /Users/marian/projects/elFinder/css/places.css */
+/* File: /home/osc/elFinder-build/elFinder/css/places.css */
 
-/* File: /Users/marian/projects/elFinder/css/quicklook.css */
+/* File: /home/osc/elFinder-build/elFinder/css/quicklook.css */
 /* quicklook window */
 .elfinder-quicklook {
 	position:absolute;
@@ -1362,7 +1362,7 @@ embed.elfinder-quicklook-preview-audio {
 
 
 
-/* File: /Users/marian/projects/elFinder/css/statusbar.css */
+/* File: /home/osc/elFinder-build/elFinder/css/statusbar.css */
 /******************************************************************/
 /*                           STATUSBAR STYLES                     */
 /******************************************************************/
@@ -1401,7 +1401,7 @@ embed.elfinder-quicklook-preview-audio {
 
 .elfinder-stat-selected { white-space:nowrap; overflow:hidden; }
 
-/* File: /Users/marian/projects/elFinder/css/toolbar.css */
+/* File: /home/osc/elFinder-build/elFinder/css/toolbar.css */
 /*********************************************/
 /*               TOOLBAR STYLES              */
 /*********************************************/

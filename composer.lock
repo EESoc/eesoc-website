@@ -3,8 +3,47 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "288ee07bc71211d0e0e6e8f9767e4e46",
+    "hash": "acff913eed3f1d7eb62f091da2834a29",
     "packages": [
+        {
+            "name": "barryvdh/elfinder-bundle",
+            "version": "dev-ckeditor",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jianyuan/elfinder-bundle.git",
+                "reference": "52ed6a7fd3ae8d3ba5f130dc9087df8f8474c868"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jianyuan/elfinder-bundle/zipball/52ed6a7fd3ae8d3ba5f130dc9087df8f8474c868",
+                "reference": "52ed6a7fd3ae8d3ba5f130dc9087df8f8474c868",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.0.x",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/elFinder"
+                ],
+                "psr-0": {
+                    "Barryvdh\\ElfinderBundle": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "A Laravel Bundle to integrate elFinder 2.0",
+            "support": {
+                "source": "https://github.com/jianyuan/elfinder-bundle/tree/ckeditor"
+            },
+            "time": "2013-08-28 23:57:14"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "1.0.1",
@@ -585,12 +624,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "efef3c29068b9a91953db439780007bcb46f0a29"
+                "reference": "647cd469ce63efc8908a604e866ee322e82a693c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/efef3c29068b9a91953db439780007bcb46f0a29",
-                "reference": "efef3c29068b9a91953db439780007bcb46f0a29",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/647cd469ce63efc8908a604e866ee322e82a693c",
+                "reference": "647cd469ce63efc8908a604e866ee322e82a693c",
                 "shasum": ""
             },
             "require": {
@@ -669,7 +708,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-08-25 02:15:08"
+            "time": "2013-08-28 04:14:17"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -712,16 +751,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "dev-master",
+            "version": "4.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "65c7827090355c4145794f158e7743bc2264865d"
+                "reference": "ae164e2f07b3fde9ba51b1e098bc7915c3260c30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/65c7827090355c4145794f158e7743bc2264865d",
-                "reference": "65c7827090355c4145794f158e7743bc2264865d",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ae164e2f07b3fde9ba51b1e098bc7915c3260c30",
+                "reference": "ae164e2f07b3fde9ba51b1e098bc7915c3260c30",
                 "shasum": ""
             },
             "require": {
@@ -733,7 +772,6 @@
                 "nesbot/carbon": "1.*",
                 "patchwork/utf8": "1.1.*",
                 "php": ">=5.3.0",
-                "phpseclib/phpseclib": "0.3.x",
                 "predis/predis": "0.8.*",
                 "swiftmailer/swiftmailer": "5.0.*",
                 "symfony/browser-kit": "2.3.*",
@@ -788,7 +826,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.1-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
@@ -821,7 +859,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2013-08-23 03:27:47"
+            "time": "2013-08-27 16:09:54"
         },
         {
             "name": "loic-sharma/profiler",
@@ -1057,80 +1095,6 @@
                 "utf8"
             ],
             "time": "2013-08-19 09:37:02"
-        },
-        {
-            "name": "phpseclib/phpseclib",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "df45abcda0b54ecba92775c7d873b1698c6d00d8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/df45abcda0b54ecba92775c7d873b1698c6d00d8",
-                "reference": "df45abcda0b54ecba92775c7d873b1698c6d00d8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.0.0"
-            },
-            "suggest": {
-                "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.",
-                "ext-mcrypt": "Install the Mcrypt extension in order to speed up a wide variety of cryptographic operations.",
-                "pear-pear/PHP_Compat": "Install PHP_Compat to get phpseclib working on PHP >= 4.3.3."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Crypt": "phpseclib/",
-                    "File": "phpseclib/",
-                    "Math": "phpseclib/",
-                    "Net": "phpseclib/"
-                },
-                "files": [
-                    "phpseclib/Crypt/Random.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "include-path": [
-                "phpseclib/"
-            ],
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jim Wigginton",
-                    "email": "terrafrost@php.net",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PHP Secure Communications Library - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.",
-            "homepage": "http://phpseclib.sourceforge.net",
-            "keywords": [
-                "BigInteger",
-                "aes",
-                "asn.1",
-                "asn1",
-                "crypto",
-                "cryptography",
-                "encryption",
-                "rsa",
-                "security",
-                "sftp",
-                "signature",
-                "signing",
-                "ssh",
-                "x.509",
-                "x509"
-            ],
-            "time": "2013-08-21 04:52:15"
         },
         {
             "name": "predis/predis",
@@ -1790,12 +1754,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel.git",
-                "reference": "0c174072574abfc412f7e478ba004df4e8305a3f"
+                "reference": "581fb22f5c0ff868c1378ef0809726cf02546ca1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/0c174072574abfc412f7e478ba004df4e8305a3f",
-                "reference": "0c174072574abfc412f7e478ba004df4e8305a3f",
+                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/581fb22f5c0ff868c1378ef0809726cf02546ca1",
+                "reference": "581fb22f5c0ff868c1378ef0809726cf02546ca1",
                 "shasum": ""
             },
             "require": {
@@ -1852,7 +1816,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "http://symfony.com",
-            "time": "2013-08-23 15:31:47"
+            "time": "2013-08-27 13:39:19"
         },
         {
             "name": "symfony/process",
@@ -2013,43 +1977,6 @@
             "description": "Symfony Translation Component",
             "homepage": "http://symfony.com",
             "time": "2013-08-26 05:49:51"
-        },
-        {
-            "name": "tsf/elfinder-laravel",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/marianperca/elfinder-laravel.git",
-                "reference": "a0fbb5964c21e81ff70b2123133311f3c5ef23db"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/marianperca/elfinder-laravel/zipball/a0fbb5964c21e81ff70b2123133311f3c5ef23db",
-                "reference": "a0fbb5964c21e81ff70b2123133311f3c5ef23db",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "4.1.x",
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/elFinder"
-                ],
-                "psr-0": {
-                    "TSF\\ElfinderLaravel": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Marian Perca",
-                    "email": "marian.perca@gmail.com"
-                }
-            ],
-            "description": "A Laravel Bundle to integrate elFinder 2.0",
-            "time": "2013-08-06 09:44:57"
         }
     ],
     "packages-dev": [
@@ -2061,7 +1988,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "guzzle/guzzle": 20,
-        "tsf/elfinder-laravel": 20
+        "barryvdh/elfinder-bundle": 20
     },
     "platform": {
         "php": ">=5.4.0"

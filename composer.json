@@ -2,14 +2,20 @@
 	"name": "laravel/laravel",
 	"description": "The Laravel Framework.",
 	"keywords": ["framework", "laravel"],
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/jianyuan/elfinder-bundle"
+		}
+	],
 	"require": {
 		"php": ">=5.4.0",
-		"laravel/framework": "4.1.*",
+		"laravel/framework": "4.0.*",
 		"loic-sharma/profiler": "1.1.*",
 		"guzzle/guzzle": "3.7.*@dev",
 		"nesbot/Carbon": "*",
 		"robclancy/presenter": "1.2.*",
-		"tsf/elfinder-laravel": "dev-master"
+		"barryvdh/elfinder-bundle": "dev-ckeditor"
 	},
 	"autoload": {
 		"classmap": [

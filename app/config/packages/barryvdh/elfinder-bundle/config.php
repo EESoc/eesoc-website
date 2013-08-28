@@ -11,7 +11,7 @@ return array(
     |
     */
 
-    'dir' => 'uploads',
+    'dir' => 'files',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return array(
     |
     */
 
-    'access' => 'TSF\Elfinder\Elfinder::checkAccess',
+    'access' => 'Barryvdh\ElfinderBundle\Elfinder::checkAccess',
 
     /*
     |--------------------------------------------------------------------------

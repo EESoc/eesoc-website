@@ -154,6 +154,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
       		'ntfloadimg'  : 'イメージを読み込んでいます',
       		'ntfnetmount' : 'ネットワークボリュームをマウントしています', // added 18.04.2012
 			'ntfdim'      : '画像サイズを取得しています', // added 20.05.2013
+			'ntfreaddir'  : 'ホルダ情報を読み取っています', // added 01.07.2013
 			
 			/************************************ dates **********************************/
 			'dateUnknown' : '不明',
@@ -235,6 +236,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 			'dontforget'      : 'タオル忘れちゃだめよー。',
 			'shortcutsof'     : 'ショートカットは利用できません',
 			'dropFiles'       : 'ここにファイルをドロップ',
+			'dropFilesBrowser': 'ブラウザからファイルをドロップまたは貼り付け', // added 30.05.2012
 			'or'              : 'または',
 			'selectForUpload' : 'アップロードするファイルを選択',
 			'moveFiles'       : 'ファイルを移動',
