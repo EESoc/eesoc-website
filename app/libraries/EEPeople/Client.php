@@ -8,6 +8,7 @@ use Guzzle\Plugin\Cookie\Cookie;
 use Guzzle\Plugin\Cookie\CookiePlugin;
 use Guzzle\Plugin\Cookie\CookieJar\CookieJarInterface;
 use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
+use ImperialCollegeCredential;
 
 class Client {
 
@@ -30,8 +31,9 @@ class Client {
 
 	protected $cookie_jar;
 
-	private $login_information;
-
+	/**
+	 * @param Http_Client $client
+	 */
 	public function __construct(Http_Client $client)
 	{
 		$client->setBaseUrl(self::$URL_BASE);
@@ -45,9 +47,15 @@ class Client {
 		$this->client = $client;
 	}
 
-	public function signIn(\ImperialCollegeLogin $login)
+	/**
+	 * Sign in a given credential
+	 * 
+	 * @param  ImperialCollegeCredential $credential
+	 * @return boolean
+	 */
+	public function signIn(ImperialCollegeCredential $credential)
 	{
-		$auth_params = array($login->getUsername(), $login->getPassword());
+		$auth_params = array($credential->getUsername(), $credential->getPassword());
 		$request = $this->client->get(self::$PATH_SIGN_IN, null, array(
 			'auth' => $auth_params,
 		));
@@ -56,12 +64,11 @@ class Client {
 			$response = $request->send();
 
 			// Persist auth
-			$this->login_information = $login;
 			$this->client->setDefaultOption('auth', $auth_params);
 
 			// Set server side session data
 			$params = array(
-				'logon' => $login->getUsername(),
+				'logon' => $credential->getUsername(),
 				'np' => self::$PATH_STUDENT_GROUP.'?'.http_build_query(self::$PARAMS_STUDENT_GROUP_INDEX),
 			);
 			$response = $this->client->post(self::$PATH_SESSION_INIT, null, $params)->send();
@@ -72,6 +79,11 @@ class Client {
 		}
 	}
 
+	/**
+	 * Get a list of student groups
+	 * 
+	 * @return array
+	 */
 	public function getStudentGroups()
 	{
 		$response = $this->getPageResponse(self::$PATH_STUDENT_GROUP, self::$PARAMS_STUDENT_GROUP_INDEX);
@@ -92,6 +104,12 @@ class Client {
 		return $result;
 	}
 
+	/**
+	 * Get a list of student Ids in a group
+	 * 
+	 * @param  string $group_id
+	 * @return array
+	 */
 	public function getStudentIdsInGroup($group_id)
 	{
 		$response = $this->getPageResponse(self::$PATH_STUDENT_GROUP, array('g' => $group_id));
@@ -109,6 +127,12 @@ class Client {
 		return $result;
 	}
 
+	/**
+	 * Get a Person's details
+	 * 
+	 * @param  integer $student_id
+	 * @return array
+	 */
 	public function getPerson($student_id)
 	{
 		$params = self::$PARAMS_PERSON;
@@ -162,6 +186,12 @@ class Client {
 		return $result;
 	}
 
+	/**
+	 * Get the Image of a Person
+	 * 
+	 * @param  array $person
+	 * @return array
+	 */
 	public function getImageOfPerson($person)
 	{
 		$result = array();
@@ -178,6 +208,11 @@ class Client {
 		return $result;
 	}
 
+	/**
+	 * Get the student
+	 * 
+	 * @return integer
+	 */
 	public function getStudentsCount()
 	{
 		$sum = 0;
@@ -187,6 +222,13 @@ class Client {
 		return $sum;
 	}
 
+	/**
+	 * Send a GET request with params
+	 * 
+	 * @param  string $path
+	 * @param  array $query
+	 * @return Response
+	 */
 	protected function getPageResponse($path = null, $query = null)
 	{
 		$request = $this->client->get($path, null, array('query' => $query));

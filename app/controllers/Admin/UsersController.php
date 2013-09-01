@@ -12,7 +12,11 @@ use \View;
 
 class UsersController extends BaseController {
 
-	const USERS_PER_PAGE = 20;
+	/**
+	 * Number of users to display per page
+	 * @var integer
+	 */
+	protected static $USERS_PER_PAGE = 20;
 
 	/**
 	 * Display a list of users. Able to apply filters and search query.
@@ -58,7 +62,7 @@ class UsersController extends BaseController {
 		}
 
 		return View::make('admin.users.index')
-			->with('users', $users->paginate(self::USERS_PER_PAGE))
+			->with('users', $users->paginate(self::$USERS_PER_PAGE))
 			->with(User::statistics())
 			->with('request_params', $request_params)
 			->with('groups', StudentGroup::with('children')->root()->alphabetically()->get())
@@ -122,6 +126,11 @@ class UsersController extends BaseController {
 
 	}
 
+	/**
+	 * Display a list of users' photo
+	 * 
+	 * @return Response
+	 */
 	public function getWall()
 	{
 		return View::make('admin.users.wall')

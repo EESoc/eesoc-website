@@ -3,8 +3,9 @@ namespace Admin;
 
 use \App;
 use \Auth;
-use \EActivitiesClient;
-use \Guzzle\Http\Client as HttpClient;
+use \EActivities\Client as EActivitiesClient;
+use \EActivities\Synchronizer as EActivitiesSynchronizer;
+use \ImperialCollegeCredential;
 use \Input;
 use \Redirect;
 use \Session;
@@ -14,10 +15,15 @@ use \View;
 
 class UsersEActivitiesController extends BaseController {
 
-	const KEY_EACTIVITIES_SESSION = 'eactivities_session';
+	protected static $KEY_EACTIVITIES_SESSION = 'eactivities_session';
 
 	private $client;
 
+	/**
+	 * Decide where to start.
+	 * 
+	 * @return Resonse
+	 */
 	public function getBegin()
 	{
 		$this->client = $this->createEActivitiesClient();
@@ -57,8 +63,11 @@ class UsersEActivitiesController extends BaseController {
 
 		if ($validator->passes()) {
 			$client = $this->createEActivitiesClient();
-			if ($client->signIn(Auth::user()->username, $inputs['password'])) {
-				Session::put(self::KEY_EACTIVITIES_SESSION, $client->getSessionId());
+
+			$credential = new ImperialCollegeCredential(Auth::user()->username, $inputs['password']);
+
+			if ($client->signIn($credential)) {
+				Session::put(self::$KEY_EACTIVITIES_SESSION, $client->getSessionId());
 				return Redirect::action('Admin\UsersEActivitiesController@getRoles')
 					->with('success', 'You have successfully signed in to eActivities');
 			} else {
@@ -128,27 +137,9 @@ class UsersEActivitiesController extends BaseController {
 			return $client;
 		}
 
-		$members = $client->getMembersList();
+		(new EActivitiesSynchronizer($client))->perform();
 
-		// Reset membership status
-		User::resetMemberships();
-
-		foreach ($members as $member) {
-			// Find or create
-			$user = User::where('username', '=', $member['login'])->first();
-			if ( ! $user) {
-				$user = new User;
-				$user->username = $member['login'];
-			}
-
-			$user->name      = "{$member['first_name']} {$member['last_name']}";
-			$user->email     = $member['email'];
-			$user->cid       = $member['cid'];
-			$user->is_member = true;
-			$user->save();
-		}
-
-		Session::forget(self::KEY_EACTIVITIES_SESSION);
+		Session::forget(self::$KEY_EACTIVITIES_SESSION);
 
 		return Redirect::route('admin.users.index')
 			->with('success', 'Successfully synchronized users from eActivities');
@@ -167,8 +158,8 @@ class UsersEActivitiesController extends BaseController {
 
 		$eactivities_client = new EActivitiesClient($http_client);
 
-		if (Session::has(self::KEY_EACTIVITIES_SESSION)) {
-			$eactivities_client->setSessionId(Session::get(self::KEY_EACTIVITIES_SESSION));
+		if (Session::has(self::$KEY_EACTIVITIES_SESSION)) {
+			$eactivities_client->setSessionId(Session::get(self::$KEY_EACTIVITIES_SESSION));
 		}
 
 		return $eactivities_client;

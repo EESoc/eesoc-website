@@ -160,14 +160,24 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		return $this->save();
 	}
 
+	/**
+	 * Return has image attribute.
+	 * 
+	 * @return boolean
+	 */
 	public function getHasImageAttribute()
 	{
-		return ! empty($this->image_blob);
+		return ( ! empty($this->image_blob));
 	}
 
+	/**
+	 * Return has email attribute.
+	 * 
+	 * @return boolean
+	 */
 	public function getHasEmailAttribute()
 	{
-		return ! empty($this->email);
+		return ( ! empty($this->email));
 	}
 
 	public function canFilterBy($filter)

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -6,11 +6,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{{{ isset($page_title) ? $page_title.' | ' : '' }}}EESoc Administration</title>
+    <title>{{{ isset($page_title) ? $page_title.' | ' : '' }}}EESoc</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <!-- <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
 
@@ -27,7 +27,7 @@
 
   <body>
 
-    <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-inverse" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">

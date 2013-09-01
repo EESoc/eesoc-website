@@ -3,10 +3,10 @@ namespace Admin;
 
 use \App;
 use \Auth;
-use \EEPeople\Synchronizer as EEPeopleSynchronizer;
 use \EEPeople\Client as EEPeopleClient;
+use \EEPeople\Synchronizer as EEPeopleSynchronizer;
 use \Guzzle\Http\Client as HttpClient;
-use \ImperialCollegeLogin;
+use \ImperialCollegeCredential;
 use \Input;
 use \Redirect;
 use \Validator;
@@ -14,6 +14,11 @@ use \View;
 
 class UsersEEPeopleController extends BaseController {
 
+	/**
+	 * Decide where to start.
+	 * 
+	 * @return Response
+	 */
 	public function getBegin()
 	{
 		return $this->getSignIn();
@@ -48,11 +53,11 @@ class UsersEEPeopleController extends BaseController {
 
 		if ($validator->passes()) {
 			$client = $this->createEEPeopleClient();
-			$credentials = new ImperialCollegeLogin(Auth::user()->username, $inputs['password']);
+			$credential = new ImperialCollegeCredential(Auth::user()->username, $inputs['password']);
 
-			if ($client->signIn($credentials)) {
-				$synchronizer = new EEPeopleSynchronizer($client);
-				$synchronizer->perform();
+			if ($client->signIn($credential)) {
+				(new EEPeopleSynchronizer($client))->perform();
+
 				return Redirect::route('admin.users.index')
 					->with('success', 'Successfully synchronized users from EEPeople');
 			} else {
@@ -63,11 +68,6 @@ class UsersEEPeopleController extends BaseController {
 			return Redirect::action('Admin\UsersEEPeopleController@getSignIn')
 				->withErrors($validator);
 		}
-	}
-
-	public function getStudentsCount()
-	{
-		return $this->createEEPeopleClient()->getStudentsCount();
 	}
 
 	/**
