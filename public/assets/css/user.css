@@ -1,0 +1,19 @@
+td.locker {
+  border-width: 2px !important;
+}
+
+td.locker div {
+  width: 80px;
+}
+
+td.locker-s div {
+  padding: 0;
+}
+
+td.locker-m div {
+  padding: 25px 0;
+}
+
+td.locker-l div {
+  padding: 50px 0;
+}

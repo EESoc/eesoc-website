@@ -1,6 +1,8 @@
 <?php
 
-class ContentPresenter extends Robbo\Presenter\Presenter {
+use Robbo\Presenter\Presenter;
+
+class ContentPresenter extends Presenter {
 
 	public function presentTemplateCode()
 	{

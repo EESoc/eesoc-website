@@ -13,6 +13,7 @@
     <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/user.css') }}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

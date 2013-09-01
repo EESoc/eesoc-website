@@ -4,22 +4,21 @@
 	"keywords": ["framework", "laravel"],
 	"require": {
 		"php": ">=5.4.0",
-		"laravel/framework": "4.1.*",
+		"laravel/framework": "4.0.*",
 		"loic-sharma/profiler": "1.1.*",
 		"guzzle/guzzle": "3.7.*@dev",
 		"nesbot/Carbon": "*",
-		"robclancy/presenter": "1.2.*",
-		"tsf/elfinder-laravel": "dev-master"
+		"robclancy/presenter": "1.2.*"
 	},
 	"autoload": {
 		"classmap": [
 			"app/commands",
 			"app/controllers",
 			"app/models",
+			"app/presenters",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php",
-			"app/presenters"
+			"app/tests/TestCase.php"
 		]
 	},
 	"scripts": {
