@@ -1,19 +1,35 @@
-td.locker {
+.locker-cluster {
+
+}
+
+.horizontal-scroll {
+  overflow-x: auto;
+}
+
+/*.locker-sidebar .nav .nav > li > a {
+  padding-left: 30px;
+}*/
+
+.lockers {
+  margin: 0;
+}
+
+.locker {
   border-width: 2px !important;
 }
 
-td.locker div {
-  width: 80px;
+.locker div {
+  width: 60px;
 }
 
-td.locker-s div {
+.locker-s div {
   padding: 0;
 }
 
-td.locker-m div {
-  padding: 25px 0;
+.locker-m div {
+  padding: 20px 0;
 }
 
-td.locker-l div {
-  padding: 50px 0;
+.locker-l div {
+  padding: 40px 0;
 }

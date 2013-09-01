@@ -13,6 +13,11 @@ class Locker extends Eloquent implements PresentableInterface {
 		return $this->belongsTo('LockerCluster');
 	}
 
+	public function owner()
+	{
+		return $this->belongsTo('User');
+	}
+
 	public function getIsVacantAttribute()
 	{
 		return ($this->status === self::STATUS_VACANT);

@@ -26,9 +26,9 @@
 
   </head>
 
-  <body>
+  <body @yield('body')>
 
-    <nav class="navbar navbar-inverse" role="navigation">
+    <nav class="navbar navbar-static-top navbar-inverse" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">

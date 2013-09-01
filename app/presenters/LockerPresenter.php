@@ -26,4 +26,16 @@ class LockerPresenter extends Presenter {
 		return "{$this->presentStatusCssClass()} locker {$this->presentSizeCssClass()}";
 	}
 
+	public function presentStatusAction()
+	{
+		switch ($this->status) {
+			case Locker::STATUS_TAKEN:
+				return '<a href="#" class="btn btn-danger btn-xs disabled">Taken</a>';
+			case Locker::STATUS_RESERVED:
+				return '<a href="#" class="btn btn-warning btn-xs disabled">Reserved</a>';
+			case Locker::STATUS_VACANT:
+				return '<a href="javascript:alert(\'TODO: Claim this locker\')" class="btn btn-success btn-xs">Claim</a>';
+		}
+	}
+
 }

@@ -9,9 +9,9 @@ class LockerTableSeeder extends Seeder {
 		DB::table('locker_floors')->delete();
 
 		$levels = [];
-		$levels[] = LockerFloor::create(['name' => 'Level 3', 'floor' => 3, 'position' => 1]);
-		$levels[] = LockerFloor::create(['name' => 'Level 4', 'floor' => 4, 'position' => 2]);
-		$levels[] = LockerFloor::create(['name' => 'Level 5', 'floor' => 5, 'position' => 3]);
+		$levels[] = LockerFloor::create(['name' => 'Level 3', 'floor' => 3]);
+		$levels[] = LockerFloor::create(['name' => 'Level 4', 'floor' => 4]);
+		$levels[] = LockerFloor::create(['name' => 'Level 5', 'floor' => 5]);
 
 		foreach ($levels as $level) {
 			foreach (['West', 'North'] as $position => $cluster_name) {

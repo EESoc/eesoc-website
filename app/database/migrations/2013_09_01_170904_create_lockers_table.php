@@ -14,8 +14,7 @@ class CreateLockersTable extends Migration {
 		Schema::create('locker_floors', function($table) {
 			$table->increments('id');
 			$table->string('name');
-			$table->integer('floor')->unsigned();
-			$table->integer('position');
+			$table->integer('floor');
 		});
 
 		Schema::create('locker_clusters', function($table) {
