@@ -41,12 +41,14 @@
         <div class="collapse navbar-collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
           </ul>
-          {{ Form::open(array('action' => 'SessionsController@deleteDestroy', 'method' => 'delete', 'class' => 'navbar-form pull-right')) }}
-            <button type="submit" class="btn btn-default">Sign Out</button>
-          {{ Form::close() }}
-          <p class="navbar-text pull-right">
-            Signed in as <strong>{{ Auth::user()->name }}</strong>.
-          </p>
+          @if (Auth::check())
+            {{ Form::open(array('action' => 'SessionsController@deleteDestroy', 'method' => 'delete', 'class' => 'navbar-form pull-right')) }}
+              <button type="submit" class="btn btn-default">Sign Out</button>
+            {{ Form::close() }}
+            <p class="navbar-text pull-right">
+              Signed in as <strong>{{ Auth::user()->name }}</strong>.
+            </p>
+          @endif
         </div>
       </div>
     </nav>

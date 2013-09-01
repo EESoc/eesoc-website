@@ -1,11 +1,11 @@
 <?php
 namespace Admin;
 
-use Content;
-use Input;
-use Redirect;
-use Validator;
-use View;
+use \Content;
+use \Input;
+use \Redirect;
+use \Validator;
+use \View;
 
 class ContentsController extends BaseController {
 

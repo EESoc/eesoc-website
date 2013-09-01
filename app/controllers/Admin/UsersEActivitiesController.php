@@ -1,16 +1,16 @@
 <?php
 namespace Admin;
 
-use App;
-use Auth;
-use EActivitiesClient;
-use Guzzle\Http\Client as HttpClient;
-use Input;
-use Redirect;
-use Session;
-use User;
-use Validator;
-use View;
+use \App;
+use \Auth;
+use \EActivitiesClient;
+use \Guzzle\Http\Client as HttpClient;
+use \Input;
+use \Redirect;
+use \Session;
+use \User;
+use \Validator;
+use \View;
 
 class UsersEActivitiesController extends BaseController {
 

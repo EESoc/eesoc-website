@@ -5,13 +5,6 @@ use Robbo\Presenter\PresentableInterface;
 
 class User extends Eloquent implements UserInterface, PresentableInterface {
 
-	public static $FILTER_TO_FUNCTION_MAP = array(
-		'admins'      => 'admin',
-		'non-admins'  => 'nonAdmin',
-		'members'     => 'member',
-		'non-members' => 'nonMember',
-	);
-
 	private $imperialCollegeUser;
 
 	public function studentGroup()
@@ -175,6 +168,20 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	public function getHasEmailAttribute()
 	{
 		return ! empty($this->email);
+	}
+
+	public function canFilterBy($filter)
+	{
+		return isset($this->filter_to_function_map[$filter]);
+	}
+
+	public function filterBy($filter)
+	{
+		if (isset($this->filter_to_function_map[$filter])) {
+			return $this->{$filter}();
+		} else {
+			return $this;
+		}
 	}
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 namespace Admin;
 
-use View;
+use \View;
 
 class DashboardController extends BaseController {
 

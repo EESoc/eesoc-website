@@ -1,11 +1,11 @@
 <?php
 namespace Admin;
 
-use Category;
-use Input;
-use Redirect;
-use Validator;
-use View;
+use \Category;
+use \Input;
+use \Redirect;
+use \Validator;
+use \View;
 
 class CategoriesController extends BaseController {
 
