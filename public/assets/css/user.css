@@ -11,7 +11,7 @@
   width: auto;
 }
 
-.locker, .locker * {
+.locker, .locker > * {
   width: 70px !important;
   text-align: center
 }

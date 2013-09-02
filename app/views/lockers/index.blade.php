@@ -1,9 +1,32 @@
 @extends('layouts.application')
 
 @section('content')
+  <div class="page-header">
+    <h1>Locker Sale</h1>
+  </div>
+  @if ( ! $lockers_owned->isEmpty())
+    <div class="panel panel-primary">
+      <div class="panel-heading">Lockers I currently own</div>
+      <div class="panel-body">
+        <div class="row">
+          @foreach ($lockers_owned as $locker)
+            <div class="col-lg-2">
+              <h2>
+                {{{ $locker->name }}}
+              </h2>
+              <h4>
+                {{{ $locker->lockerCluster->lockerFloor->name }}}
+                <small>{{{ $locker->lockerCluster->name }}}</small>
+              </h4>
+            </div>
+          @endforeach
+        </div>
+      </div>
+    </div>
+  @endif
   @foreach ($locker_floors as $locker_floor)
     <div class="page-header" id="{{ $locker_floor->anchor_name }}">
-      <h1>{{{ $locker_floor->name }}}</h1>
+      <h2>{{{ $locker_floor->name }}}</h2>
     </div>
     @foreach ($locker_floor->lockerClusters()->sorted()->get() as $locker_cluster)
       <div class="panel panel-default locker-cluster" id="{{ $locker_cluster->anchor_name }}">

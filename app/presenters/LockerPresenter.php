@@ -54,7 +54,11 @@ class LockerPresenter extends Presenter {
 			case Locker::STATUS_RESERVED:
 				return '<a href="#" class="btn btn-warning btn-sm btn-block disabled">Reserved</a>';
 			case Locker::STATUS_VACANT:
-				return '<a href="'.URL::action('LockersController@getClaim', $this->id).'" class="btn btn-success btn-block btn-sm" data-disable-with="Wait&hellip;">Claim</a>';
+				$html = '<a href="'.URL::action('LockersController@getClaim', $this->id).'" class="btn btn-success btn-block btn-sm" data-disable-with="Wait&hellip;">';
+				$html .= '<span class="glyphicon glyphicon-tower"></span> ';
+				$html .= 'Claim';
+				$html .= '</a>';
+				return $html;
 		}
 	}
 
