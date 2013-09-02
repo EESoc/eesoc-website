@@ -4,21 +4,21 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class SyncEEPeopleCommand extends Command implements Loggable {
+class SyncEActivitiesSalesCommand extends Command {
 
 	/**
 	 * The console command name.
 	 *
 	 * @var string
 	 */
-	protected $name = 'eepeople:sync';
+	protected $name = 'eactivities:sales:sync';
 
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
-	protected $description = 'Sync with EEPeople.';
+	protected $description = 'Sync eActivities Sales.';
 
 	/**
 	 * Create a new command instance.
@@ -48,15 +48,42 @@ class SyncEEPeopleCommand extends Command implements Loggable {
 			$http_client->setSslVerification(false);
 		}
 
-		$eepeople_client = new EEPeople\Client($http_client);
+		$eactivities_client = new EActivities\Client($http_client);
 
-		if ( ! $eepeople_client->signIn($credentials)) {
+		if ( ! $eactivities_client->signIn($credentials)) {
 			$this->error('Error signing in! Please check your username and password.');
 			return;
 		}
 
-		$synchronizer = new EEPeople\Synchronizer($eepeople_client, true, $this->option('skip'), $this);
-		$synchronizer->perform();
+		// Role changing
+		while (true) {
+			$roles = $eactivities_client->getCurrentAndOtherRoles();
+			$this->info(sprintf('Your current role is `%s`', $roles['current']));
+
+			if ($this->confirm('Continue with this role? [yes|no]')) {
+				break;
+			}
+
+			$this->info('Other roles:');
+			foreach ($roles['others'] as $role_key => $role) {
+				$this->info(sprintf('[%d] %s', $role_key, $role));
+			}
+
+			while (true) {
+				$role_key = $this->confirm('Enter role key:');
+
+				if (isset($roles['others'][$role_key])) {
+					break;
+				} else {
+					$this->error('Role key does not exist, please try again');
+				}
+			}
+
+			$eactivities_client->changeRole($role_key);
+		}
+
+		//['1725', '1772', '1772-1']
+		//16650
 	}
 
 	/**
@@ -76,9 +103,7 @@ class SyncEEPeopleCommand extends Command implements Loggable {
 	 */
 	protected function getOptions()
 	{
-		return array(
-			array('skip', null, InputOption::VALUE_NONE, 'Skip populated users.', null),
-		);
+		return array();
 	}
 
 }

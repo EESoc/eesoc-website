@@ -16,7 +16,9 @@ class Client {
 
 	const PATH_COMMON_AJAX_HANDLER = '/common/ajax_handler.php';
 	const PATH_ADMIN_CSP_DETAILS   = '/admin/csp/details';
+	const PATH_FINANCE_INCOME_SHOP = '/finance/income/shop';
 	const PATH_MEMBERS_REPORT      = '/common/data_handler.php?id=%d&type=csv&name=Members_Report';
+	const PATH_PURCHASE_REPORT     = '/common/data_handler.php?id=1766&type=csv&name=Purchase_Report&searchstr=ProductID&searchvalue=%d';
 
 	const NAME_SESSION_COOKIE = 'ICU_eActivities';
 
@@ -119,7 +121,7 @@ class Client {
 
 		$result = array(
 			'current' => null,
-			'others' => array()
+			'others' => []
 		);
 
 		preg_match('/<p class="currentrole">([^<]+)<\/p>/', $body, $output_array);
@@ -144,7 +146,7 @@ class Client {
 	{
 		$response = $this->getPageResponse(self::PATH_ADMIN_CSP_DETAILS);
 		if ( ! $this->isSignedIn($response)) {
-			return null; // @todo raise exception?
+			return []; // @todo raise exception?
 		}
 
 		$response = $this->activateTabs('395');
@@ -173,18 +175,58 @@ class Client {
 			// Format rows
 			$result = array_map(function($original) use ($headers) {
 				$row = str_getcsv($original);
-				$new_row = array();
+				$new_row = [];
 				foreach ($headers as $key => $header) {
 					$new_row[$header] = $row[$key];
 				}
 				return $new_row;
 			}, $result);
 
-
 			return $result;
 		} else {
-			return array();
+			return [];
 		}
+	}
+
+	public function getPurchasesList($activate_tabs, $product_id)
+	{
+		$response = $this->getPageResponse(self::PATH_FINANCE_INCOME_SHOP);
+		if ( ! $this->isSignedIn($response)) {
+			return []; // @todo raise exception?
+		}
+
+		$response = $this->activateTabs($activate_tabs);
+		if ( ! $response->isSuccessful()) {
+			return []; // @todo raise exception?
+		}
+
+		$request = $this->client->get(sprintf(self::PATH_PURCHASE_REPORT, $product_id));
+		$response = $request->send();
+		$body = $response->getBody();
+
+		$result = explode("\n", trim($body));
+
+		// Get header
+		$headers = str_getcsv(array_shift($result));
+		$headers = array_map(function($original) {
+			if ($original === 'CID') {
+				return 'cid';
+			} else {
+				return Str::snake($original);
+			}
+		}, $headers);
+
+		// Format rows
+		$result = array_map(function($original) use ($headers) {
+			$row = str_getcsv($original);
+			$new_row = [];
+			foreach ($headers as $key => $header) {
+				$new_row[$header] = $row[$key];
+			}
+			return $new_row;
+		}, $result);
+
+		return $result;
 	}
 
 	/**
@@ -210,10 +252,21 @@ class Client {
 	 */
 	protected function activateTabs($navigate)
 	{
-		return $this->getAjaxHandlerResponse(array(
-			'ajax' => 'activatetabs',
-			'navigate' => $navigate,
-		));
+		$navigate = (array) $navigate;
+		$last_response = null;
+
+		while (($current_navigate = array_shift($navigate))) {
+			$last_response = $this->getAjaxHandlerResponse(array(
+				'ajax' => 'activatetabs',
+				'navigate' => $current_navigate,
+			));
+
+			if ( ! $last_response->isSuccessful()) {
+				break;
+			}
+		}
+
+		return $last_response;
 	}
 
 	/**
@@ -236,7 +289,7 @@ class Client {
 	 */
 	protected function getAjaxHandlerResponse($params)
 	{
-		$request = $this->client->post(self::PATH_COMMON_AJAX_HANDLER, array(), $params);
+		$request = $this->client->post(self::PATH_COMMON_AJAX_HANDLER, [], $params);
 		return $request->send();
 	}
 
