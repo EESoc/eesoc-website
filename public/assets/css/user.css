@@ -2,34 +2,44 @@
 
 }
 
-.horizontal-scroll {
+.lockers {
   overflow-x: auto;
 }
 
-/*.locker-sidebar .nav .nav > li > a {
-  padding-left: 30px;
-}*/
-
-.lockers {
+.lockers-table {
   margin: 0;
+  width: auto;
 }
 
-.locker {
-  border-width: 2px !important;
+.locker, .locker * {
+  width: 70px !important;
+  text-align: center
 }
 
-.locker div {
-  width: 60px;
+.locker-s {
+  padding: 5px !important;
 }
 
-.locker-s div {
-  padding: 0;
+.locker-m {
+  padding: 20px 5px !important;
 }
 
-.locker-m div {
-  padding: 20px 0;
+.locker-l {
+  padding: 40px 5px !important;
 }
 
-.locker-l div {
-  padding: 40px 0;
+.locker.success {
+  background-color: #B0E49A !important;
+}
+
+.locker.danger {
+  background-color: #FFA9A9 !important;
+}
+
+.locker.warning {
+  background-color: #FDF2B5 !important;
+}
+
+.locker.muted {
+  background-color: #FFFFFF !important;
 }

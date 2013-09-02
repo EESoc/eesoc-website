@@ -33,6 +33,46 @@ class Locker extends Eloquent implements PresentableInterface {
 		return ($this->status === self::STATUS_TAKEN);
 	}
 
+	/**
+	 * Can Locker be claimed by this user.
+	 * @param  User   $user
+	 * @return boolean
+	 */
+	public function canBeClaimedBy(User $user)
+	{
+		// @TODO Check for unprocessed purchases
+		return $this->is_vacant;
+	}
+
+	/**
+	 * Check if Locker is owned by this user.
+	 * @param  User   $user
+	 * @return boolean
+	 */
+	public function ownedBy(User $user)
+	{
+		return ($this->owner_id === $user->id);
+	}
+
+	/**
+	 * Claim this locker
+	 * @param  User   $user
+	 * @return [type]       [description]
+	 */
+	public function performClaimBy(User $user)
+	{
+		$this->owner()->associate($user);
+		$this->status = self::STATUS_TAKEN;
+
+		// @TODO mark user's sale as processed
+		return $this->save();
+	}
+
+	/**
+	 * New collection class
+	 * @param  array  $models
+	 * @return LockerCollection
+	 */
 	public function newCollection(array $models = array())
 	{
 		return new LockerCollection($models);

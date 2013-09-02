@@ -22,7 +22,7 @@ class LockerTableSeeder extends Seeder {
 				$cluster->save();
 
 				for ($row = 0; $row < 3; ++$row) {
-					for ($col = 0; $col < 20; ++$col) {
+					for ($col = 0; $col < 30; ++$col) {
 						$locker = new Locker;
 						$locker->name = "{$level->floor}{$row}{$col}";
 						$locker->row = $row;

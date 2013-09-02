@@ -8,8 +8,8 @@
     @foreach ($locker_floor->lockerClusters()->sorted()->get() as $locker_cluster)
       <div class="panel panel-default locker-cluster" id="{{ $locker_cluster->anchor_name }}">
         <div class="panel-heading">{{{ $locker_cluster->name }}}</div>
-        <div class="horizontal-scroll">
-          <table class="table table-bordered lockers">
+        <div class="lockers">
+          <table class="table table-bordered lockers-table">
             <?php
               $lockers = $locker_cluster->lockers;
               $maximum_columns = $lockers->totalColumns();
@@ -20,11 +20,13 @@
                 @for ($column = 0; $column <= $maximum_columns; ++$column)
                   @if ($locker = $lockers->at($row, $column))
                     <?php $locker = $locker->getPresenter(); ?>
-                    <td class="{{ $locker->css_class }}">
-                      <div class="text-center">
-                        <h4>{{{ $locker->name }}}</h4>
+                    <td class="{{ $locker->{$locker->ownedBy(Auth::user()) ? 'owner_css_class' : 'css_class'} }}">
+                      <h4>{{{ $locker->name }}}</h4>
+                      @if ($locker->ownedBy(Auth::user()))
+                        <a href="#" class="btn btn-default btn-sm btn-block disabled">Owned</a>
+                      @else
                         {{ $locker->status_action }}
-                      </div>
+                      @endif
                     </td>
                   @else
                     <td></td>
