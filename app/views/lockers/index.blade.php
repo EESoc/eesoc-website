@@ -45,7 +45,7 @@
           <div class="panel-body">
             <div class="row">
               @foreach ($lockers_owned as $locker)
-                <div class="col-lg-2">
+                <div class="col-xs-3 col-sm-2">
                   <h2>
                     {{{ $locker->name }}}
                   </h2>
