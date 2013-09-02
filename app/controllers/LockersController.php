@@ -36,6 +36,12 @@ class LockersController extends BaseController {
 		}
 	}
 
+	public function getRent()
+	{
+		return View::make('lockers.redirect_to_shop')
+			->with('redirect_to', URL::action('LockersController@getIndex'));
+	}
+
 	private function findLockerAndAuthorizeClaim($id)
 	{
 		$locker = Locker::findOrFail($id);

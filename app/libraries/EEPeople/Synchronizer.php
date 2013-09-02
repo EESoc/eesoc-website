@@ -1,10 +1,10 @@
 <?php
 namespace EEPeople;
 
-use ImperialCollegeUser;
-use Loggable;
-use StudentGroup;
-use User;
+use \ImperialCollegeUser;
+use \Loggable;
+use \StudentGroup;
+use \User;
 
 class Synchronizer {
 
