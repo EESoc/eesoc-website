@@ -20,7 +20,7 @@
       <ul class="nav nav-pills nav-stacked">
         <li
           @if (
-            ! in_array(Input::get('filter'), array('admins', 'non-admins', 'members', 'non-members')) &&
+            ! in_array(Input::get('filter'), array('admin', 'non-admin', 'member', 'non-member')) &&
             ! Input::get('group_id')
           )
             class="active"
@@ -49,26 +49,26 @@
             @include('admin.users.groups_list', ['groups' => $groups, 'level' => 0])
           </ul>
         </li>
-        <li {{ (Input::get('filter') === 'admins') ? 'class="active"' : '' }}>
-          <a href="{{ URL::route('admin.users.index', array('filter' => 'admins')) }}">
+        <li {{ (Input::get('filter') === 'admin') ? 'class="active"' : '' }}>
+          <a href="{{ URL::route('admin.users.index', array('filter' => 'admin')) }}">
             <span class="badge pull-right">{{ $admins_count }}</span>
             Admins
           </a>
         </li>
-        <li {{ (Input::get('filter') === 'non-admins') ? 'class="active"' : '' }}>
-          <a href="{{ URL::route('admin.users.index', array('filter' => 'non-admins')) }}">
+        <li {{ (Input::get('filter') === 'non-admin') ? 'class="active"' : '' }}>
+          <a href="{{ URL::route('admin.users.index', array('filter' => 'non-admin')) }}">
             <span class="badge pull-right">{{ $non_admins_count }}</span>
             Non-Admins
           </a>
         </li>
-        <li {{ (Input::get('filter') === 'members') ? 'class="active"' : '' }}>
-          <a href="{{ URL::route('admin.users.index', array('filter' => 'members')) }}">
+        <li {{ (Input::get('filter') === 'member') ? 'class="active"' : '' }}>
+          <a href="{{ URL::route('admin.users.index', array('filter' => 'member')) }}">
             <span class="badge pull-right">{{ $members_count }}</span>
             Members
           </a>
         </li>
-        <li {{ (Input::get('filter') === 'non-members') ? 'class="active"' : '' }}>
-          <a href="{{ URL::route('admin.users.index', array('filter' => 'non-members')) }}">
+        <li {{ (Input::get('filter') === 'non-member') ? 'class="active"' : '' }}>
+          <a href="{{ URL::route('admin.users.index', array('filter' => 'non-member')) }}">
             <span class="badge pull-right">{{ $non_members_count }}</span>
             Non-Members
           </a>

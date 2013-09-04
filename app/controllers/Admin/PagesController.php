@@ -1,11 +1,11 @@
 <?php
 namespace Admin;
 
-use Page;
-use Input;
-use Redirect;
-use Validator;
-use View;
+use \Page;
+use \Input;
+use \Redirect;
+use \Validator;
+use \View;
 
 class PagesController extends BaseController {
 

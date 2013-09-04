@@ -23,6 +23,7 @@
 
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    @yield('javascript_for_page')
 
   </body>
 </html>

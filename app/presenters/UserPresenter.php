@@ -1,6 +1,8 @@
 <?php
 
-class UserPresenter extends Robbo\Presenter\Presenter {
+use Robbo\Presenter\Presenter;
+
+class UserPresenter extends Presenter {
 
 	public function presentRoleLabel()
 	{

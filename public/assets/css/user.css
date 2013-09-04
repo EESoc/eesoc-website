@@ -1,0 +1,45 @@
+.locker-sale-panel .table {
+  margin: 0;
+}
+
+.lockers {
+  overflow-x: auto;
+}
+
+.lockers-table {
+  margin: 0;
+  width: auto;
+}
+
+.locker, .locker > * {
+  width: 70px !important;
+  text-align: center
+}
+
+.locker-s {
+  padding: 5px !important;
+}
+
+.locker-m {
+  padding: 20px 5px !important;
+}
+
+.locker-l {
+  padding: 40px 5px !important;
+}
+
+.locker.success {
+  background-color: #B0E49A !important;
+}
+
+.locker.danger {
+  background-color: #FFA9A9 !important;
+}
+
+.locker.warning {
+  background-color: #FDF2B5 !important;
+}
+
+.locker.muted {
+  background-color: #FFFFFF !important;
+}

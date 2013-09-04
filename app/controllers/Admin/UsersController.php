@@ -1,13 +1,14 @@
 <?php
 namespace Admin;
 
-use Auth;
-use Input;
-use Redirect;
-use Response;
-use StudentGroup;
-use User;
-use View;
+use \Auth;
+use \Input;
+use \Redirect;
+use \Response;
+use \Str;
+use \StudentGroup;
+use \User;
+use \View;
 
 class UsersController extends BaseController {
 
@@ -32,22 +33,32 @@ class UsersController extends BaseController {
 			'group_id' => Input::get('group_id'),
 		);
 
+		/**
+		 * Filtering by scope
+		 */
 		if ( ! empty($request_params['filter'])) {
-			if (isset(User::$FILTER_TO_FUNCTION_MAP[$request_params['filter']])) {
-				$users->{User::$FILTER_TO_FUNCTION_MAP[$request_params['filter']]}();
+			if (in_array($request_params['filter'], ['admin', 'non-admin', 'member', 'non-member'])) {
+				$users->{Str::camel($request_params['filter'])}();
 			} else {
 				$request_params['filter'] = null;
 			}
 		}
 
+		/**
+		 * Searching
+		 */
 		if ( ! empty($request_params['query'])) {
 			$users->searching($request_params['query']);
 		}
 
-		$selected_group = null;
+		/**
+		 * By year group
+		 */
 		if ( ! empty($request_params['group_id'])) {
 			$selected_group = StudentGroup::findOrFail($request_params['group_id']);
 			$users->inGroup($selected_group);
+		} else {
+			$selected_group = null;
 		}
 
 		return View::make('admin.users.index')

@@ -10,9 +10,10 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/user.css') }}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -25,9 +26,9 @@
 
   </head>
 
-  <body>
+  <body @yield('body')>
 
-    <nav class="navbar navbar-inverse" role="navigation">
+    <nav class="navbar navbar-static-top navbar-inverse" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -41,12 +42,14 @@
         <div class="collapse navbar-collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
           </ul>
-          {{ Form::open(array('action' => 'SessionsController@deleteDestroy', 'method' => 'delete', 'class' => 'navbar-form pull-right')) }}
-            <button type="submit" class="btn btn-default">Sign Out</button>
-          {{ Form::close() }}
-          <p class="navbar-text pull-right">
-            Signed in as <strong>{{ Auth::user()->name }}</strong>.
-          </p>
+          @if (Auth::check())
+            {{ Form::open(array('action' => 'SessionsController@deleteDestroy', 'method' => 'delete', 'class' => 'navbar-form pull-right')) }}
+              <button type="submit" class="btn btn-default">Sign Out</button>
+            {{ Form::close() }}
+            <p class="navbar-text pull-right">
+              Signed in as <strong>{{ Auth::user()->name }}</strong>.
+            </p>
+          @endif
         </div>
       </div>
     </nav>

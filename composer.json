@@ -15,17 +15,17 @@
 		"guzzle/guzzle": "3.7.*@dev",
 		"nesbot/Carbon": "*",
 		"robclancy/presenter": "1.2.*",
-		"barryvdh/elfinder-bundle": "dev-ckeditor"
+		"tsf/elfinder-laravel": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
 			"app/commands",
 			"app/controllers",
 			"app/models",
+			"app/presenters",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php",
-			"app/presenters"
+			"app/tests/TestCase.php"
 		]
 	},
 	"scripts": {

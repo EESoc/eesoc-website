@@ -1,24 +1,24 @@
 <?php
 namespace EActivities;
 
-use Guzzle\Http\Client as Http_Client;
-use Guzzle\Http\Message\Response;
-use Guzzle\Plugin\Cookie\Cookie;
-use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
-use Guzzle\Plugin\Cookie\CookieJar\CookieJarInterface;
-use Guzzle\Plugin\Cookie\CookiePlugin;
-use ImperialCollegeCredential;
-use Str;
+use \Guzzle\Http\Client as Http_Client;
+use \Guzzle\Http\Message\Response;
+use \Guzzle\Plugin\Cookie\Cookie;
+use \Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
+use \Guzzle\Plugin\Cookie\CookieJar\CookieJarInterface;
+use \Guzzle\Plugin\Cookie\CookiePlugin;
+use \ImperialCollegeCredential;
+use \Str;
 
 class Client {
 
-	public static $URL_BASE = 'https://eactivities.union.imperial.ac.uk/';
+	const URL_BASE = 'https://eactivities.union.imperial.ac.uk/';
 
-	public static $PATH_COMMON_AJAX_HANDLER = '/common/ajax_handler.php';
-	public static $PATH_ADMIN_CSP_DETAILS   = '/admin/csp/details';
-	public static $PATH_MEMBERS_REPORT      = '/common/data_handler.php?id=%d&type=csv&name=Members_Report';
+	const PATH_COMMON_AJAX_HANDLER = '/common/ajax_handler.php';
+	const PATH_ADMIN_CSP_DETAILS   = '/admin/csp/details';
+	const PATH_MEMBERS_REPORT      = '/common/data_handler.php?id=%d&type=csv&name=Members_Report';
 
-	public static $NAME_SESSION_COOKIE = 'ICU_eActivities';
+	const NAME_SESSION_COOKIE = 'ICU_eActivities';
 
 	protected $client;
 
@@ -29,7 +29,7 @@ class Client {
 	 */
 	public function __construct(Http_Client $client)
 	{
-		$client->setBaseUrl(self::$URL_BASE);
+		$client->setBaseUrl(self::URL_BASE);
 
 		$client->setDefaultOption('exceptions', false);
 
@@ -48,7 +48,7 @@ class Client {
 	public function getSessionId()
 	{
 		foreach ($this->cookie_jar->all() as $cookie) {
-			if ($cookie->getName() == self::$NAME_SESSION_COOKIE) {
+			if ($cookie->getName() == self::NAME_SESSION_COOKIE) {
 				return $cookie->getValue();
 			}
 		}
@@ -64,7 +64,7 @@ class Client {
 	public function setSessionId($session_id)
 	{
 		$cookie = new Cookie(array(
-			'name' => self::$NAME_SESSION_COOKIE,
+			'name' => self::NAME_SESSION_COOKIE,
 			'value' => $session_id,
 			'domain' => 'eactivities.union.imperial.ac.uk'));
 		$this->cookie_jar->add($cookie);
@@ -142,7 +142,7 @@ class Client {
 	 */
 	public function getMembersList()
 	{
-		$response = $this->getPageResponse(self::$PATH_ADMIN_CSP_DETAILS);
+		$response = $this->getPageResponse(self::PATH_ADMIN_CSP_DETAILS);
 		if ( ! $this->isSignedIn($response)) {
 			return null; // @todo raise exception?
 		}
@@ -154,7 +154,7 @@ class Client {
 		if (isset($output_array[1])) {
 			$file_id = $output_array[1];
 
-			$request = $this->client->post(sprintf(self::$PATH_MEMBERS_REPORT, $file_id));
+			$request = $this->client->post(sprintf(self::PATH_MEMBERS_REPORT, $file_id));
 			$response = $request->send();
 			$body = $response->getBody();
 
@@ -236,7 +236,7 @@ class Client {
 	 */
 	protected function getAjaxHandlerResponse($params)
 	{
-		$request = $this->client->post(self::$PATH_COMMON_AJAX_HANDLER, array(), $params);
+		$request = $this->client->post(self::PATH_COMMON_AJAX_HANDLER, array(), $params);
 		return $request->send();
 	}
 

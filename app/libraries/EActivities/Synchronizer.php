@@ -1,8 +1,8 @@
 <?php
 namespace EActivities;
 
-use Loggable;
-use User;
+use \Loggable;
+use \User;
 
 class Synchronizer {
 

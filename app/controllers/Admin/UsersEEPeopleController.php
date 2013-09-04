@@ -1,16 +1,16 @@
 <?php
 namespace Admin;
 
-use App;
-use Auth;
-use EEPeople\Client as EEPeopleClient;
-use EEPeople\Synchronizer as EEPeopleSynchronizer;
-use Guzzle\Http\Client as HttpClient;
-use ImperialCollegeCredential;
-use Input;
-use Redirect;
-use Validator;
-use View;
+use \App;
+use \Auth;
+use \EEPeople\Client as EEPeopleClient;
+use \EEPeople\Synchronizer as EEPeopleSynchronizer;
+use \Guzzle\Http\Client as HttpClient;
+use \ImperialCollegeCredential;
+use \Input;
+use \Redirect;
+use \Validator;
+use \View;
 
 class UsersEEPeopleController extends BaseController {
 

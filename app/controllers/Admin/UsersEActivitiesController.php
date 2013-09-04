@@ -1,18 +1,17 @@
 <?php
 namespace Admin;
 
-use App;
-use Auth;
-use EActivities\Client as EActivitiesClient;
-use EActivities\Synchronizer as EActivitiesSynchronizer;
-use Guzzle\Http\Client as HttpClient;
-use ImperialCollegeCredential;
-use Input;
-use Redirect;
-use Session;
-use User;
-use Validator;
-use View;
+use \App;
+use \Auth;
+use \EActivities\Client as EActivitiesClient;
+use \EActivities\Synchronizer as EActivitiesSynchronizer;
+use \ImperialCollegeCredential;
+use \Input;
+use \Redirect;
+use \Session;
+use \User;
+use \Validator;
+use \View;
 
 class UsersEActivitiesController extends BaseController {
 

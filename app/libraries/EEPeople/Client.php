@@ -1,14 +1,14 @@
 <?php
 namespace EEPeople;
 
-use Guzzle\Http\Client as Http_Client;
-use Guzzle\Http\Exception\ClientErrorResponseException;
-use Guzzle\Http\Message\Response;
-use Guzzle\Plugin\Cookie\Cookie;
-use Guzzle\Plugin\Cookie\CookiePlugin;
-use Guzzle\Plugin\Cookie\CookieJar\CookieJarInterface;
-use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
-use ImperialCollegeCredential;
+use \Guzzle\Http\Client as Http_Client;
+use \Guzzle\Http\Exception\ClientErrorResponseException;
+use \Guzzle\Http\Message\Response;
+use \Guzzle\Plugin\Cookie\Cookie;
+use \Guzzle\Plugin\Cookie\CookiePlugin;
+use \Guzzle\Plugin\Cookie\CookieJar\CookieJarInterface;
+use \Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
+use \ImperialCollegeCredential;
 
 class Client {
 
