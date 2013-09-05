@@ -13,6 +13,7 @@ class CreateDefaultCategory extends Migration {
 	{
 		$category = new Category;
 		$category->name = 'Uncategorised';
+		$category->slug = 'uncategorised';
 		$category->save();
 	}
 
