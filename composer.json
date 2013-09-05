@@ -15,7 +15,7 @@
 		"guzzle/guzzle": "3.7.*@dev",
 		"nesbot/Carbon": "*",
 		"robclancy/presenter": "1.2.*",
-		"tsf/elfinder-laravel": "dev-master"
+		"barryvdh/elfinder-bundle": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

@@ -117,7 +117,7 @@ return array(
 		'Profiler\ProfilerServiceProvider',
 		'Robbo\Presenter\PresenterServiceProvider',
 
-		// 'TSF\ElfinderLaravel\ElfinderServiceProvider',
+		'Barryvdh\ElfinderBundle\ElfinderBundleServiceProvider'
 
 	),
 
