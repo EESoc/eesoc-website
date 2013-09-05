@@ -44,7 +44,7 @@ class LockerTableSeeder extends Seeder {
 							$locker->name = ++$locker_name;
 							$locker->row = $row;
 							$locker->column = $col + $column_offset;
-							$locker->size = ($row == 2) ? 'l' : 's';
+							$locker->size = 's';
 							$locker->lockerCluster()->associate($cluster);
 							$locker->status = 'vacant';
 							$locker->save();

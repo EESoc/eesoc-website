@@ -5,7 +5,11 @@ use Robbo\Presenter\PresentableInterface;
 
 class User extends Eloquent implements UserInterface, PresentableInterface {
 
-	private $imperialCollegeUser;
+	private $imperial_college_user;
+
+	/*
+	Relations
+	 */
 
 	public function studentGroup()
 	{
@@ -21,6 +25,10 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	{
 		return $this->hasMany('Sale');
 	}
+
+	/*
+	Scopes
+	 */
 
 	public function scopeAdmin($query)
 	{
@@ -80,6 +88,15 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		return $query->whereNotNull('image_blob');
 	}
 
+	/*
+	Factories
+	 */
+
+	/**
+	 * Find or create a User using data from LDAP.
+	 * @param  string $username Imperial College username.
+	 * @return User
+	 */
 	public static function findOrCreateWithLDAP($username)
 	{
 		$username = strtolower($username);
@@ -93,6 +110,7 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		$user = static::where('username', '=', $username)->first();
 		if ( ! $user) {
 			$user = new static;
+			$user->username = $username;
 		}
 
 		$user->setImperialCollegeUser($imperialCollegeUser);
@@ -101,12 +119,20 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		return $user;
 	}
 
+	/**
+	 * Revoke all users' status.
+	 * @return mixed
+	 */
 	public static function resetMemberships()
 	{
 		$user = new static;
 		return $user->update(array('is_member' => false));
 	}
 
+	/**
+	 * Return user statistics.
+	 * @return array
+	 */
 	public static function statistics()
 	{
 		return array(
@@ -128,18 +154,18 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		return null;
 	}
 
-	public function setImperialCollegeUser($imperialCollegeUser)
+	public function setImperialCollegeUser($imperial_college_user)
 	{
-		$this->imperialCollegeUser = $imperialCollegeUser;
+		$this->imperial_college_user = $imperial_college_user;
 	}
 
 	public function getImperialCollegeUser()
 	{
-		if ( ! isset($this->imperialCollegeUser)) {
-			$this->imperialCollegeUser = new ImperialCollegeUser($this->username);
+		if ( ! isset($this->imperial_college_user)) {
+			$this->imperial_college_user = new ImperialCollegeUser($this->username);
 		}
 
-		return $this->imperialCollegeUser;
+		return $this->imperial_college_user;
 	}
 
 	public function checkPassword($password)
@@ -171,8 +197,16 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	}
 
 	/**
+	 * Return a created presenter.
+	 * @return Robbo\Presenter\Presenter
+	 */
+	public function getPresenter()
+	{
+		return new UserPresenter($this);
+	}
+
+	/**
 	 * Return has image attribute.
-	 * 
 	 * @return boolean
 	 */
 	public function getHasImageAttribute()
@@ -182,7 +216,6 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 
 	/**
 	 * Return has email attribute.
-	 * 
 	 * @return boolean
 	 */
 	public function getHasEmailAttribute()
@@ -215,14 +248,16 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		}
 	}
 
-	/**
-	 * Return a created presenter.
-	 *
-	 * @return Robbo\Presenter\Presenter
+	/*
+	Lockers
 	 */
-	public function getPresenter()
+
+	public function getUnclaimedLockersCountAttribute()
 	{
-		return new UserPresenter($this);
+		$bought = $this->sales()->locker()->sum('quantity');
+		$owned = $this->lockers()->count();
+
+		return $bought - $owned;
 	}
 
 }

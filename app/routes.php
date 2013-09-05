@@ -41,10 +41,9 @@ Route::group(array('before' => 'auth.admin', 'prefix' => 'admin'), function() {
 	Route::resource  ('users',             'Admin\UsersController', array('only' => array('index')));
 
 	// elFinder
-	// Route::get('elfinder',           'TSF\ElfinderLaravel\ElfinderController@showIndex');
-	// Route::any('elfinder/connector', 'TSF\ElfinderLaravel\ElfinderController@showConnector');
-	// Route::get('elfinder/ckeditor',  'TSF\ElfinderLaravel\ElfinderController@showCKEditor');
-
+	Route::get('elfinder',           'TSF\ElfinderLaravel\ElfinderController@showIndex');
+	Route::any('elfinder/connector', 'TSF\ElfinderLaravel\ElfinderController@showConnector');
+	Route::get('elfinder/ckeditor',  'TSF\ElfinderLaravel\ElfinderController@showCKEditor');
 });
 
 // Catch all

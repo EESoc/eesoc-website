@@ -8,6 +8,10 @@ class Locker extends Eloquent implements PresentableInterface {
 	const STATUS_RESERVED = 'reserved';
 	const STATUS_TAKEN = 'taken';
 
+	/*
+	Relations
+	 */
+
 	public function lockerCluster()
 	{
 		return $this->belongsTo('LockerCluster');
@@ -17,6 +21,19 @@ class Locker extends Eloquent implements PresentableInterface {
 	{
 		return $this->belongsTo('User');
 	}
+
+	/*
+	Scopes
+	 */
+
+	public function scopeOwnedBy($query, User $user)
+	{
+		return $query->where('owner_id', '=', $user->id);
+	}
+
+	/*
+	Attribute getters
+	 */
 
 	public function getIsVacantAttribute()
 	{
@@ -40,8 +57,7 @@ class Locker extends Eloquent implements PresentableInterface {
 	 */
 	public function canBeClaimedBy(User $user)
 	{
-		// @TODO Check for unprocessed purchases
-		return $this->is_vacant;
+		return ($this->is_vacant && $user->unclaimed_lockers_count > 0);
 	}
 
 	/**
@@ -49,7 +65,7 @@ class Locker extends Eloquent implements PresentableInterface {
 	 * @param  User   $user
 	 * @return boolean
 	 */
-	public function ownedBy(User $user)
+	public function isOwnedBy(User $user)
 	{
 		return ($this->owner_id === $user->id);
 	}

@@ -7,7 +7,8 @@ class LockersController extends BaseController {
 		return View::make('lockers.index')
 			->with('locker_sales', Auth::user()->sales()->locker()->get())
 			->with('locker_floors', LockerFloor::sorted()->get())
-			->with('lockers_owned', Auth::user()->lockers);
+			->with('lockers_owned', Auth::user()->lockers)
+			->with('unclaimed_lockers_count', Auth::user()->unclaimed_lockers_count);
 	}
 
 	public function getClaim($id)
