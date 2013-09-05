@@ -21,6 +21,11 @@ Route::get('users/{username}', 'UsersController@getShow');
  * Routes for members
  */
 Route::group(['before' => 'auth.member', 'prefix' => 'dashboard'], function() {
+	// Books
+	Route::resource  ('books', 'BooksController');
+	Route::controller('books', 'BooksController');
+
+	// Lockers
 	Route::controller('lockers', 'LockersController');
 });
 
