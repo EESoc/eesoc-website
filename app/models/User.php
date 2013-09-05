@@ -7,6 +7,8 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 
 	private $imperial_college_user;
 
+	private $unclaimed_lockers_count;
+
 	/*
 	Relations
 	 */
@@ -249,15 +251,23 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	}
 
 	/*
-	Lockers
+	Locker methods
 	 */
 
+	/**
+	 * Get the number of unclaimed lockers.
+	 * @return integer
+	 */
 	public function getUnclaimedLockersCountAttribute()
 	{
-		$bought = $this->sales()->locker()->sum('quantity');
-		$owned = $this->lockers()->count();
+		if ($this->unclaimed_lockers_count === null) {
+			$bought = $this->sales()->locker()->sum('quantity');
+			$owned = $this->lockers()->count();
 
-		return $bought - $owned;
+			$this->unclaimed_lockers_count = $bought - $owned;
+		}
+
+		return $this->unclaimed_lockers_count;
 	}
 
 }
