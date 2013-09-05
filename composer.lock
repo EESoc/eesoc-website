@@ -3,47 +3,8 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "acff913eed3f1d7eb62f091da2834a29",
+    "hash": "19bae17c41801969ab90d29bb274a9e8",
     "packages": [
-        {
-            "name": "barryvdh/elfinder-bundle",
-            "version": "dev-ckeditor",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jianyuan/elfinder-bundle.git",
-                "reference": "52ed6a7fd3ae8d3ba5f130dc9087df8f8474c868"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jianyuan/elfinder-bundle/zipball/52ed6a7fd3ae8d3ba5f130dc9087df8f8474c868",
-                "reference": "52ed6a7fd3ae8d3ba5f130dc9087df8f8474c868",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "4.0.x",
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/elFinder"
-                ],
-                "psr-0": {
-                    "Barryvdh\\ElfinderBundle": "src/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Barry vd. Heuvel",
-                    "email": "barryvdh@gmail.com"
-                }
-            ],
-            "description": "A Laravel Bundle to integrate elFinder 2.0",
-            "support": {
-                "source": "https://github.com/jianyuan/elfinder-bundle/tree/ckeditor"
-            },
-            "time": "2013-08-28 23:57:14"
-        },
         {
             "name": "classpreloader/classpreloader",
             "version": "1.0.1",
@@ -237,12 +198,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "623caf42551b416460df786154d89bc50e3d1798"
+                "reference": "bcb53776a096a0c64579cc8d8ec0db62f1109fbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/623caf42551b416460df786154d89bc50e3d1798",
-                "reference": "623caf42551b416460df786154d89bc50e3d1798",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/bcb53776a096a0c64579cc8d8ec0db62f1109fbc",
+                "reference": "bcb53776a096a0c64579cc8d8ec0db62f1109fbc",
                 "shasum": ""
             },
             "require": {
@@ -283,7 +244,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -296,7 +257,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2013-07-23 08:27:26"
+            "time": "2013-08-29 16:56:45"
         },
         {
             "name": "doctrine/common",
@@ -624,12 +585,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "647cd469ce63efc8908a604e866ee322e82a693c"
+                "reference": "40602780fcc40ceddef43216334da6ad0ddb7ff3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/647cd469ce63efc8908a604e866ee322e82a693c",
-                "reference": "647cd469ce63efc8908a604e866ee322e82a693c",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/40602780fcc40ceddef43216334da6ad0ddb7ff3",
+                "reference": "40602780fcc40ceddef43216334da6ad0ddb7ff3",
                 "shasum": ""
             },
             "require": {
@@ -708,7 +669,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-08-28 04:14:17"
+            "time": "2013-08-29 20:54:09"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -751,16 +712,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "4.0.x-dev",
+            "version": "v4.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "ae164e2f07b3fde9ba51b1e098bc7915c3260c30"
+                "reference": "ec35b132280906dfa02f3aeeea2bc915a21e4f64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/ae164e2f07b3fde9ba51b1e098bc7915c3260c30",
-                "reference": "ae164e2f07b3fde9ba51b1e098bc7915c3260c30",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ec35b132280906dfa02f3aeeea2bc915a21e4f64",
+                "reference": "ec35b132280906dfa02f3aeeea2bc915a21e4f64",
                 "shasum": ""
             },
             "require": {
@@ -859,7 +820,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2013-08-27 16:09:54"
+            "time": "2013-08-02 16:46:10"
         },
         {
             "name": "loic-sharma/profiler",
@@ -1102,12 +1063,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nrk/predis.git",
-                "reference": "cb18d67b6ab6b8e567c1ab50fe999d1d624f9884"
+                "reference": "4824af15631f6a80a939cdc58104d03e0aadd17a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/cb18d67b6ab6b8e567c1ab50fe999d1d624f9884",
-                "reference": "cb18d67b6ab6b8e567c1ab50fe999d1d624f9884",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/4824af15631f6a80a939cdc58104d03e0aadd17a",
+                "reference": "4824af15631f6a80a939cdc58104d03e0aadd17a",
                 "shasum": ""
             },
             "require": {
@@ -1141,7 +1102,7 @@
                 "predis",
                 "redis"
             ],
-            "time": "2013-07-27 09:13:54"
+            "time": "2013-08-31 08:51:10"
         },
         {
             "name": "psr/log",
@@ -1234,16 +1195,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.0.1",
+            "version": "v5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "v5.0.1"
+                "reference": "f3917ecef35a4e4d98b303eb9fee463bc983f379"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/v5.0.1",
-                "reference": "v5.0.1",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/f3917ecef35a4e4d98b303eb9fee463bc983f379",
+                "reference": "f3917ecef35a4e4d98b303eb9fee463bc983f379",
                 "shasum": ""
             },
             "require": {
@@ -1279,7 +1240,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2013-06-17 13:32:32"
+            "time": "2013-08-30 12:35:21"
         },
         {
             "name": "symfony/browser-kit",
@@ -1288,12 +1249,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/BrowserKit.git",
-                "reference": "2639dc4eec81f92760e05396a93bb78000b4f5ca"
+                "reference": "11dcdf2a3f485e0b362cfc364b7e9e5ef80562ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/2639dc4eec81f92760e05396a93bb78000b4f5ca",
-                "reference": "2639dc4eec81f92760e05396a93bb78000b4f5ca",
+                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/11dcdf2a3f485e0b362cfc364b7e9e5ef80562ab",
+                "reference": "11dcdf2a3f485e0b362cfc364b7e9e5ef80562ab",
                 "shasum": ""
             },
             "require": {
@@ -1334,7 +1295,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "http://symfony.com",
-            "time": "2013-07-21 12:12:18"
+            "time": "2013-08-31 06:12:22"
         },
         {
             "name": "symfony/console",
@@ -1704,12 +1665,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation.git",
-                "reference": "fdf130fe65457aedbc4639a22f4ef9d3be5c002c"
+                "reference": "cd7b96d5777a742e178fb58059ab70d794b5b351"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/fdf130fe65457aedbc4639a22f4ef9d3be5c002c",
-                "reference": "fdf130fe65457aedbc4639a22f4ef9d3be5c002c",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/cd7b96d5777a742e178fb58059ab70d794b5b351",
+                "reference": "cd7b96d5777a742e178fb58059ab70d794b5b351",
                 "shasum": ""
             },
             "require": {
@@ -1745,7 +1706,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "http://symfony.com",
-            "time": "2013-08-26 05:49:51"
+            "time": "2013-08-29 19:32:30"
         },
         {
             "name": "symfony/http-kernel",
@@ -1754,12 +1715,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel.git",
-                "reference": "581fb22f5c0ff868c1378ef0809726cf02546ca1"
+                "reference": "bfa123abe1f4f701c5961d205f9a15eb20d6b5f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/581fb22f5c0ff868c1378ef0809726cf02546ca1",
-                "reference": "581fb22f5c0ff868c1378ef0809726cf02546ca1",
+                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/bfa123abe1f4f701c5961d205f9a15eb20d6b5f6",
+                "reference": "bfa123abe1f4f701c5961d205f9a15eb20d6b5f6",
                 "shasum": ""
             },
             "require": {
@@ -1816,7 +1777,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "http://symfony.com",
-            "time": "2013-08-27 13:39:19"
+            "time": "2013-08-30 13:10:46"
         },
         {
             "name": "symfony/process",
@@ -1825,12 +1786,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "1e91553e1cedd0b8fb1da6ea4f89b02e21713d5b"
+                "reference": "6e3b487a74ce7dcab6af34e14afcb9d438d69327"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/1e91553e1cedd0b8fb1da6ea4f89b02e21713d5b",
-                "reference": "1e91553e1cedd0b8fb1da6ea4f89b02e21713d5b",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/6e3b487a74ce7dcab6af34e14afcb9d438d69327",
+                "reference": "6e3b487a74ce7dcab6af34e14afcb9d438d69327",
                 "shasum": ""
             },
             "require": {
@@ -1863,7 +1824,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2013-08-22 06:42:25"
+            "time": "2013-08-30 13:10:46"
         },
         {
             "name": "symfony/routing",
@@ -1977,6 +1938,43 @@
             "description": "Symfony Translation Component",
             "homepage": "http://symfony.com",
             "time": "2013-08-26 05:49:51"
+        },
+        {
+            "name": "tsf/elfinder-laravel",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marianperca/elfinder-laravel.git",
+                "reference": "5953addec6bb3dc4fc34119c78aa488b8b9b1cc1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marianperca/elfinder-laravel/zipball/5953addec6bb3dc4fc34119c78aa488b8b9b1cc1",
+                "reference": "5953addec6bb3dc4fc34119c78aa488b8b9b1cc1",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.0.6",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/elFinder"
+                ],
+                "psr-0": {
+                    "TSF\\ElfinderLaravel": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Marian Perca",
+                    "email": "marian.perca@gmail.com"
+                }
+            ],
+            "description": "A Laravel Bundle to integrate elFinder 2.0",
+            "time": "2013-09-03 09:55:57"
         }
     ],
     "packages-dev": [
@@ -1988,7 +1986,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "guzzle/guzzle": 20,
-        "barryvdh/elfinder-bundle": 20
+        "tsf/elfinder-laravel": 20
     },
     "platform": {
         "php": ">=5.4.0"

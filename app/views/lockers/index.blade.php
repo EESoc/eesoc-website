@@ -47,7 +47,9 @@
               @foreach ($lockers_owned as $locker)
                 <div class="col-xs-3 col-sm-2">
                   <h2>
-                    {{{ $locker->name }}}
+                    <a href="#{{{ $locker->anchor_id }}}">
+                      {{{ $locker->name }}}
+                    </a>
                   </h2>
                   <h4>
                     {{{ $locker->lockerCluster->lockerFloor->name }}}
@@ -80,7 +82,7 @@
                 @for ($column = 0; $column <= $maximum_columns; ++$column)
                   @if ($locker = $lockers->at($row, $column))
                     <?php $locker = $locker->getPresenter(); ?>
-                    <td class="{{ $locker->{$locker->ownedBy(Auth::user()) ? 'owner_css_class' : 'css_class'} }}">
+                    <td class="{{{ $locker->{$locker->ownedBy(Auth::user()) ? 'owner_css_class' : 'css_class'} }}}" id="{{{ $locker->anchor_id }}}">
                       <h4>{{{ $locker->name }}}</h4>
                       @if ($locker->ownedBy(Auth::user()))
                         <a href="#" class="btn btn-default btn-sm btn-block disabled">Owned</a>

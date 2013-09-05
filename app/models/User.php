@@ -185,11 +185,22 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		return ( ! empty($this->email));
 	}
 
+	/**
+	 * Check if filter exists.
+	 * @param  string $filter
+	 * @return boolean
+	 */
 	public function canFilterBy($filter)
 	{
 		return isset($this->filter_to_function_map[$filter]);
 	}
 
+	/**
+	 * Apply filter.
+	 * @param  string $filter Filter to be applied.
+	 *                        Checks the filter_to_function_map for validity.
+	 * @return mixed
+	 */
 	public function filterBy($filter)
 	{
 		if (isset($this->filter_to_function_map[$filter])) {

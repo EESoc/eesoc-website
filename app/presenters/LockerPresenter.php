@@ -83,4 +83,9 @@ class LockerPresenter extends Presenter {
 		return $html;
 	}
 
+	public function presentAnchorId()
+	{
+		return "locker-{$this->id}";
+	}
+
 }
