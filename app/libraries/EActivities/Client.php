@@ -1,6 +1,7 @@
 <?php
 namespace EActivities;
 
+use \DateTime;
 use \Guzzle\Http\Client as Http_Client;
 use \Guzzle\Http\Message\Response;
 use \Guzzle\Plugin\Cookie\Cookie;
@@ -160,29 +161,7 @@ class Client {
 			$response = $request->send();
 			$body = $response->getBody();
 
-			$result = explode("\n", trim($body));
-
-			// Get header
-			$headers = str_getcsv(array_shift($result));
-			$headers = array_map(function($original) {
-				if ($original === 'CID') {
-					return 'cid';
-				} else {
-					return Str::snake(Str::camel($original));
-				}
-			}, $headers);
-
-			// Format rows
-			$result = array_map(function($original) use ($headers) {
-				$row = str_getcsv($original);
-				$new_row = [];
-				foreach ($headers as $key => $header) {
-					$new_row[$header] = $row[$key];
-				}
-				return $new_row;
-			}, $result);
-
-			return $result;
+			return $this->parseCsv($body);
 		} else {
 			return [];
 		}
@@ -204,26 +183,11 @@ class Client {
 		$response = $request->send();
 		$body = $response->getBody();
 
-		$result = explode("\n", trim($body));
+		$result = $this->parseCsv($body);
 
-		// Get header
-		$headers = str_getcsv(array_shift($result));
-		$headers = array_map(function($original) {
-			if ($original === 'CID') {
-				return 'cid';
-			} else {
-				return Str::snake($original);
-			}
-		}, $headers);
-
-		// Format rows
-		$result = array_map(function($original) use ($headers) {
-			$row = str_getcsv($original);
-			$new_row = [];
-			foreach ($headers as $key => $header) {
-				$new_row[$header] = $row[$key];
-			}
-			return $new_row;
+		$result = array_map(function($original) {
+			$original['date'] = DateTime::createFromFormat('d/h/Y', $original['date']);
+			return $original;
 		}, $result);
 
 		return $result;
@@ -291,6 +255,38 @@ class Client {
 	{
 		$request = $this->client->post(self::PATH_COMMON_AJAX_HANDLER, [], $params);
 		return $request->send();
+	}
+
+	/**
+	 * Parse CSV body. Normalizes column names.
+	 * @param  string $body
+	 * @return array
+	 */
+	protected function parseCsv($body)
+	{
+		$result = explode("\n", trim($body));
+
+		// Get header
+		$headers = str_getcsv(array_shift($result));
+		$headers = array_map(function($original) {
+			if ($original === 'CID') {
+				return 'cid';
+			} else {
+				return Str::snake(Str::camel($original));
+			}
+		}, $headers);
+
+		// Format rows
+		$result = array_map(function($original) use ($headers) {
+			$row = str_getcsv($original);
+			$new_row = [];
+			foreach ($headers as $key => $header) {
+				$new_row[$header] = $row[$key];
+			}
+			return $new_row;
+		}, $result);
+
+		return $result;
 	}
 
 }

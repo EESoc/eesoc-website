@@ -9,15 +9,25 @@
         <tr>
           <th>Order #</th>
           <th>Date</th>
-          <th>Status</th>
+          <th>Product Name</th>
+          <th class="text-center">Unit Price</th>
+          <th class="text-center">Quantity</th>
+          <th class="text-center">Gross Price</th>
+          <th class="text-right">Status</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1234</td>
-          <td>1234</td>
-          <td>1234</td>
-        </tr>
+        @foreach ($locker_sales as $sale)
+          <tr class="{{{ $sale->status_css }}}">
+            <td>{{{ $sale->id }}}</td>
+            <td>{{{ $sale->date }}}</td>
+            <td>{{{ $sale->product_name }}}</td>
+            <td class="text-center">{{{ $sale->unit_price }}}</td>
+            <td class="text-center">{{{ $sale->quantity }}}</td>
+            <td class="text-center">{{{ $sale->gross_price }}}</td>
+            <td class="text-right">{{ $sale->status_label }}</td>
+          </tr>
+        @endforeach
       </tbody>
     </table>
   </div>

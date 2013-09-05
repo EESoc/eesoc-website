@@ -23,8 +23,9 @@ class CreateSalesTable extends Migration {
 			$table->string('last_name');
 			$table->string('email');
 			$table->string('product_name');
-			$table->integer('amount_in_pennies')->unsigned();
+			$table->integer('unit_price_in_pence')->unsigned();
 			$table->integer('quantity')->unsigned();
+			$table->integer('gross_price_in_pence')->unsigned();
 			$table->timestamps();
 		});
 	}

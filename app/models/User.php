@@ -17,6 +17,11 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		return $this->hasMany('Locker', 'owner_id');
 	}
 
+	public function sales()
+	{
+		return $this->hasMany('Sale');
+	}
+
 	public function scopeAdmin($query)
 	{
 		return $query->where('is_admin', '=', true);

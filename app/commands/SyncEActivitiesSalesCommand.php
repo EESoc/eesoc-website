@@ -70,9 +70,9 @@ class SyncEActivitiesSalesCommand extends Command {
 			}
 
 			while (true) {
-				$role_key = $this->confirm('Enter role key:');
+				$role_key = $this->ask('Enter role key:');
 
-				if (isset($roles['others'][$role_key])) {
+				if (ctype_digit($role_key) && isset($roles['others'][(int) $role_key])) {
 					break;
 				} else {
 					$this->error('Role key does not exist, please try again');
@@ -82,8 +82,37 @@ class SyncEActivitiesSalesCommand extends Command {
 			$eactivities_client->changeRole($role_key);
 		}
 
-		//['1725', '1772', '1772-1']
-		//16650
+		// @todo make a ask prompt for this.
+		// ['1725', '1772', '1772-3']
+		$purchases = $eactivities_client->getPurchasesList(['1725', '1772', '1772-3'], 1983);
+
+		foreach ($purchases as $purchase) {
+			$sale = Sale::find($purchase['order_no']);
+			if ( ! $sale) {
+				$sale = new Sale;
+				$sale->id = $purchase['order_no'];
+			}
+
+			$user = User::where('username', '=', $purchase['login'])->first();
+			if ( ! $user) {
+				$user = new User;
+				$user->username = $purchase['login'];
+				$user->cid      = $purchase['cid'];
+				$user->name     = "{$purchase['first_name']} {$purchase['last_name']}";
+				$user->email    = $purchase['email'];
+				$user->save();
+			}
+
+			$sale->user()->associate($user);
+
+			foreach (['year', 'date', 'cid', 'first_name', 'last_name', 'email', 'product_name', 'quantity', 'unit_price', 'gross_price'] as $attribute) {
+				$sale->{$attribute} = $purchase[$attribute];
+			}
+			$sale->username = $purchase['login'];
+			$sale->save();
+		}
+
+		$this->info(sprintf('Successfully refreshed `%d` sale entries', count($purchases)));
 	}
 
 	/**
