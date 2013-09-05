@@ -17,28 +17,34 @@ Route::delete('sign-out', 'SessionsController@deleteDestroy');
 
 Route::get('users/{username}', 'UsersController@getShow');
 
-Route::group(['before' => 'auth', 'prefix' => 'dashboard'], function() {
+/**
+ * Routes for members
+ */
+Route::group(['before' => 'auth.member', 'prefix' => 'dashboard'], function() {
 	Route::controller('lockers', 'LockersController');
 });
 
-Route::group(array('before' => 'auth.admin', 'prefix' => 'admin'), function() {
+/**
+ * Routes for admins
+ */
+Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 
 	Route::get('/', 'Admin\DashboardController@getShow');
 
 	// Categories
-	Route::resource('categories', 'Admin\CategoriesController', array('except' => array('show')));
+	Route::resource('categories', 'Admin\CategoriesController', ['except' => ['show']]);
 
 	// Contents
-	Route::resource('contents', 'Admin\ContentsController', array('except' => array('show')));
+	Route::resource('contents', 'Admin\ContentsController', ['except' => ['show']]);
 
 	// Pages
-	Route::resource('pages', 'Admin\PagesController', array('except' => array('show')));
+	Route::resource('pages', 'Admin\PagesController', ['except' => ['show']]);
 
 	// Users
 	Route::controller('users/eactivities', 'Admin\UsersEActivitiesController');
 	Route::controller('users/eepeople',    'Admin\UsersEEPeopleController');
 	Route::controller('users',             'Admin\UsersController');
-	Route::resource  ('users',             'Admin\UsersController', array('only' => array('index')));
+	Route::resource  ('users',             'Admin\UsersController', ['only' => ['index']]);
 
 	// elFinder
 	Route::get('elfinder',           'TSF\ElfinderLaravel\ElfinderController@showIndex');

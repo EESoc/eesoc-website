@@ -43,6 +43,22 @@ Route::filter('auth', function()
 });
 
 
+Route::filter('auth.member', function()
+{
+	if (Auth::guest())
+	{
+		$signInURL = URL::action('SessionsController@getNew');
+		return Redirect::guest($signInURL)->with('info', 'You need to be signed in before you can continue');
+	}
+
+	if ( ! Auth::user()->is_member)
+	{
+		// @todo redirect to a nice page stating that you are not a member and that he/she should get membership
+		App::abort(401, 'You are not a member of the society');
+	}
+});
+
+
 Route::filter('auth.admin', function()
 {
 	if (Auth::guest())
