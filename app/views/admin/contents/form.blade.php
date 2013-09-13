@@ -1,7 +1,7 @@
 @section('javascript_for_page')
 <script>
   CKEDITOR.inline('content', {
-    filebrowserBrowseUrl: '{{ URL::action('TSF\ElfinderLaravel\ElfinderController@showCKEditor') }}'
+    filebrowserBrowseUrl: '{{ URL::action('Barryvdh\ElfinderBundle\ElfinderController@showCKEditor') }}'
   });
 </script>
 @stop
