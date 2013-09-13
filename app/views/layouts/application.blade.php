@@ -41,14 +41,36 @@
         </div>
         <div class="collapse navbar-collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
+            <li><a href="{{ URL::to('/about') }}">About Us</a></li>
+            <li><a href="#">News &amp; Events</a></li>
+            <li><a href="#">Sponsors</a></li>
+            <li><a href="#">Committee</a></li>
           </ul>
           @if (Auth::check())
-            {{ Form::open(array('action' => 'SessionsController@deleteDestroy', 'method' => 'delete', 'class' => 'navbar-form pull-right')) }}
-              <button type="submit" class="btn btn-default">Sign Out</button>
-            {{ Form::close() }}
-            <p class="navbar-text pull-right">
-              Signed in as <strong>{{ Auth::user()->name }}</strong>.
-            </p>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="navbar-text">
+                Signed in as
+              </li>
+              <li>
+                <a href="{{{ URL::action('UsersController@getShow', Auth::user()->username) }}}">
+                  <strong>{{{ Auth::user()->name }}}</strong>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="glyphicon glyphicon-wrench"></span>
+                </a>
+              </li>
+              <li>
+                <a href="{{{ URL::action('SessionsController@deleteDestroy') }}}" data-method="delete">
+                  <span class="glyphicon glyphicon-off"></span>
+                </a>
+              </li>
+            </ul>
+          @else
+            <a href="{{{ URL::action('SessionsController@getNew') }}}" class="btn btn-default navbar-btn navbar-right">
+              Sign In
+            </a>
           @endif
         </div>
       </div>

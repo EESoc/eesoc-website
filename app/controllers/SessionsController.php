@@ -42,8 +42,8 @@ class SessionsController extends BaseController {
 		if ($validator->passes()) {
 			if (Auth::attempt($inputs)) {
 				Auth::user()->recordSignIn();
-				$userProfileURL = URL::action('UsersController@getShow', array('username' => $inputs['username']));
-				return Redirect::intended($userProfileURL);
+				$defaultURL = URL::action('UsersController@getDashboard');
+				return Redirect::intended($defaultURL);
 			} else {
 				return Redirect::action('SessionsController@getNew')
 					->withInput()

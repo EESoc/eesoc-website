@@ -20,8 +20,14 @@ Route::get('users/{username}', 'UsersController@getShow');
 /**
  * Routes for members
  */
-Route::group(['before' => 'auth.member', 'prefix' => 'dashboard'], function() {
-	Route::controller('lockers', 'LockersController');
+Route::group(['before' => 'auth.member'], function() {
+	// Dashboard
+	Route::get('dashboard', 'UsersController@getDashboard');
+
+	Route::group(['prefix' => 'dashboard'], function() {
+		// Lockers
+		Route::controller('lockers', 'LockersController');
+	});
 });
 
 /**

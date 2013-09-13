@@ -1,9 +1,10 @@
 @extends('layouts.focus')
 
 @section('content')
-  <div class="col-lg-4 col-lg-offset-4">
+  <div class="col-lg-4 col-lg-offset-4 text-center">
     <div class="page-header">
-      <h1>Sign In</h1>
+      <h1><span class="glyphicon glyphicon-lock"></span></h1>
+      <h2>Sign In</h2>
     </div>
     {{ Form::open(array('action' => 'SessionsController@postCreate')) }}
 
