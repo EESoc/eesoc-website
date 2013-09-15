@@ -11,12 +11,14 @@ class CreateDefaultRootPage extends Migration {
 	 */
 	public function up()
 	{
-		Page::create([
-			'name' => 'Home Page',
-			'slug' => '',
-			'type' => Page::TYPE_DATABASE,
-			'content' => 'Hello world!',
-		]);
+		if ( ! Page::where('slug', '=', '')->exists()) {
+			Page::create([
+				'name' => 'Home Page',
+				'slug' => '',
+				'type' => Page::TYPE_DATABASE,
+				'content' => 'Hello world!',
+			]);
+		}
 	}
 
 	/**

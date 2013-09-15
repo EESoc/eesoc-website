@@ -9,15 +9,15 @@
     <title>{{{ isset($page_title) ? $page_title.' | ' : '' }}}EESoc Administration</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <!-- <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet"> -->
-    <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
+    <link href="{{{ asset('assets/css/bootstrap.min.css') }}}" rel="stylesheet">
+    <!-- <link href="{{{ asset('assets/css/bootstrap-theme.min.css') }}}" rel="stylesheet"> -->
+    <link href="{{{ asset('assets/css/animate.min.css') }}}" rel="stylesheet">
+    <link href="{{{ asset('assets/css/admin.css') }}}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="{{ asset('assets/js/html5shiv.js') }}"></script>
-      <script src="{{ asset('assets/js/respond.min.js') }}"></script>
+      <script src="{{{ asset('assets/js/html5shiv.js') }}}"></script>
+      <script src="{{{ asset('assets/js/respond.min.js') }}}"></script>
     <![endif]-->
 
     <meta content="_token" name="csrf-param" />
@@ -42,16 +42,25 @@
           <ul class="nav navbar-nav">
             <li><a href="#">Posts</a></li>
             <li {{ str_contains(Route::currentRouteAction(), 'Admin\Pages') ? 'class="active"' : '' }}>
-              <a href="{{ URL::route('admin.pages.index') }}">Pages</a>
+              <a href="{{{ URL::route('admin.pages.index') }}}">Pages</a>
             </li>
             <li {{ str_contains(Route::currentRouteAction(), 'Admin\Contents') ? 'class="active"' : '' }}>
-              <a href="{{ URL::route('admin.contents.index') }}">Contents</a>
+              <a href="{{{ URL::route('admin.contents.index') }}}">Contents</a>
             </li>
             <li {{ str_contains(Route::currentRouteAction(), 'Admin\Categories') ? 'class="active"' : '' }}>
-              <a href="{{ URL::route('admin.categories.index') }}">Categories</a>
+              <a href="{{{ URL::route('admin.categories.index') }}}">Categories</a>
             </li>
             <li {{ str_contains(Route::currentRouteAction(), 'Admin\Users') ? 'class="active"' : '' }}>
-              <a href="{{ URL::route('admin.users.index') }}">Users</a>
+              <a href="{{{ URL::route('admin.users.index') }}}">Users</a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Maintenance
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{{{ URL::route('admin.logs.index') }}}">Logs</a></li>
+              </ul>
             </li>
           </ul>
           {{ Form::open(array('action' => 'SessionsController@deleteDestroy', 'method' => 'delete', 'class' => 'navbar-form pull-right')) }}
@@ -63,27 +72,31 @@
         </div>
       </div>
     </nav>
-    <div class="container">
 
-      @include('shared.flashes')
-      @yield('content')
+    @section('body')
+      <div class="container">
 
-      <div class="row">
-        <footer id="credits" class="col-lg-12">
-          <hr>
-          &copy; {{ date('Y') }}
-          Code by <a href="#">Jian Yuan Lee</a>
-        </footer>
+        @include('shared.flashes')
+        @yield('content')
+
       </div>
+    @show
+
+    <div class="container">
+      <footer id="credits">
+        <hr>
+        &copy; {{ date('Y') }}
+        Code by <a href="#">Jian Yuan Lee</a>
+      </footer>
     </div>
 
     <script src="//code.jquery.com/jquery.js"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/laravel-ujs.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.highlight.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.slugify.js') }}"></script>
-    <script src="{{ asset('assets/js/ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ asset('assets/js/admin.js') }}"></script>
+    <script src="{{{ asset('assets/js/bootstrap.min.js') }}}"></script>
+    <script src="{{{ asset('assets/js/laravel-ujs.js') }}}"></script>
+    <script src="{{{ asset('assets/js/jquery.highlight.js') }}}"></script>
+    <script src="{{{ asset('assets/js/jquery.slugify.js') }}}"></script>
+    <script src="{{{ asset('assets/js/ckeditor/ckeditor.js') }}}"></script>
+    <script src="{{{ asset('assets/js/admin.js') }}}"></script>
     @yield('javascript_for_page')
 
   </body>

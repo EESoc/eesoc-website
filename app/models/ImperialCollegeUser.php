@@ -136,11 +136,18 @@ class ImperialCollegeUser {
 		return (array) ldap_get_info($this->username);
 	}
 
+	/**
+	 * Magic get function
+	 * @param  string $key
+	 * @return mixed
+	 */
 	public function __get($key)
 	{
 		if (method_exists($this, 'get'.studly_case($key))) {
 			return $this->{'get'.studly_case($key)}($key);
 		}
+
+		return parent::__get($key);
 	}
 
 }
