@@ -61,6 +61,9 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 	Route::get('elfinder/ckeditor',  'Barryvdh\ElfinderBundle\ElfinderController@showCKEditor');
 });
 
+Route::controller('home', 'HomeController');
+Route::get('/', 'HomeController@getWelcome');
+
 // Catch all
 Route::any('{path}', function($path) {
 	$path = rtrim($path, '/');
