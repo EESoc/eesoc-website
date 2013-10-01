@@ -11,7 +11,7 @@
       {{ Form::close() }}
       @if ($page->is_deletable)
         {{ Form::open(array('route' => array('admin.pages.destroy', $page->id), 'method' => 'delete')) }}
-          <button type="submit" class="btn btn-danger btn-large pull-right" data-confirm="Are you sure?">
+          <button type="submit" class="btn btn-danger btn-lg pull-right" data-confirm="Are you sure?">
             <span class="glyphicon glyphicon-remove"></span>
             Delete
           </button>

@@ -27,7 +27,7 @@
     @endforeach
   @endif
   {{ Form::open(array('action' => 'Admin\UsersEActivitiesController@postPerform')) }}
-    <button type="submit" class="btn btn-primary btn-large btn-block">
+    <button type="submit" class="btn btn-primary btn-lg btn-block">
       <span class="glyphicon glyphicon-refresh"></span>
       Perform Synchronization
     </button>

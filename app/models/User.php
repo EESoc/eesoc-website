@@ -52,6 +52,11 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		return $this->hasMany('UserSignIn');
 	}
 
+	public function subscriptions()
+	{
+		return $this->belongsToMany('Newsletter', 'user_subscriptions');
+	}
+
 	/*
 	Scopes
 	 */

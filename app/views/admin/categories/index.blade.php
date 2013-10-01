@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="page-header">
-        <a href="{{ URL::route('admin.categories.create') }}" class="pull-right btn btn-primary btn-large">
+        <a href="{{ URL::route('admin.categories.create') }}" class="pull-right btn btn-primary btn-lg">
           <span class="glyphicon glyphicon-plus"></span>
           New Category
         </a>
