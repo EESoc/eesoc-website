@@ -9,11 +9,12 @@ class Synchronizer {
 	public function __construct(Client $client, $no_time_limit = true, Loggable $logger = null)
 	{
 		$this->client = $client;
-		$this->logger = $logger;
 
 		if ($no_time_limit) {
 			set_time_limit(0);
 		}
+
+		$this->logger = $logger;
 	}
 
 	public function perform()

@@ -12,6 +12,7 @@
 */
 
 Artisan::add(new BecomeAdminCommand);
+Artisan::add(new SyncEActivitiesCommand);
+Artisan::add(new SyncEActivitiesSalesCommand);
 Artisan::add(new SyncEEPeopleCommand);
 Artisan::add(new SyncLDAPCommand);
-Artisan::add(new SyncEActivitiesSalesCommand);

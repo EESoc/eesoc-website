@@ -15,12 +15,13 @@ class Synchronizer {
 	public function __construct(Client $client, $no_time_limit = true, $skip = true, Loggable $logger = null)
 	{
 		$this->client = $client;
-		$this->logger = $logger;
-		$this->skip   = $skip;
 
 		if ($no_time_limit) {
 			set_time_limit(0);
 		}
+
+		$this->skip   = $skip;
+		$this->logger = $logger;
 	}
 
 	public function perform()

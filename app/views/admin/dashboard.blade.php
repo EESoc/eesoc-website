@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
 @section('content')
-  test
+  Welcome to the Admin Dashboard. Please select a section above to continue.
 @stop
