@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="page-header">
-    <div class="pull-right btn-group">
+    <div class="pull-right btn-group hide">
       <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
         <span class="glyphicon glyphicon-refresh"></span>
         Sync Users

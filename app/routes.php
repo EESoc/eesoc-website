@@ -17,6 +17,8 @@ Route::delete('sign-out', 'SessionsController@deleteDestroy');
 
 Route::get('users/{username}', 'UsersController@getShow');
 
+Route::controller('cron', 'CronController');
+
 /**
  * Routes for members
  */

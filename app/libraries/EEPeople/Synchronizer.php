@@ -100,7 +100,7 @@ class Synchronizer {
 		$user->studentGroup()->associate($group);
 		$user->eepeople_id = $person['id'];
 		$user->tutor_name  = $person['tutor_name'];
-		$user->name        = $person['name'];
+		$user->name        = isset($person['name']) ? $person['name'] : $person['username'];
 		$user->email       = $person['email'];
 
 		if ( ! $user->image_content_type || ! $user->image_blob) {

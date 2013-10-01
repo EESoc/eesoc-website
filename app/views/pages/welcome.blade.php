@@ -34,9 +34,9 @@ $(function() {
                   .attr('href', photo.link)
                   .append(
                     $('<img />')
-                      .attr('src', photo.standard_resolution.url)
-                      .attr('width', photo.standard_resolution.width)
-                      .attr('height', photo.standard_resolution.height)
+                      .attr('src', photo.image_standard_resolution_url)
+                      .attr('width', 612)
+                      .attr('height', 612)
                       .addClass('img-responsive')
                   )
               )

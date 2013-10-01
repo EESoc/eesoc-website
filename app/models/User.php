@@ -9,6 +9,20 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 
 	private $unclaimed_lockers_count;
 
+	public static function boot()
+	{
+		parent::boot();
+
+		// Set a unique email token for each user
+		static::saving(function($user) {
+			if (empty($user->email_token)) {
+				do {
+					$user->email_token = str_random(40);
+				} while (static::where('id', '<>', $user->id)->where('email_token', '=', $user->email_token)->first());
+			}
+		});
+	}
+
 	/*
 	Relations
 	 */
@@ -26,6 +40,16 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	public function sales()
 	{
 		return $this->hasMany('Sale');
+	}
+
+	public function instagramPhoto()
+	{
+		return $this->hasMany('InstagramPhoto');
+	}
+
+	public function signIns()
+	{
+		return $this->hasMany('UserSignIn');
 	}
 
 	/*
@@ -186,6 +210,14 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 
 	public function recordSignIn()
 	{
+		// Log sign in
+		$sign_in = new UserSignIn;
+		$sign_in->user()->associate($this);
+		$sign_in->ip_address      = $_SERVER['REMOTE_ADDR'];
+		$sign_in->http_user_agent = $_SERVER['HTTP_USER_AGENT'];
+		$sign_in->save();
+
+		// Update this user's sign in
 		$this->last_sign_in_at = new DateTime;
 
 		// First time signing in

@@ -1,8 +1,9 @@
+*.sqlite
+.DS_Store
+/.idea
+/app/config/database.php
+/app/config/instagram.php
 /bootstrap/compiled.php
+/bootstrap/start.php
 /vendor
 composer.phar
-.DS_Store
-/app/config/database.php
-/bootstrap/start.php
-*.sqlite
-/.idea
