@@ -16,6 +16,17 @@
   {{ Form::select('newsletter_id', Newsletter::all()->lists('name', 'id'), null, array('class' => 'form-control input-lg')) }}
   {{ $errors->first('newsletter_id', '<span class="help-block">:message</span>') }}
 </div>
+<div class="form-group">
+  {{ Form::label('student_group_ids', 'Student Groups') }}
+  @foreach ($groups as $group)
+    <div class="checkbox">
+      <label>
+        {{{ $group->name }}}
+        {{ Form::checkbox('student_group_ids', $group->id, in_array($group->id, $email->student_group_ids)) }}
+      </label>
+    </div>
+  @endforeach
+</div>
 <div class="form-group {{ $errors->first('body', 'has-error') }}">
   {{ Form::label('body', 'Body', array('class' => 'control-label')) }}
   <div class="panel panel-default">

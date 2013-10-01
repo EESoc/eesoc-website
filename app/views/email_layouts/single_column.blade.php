@@ -91,6 +91,18 @@
                 <td class="w640" width="640" style="font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif;border-collapse: collapse;">
     <table id="footer" class="w640" width="640" cellpadding="0" cellspacing="0" border="0" bgcolor="#424242" style="border-radius: 0px 0px 6px 6px;-moz-border-radius: 0px 0px 6px 6px;-webkit-border-radius: 0px 0px 6px 6px;-webkit-font-smoothing: antialiased;background-color: #424242;color: #FFFFFF;">
         <tbody><tr style="border-collapse: collapse;"><td class="w30" width="30" style="font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif;border-collapse: collapse;"></td><td class="w580 h0" width="360" height="30" style="font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif;border-collapse: collapse;"></td><td class="w0" width="60" style="font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif;border-collapse: collapse;"></td><td class="w0" width="160" style="font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif;border-collapse: collapse;"></td><td class="w30" width="30" style="font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif;border-collapse: collapse;"></td></tr>
+
+<td id="footer" class="w640" width="640" align="center" bgcolor="#ffffff" style="font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif;border-collapse: collapse;">
+    
+    <div align="center" style="text-align: center">
+        <a href="http://eesoc.com/">
+        <img id="customHeaderImage" label="Header Image" width="526" height="146" src="https://dougal.union.ic.ac.uk/guilds/eesoc/new_eesoc_website/public/assets/images/newsletter/footer.jpg" class="w640" border="0" align="top" style="display: inline;outline: none;text-decoration: none;">
+        </a>
+    </div>
+    
+    
+</td>
+
         <tr style="border-collapse: collapse;">
             <td class="w30" width="30" style="font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif;border-collapse: collapse;"></td>
             <td class="w580" width="360" valign="top" style="font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif;border-collapse: collapse;">

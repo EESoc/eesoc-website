@@ -1,6 +1,7 @@
 <?php
 namespace Admin;
 
+use \StudentGroup;
 use \NewsletterEmail;
 use \NewsletterEmailQueue;
 use \Input;
@@ -29,7 +30,8 @@ class EmailsController extends BaseController {
 	public function create()
 	{
 		return View::make('admin.emails.create')
-			->with('email', new NewsletterEmail);
+			->with('email', new NewsletterEmail)
+			->with('groups', StudentGroup::with('children')->root()->alphabetically()->get());
 	}
 
 	/**
@@ -40,18 +42,20 @@ class EmailsController extends BaseController {
 	public function store()
 	{
 		$inputs = array(
-			'subject'       => Input::get('subject'),
-			'body'          => Input::get('body'),
-			'newsletter_id' => Input::get('newsletter_id'),
-			'queue_send'    => Input::get('queue_send'),
+			'subject'           => Input::get('subject'),
+			'body'              => Input::get('body'),
+			'newsletter_id'     => Input::get('newsletter_id'),
+			'student_group_ids' => Input::get('student_group_ids'),
+			'queue_send'        => Input::get('queue_send'),
 		);
 
 		$rules = array();
 		if ($inputs['queue_send']) {
 			$rules = array(
-				'subject'       => 'required',
-				'body'          => 'required',
-				'newsletter_id' => 'required',
+				'subject'           => 'required',
+				'body'              => 'required',
+				'newsletter_id'     => 'required_without:student_group_ids',
+				'student_group_ids' => 'required_without:newsletter_id'
 			);
 		}
 
@@ -81,7 +85,8 @@ class EmailsController extends BaseController {
 	public function edit($id)
 	{
 		return View::make('admin.emails.edit')
-			->with('email', NewsletterEmail::findOrFail($id));
+			->with('email', NewsletterEmail::findOrFail($id))
+			->with('groups', StudentGroup::with('children')->root()->alphabetically()->get());
 	}
 
 	/**
@@ -95,18 +100,20 @@ class EmailsController extends BaseController {
 		$email = NewsletterEmail::findOrFail($id);
 
 		$inputs = array(
-			'subject'       => Input::get('subject'),
-			'body'          => Input::get('body'),
-			'newsletter_id' => Input::get('newsletter_id'),
-			'queue_send'    => Input::get('queue_send'),
+			'subject'           => Input::get('subject'),
+			'body'              => Input::get('body'),
+			'newsletter_id'     => Input::get('newsletter_id'),
+			'student_group_ids' => Input::get('student_group_ids'),
+			'queue_send'        => Input::get('queue_send'),
 		);
 
 		$rules = array();
 		if ($inputs['queue_send']) {
 			$rules = array(
-				'subject'       => 'required',
-				'body'          => 'required',
-				'newsletter_id' => 'required',
+				'subject'           => 'required',
+				'body'              => 'required',
+				'newsletter_id'     => 'required_without:student_group_ids',
+				'student_group_ids' => 'required_without:newsletter_id'
 			);
 		}
 
@@ -145,21 +152,43 @@ class EmailsController extends BaseController {
 		}
 	}
 
+	public function getPreview($id)
+	{
+		$email = NewsletterEmail::findOrFail($id);
+
+		return View::make('email_layouts.single_column')
+			->with('body', $email->body);
+	}
+
 	/**
 	 * Queue a newsletter email
 	 * @param  NewsletterEmail $email
 	 */
 	private function queueEmail(NewsletterEmail $email)
 	{
+		set_time_limit(0);
+        \DB::table('newsletter_email_queue')->delete();
+
 		if ($email->newsletter) {
 			foreach ($email->newsletter->users as $user) {
 				$queue = new NewsletterEmailQueue;
-				$queue->newsletterEmail()->associate($email);
+				$queue->email()->associate($email);
 				$queue->to = $user->email;
 				$queue->save();
 			}
-		} else if ($email->group_ids) {
+		}
 
+		if ($email->student_group_ids) {
+			foreach ($email->student_group_ids as $student_group_id) {
+				if ($group = StudentGroup::find($student_group_id)) {
+					foreach ($group->users as $user) {
+						$queue = new NewsletterEmailQueue;
+						$queue->email()->associate($email);
+						$queue->to = $user->email;
+						$queue->save();
+					}
+				}
+			}
 		}
 	}
 

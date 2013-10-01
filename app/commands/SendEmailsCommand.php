@@ -71,11 +71,14 @@ class SendEmailsCommand extends Command {
 
 			if ($mailer->send($message)) {
 				$this->info(sprintf('Successfully sent email `%s` to `%s`', $queue->email->subject, $queue->to));
-				unset($message);
-				// $queue->delete();
+
+				// Remove from queue
+				$queue->delete();
 			} else {
 				$this->error(sprintf('Something went wrong while sending email `%s` to `%s`', $queue->email->subject, $queue->to));
 			}
+
+			unset($message);
 		}
 	}
 
