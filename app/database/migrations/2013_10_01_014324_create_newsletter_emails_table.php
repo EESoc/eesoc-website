@@ -15,6 +15,7 @@ class CreateNewsletterEmailsTable extends Migration {
 			$table->increments('id');
 			$table->integer('newsletter_id')->unsigned();
 			$table->foreign('newsletter_id')->references('id')->on('newsletters');
+			$table->string('subject');
 			$table->text('body');
 			$table->dateTime('send_at')->nullable();
 			$table->timestamps();
