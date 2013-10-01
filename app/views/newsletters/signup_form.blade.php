@@ -13,7 +13,7 @@
       <div class="col-sm-5">
         <div class="form-group {{ $errors->first('ic_username', 'has-error') }}">
           {{ Form::label('ic_username', 'Imperial College Username', array('class' => 'control-label')) }}
-          {{ Form::text('ic_username', null, array('class' => 'form-control input-lg', 'placeholder' => 'Imperial College Username')) }}
+          {{ Form::text('ic_username', null, array('class' => 'form-control input-lg', 'placeholder' => 'Imperial College Username (e.g. xyz123)')) }}
           {{ $errors->first('ic_username', '<span class="help-block">:message</span>') }}
         </div>
       </div>

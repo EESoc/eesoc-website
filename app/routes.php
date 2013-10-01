@@ -47,8 +47,8 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 	Route::resource('contents', 'Admin\ContentsController', ['except' => ['show']]);
 
 	// Emails
-	Route::controller('emails', 'Admin\EmailsController');
 	Route::resource('emails', 'Admin\EmailsController');
+	Route::controller('emails', 'Admin\EmailsController');
 
 	// Logs
 	Route::resource('logs', 'Admin\LogsController', ['only' => ['index', 'show']]);
