@@ -26,7 +26,7 @@ class NewsletterEmail extends Eloquent {
 
 	public function getStudentGroupIdsAttribute()
 	{
-		return (array) json_decode($this->attributes['student_group_ids']);
+		return isset($this->attributes['student_group_ids']) ? (array) json_decode($this->attributes['student_group_ids']) : array();
 	}
 
 }

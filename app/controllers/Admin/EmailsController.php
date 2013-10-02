@@ -156,7 +156,7 @@ class EmailsController extends BaseController {
 	{
 		$email = NewsletterEmail::findOrFail($id);
 
-		return View::make('email_layouts.single_column')
+		return View::make('email_layouts.basic')
 			->with('body', $email->body);
 	}
 
