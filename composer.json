@@ -15,7 +15,8 @@
 		"guzzle/guzzle": "~3.7",
 		"nesbot/Carbon": "*",
 		"robclancy/presenter": "1.2.*",
-		"barryvdh/elfinder-bundle": "dev-master"
+		"barryvdh/elfinder-bundle": "dev-master",
+		"tijsverkoyen/css-to-inline-styles": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

@@ -15,7 +15,6 @@ class CreateNewsletterEmailsTable extends Migration {
 			$table->increments('id');
 			$table->integer('newsletter_id')->unsigned()->nullable();
 			$table->foreign('newsletter_id')->references('id')->on('newsletters');
-			$table->text('student_group_ids')->nullable();
 			$table->string('subject');
 			$table->text('body');
 			$table->dateTime('send_at')->nullable();
