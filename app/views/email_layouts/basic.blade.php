@@ -14,13 +14,13 @@
 <body bgcolor="#FFFFFF">
 
 <!-- HEADER -->
-<table class="head-wrap" bgcolor="#4586D1">
+<table class="head-wrap" bgcolor="#79838F">
 	<tr>
 		<td></td>
 		<td class="header container" >
 				
 				<div class="content">
-				<table bgcolor="#4586D1">
+				<table bgcolor="#79838F">
 					<tr>
 						<td><img src="{{ asset('assets/images/email/eesoc.png') }}" /></td>
 						<td align="right"><h6 class="collapse">Some Text Here...</h6></td>
@@ -125,7 +125,7 @@
 												
 												<h5 class="">Connect with Us:</h5>
 												<p class="">
-													<a href="#" class="soc-btn www gp">Website</a>
+													<a href="https://eesoc.com" class="soc-btn www gp">Website</a>
 													<a href="#" class="soc-btn fb">Facebook</a>
 													<a href="#" class="soc-btn tw">Twitter</a>
 													<a href="#" class="soc-btn ig gp">Instagram</a>
@@ -144,8 +144,8 @@
 											<td>				
 																			
 												<h5 class="">Contact Info:</h5>												
-												<p>Phone: <strong>408.341.0600</strong><br/>
-                Email: <strong><a href="emailto:hseldon@trantor.com">hseldon@trantor.com</a></strong></p>
+												<p>Phone: <strong>xxx.xxx.xxx</strong><br/>
+                Email: <strong><a href="emailto:eesoc@imperial.ac.uk">eesoc@imperial.ac.uk</a></strong></p>
                 
 											</td>
 										</tr>
@@ -161,6 +161,19 @@
 						</td>
 					</tr>
 				</table>
+			</div><!-- /content -->
+			
+			<!-- content -->
+			<div class="content">
+				
+				<table bgcolor="">
+					<tr>
+						<td>
+							<img src="{{ asset('assets/images/email/footer.jpg') }}" />
+						</td>
+					</tr>
+				</table>
+			
 			</div><!-- /content -->
 
 		</td>
