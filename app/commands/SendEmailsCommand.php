@@ -37,45 +37,54 @@ class SendEmailsCommand extends Command {
 	 */
 	public function fire()
 	{
-		$count = NewsletterEmailQueue::count();
+		// $count = NewsletterEmailQueue::count();
 
-		if ($count === 0) {
-			$this->info('There are no emails to send');
-			return;
-		}
+		// if ($count === 0) {
+		// 	$this->info('There are no emails to send');
+		// 	return;
+		// }
 
-		if ( ! $this->confirm(sprintf('There\'s %d emails in the send queue. Are you sure you want to send them out now? [yes|no]', $count), true)) {
-			return;
-		}
+		// if ( ! $this->confirm(sprintf('There\'s %d emails in the send queue. Are you sure you want to send them out now? [yes|no]', $count), true)) {
+		// 	return;
+		// }
 
-		$transport = Swift_SmtpTransport::newInstance('localhost', 1025);
+		// $transport = Swift_SmtpTransport::newInstance('localhost', 1025);
 		// $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
 		//   ->setUsername('')
 		//   ->setPassword('');
 
+		$email = NewsletterEmail::findOrFail(1);
+
+		$html = View::make('email_layouts.basic')
+			->with('body', $email->body)
+			->render();
+
+		$body = (new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles($html, file_get_contents(base_path() . '/public/assets/css/email.css')))
+			->convert();
+
+		$transport = Swift_MailTransport::newInstance();
+
 		$mailer = Swift_Mailer::newInstance($transport);
 
-		foreach (NewsletterEmailQueue::all() as $queue)
+		$emails = array('jianyuan@gmail.com', 'jian.lee11@imperial.ac.uk');
+
+		foreach ($emails as $email)
 		{
-			$this->info(sprintf('Sending email `%s` to `%s`', $queue->email->subject, $queue->to));
+			$this->info(sprintf('Sending email `%s` to `%s`', 'A chilled end to the week', $email));
 			$message = Swift_Message::newInstance();
 
 			$message->setFrom(array('no-reply@eesoc.com' => 'EESoc'));
-			$message->setTo($queue->to);
-			$message->setSubject($queue->email->subject);
-			$message->setBody(
-				View::make('email_layouts.single_column')
-					->with('message', $message)
-					->with('body', $queue->email->body)
-			, 'text/html');
+			$message->setTo($email);
+			$message->setSubject('A chilled end to the week');
+			$message->setBody($body, 'text/html');
 
 			if ($mailer->send($message)) {
-				$this->info(sprintf('Successfully sent email `%s` to `%s`', $queue->email->subject, $queue->to));
+				$this->info(sprintf('Successfully sent email `%s` to `%s`', 'A chilled end to the week', $email));
 
 				// Remove from queue
-				$queue->delete();
+				// $queue->delete();
 			} else {
-				$this->error(sprintf('Something went wrong while sending email `%s` to `%s`', $queue->email->subject, $queue->to));
+				$this->error(sprintf('Something went wrong while sending email `%s` to `%s`', 'A chilled end to the week', $email));
 			}
 
 			unset($message);

@@ -22,7 +22,7 @@
 				<div class="content">
 				<table bgcolor="#79838F">
 					<tr>
-						<td><img src="{{ asset('assets/images/email/eesoc.png') }}" /></td>
+						<td><img src="http://eesoc.com/assets/images/email/eesoc.png" /></td>
 						<td align="right"><h6 class="collapse">A chilled end to the week</h6></td>
 					</tr>
 				</table>
@@ -127,7 +127,7 @@
 				<table bgcolor="">
 					<tr>
 						<td>
-							<img src="{{ asset('assets/images/email/footer.jpg') }}" />
+							<img src="http://eesoc.com/assets/images/email/footer.jpg" />
 						</td>
 					</tr>
 				</table>
