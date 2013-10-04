@@ -67,6 +67,7 @@ a.fb { background-color: #3B5998!important; }
 a.tw { background-color: #1daced!important; }
 a.gp { background-color: #DB4A39!important; }
 a.ms { background-color: #000!important; }
+a.ig { background-color: #3d6a91!important; }
 
 .sidebar .soc-btn { 
 	display:block;
@@ -114,7 +115,7 @@ h2 { font-weight:200; font-size: 37px;}
 h3 { font-weight:500; font-size: 27px;}
 h4 { font-weight:500; font-size: 23px;}
 h5 { font-weight:900; font-size: 17px;}
-h6 { font-weight:900; font-size: 14px; text-transform: uppercase; color:#444;}
+h6 { font-weight:900; font-size: 14px; text-transform: uppercase; color:#E0E0E0;}
 
 .collapse { margin:0!important;}
 

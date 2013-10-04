@@ -156,8 +156,12 @@ class EmailsController extends BaseController {
 	{
 		$email = NewsletterEmail::findOrFail($id);
 
-		return View::make('email_layouts.basic')
-			->with('body', $email->body);
+		$html = View::make('email_layouts.basic')
+			->with('body', $email->body)
+			->render();
+
+		return (new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles($html, file_get_contents(base_path() . '/public/assets/css/email.css')))
+			->convert();
 	}
 
 	/**
