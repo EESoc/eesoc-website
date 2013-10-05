@@ -1,9 +1,44 @@
 <?php
 
-class CronController extends BaseController {
+use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
-	public function getInstagram()
+class InstagramSyncCommand extends Command {
+
+	/**
+	 * The console command name.
+	 *
+	 * @var string
+	 */
+	protected $name = 'instagram:sync';
+
+	/**
+	 * The console command description.
+	 *
+	 * @var string
+	 */
+	protected $description = 'Sync Instagram Feed.';
+
+	/**
+	 * Create a new command instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
 	{
+		parent::__construct();
+	}
+
+	/**
+	 * Execute the console command.
+	 *
+	 * @return void
+	 */
+	public function fire()
+	{
+		$this->info('Syncing Instagram photos...');
+
 		$ids = array();
 		$next_url = null;
 
@@ -20,9 +55,11 @@ class CronController extends BaseController {
 
 		do {
 			if (isset($next_url)) {
+				$this->info('Got next page');
 				$next_url_params = parse_url($next_url);
 				$request = $client->get($next_url_params['path'] . '?' . $next_url_params['query']);
 			} else {
+				$this->info('Fetch first page');
 				$request = $client->get('tags/{tag_name}/media/recent');
 			}
 
@@ -37,6 +74,7 @@ class CronController extends BaseController {
 					
 					$ids[] = $photo['id'];
 					InstagramPhoto::refresh($photo);
+					$this->info(sprintf('Got photo `%s`', $photo['id']));
 				}
 
 
@@ -46,6 +84,8 @@ class CronController extends BaseController {
 			}
 
 		} while (isset($next_url));
+
+		$this->info('Successfully synchronized Instagram photos');
 	}
 
 }
