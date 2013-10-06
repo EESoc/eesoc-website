@@ -191,6 +191,7 @@
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/laravel-ujs.js') }}"></script>
     @yield('javascript_for_page')
+    @include('shared.gosquared')
 
   </body>
 </html>
