@@ -13,7 +13,10 @@
 
 App::before(function($request)
 {
-	//
+	// Force HTTPS
+	if (App::environment() === 'production' && ! $request->secure()) {
+		return Redirect::secure($request->path());
+	}
 });
 
 
