@@ -8,7 +8,7 @@
           <span class="glyphicon glyphicon-plus"></span>
           New Content
         </a>
-        <h1>Contents</h1>
+        <h1>Content</h1>
       </div>
       <div class="list-group category-list">
         @foreach($contents as $content)

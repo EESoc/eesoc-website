@@ -49,7 +49,21 @@ class LogStorage {
 
 	public function getContent()
 	{
-		return file_get_contents($this->path);
+		$logs = array();
+		foreach (file($this->path) as $line) {
+			$line = trim($line);
+			if (preg_match('/^\[(.+?)\] log\./', $line)) {
+				$logs[] = array(
+					'name' => $line,
+					'details' => [],
+				);
+			} else {
+				end($logs);
+				$logs[key($logs)]['details'][] = $line;
+			}
+		}
+
+		return $logs;
 	}
 
 	/**

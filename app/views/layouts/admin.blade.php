@@ -45,7 +45,7 @@
               <a href="{{{ URL::route('admin.pages.index') }}}">Pages</a>
             </li>
             <li {{ str_contains(Route::currentRouteAction(), 'Admin\Contents') ? 'class="active"' : '' }}>
-              <a href="{{{ URL::route('admin.contents.index') }}}">Contents</a>
+              <a href="{{{ URL::route('admin.contents.index') }}}">Content</a>
             </li>
             <li {{ str_contains(Route::currentRouteAction(), 'Admin\Categories') ? 'class="active"' : '' }}>
               <a href="{{{ URL::route('admin.categories.index') }}}">Categories</a>
