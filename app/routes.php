@@ -50,11 +50,17 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 	Route::resource('emails', 'Admin\EmailsController');
 	Route::controller('emails', 'Admin\EmailsController');
 
+	// Events
+	Route::resource('events', 'Admin\EventsController', ['except' => ['show']]);
+
 	// Logs
 	Route::resource('logs', 'Admin\LogsController', ['only' => ['index', 'show']]);
 
 	// Pages
 	Route::resource('pages', 'Admin\PagesController', ['except' => ['show']]);
+
+	// Posts
+	Route::resource('posts', 'Admin\PostsController', ['except' => ['show']]);
 
 	// Users
 	Route::controller('users/eactivities', 'Admin\UsersEActivitiesController');

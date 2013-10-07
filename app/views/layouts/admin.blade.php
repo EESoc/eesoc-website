@@ -40,7 +40,9 @@
         </div>
         <div class="collapse navbar-collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#">Posts</a></li>
+            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Posts') ? 'class="active"' : '' }}>
+              <a href="{{{ URL::route('admin.posts.index') }}}">Posts</a>
+            </li>
             <li {{ str_contains(Route::currentRouteAction(), 'Admin\Pages') ? 'class="active"' : '' }}>
               <a href="{{{ URL::route('admin.pages.index') }}}">Pages</a>
             </li>
