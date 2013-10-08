@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jianyuan/elfinder-bundle.git",
-                "reference": "0a7c77c80cb32d58670d88e03919d04a1ba60819"
+                "reference": "52ed6a7fd3ae8d3ba5f130dc9087df8f8474c868"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jianyuan/elfinder-bundle/zipball/0a7c77c80cb32d58670d88e03919d04a1ba60819",
-                "reference": "0a7c77c80cb32d58670d88e03919d04a1ba60819",
+                "url": "https://api.github.com/repos/jianyuan/elfinder-bundle/zipball/52ed6a7fd3ae8d3ba5f130dc9087df8f8474c868",
+                "reference": "52ed6a7fd3ae8d3ba5f130dc9087df8f8474c868",
                 "shasum": ""
             },
             "require": {
@@ -40,9 +40,9 @@
             ],
             "description": "A Laravel Bundle to integrate elFinder 2.0",
             "support": {
-                "source": "https://github.com/jianyuan/elfinder-bundle/tree/master"
+                "source": "https://github.com/jianyuan/elfinder-bundle/tree/ckeditor"
             },
-            "time": "2013-08-26 15:16:43"
+            "time": "2013-08-28 23:57:14"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -1038,20 +1038,26 @@
         },
         {
             "name": "patchwork/utf8",
-            "version": "v1.1.11",
+            "version": "v1.1.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nicolas-grekas/Patchwork-UTF8.git",
-                "reference": "v1.1.11"
+                "reference": "bf556062f69380066dacd03b4bcc6727c5b8e97e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nicolas-grekas/Patchwork-UTF8/zipball/v1.1.11",
-                "reference": "v1.1.11",
+                "url": "https://api.github.com/repos/nicolas-grekas/Patchwork-UTF8/zipball/bf556062f69380066dacd03b4bcc6727c5b8e97e",
+                "reference": "bf556062f69380066dacd03b4bcc6727c5b8e97e",
                 "shasum": ""
             },
             "require": {
+                "lib-pcre": "*",
                 "php": ">=5.3.0"
+            },
+            "suggest": {
+                "ext-mbstring": "Use Mbstring for best performance",
+                "lib-iconv": "Use iconv for best performance",
+                "lib-icu": "Use Intl for best performance"
             },
             "type": "library",
             "autoload": {
@@ -1079,7 +1085,7 @@
                 "utf-8",
                 "utf8"
             ],
-            "time": "2013-08-19 09:37:02"
+            "time": "2013-10-04 09:47:08"
         },
         {
             "name": "predis/predis",
