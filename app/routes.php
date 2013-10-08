@@ -29,7 +29,18 @@ Route::group(['before' => 'auth.member'], function() {
 
 	Route::group(['prefix' => 'dashboard'], function() {
 		// Lockers
-		Route::controller('lockers', 'LockersController');
+		// Route::controller('lockers', 'LockersController');
+		// Temporary route
+		Route::get('lockers', function() {
+			$page = Page::where('slug', '=', 'dashboard/lockers')->first();
+
+			if ( ! $page) {
+				App::abort(404);
+			}
+
+			return View::make('page')
+				->with('page', $page);
+		})->where('path', '.*');
 	});
 });
 
