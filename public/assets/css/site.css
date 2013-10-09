@@ -89,7 +89,7 @@ border-bottom-right-radius: 200px;
 
 
 /* temporary */
-/*#site-header .row .row,
+#site-header .row .row,
 #site-header .col-right {
   display: none;
 }
@@ -98,4 +98,4 @@ border-bottom-right-radius: 200px;
 }
 #credits {
   display: none;
-}*/
+}
