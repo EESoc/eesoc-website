@@ -59,8 +59,8 @@
                           </a>
                         </li>
                         <li>
-                          <a href="{{ url('news') }}">
-                            <span class="glyphicon glyphicon-chevron-right"></span> News &amp; Events
+                          <a href="{{ url('events') }}">
+                            <span class="glyphicon glyphicon-chevron-right"></span> Events
                           </a>
                         </li>
                         <li>

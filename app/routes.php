@@ -11,24 +11,37 @@
 |
 */
 
+# Home
+Route::controller('home', 'HomeController');
+Route::get('/', 'HomeController@getWelcome');
+
+# Session Management
 Route::get('sign-in',     'SessionsController@getNew');
 Route::post('sign-in',    'SessionsController@postCreate');
 Route::delete('sign-out', 'SessionsController@deleteDestroy');
 
+# Cron
+Route::controller('cron', 'CronController');
+
+# Events
+Route::controller('events', 'EventsController');
+
+# Newsletter
+Route::controller('newsletters', 'NewslettersController');
+
+# User
 Route::get('users/{username}', 'UsersController@getShow');
 
-Route::controller('cron', 'CronController');
-Route::controller('newsletters', 'NewslettersController');
 
 /**
  * Routes for members
  */
 Route::group(['before' => 'auth.member'], function() {
-	// Dashboard
+	# Dashboard
 	Route::get('dashboard', 'UsersController@getDashboard');
 
 	Route::group(['prefix' => 'dashboard'], function() {
-		// Lockers
+		# Lockers
 		// Route::controller('lockers', 'LockersController');
 		// Temporary route
 		Route::get('lockers', function() {
@@ -51,44 +64,41 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 
 	Route::get('/', 'Admin\DashboardController@getShow');
 
-	// Categories
+	# Categories
 	Route::resource('categories', 'Admin\CategoriesController', ['except' => ['show']]);
 
-	// Contents
+	# Contents
 	Route::resource('contents', 'Admin\ContentsController', ['except' => ['show']]);
 
-	// Emails
+	# Emails
 	Route::resource('emails', 'Admin\EmailsController');
 	Route::controller('emails', 'Admin\EmailsController');
 
-	// Events
+	# Events
 	Route::resource('events', 'Admin\EventsController', ['except' => ['show']]);
 
-	// Logs
+	# Logs
 	Route::resource('logs', 'Admin\LogsController', ['only' => ['index', 'show']]);
 
-	// Pages
+	# Pages
 	Route::resource('pages', 'Admin\PagesController', ['except' => ['show']]);
 
-	// Posts
+	# Posts
 	Route::resource('posts', 'Admin\PostsController', ['except' => ['show']]);
 
-	// Users
+	# Users
 	Route::controller('users/eactivities', 'Admin\UsersEActivitiesController');
 	Route::controller('users/eepeople',    'Admin\UsersEEPeopleController');
 	Route::controller('users',             'Admin\UsersController');
 	Route::resource  ('users',             'Admin\UsersController', ['only' => ['index']]);
 
-	// elFinder
+	# elFinder
 	Route::get('elfinder',           'Barryvdh\ElfinderBundle\ElfinderController@showIndex');
 	Route::any('elfinder/connector', 'Barryvdh\ElfinderBundle\ElfinderController@showConnector');
 	Route::get('elfinder/ckeditor',  'Barryvdh\ElfinderBundle\ElfinderController@showCKEditor');
 });
 
-Route::controller('home', 'HomeController');
-Route::get('/', 'HomeController@getWelcome');
-
-// Catch all
+# Catch all
 Route::any('{path}', function($path) {
 	$path = rtrim($path, '/');
 	$page = Page::where('slug', '=', $path)->first();

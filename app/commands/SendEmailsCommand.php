@@ -48,43 +48,50 @@ class SendEmailsCommand extends Command {
 		// 	return;
 		// }
 
+		// Mail
+		$transport = Swift_MailTransport::newInstance();
 		// $transport = Swift_SmtpTransport::newInstance('localhost', 1025);
 		// $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
 		//   ->setUsername('')
 		//   ->setPassword('');
 
-		$email = NewsletterEmail::findOrFail(1);
+		// $email = NewsletterEmail::findOrFail(1);
 
-		$html = View::make('email_layouts.basic')
-			->with('body', $email->body)
+		$html = View::make('emails.2013_10_09.html')
+			// ->with('body', $email->body)
+			->render();
+		$plaintext = View::make('emails.2013_10_09.plaintext')
 			->render();
 
-		$body = (new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles($html, file_get_contents(base_path() . '/public/assets/css/email.css')))
-			->convert();
+		// $body = (new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles($html, file_get_contents(base_path() . '/public/assets/css/email.css')))
+		// 	->convert();
 
 		$transport = Swift_MailTransport::newInstance();
 
 		$mailer = Swift_Mailer::newInstance($transport);
 
-		$emails = array('jianyuan@gmail.com', 'jian.lee11@imperial.ac.uk');
+		// $emails = array('jianyuan@gmail.com', 'jian.lee11@imperial.ac.uk');
+		$emails = User::hasStudentGroup()->get()->lists('email');
 
 		foreach ($emails as $email)
 		{
-			$this->info(sprintf('Sending email `%s` to `%s`', 'A chilled end to the week', $email));
+			$this->info(sprintf('Sending email `%s` to `%s`', 'Welcome to EESoc 2013/14', $email));
 			$message = Swift_Message::newInstance();
 
-			$message->setFrom(array('no-reply@eesoc.com' => 'EESoc'));
+			$message->setFrom(array('please-reply@eesoc.com' => 'EESoc'));
+			$message->setReplyTo('eesoc@imperial.ac.uk');
 			$message->setTo($email);
-			$message->setSubject('A chilled end to the week');
-			$message->setBody($body, 'text/html');
+			$message->setSubject('Welcome to EESoc 2013/14');
+			$message->setBody($html, 'text/html');
+			$message->addPart($plaintext, 'text/plain');
 
 			if ($mailer->send($message)) {
-				$this->info(sprintf('Successfully sent email `%s` to `%s`', 'A chilled end to the week', $email));
+				$this->info(sprintf('Successfully sent email `%s` to `%s`', 'Welcome to EESoc 2013/14', $email));
 
 				// Remove from queue
 				// $queue->delete();
 			} else {
-				$this->error(sprintf('Something went wrong while sending email `%s` to `%s`', 'A chilled end to the week', $email));
+				$this->error(sprintf('Something went wrong while sending email `%s` to `%s`', 'Welcome to EESoc 2013/14', $email));
 			}
 
 			unset($message);

@@ -114,6 +114,11 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		return $query->whereIn('student_group_id', $group->related_group_ids);
 	}
 
+	public function scopeHasStudentGroup($query)
+	{
+		return $query->whereNotNull('student_group_id');
+	}
+
 	public function scopeHasImage($query)
 	{
 		return $query->whereNotNull('image_blob');
