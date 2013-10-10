@@ -55,6 +55,9 @@
             <li {{ str_contains(Route::currentRouteAction(), 'Admin\Events') ? 'class="active"' : '' }}>
               <a href="{{{ URL::route('admin.events.index') }}}">Events</a>
             </li>
+            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Sponsors') ? 'class="active"' : '' }}>
+              <a href="{{{ URL::route('admin.sponsors.index') }}}">Sponsors</a>
+            </li>
             <li {{ str_contains(Route::currentRouteAction(), 'Admin\Users') ? 'class="active"' : '' }}>
               <a href="{{{ URL::route('admin.users.index') }}}">Users</a>
             </li>

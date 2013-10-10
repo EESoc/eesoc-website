@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ImperialCollegeUser {
