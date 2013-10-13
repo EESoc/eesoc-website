@@ -11,4 +11,14 @@ class NewsletterEmailQueue extends Eloquent {
 		return $this->belongsTo('NewsletterEmail', 'newsletter_email_id');
 	}
 
+	public function scopePendingSend($query)
+	{
+		return $query->where('sent', '=', '0');
+	}
+
+	public function scopeSent($query)
+	{
+		return $query->where('sent', '=', '1');
+	}
+
 }

@@ -12,7 +12,7 @@
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/site.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('assets/css/site.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/user.css') }}" rel="stylesheet">
 
@@ -30,6 +30,80 @@
   <body class="@yield('body_class')">
 
     @section('navbar')
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url('/') }}">
+              <img src="{{ asset('assets/images/eesoc.png') }}" alt="EESoc" height="100">
+            </a>
+          </div>
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+              <li <?php if (Request::is('/')) echo 'class="active"' ?>>
+                <a href="{{ url('/') }}">
+                  <span class="glyphicon glyphicon-chevron-right"></span> Home
+                </a>
+              </li>
+              <li <?php if (Request::is('about')) echo 'class="active"' ?>>
+                <a href="{{ url('about') }}">
+                  <span class="glyphicon glyphicon-chevron-right"></span> About Us
+                </a>
+              </li>
+              <li>
+                <a href="{{ url('events') }}">
+                  <span class="glyphicon glyphicon-chevron-right"></span> Events
+                </a>
+              </li>
+              <li>
+                <a href="{{ url('sponsors') }}">
+                  <span class="glyphicon glyphicon-chevron-right"></span> Sponsors
+                </a>
+              </li>
+              <li>
+                <a href="{{ url('committee') }}">
+                  <span class="glyphicon glyphicon-chevron-right"></span> Committee
+                </a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav">
+              @if (Auth::check())
+                <li class="navbar-text">
+                  Signed in as
+                </li>
+                <li>
+                  <a href="{{{ action('UsersController@getShow', Auth::user()->username) }}}">
+                    <strong>{{{ Auth::user()->name }}}</strong>
+                  </a>
+                </li>
+                <li>
+                  <a href="{{{ action('UsersController@getDashboard') }}}">
+                    <span class="glyphicon glyphicon-wrench"></span>
+                    Settings
+                  </a>
+                </li>
+                <li>
+                  <a href="{{{ action('SessionsController@deleteDestroy') }}}" data-method="delete">
+                    <span class="glyphicon glyphicon-off"></span>
+                    Sign Out
+                  </a>
+                </li>
+              @else
+                <a href="{{{ action('SessionsController@getNew') }}}" class="btn btn-primary">
+                  <span class="glyphicon glyphicon-lock"></span>
+                  Sign In
+                </a>
+              @endif
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div>
+      </nav>
+
       <header id="site-header">
         <div class="container">
           <div class="row">

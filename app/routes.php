@@ -80,6 +80,9 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 	# Logs
 	Route::resource('logs', 'Admin\LogsController', ['only' => ['index', 'show']]);
 
+	# Newsletters
+	Route::resource('newsletters', 'Admin\NewslettersController');
+
 	# Pages
 	Route::resource('pages', 'Admin\PagesController', ['except' => ['show']]);
 

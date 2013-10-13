@@ -1,11 +1,13 @@
 <?php
 namespace Admin;
 
-use \StudentGroup;
+use \Input;
+use \Newsletter;
 use \NewsletterEmail;
 use \NewsletterEmailQueue;
-use \Input;
 use \Redirect;
+use \Response;
+use \StudentGroup;
 use \Validator;
 use \View;
 
@@ -31,7 +33,7 @@ class EmailsController extends BaseController {
 	{
 		return View::make('admin.emails.create')
 			->with('email', new NewsletterEmail)
-			->with('groups', StudentGroup::with('children')->root()->alphabetically()->get());
+			->with('newsletters', Newsletter::all());
 	}
 
 	/**
@@ -54,8 +56,6 @@ class EmailsController extends BaseController {
 			$rules = array(
 				'subject'           => 'required',
 				'body'              => 'required',
-				'newsletter_id'     => 'required_without:student_group_ids',
-				'student_group_ids' => 'required_without:newsletter_id'
 			);
 		}
 
@@ -65,6 +65,8 @@ class EmailsController extends BaseController {
 			$email = new NewsletterEmail;
 			$email->fill($inputs);
 			$email->save();
+
+			$email->newsletters()->sync(Input::get('newsletter_ids'));
 
 			if ($inputs['queue_send']) {
 				$this->queueEmail($email);
@@ -77,6 +79,24 @@ class EmailsController extends BaseController {
 	}
 
 	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		$email = NewsletterEmail::findOrFail($id);
+
+		if ($email->can_save) {
+			return Redirect::route('admin.emails.edit', $email->id);
+		} else {
+			return View::make('admin.emails.show')
+				->with('email', $email);
+		}
+	}
+
+	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param	int	$id
@@ -84,9 +104,15 @@ class EmailsController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		return View::make('admin.emails.edit')
-			->with('email', NewsletterEmail::findOrFail($id))
-			->with('groups', StudentGroup::with('children')->root()->alphabetically()->get());
+		$email = NewsletterEmail::findOrFail($id);
+
+		if ($email->can_save) {
+			return View::make('admin.emails.edit')
+				->with('email', $email)
+				->with('newsletters', Newsletter::all());
+		} else {
+			return Redirect::route('admin.emails.show', $email->id);
+		}
 	}
 
 	/**
@@ -99,37 +125,47 @@ class EmailsController extends BaseController {
 	{
 		$email = NewsletterEmail::findOrFail($id);
 
-		$inputs = array(
-			'subject'           => Input::get('subject'),
-			'body'              => Input::get('body'),
-			'newsletter_id'     => Input::get('newsletter_id'),
-			'student_group_ids' => Input::get('student_group_ids'),
-			'queue_send'        => Input::get('queue_send'),
-		);
-
-		$rules = array();
-		if ($inputs['queue_send']) {
-			$rules = array(
+		if (Input::get('send_now') === 'true') {
+			$rules = [
 				'subject'           => 'required',
 				'body'              => 'required',
-				'newsletter_id'     => 'required_without:student_group_ids',
-				'student_group_ids' => 'required_without:newsletter_id'
-			);
+			];
+		} else {
+			$rules = [];
 		}
 
-		$validator = Validator::make($inputs, $rules);
+		$validator = Validator::make(Input::all(), $rules);
 
 		if ($validator->passes()) {
-			$email->fill($inputs);
-			$email->save();
-
-			if ($inputs['queue_send']) {
-				$this->queueEmail($email);
+			if ($email->can_save) {
+				$email->fill(Input::all());
+				$email->save();
+				$email->newsletters()->sync((array) Input::get('newsletter_ids'));
 			}
 
-			return Redirect::route('admin.emails.index')->with('success', 'Email has been successfully updated');
+			if (Input::get('action') === 'pause' && $email->can_pause) {
+				$email->state = 'draft';
+				$email->save();
+
+				return Redirect::route('admin.emails.show', $email->id)
+					->with('success', 'Email has been successfully updated');
+			}
+
+			if (Input::get('action') === 'send' && $email->can_send) {
+				$email->buildEmailQueue();
+				$email->state = 'sending';
+				$email->save();
+
+				return Redirect::route('admin.emails.show', $email->id)
+					->with('success', 'Email has been successfully updated');
+			}
+
+			return Redirect::route('admin.emails.index')
+				->with('success', 'Email has been successfully updated');
 		} else {
-			return Redirect::route('admin.emails.edit', $email->id)->withInput()->withErrors($validator);
+			return Redirect::route('admin.emails.edit', $email->id)
+				->withInput()
+				->withErrors($validator);
 		}
 	}
 
@@ -164,36 +200,21 @@ class EmailsController extends BaseController {
 			->convert();
 	}
 
-	/**
-	 * Queue a newsletter email
-	 * @param  NewsletterEmail $email
-	 */
-	private function queueEmail(NewsletterEmail $email)
+	public function postSendBatch($id)
 	{
-		set_time_limit(0);
-        \DB::table('newsletter_email_queue')->delete();
-
-		if ($email->newsletter) {
-			foreach ($email->newsletter->users as $user) {
-				$queue = new NewsletterEmailQueue;
-				$queue->email()->associate($email);
-				$queue->to = $user->email;
-				$queue->save();
-			}
+		$email = NewsletterEmail::findOrFail($id);
+		if ($email->is_sending) {
+			$email->sendBatch();
 		}
 
-		if ($email->student_group_ids) {
-			foreach ($email->student_group_ids as $student_group_id) {
-				if ($group = StudentGroup::find($student_group_id)) {
-					foreach ($group->users as $user) {
-						$queue = new NewsletterEmailQueue;
-						$queue->email()->associate($email);
-						$queue->to = $user->email;
-						$queue->save();
-					}
-				}
-			}
-		}
+		$panel = View::make('admin.emails.send_panel_body')
+			->with('email', $email)
+			->render();
+
+		return Response::json([
+			'sending' => $email->is_sending,
+			'panel' => $panel,
+		]);
 	}
 
 }

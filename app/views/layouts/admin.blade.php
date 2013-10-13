@@ -40,25 +40,47 @@
         </div>
         <div class="collapse navbar-collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Posts') ? 'class="active"' : '' }}>
-              <a href="{{{ URL::route('admin.posts.index') }}}">Posts</a>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Content
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="{{{ URL::route('admin.pages.index') }}}">Pages</a>
+                </li>
+                <li>
+                  <a href="{{{ URL::route('admin.contents.index') }}}">Content Blocks</a>
+                </li>
+                <li>
+                  <a href="{{{ URL::route('admin.posts.index') }}}">Posts</a>
+                </li>
+                <li>
+                  <a href="{{{ URL::route('admin.categories.index') }}}">Categories</a>
+                </li>
+                <li>
+                  <a href="{{{ URL::route('admin.events.index') }}}">Events</a>
+                </li>
+                <li>
+                  <a href="{{{ URL::route('admin.sponsors.index') }}}">Sponsors</a>
+                </li>
+              </ul>
             </li>
-            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Pages') ? 'class="active"' : '' }}>
-              <a href="{{{ URL::route('admin.pages.index') }}}">Pages</a>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Newsletter
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="{{{ URL::route('admin.emails.index') }}}">Emails</a>
+                </li>
+                <li>
+                  <a href="{{{ URL::route('admin.newsletters.index') }}}">Lists</a>
+                </li>
+              </ul>
             </li>
-            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Contents') ? 'class="active"' : '' }}>
-              <a href="{{{ URL::route('admin.contents.index') }}}">Content</a>
-            </li>
-            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Categories') ? 'class="active"' : '' }}>
-              <a href="{{{ URL::route('admin.categories.index') }}}">Categories</a>
-            </li>
-            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Events') ? 'class="active"' : '' }}>
-              <a href="{{{ URL::route('admin.events.index') }}}">Events</a>
-            </li>
-            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Sponsors') ? 'class="active"' : '' }}>
-              <a href="{{{ URL::route('admin.sponsors.index') }}}">Sponsors</a>
-            </li>
-            <li {{ str_contains(Route::currentRouteAction(), 'Admin\Users') ? 'class="active"' : '' }}>
+            <li class="{{ str_contains(Route::currentRouteAction(), 'Admin\Users') ? 'active' : '' }}">
               <a href="{{{ URL::route('admin.users.index') }}}">Users</a>
             </li>
             <li class="dropdown">
