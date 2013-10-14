@@ -7,11 +7,13 @@ class Sponsor extends Eloquent implements PresentableInterface {
 
 	protected $fillable = ['name', 'description', 'logo', 'position'];
 
-	public function setLogoAttribute(UploadedFile $file)
+	public function setLogoAttribute($file)
 	{
-		$filename = Str::slug($this->name) . '.' . $file->getClientOriginalExtension();
-		$newfile = $file->move(base_path('public/assets/images/sponsors'), $filename);
-		$this->attributes['logo'] = $filename;
+		if ($file instanceof UploadedFile) {
+			$filename = Str::slug($this->name) . '.' . $file->getClientOriginalExtension();
+			$newfile = $file->move(base_path('public/assets/images/sponsors'), $filename);
+			$this->attributes['logo'] = $filename;
+		}
 	}
 
 	/**

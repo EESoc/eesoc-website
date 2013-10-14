@@ -36,7 +36,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="#" class="navbar-brand">EESoc</a>
+          <a href="{{{ url('admin') }}}" class="navbar-brand">EESoc Admin</a>
         </div>
         <div class="collapse navbar-collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">

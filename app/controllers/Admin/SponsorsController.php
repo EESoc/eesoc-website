@@ -38,7 +38,13 @@ class SponsorsController extends BaseController {
 	 */
 	public function store()
 	{
-		$validator = $this->makeValidator();
+		$rules = [
+			'name'        => 'required',
+			'description' => 'required',
+			'logo'        => 'required|image|mimes:jpeg,bmp,png',
+		];
+
+		$validator = Validator::make(Input::all(), $rules);
 
 		if ($validator->passes()) {
 			$sponsor = new Sponsor;
@@ -76,7 +82,13 @@ class SponsorsController extends BaseController {
 	{
 		$sponsor = Sponsor::findOrFail($id);
 
-		$validator = $this->makeValidator();
+		$rules = [
+			'name'        => 'required',
+			'description' => 'required',
+			'logo'        => 'image|mimes:jpeg,bmp,png',
+		];
+
+		$validator = Validator::make(Input::all(), $rules);
 
 		if ($validator->passes()) {
 			$sponsor->fill(Input::all());
@@ -110,17 +122,6 @@ class SponsorsController extends BaseController {
 			return Redirect::route('admin.sponsors.index')
 				->with('danger', 'This sponsor cannot be deleted');
 		}
-	}
-
-	private function makeValidator()
-	{
-		$rules = [
-			'name'        => 'required',
-			'description' => 'required',
-			'logo'        => 'required|image|mimes:jpeg,bmp,png',
-		];
-
-		return	Validator::make(Input::all(), $rules);
 	}
 
 }
