@@ -488,10 +488,10 @@
 
 </p>
 <ul>
-<li>BP IndustrEE event with Lunch and iPad Mini Raffle on <strong>Thursday at 1pm</strong>.</li>
-<li>Deutsche Bank Interview Skills Session &amp; Competency Questions Walkthrough <strong> Tuesday</strong> at <strong>13:00</strong>.</li>
+<li>BP IndustrEE event with Lunch and iPad Mini Raffle on <strong>Thursday at 1 PM</strong>.</li>
+<li>Deutsche Bank Interview Skills Session &amp; Competency Questions Walkthrough <strong> Tuesday</strong> at <strong>1 PM</strong>.</li>
 <li>Locker Sale <strong>today from 9 AM</strong>!</li>
-<li>Book Sale on <strong>Wednesday</strong> on the 6th floor EE Library from <strong>12:00-14:00</strong></li>
+<li>Book Sale on <strong>Wednesday</strong> on the 6th floor EE Library from <strong>12 - 2 PM</strong></li>
 <li>SocOff <strong>this Thursday</strong> at the Union! Prizes for the most creative photo</li>
 </ul>
 <hr>
@@ -500,15 +500,15 @@
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><img src="https://eesoc.com/assets/email/uploads/email_2_1.jpg" width="550" style="max-width: 100%">
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Join us this Thursday in 509 at 1pm, where a Subway lunch is provided, and all attendees are put in to an iPad Mini raffle!
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Join us this Thursday in 509 at 1 PM, where a Subway lunch is provided, and all attendees are put in to an iPad Mini raffle!
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Our series of industrEE talks kicks off on Thursday with BP! This will be a great opportunity to hear from graduate engineers about their roles within BP across instrumentation, control, measurement, telecommunications and other aspects of EEE. BP will be giving an overview of their key projects for the year and how you can get involved in summer internships &amp; graduate opportunities. The event will end with hints &amp; tips on the application process.
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><strong>Where</strong> : 509 A / B<br>
-<strong>When</strong> : 1pm, Thursday 17th October<br />
-<strong>Interested?</strong> Make sure you follow event updates on our <a href="http://on.fb.me/1gfSBXZ">facebook event</a> page.
+<strong>When</strong> : 1 PM, Thursday 17th October<br />
+<strong>Interested?</strong> Make sure you follow updates on our <a href="http://on.fb.me/1gfSBXZ">facebook event</a>.
 
 </p>
 <hr />
@@ -517,7 +517,7 @@
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><strong>Where</strong> : Physics LT1<br>
-<strong>When</strong> : 1pm, Tuesday 15th October
+<strong>When</strong> : 1 PM, Tuesday 15th October
 
 </p>
 <hr />
@@ -534,7 +534,7 @@
 </p>
 <hr />
 <h3 style="margin: 0;padding: 0;display: block;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 22px;font-style: normal;font-weight: 300;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;">Book Sale</h3>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">The book sale will be held this Wednesday (16th October) from <strong>12:00 - 14:00</strong> on the 6th floor EEE Library. This is a great opportunity to sell your old books, as well as buy second hand books for a fair price (Below Amazon's second hand prices!).
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">The book sale will be held this Wednesday (16th October) from <strong>12 - 2 PM</strong> on the 6th floor EEE Library. This is a great opportunity to sell your old books, as well as buy second hand books for a fair price (Below Amazon's second hand prices!).
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">To keep the sale organised, we're allowing people to advertise their books online. This gives people an easy to browse books before the booksale. If you're planning on selling books at the book sale, make sure to <a href="http://bit.ly/19M0elt">register your books for sale</a>.

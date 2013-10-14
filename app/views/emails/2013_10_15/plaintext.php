@@ -5,9 +5,9 @@ Hi all,
 We hope you've survived the first two weeks of college! As we move into the third week, we start our broad lineup of IndustrEE!
 
 - BP IndustrEE event with Lunch and iPad Mini Raffle on __Thursday at 1pm__.
-- Deutsche Bank Interview Skills Session & Competency Questions Walkthrough __ Tuesday__ at __13:00__.
+- Deutsche Bank Interview Skills Session & Competency Questions Walkthrough __ Tuesday__ at __1 PM__.
 - Locker Sale __from 9 AM__!
-- Book Sale on __Wednesday__ on the 6th floor EE Library from __12:00-14:00__
+- Book Sale on __Wednesday__ on the 6th floor EE Library from __12 - 2 PM__
 - SocOff __this Thursday__ at the Union! Prizes for the most creative photo
 
 ________________________________________
@@ -47,7 +47,7 @@ If you have not already emptied your locker, __please do so now__. Any occupied 
 ### Book Sale
 #################################
 
-The book sale will be held this Wednesday (16th October) from __12:00 - 14:00__ on the 6th floor EEE Library. This is a great opportunity to sell your old books, as well as buy second hand books for a fair price (Below Amazon's second hand prices!).
+The book sale will be held this Wednesday (16th October) from __12 - 2 PM__ on the 6th floor EEE Library. This is a great opportunity to sell your old books, as well as buy second hand books for a fair price (Below Amazon's second hand prices!).
 
 To keep the sale organised, we're allowing people to advertise their books online. This gives people an easy to browse books before the booksale. If you're planning on selling books at the book sale, make sure to [register your books for sale](http://bit.ly/19M0elt).
 
