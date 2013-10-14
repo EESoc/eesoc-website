@@ -2,6 +2,11 @@
 
 class CronController extends BaseController {
 
+	public function __construct()
+	{
+		// Skip CSRF filter
+	}
+
 	public function getInstagram()
 	{
 		$ids = array();
@@ -46,6 +51,58 @@ class CronController extends BaseController {
 			}
 
 		} while (isset($next_url));
+	}
+
+	public function postSales()
+	{
+		$username = Input::get('username');
+
+		if ( ! User::where('username', '=', $username)->firstOrFail()->is_admin) {
+			return Response::json(['success' => false, 'message' => 'You are not an admin!']);
+		}
+
+		$credentials = new ImperialCollegeCredential($username, Input::get('password'));
+
+		$http_client = new Guzzle\Http\Client;
+		$http_client->setSslVerification(false);
+
+		$eactivities_client = new EActivities\Client($http_client);
+
+		if ( ! $eactivities_client->signIn($credentials)) {
+			return Response::json(['success' => false, 'message' => 'Error signing in! Please check your username and password.']);
+		}
+
+		$eactivities_client->changeRole(Input::get('role_key'));
+
+		$purchases = $eactivities_client->getPurchasesList(['1725', '1772'], 20226);
+
+		foreach ($purchases as $purchase) {
+			$sale = Sale::find($purchase['order_no']);
+			if ( ! $sale) {
+				$sale = new Sale;
+				$sale->id = $purchase['order_no'];
+			}
+
+			$user = User::where('username', '=', $purchase['login'])->first();
+			if ( ! $user) {
+				$user = new User;
+				$user->username = $purchase['login'];
+				$user->cid      = $purchase['cid'];
+				$user->name     = "{$purchase['first_name']} {$purchase['last_name']}";
+				$user->email    = $purchase['email'];
+				$user->save();
+			}
+
+			$sale->user()->associate($user);
+
+			foreach (['year', 'date', 'cid', 'first_name', 'last_name', 'email', 'product_name', 'quantity', 'unit_price', 'gross_price'] as $attribute) {
+				$sale->{$attribute} = $purchase[$attribute];
+			}
+			$sale->username = $purchase['login'];
+			$sale->save();
+		}
+
+		return Response::json(['success' => true, 'message' => sprintf('Successfully refreshed `%d` sale entries', count($purchases))]);
 	}
 
 }
