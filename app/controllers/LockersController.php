@@ -49,7 +49,7 @@ class LockersController extends BaseController {
 	public function getRent()
 	{
 		return View::make('lockers.redirect_to_shop')
-			->with('redirect_to', URL::action('LockersController@getIndex'));
+			->with('redirect_to', 'https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/3516/eesoc-locker');
 	}
 
 	public function putCancelReservation($id)
