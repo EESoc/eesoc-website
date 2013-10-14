@@ -14,3 +14,7 @@
 .sponsors div {
   height: 200px;
 }
+
+.book-search-results a.thumbnail {
+  text-decoration: none;
+}

@@ -31,7 +31,26 @@ class BooksController extends BaseController {
 	 */
 	public function store()
 	{
-		//
+		$rules = [
+			'name'      => 'required',
+			'condition' => 'required',
+			'price'     => 'required',
+		];
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->passes()) {
+			$book = new Book;
+			$book->fill(Input::all());
+			$book->save();
+
+			return Redirect::route('dashboard.books.index')
+				->with('success', 'Sponsor has been successfully created');
+		} else {
+			return Redirect::route('dashboard.books.create')
+				->withInput()
+				->withErrors($validator);
+		}
 	}
 
 	/**

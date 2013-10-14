@@ -43,27 +43,23 @@ class EmailsController extends BaseController {
 	 */
 	public function store()
 	{
-		$inputs = array(
-			'subject'           => Input::get('subject'),
-			'body'              => Input::get('body'),
-			'newsletter_id'     => Input::get('newsletter_id'),
-			'student_group_ids' => Input::get('student_group_ids'),
-			'queue_send'        => Input::get('queue_send'),
-		);
-
-		$rules = array();
-		if ($inputs['queue_send']) {
-			$rules = array(
-				'subject'           => 'required',
-				'body'              => 'required',
-			);
+		if (Input::get('action') === 'send') {
+			$rules = [
+				'subject'    => 'required',
+				'preheader'  => 'required',
+				'from_name'  => 'required',
+				'from_email' => 'required',
+				'body'       => 'required',
+			];
+		} else {
+			$rules = [];
 		}
 
-		$validator = Validator::make($inputs, $rules);
+		$validator = Validator::make(Input::all(), $rules);
 
 		if ($validator->passes()) {
 			$email = new NewsletterEmail;
-			$email->fill($inputs);
+			$email->fill(Input::all());
 			$email->save();
 
 			$email->newsletters()->sync(Input::get('newsletter_ids'));
@@ -125,10 +121,13 @@ class EmailsController extends BaseController {
 	{
 		$email = NewsletterEmail::findOrFail($id);
 
-		if (Input::get('send_now') === 'true') {
+		if (Input::get('action') === 'send') {
 			$rules = [
-				'subject'           => 'required',
-				'body'              => 'required',
+				'subject'    => 'required',
+				'preheader'  => 'required',
+				'from_name'  => 'required',
+				'from_email' => 'required',
+				'body'       => 'required',
 			];
 		} else {
 			$rules = [];

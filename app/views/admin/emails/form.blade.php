@@ -101,7 +101,7 @@
               <label>
                 {{{ $newsletter->name }}}
                 {{ Form::checkbox(
-                    'newsletter_ids',
+                    'newsletter_ids[]',
                     $newsletter->id,
                     in_array($newsletter->id, $email->newsletters->lists('id')),
                     array('data-recipients-count' => $newsletter->recipients_count)

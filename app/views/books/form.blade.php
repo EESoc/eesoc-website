@@ -1,37 +1,105 @@
 @section('javascript_for_page')
-<script type="text/javascript">
-  var isbn = '9784906224524';
-  $('#search_query').val(isbn);
+  <script>
+    $(function() {
+      var $input = $('input[data-search-query]');
+      var $results = $('[data-search-results]');
+      var $loader = $('[data-loader]');
+      var currentRequest;
 
-  var performSearch = function(searchQuery) {
-    return function() {
-      $.get('https://www.googleapis.com/books/v1/volumes', {
-        q: searchQuery
-      }, function(data) {
-        console.log(data);
+      var selectBook = function(item) {
+        return function() {
+          $results.empty();
+          $input.val('');
+
+          // Google book id
+          $('#google_book_id').val(item.id);
+
+          // ISBN
+          // $('#isbn').val(
+          //   ($.grep(item.volumeInfo.industryIdentifiers, function(data, i) {
+          //     return data.type === 'ISBN_13';
+          //   }) || item.volumeInfo.industryIdentifiers)[0].identifier
+          // );
+          if (typeof item.volumeInfo.industryIdentifiers !== 'undefined' && item.volumeInfo.industryIdentifiers.length > 0) {
+            $('#isbn').val(item.volumeInfo.industryIdentifiers[0].identifier);
+          }
+
+          $('#name').val(item.volumeInfo.title);
+          
+          return false;
+        };
+      };
+
+      var performSearch = function(searchQuery) {
+        if (currentRequest) {
+          currentRequest.abort();
+        }
+        return function() {
+          $loader.removeClass('hide');
+          currentRequest = $.get('https://www.googleapis.com/books/v1/volumes', {
+            q: searchQuery,
+            maxResults: 6
+          }, function(data) {
+            $loader.addClass('hide');
+            $results.empty();
+            $.each(data.items, function(i, item) {
+              console.log(item);
+              $results
+                .append(
+                  $('<div class="col-lg-2" />')
+                    .append(
+                      $('<a href="#" class="thumbnail" />')
+                        .append(
+                          (
+                            typeof item.volumeInfo.imageLinks !== 'undefined'
+                            ? $('<img />')
+                                .attr('src', item.volumeInfo.imageLinks.thumbnail)
+                                .attr('alt', item.volumeInfo.title)
+                            : ''
+                          )
+                        )
+                        .append(
+                          $('<div class="caption" />')
+                            .append(
+                              $('<h4 />')
+                                .text(item.volumeInfo.title)
+                            )
+                        )
+                        .click(selectBook(item))
+                    )
+                );
+            });
+          });
+          return false;
+        }
+      };
+
+      $input.keyup(function(e) {
+        var $this = $(this),
+            searchQuery = $this.val();
+        clearTimeout($this.data('timer'));
+        if (searchQuery.length > 0) {
+          $this.data('timer', setTimeout(performSearch(searchQuery), 100));
+        }
       });
-      return false;
-    }
-  };
-
-  $('input[data-search-query]').keyup(function(e) {
-    var $this = $(this),
-        searchQuery = $this.val();
-    clearTimeout($this.data('timer'));
-    if (searchQuery.length > 0) {
-      $this.data('timer', setTimeout(performSearch(searchQuery), 100));
-    }
-  });
-</script>
+    });
+  </script>
 @stop
 
 <div class="panel panel-default">
   <div class="panel-heading">Book finder</div>
   <div class="panel-body">
-    <input type="text" class="form-control input-lg" placeholder="Search for your book" data-search-query>
+    <input type="text" class="form-control input-lg" placeholder="Search using book title, ISBN, author, etc" data-search-query>
   </div>
-  <div class="panel-body" data-search-results></div>
+  <div class="panel-body">
+    <p class="text-center hide" data-loader>
+      <img src="{{ asset('assets/images/loading.gif') }}" alt="Loading">
+    </p>
+    <div class="row book-search-results" data-search-results></div>
+  </div>
 </div>
+
+{{ Form::hidden('google_book_id', null) }}
 
 <hr>
 
@@ -75,7 +143,7 @@
   {{ Form::textarea('contact_instructions', null, array('class' => 'form-control input-lg')) }}
   {{ $errors->first('contact_instructions', '<span class="help-block">:message</span>') }}
 </div>
-<div class="form-group {{ $errors->first('expires_at', 'has-error') }}">
+<div class="form-group {{ $errors->first('expires_at', 'has-error') }} hide">
   {{ Form::label('expires_at', 'Expires at', array('class' => 'control-label')) }}
   {{ Form::text('expires_at', null, array('class' => 'form-control input-lg')) }}
   {{ $errors->first('expires_at', '<span class="help-block">:message</span>') }}

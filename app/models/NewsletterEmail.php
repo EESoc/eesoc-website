@@ -4,6 +4,13 @@ class NewsletterEmail extends Eloquent {
 
 	protected $fillable = ['subject', 'preheader', 'from_name', 'from_email', 'reply_to_email', 'body'];
 
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->state = 'draft';
+	}
+
 	public function newsletters()
 	{
 		return $this->belongsToMany('Newsletter', 'newsletters_newsletter_emails');
