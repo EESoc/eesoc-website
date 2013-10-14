@@ -8,7 +8,7 @@
       {{ $locker->lockerCluster->lockerFloor->name }}
       <small>{{ $locker->lockerCluster->name }}</small>
     </h2>
-    <p class="lockers">
+    <div class="lockers">
       <table class="table table-bordered lockers-table">
         <?php
           $lockers = $locker->lockerCluster->lockers;
@@ -36,7 +36,7 @@
           </tr>
         @endfor
       </table>
-    </p>
+    </div>
     <p class="pull-right">
       <a href="{{{ URL::action('LockersController@postClaim', $locker->id) }}}" class="btn btn-primary btn-lg" data-method="post" data-disable-with="Processing&hellip;">Yep</a>
       <a href="{{{ URL::action('LockersController@getIndex') }}}" class="btn btn-link btn-lg">Nope</a>
