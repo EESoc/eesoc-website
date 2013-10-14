@@ -83,7 +83,7 @@
     <div class="col-lg-6">
       @yield('unclaimed_lockers_alert')
       @content('locker-sale-introduction')
-      <a href="{{{ URL::action('LockersController@getRent') }}}" class="btn btn-primary btn-block btn-lg" data-disable-with="Please wait&hellip;">
+      <a href="{{{ action('LockersController@getRent') }}}" class="btn btn-primary btn-block btn-lg" data-disable-with="Please wait&hellip;">
         <span class="glyphicon glyphicon-shopping-cart"></span>
         Rent a Locker
       </a>
@@ -121,6 +121,15 @@
                         <a href="#" class="btn btn-success btn-sm btn-block disabled">Available</a>
                       @else
                         {{ $locker->status_action }}
+                      @endif
+                      @if (Auth::user()->is_admin)
+                        @if ( ! $locker->is_taken)
+                          @if ($locker->is_reserved)
+                            <a href="{{{ action('LockersController@putCancelReservation', $locker->id) }}}" class="btn btn-warning btn-xs btn-block" data-method="put">Cancel</a>
+                          @else
+                            <a href="{{{ action('LockersController@putReserve', $locker->id) }}}" class="btn btn-warning btn-xs btn-block" data-method="put">Reserve</a>
+                          @endif
+                        @endif
                       @endif
                     </td>
                   @else

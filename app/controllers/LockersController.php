@@ -2,6 +2,14 @@
 
 class LockersController extends BaseController {
 
+	public function __construct()
+	{
+		parent::__construct();
+
+		// Admins only
+		$this->beforeFilter('auth.admin', ['only' => ['putCancelReservation', 'putReserve']]);
+	}
+
 	public function getIndex()
 	{
 		return View::make('lockers.index')
@@ -42,6 +50,32 @@ class LockersController extends BaseController {
 	{
 		return View::make('lockers.redirect_to_shop')
 			->with('redirect_to', URL::action('LockersController@getIndex'));
+	}
+
+	public function putCancelReservation($id)
+	{
+		$locker = Locker::findOrFail($id);
+
+		if ( ! $locker->is_taken) {
+			$locker->status = Locker::STATUS_VACANT;
+			$locker->save();
+		}
+
+		return Redirect::action('LockersController@getIndex')
+			->with('success', 'Locker reservation cancelled');
+	}
+
+	public function putReserve($id)
+	{
+		$locker = Locker::findOrFail($id);
+
+		if ( ! $locker->is_taken) {
+			$locker->status = Locker::STATUS_RESERVED;
+			$locker->save();
+		}
+
+		return Redirect::action('LockersController@getIndex')
+			->with('success', 'Locker reserved');
 	}
 
 	private function findLockerAndAuthorizeClaim($id)

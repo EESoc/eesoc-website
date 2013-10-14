@@ -1,0 +1,10 @@
+.navbar-inverse {
+  margin: 0;
+  height: 100px;
+  background-color: #DDF2FC;
+  border: none;
+}
+
+.navbar-brand {
+  margin-top: -90px;
+}

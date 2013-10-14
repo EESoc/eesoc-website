@@ -33,6 +33,9 @@ Route::controller('events', 'EventsController');
 # Newsletter
 Route::controller('newsletters', 'NewslettersController');
 
+# Sponsors
+Route::controller('sponsors', 'SponsorsController');
+
 # User
 Route::get('users/{username}', 'UsersController@getShow');
 
@@ -50,18 +53,7 @@ Route::group(['before' => 'auth.member'], function() {
 		Route::controller('books', 'BooksController');
 
 		# Lockers
-		// Route::controller('lockers', 'LockersController');
-		// Temporary route
-		Route::get('lockers', function() {
-			$page = Page::where('slug', '=', 'dashboard/lockers')->first();
-
-			if ( ! $page) {
-				App::abort(404);
-			}
-
-			return View::make('page')
-				->with('page', $page);
-		})->where('path', '.*');
+		Route::controller('lockers', 'LockersController');
 	});
 });
 

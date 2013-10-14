@@ -12,7 +12,7 @@
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
-    <!-- <link href="{{ asset('assets/css/site.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('assets/css/application.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/user.css') }}" rel="stylesheet">
 
@@ -30,48 +30,10 @@
   <body class="@yield('body_class')">
 
     @section('navbar')
-      <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ url('/') }}">
-              <img src="{{ asset('assets/images/eesoc.png') }}" alt="EESoc" height="100">
-            </a>
-          </div>
-          <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-              <li <?php if (Request::is('/')) echo 'class="active"' ?>>
-                <a href="{{ url('/') }}">
-                  <span class="glyphicon glyphicon-chevron-right"></span> Home
-                </a>
-              </li>
-              <li <?php if (Request::is('about')) echo 'class="active"' ?>>
-                <a href="{{ url('about') }}">
-                  <span class="glyphicon glyphicon-chevron-right"></span> About Us
-                </a>
-              </li>
-              <li>
-                <a href="{{ url('events') }}">
-                  <span class="glyphicon glyphicon-chevron-right"></span> Events
-                </a>
-              </li>
-              <li>
-                <a href="{{ url('sponsors') }}">
-                  <span class="glyphicon glyphicon-chevron-right"></span> Sponsors
-                </a>
-              </li>
-              <li>
-                <a href="{{ url('committee') }}">
-                  <span class="glyphicon glyphicon-chevron-right"></span> Committee
-                </a>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav">
+      <div id="site-header">
+        <nav class="navbar navbar-static-top navbar-inverse" role="navigation">
+          <div class="container">
+            <ul class="nav navbar-nav navbar-right">
               @if (Auth::check())
                 <li class="navbar-text">
                   Signed in as
@@ -100,11 +62,55 @@
                 </a>
               @endif
             </ul>
-          </div><!-- /.navbar-collapse -->
-        </div>
-      </nav>
+          </div>
+        </nav>
+        <nav class="navbar navbar-static-top navbar-default" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{ asset('assets/images/eesoc.png') }}" alt="EESoc" height="100">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse">
+              <ul class="nav navbar-nav navbar-right">
+                <li class="{{ Request::is('/') ? 'active' : '' }}">
+                  <a href="{{ url('/') }}">
+                    <span class="glyphicon glyphicon-chevron-right"></span> Home
+                  </a>
+                </li>
+                <li class="{{ Request::is('about') ? 'active' : '' }}">
+                  <a href="{{ url('about') }}">
+                    <span class="glyphicon glyphicon-chevron-right"></span> About Us
+                  </a>
+                </li>
+                <li class="{{ Request::is('events') ? 'active' : '' }}">
+                  <a href="{{ url('events') }}">
+                    <span class="glyphicon glyphicon-chevron-right"></span> Events
+                  </a>
+                </li>
+                <li class="{{ Request::is('sponsors') ? 'active' : '' }}">
+                  <a href="{{ url('sponsors') }}">
+                    <span class="glyphicon glyphicon-chevron-right"></span> Sponsors
+                  </a>
+                </li>
+                <li class="{{ Request::is('committee') ? 'active' : '' }}">
+                  <a href="{{ url('committee') }}">
+                    <span class="glyphicon glyphicon-chevron-right"></span> Committee
+                  </a>
+                </li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div>
+        </nav>
+      </div>
 
-      <header id="site-header" class="hide">
+      <header id="old-site-header" class="hide">
         <div class="container">
           <div class="row">
             <div class="col-lg-6 col-left">
