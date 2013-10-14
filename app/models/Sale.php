@@ -11,7 +11,9 @@ class Sale extends Eloquent implements PresentableInterface {
 
 	public function scopeLocker($query)
 	{
-		return $query->whereIn('product_name', ['603-00-1226394344233']);
+		// Sets the locker scope
+		// @todo in the future: limit year?
+		return $query->whereIn('product_name', ['Single Locker']);
 	}
 
 	public function setUnitPriceAttribute($unit_price_in_decimal)
