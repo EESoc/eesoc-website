@@ -45,6 +45,10 @@ Route::group(['before' => 'auth.member'], function() {
 	Route::get('dashboard', 'UsersController@getDashboard');
 
 	Route::group(['prefix' => 'dashboard'], function() {
+		# Books
+		Route::resource  ('books', 'BooksController');
+		Route::controller('books', 'BooksController');
+
 		# Lockers
 		// Route::controller('lockers', 'LockersController');
 		// Temporary route

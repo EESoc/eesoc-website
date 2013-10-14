@@ -84,7 +84,7 @@ class ContentsController extends BaseController {
 
 		$rules = array(
 			'name'    => 'required',
-			'slug' => "required|unique:contents,slug,{$content->id}",
+			'slug'    => "required|unique:contents,slug,{$content->id}",
 			'content' => 'required',
 		);
 

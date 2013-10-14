@@ -12,13 +12,13 @@
 
       <div class="form-group {{ $errors->first('username', 'has-error') }}">
         {{ Form::label('username', 'IC Username', array('class' => 'control-label')) }}
-        {{ Form::text('username', null, array('class' => 'form-control input-large')) }}
+        {{ Form::text('username', null, array('class' => 'form-control input-lg')) }}
         {{ $errors->first('username', '<span class="help-block">:message</span>') }}
       </div>
 
       <div class="form-group {{ $errors->first('password', 'has-error') }}">
         {{ Form::label('password', 'Password', array('class' => 'control-label')) }}
-        {{ Form::password('password', array('class' => 'form-control input-large')) }}
+        {{ Form::password('password', array('class' => 'form-control input-lg')) }}
         {{ $errors->first('password', '<span class="help-block">:message</span>') }}
       </div>
 
