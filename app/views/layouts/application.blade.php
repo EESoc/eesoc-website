@@ -31,7 +31,7 @@
 
     @section('navbar')
       <div id="site-header">
-        <nav class="navbar navbar-static-top navbar-inverse" role="navigation">
+        <nav class="navbar navbar-static-top navbar-inverse hidden-xs" role="navigation">
           <div class="container">
             <ul class="nav navbar-nav navbar-right">
               @if (Auth::check())
@@ -78,6 +78,32 @@
               </a>
             </div>
             <div class="collapse navbar-collapse">
+              <ul class="nav navbar-nav visible-xs">
+                @if (Auth::check())
+                  <li>
+                    <a href="{{{ action('UsersController@getShow', Auth::user()->username) }}}">
+                      <strong>{{{ Auth::user()->name }}}</strong>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{{ action('UsersController@getDashboard') }}}">
+                      <span class="glyphicon glyphicon-wrench"></span>
+                      Settings
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{{ action('SessionsController@deleteDestroy') }}}" data-method="delete">
+                      <span class="glyphicon glyphicon-off"></span>
+                      Sign Out
+                    </a>
+                  </li>
+                @else
+                  <a href="{{{ action('SessionsController@getNew') }}}" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-lock"></span>
+                    Sign In
+                  </a>
+                @endif
+              </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li class="{{ Request::is('/') ? 'active' : '' }}">
                   <a href="{{ url('/') }}">

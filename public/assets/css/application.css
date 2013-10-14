@@ -5,8 +5,10 @@
   border: none;
 }
 
-.navbar-brand {
-  margin-top: -90px;
+@media (min-width:768px) {
+  .navbar-brand {
+    margin-top: -90px;
+  }
 }
 
 .sponsors div {
