@@ -104,12 +104,12 @@
         </div>
       </nav>
 
-      <header id="site-header">
+      <header id="site-header" class="hide">
         <div class="container">
           <div class="row">
             <div class="col-lg-6 col-left">
               <a href="{{ url('/') }}">
-                <img src="{{ asset('assets/images/eesoc.png') }}" alt="EESoc" class="brand img-responsive">      
+                <img src="{{ asset('assets/images/eesoc.png') }}" alt="EESoc" class="brand img-responsive">
               </a>
               <div class="row">
                 <div class="col-lg-7">

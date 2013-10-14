@@ -8,7 +8,7 @@
   <hr class="invisible">
   <div id="photos" class="row">
     <p class="text-center">
-      <img src="{{ asset('assets/images/loading.gif') }}" alt="Loading">
+      <img src="{{ asset('assets/images/loading.gif') }}" alt="Loading" data-loader>
     </p>
   </div>
 </div>
@@ -21,31 +21,35 @@
 <script type="text/javascript">
 $(function() {
   var $photos = $('#photos');
+  var firstTime = true;
   function load_video() {
+    $photos.find('p:has([data-loader])').remove();
     $.get(
       '{{ url('home/photos') }}',
       function(data) {
-        $photos.empty();
         $.each(data, function(i, photo) {
-          $photos.append(
-            $('<div class="col-lg-3" />')
-              .append(
-                $('<a />')
-                  .attr('href', photo.link)
-                  .append(
-                    $('<img />')
-                      .attr('src', photo.image_standard_resolution_url)
-                      .attr('width', 612)
-                      .attr('height', 612)
-                      .addClass('img-responsive')
-                  )
-              )
-              .append(
-                $('<hr />')
-                  .addClass('invisible')
-              )
-          );
+          if ($('[data-photo-id=' + photo.id + ']').length === 0) {
+            $photos[firstTime ? 'append' : 'prepend'](
+              $('<div class="col-lg-3" data-photo-id="' + photo.id + '" />')
+                .append(
+                  $('<a />')
+                    .attr('href', photo.link)
+                    .append(
+                      $('<img />')
+                        .attr('src', photo.image_standard_resolution_url)
+                        .attr('width', 612)
+                        .attr('height', 612)
+                        .addClass('img-responsive')
+                    )
+                )
+                .append(
+                  $('<hr />')
+                    .addClass('invisible')
+                )
+            );
+          }
         });
+        firstTime = false;
       }
     );
   }
