@@ -5,6 +5,11 @@
   border: none;
 }
 
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+  color: #000;
+}
+
 @media (min-width:768px) {
   .navbar-brand {
     margin-top: -90px;
