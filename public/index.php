@@ -6,6 +6,8 @@
  * @author   Taylor Otwell <taylorotwell@gmail.com>
  */
 
+ini_set('zlib.output_compression', '0');
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
