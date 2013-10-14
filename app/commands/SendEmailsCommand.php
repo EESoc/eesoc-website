@@ -57,10 +57,10 @@ class SendEmailsCommand extends Command {
 
 		// $email = NewsletterEmail::findOrFail(1);
 
-		$html = View::make('emails.2013_10_09.html')
+		$html = View::make('emails.2013_10_15.html')
 			// ->with('body', $email->body)
 			->render();
-		$plaintext = View::make('emails.2013_10_09.plaintext')
+		$plaintext = View::make('emails.2013_10_15.plaintext')
 			->render();
 
 		// $body = (new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles($html, file_get_contents(base_path() . '/public/assets/css/email.css')))
@@ -78,10 +78,10 @@ class SendEmailsCommand extends Command {
 			$this->info(sprintf('Sending email `%s` to `%s`', 'Welcome to EESoc 2013/14', $email));
 			$message = Swift_Message::newInstance();
 
-			$message->setFrom(array('please-reply@eesoc.com' => 'EESoc'));
+			$message->setFrom(array('eesoc@imperial.ac.uk' => 'EESoc'));
 			$message->setReplyTo('eesoc@imperial.ac.uk');
 			$message->setTo($email);
-			$message->setSubject('Welcome to EESoc 2013/14');
+			$message->setSubject('IndustrEE talk this Thursday, Locker and Book Sale');
 			$message->setBody($html, 'text/html');
 			$message->addPart($plaintext, 'text/plain');
 
