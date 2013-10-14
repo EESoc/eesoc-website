@@ -35,20 +35,26 @@
           <div class="container">
             @if (Auth::check())
               <ul class="nav navbar-nav navbar-right">
-                <li class="navbar-text">
-                  Signed in as
-                </li>
                 <li>
                   <a href="{{{ action('UsersController@getShow', Auth::user()->username) }}}">
+                    <span class="glyphicon glyphicon-user"> </span>
                     <strong>{{{ Auth::user()->name }}}</strong>
                   </a>
                 </li>
                 <li>
                   <a href="{{{ action('UsersController@getDashboard') }}}">
-                    <span class="glyphicon glyphicon-wrench"></span>
-                    Settings
+                    <span class="glyphicon glyphicon-dashboard"></span>
+                    Dashboard
                   </a>
                 </li>
+                @if (Auth::user()->is_admin)
+                  <li>
+                    <a href="{{{ url('admin') }}}">
+                      <span class="glyphicon glyphicon-fire"></span>
+                      Administer
+                    </a>
+                  </li>
+                @endif
                 <li>
                   <a href="{{{ action('SessionsController@deleteDestroy') }}}" data-method="delete">
                     <span class="glyphicon glyphicon-off"></span>

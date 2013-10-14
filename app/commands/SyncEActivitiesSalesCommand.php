@@ -43,10 +43,7 @@ class SyncEActivitiesSalesCommand extends Command {
 		$credentials = new ImperialCollegeCredential($username, $password);
 
 		$http_client = new Guzzle\Http\Client;
-
-		if (App::environment() === 'local') {
-			$http_client->setSslVerification(false);
-		}
+		$http_client->setSslVerification(false);
 
 		$eactivities_client = new EActivities\Client($http_client);
 
