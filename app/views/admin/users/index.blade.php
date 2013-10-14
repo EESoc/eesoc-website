@@ -141,6 +141,12 @@
                 It's me :-)
               @else
                 <div class="btn-group btn-group-sm">
+
+                  <a href="{{{ $user->pretend_url }}}" class="btn btn-default">
+                    <span class="glyphicon glyphicon-log-in"></span>
+                    Pretend
+                  </a>
+
                   @if ($user->has_email)
                     <a href="{{{ $user->email_url }}}" class="btn btn-default">
                       <span class="glyphicon glyphicon-envelope"></span>

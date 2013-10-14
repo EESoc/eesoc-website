@@ -46,4 +46,9 @@ class UserPresenter extends Presenter {
 		return URL::action('Admin\UsersController@putDemote', $this->username);
 	}
 
+	public function presentPretendUrl()
+	{
+		return URL::action('Admin\UsersController@getPretend', $this->username);
+	}
+
 }

@@ -5,6 +5,10 @@
   border: none;
 }
 
+.navbar-inverse .pull-right {
+  margin-top: 10px;
+}
+
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
   color: #000;

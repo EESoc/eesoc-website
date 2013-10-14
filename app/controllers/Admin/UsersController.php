@@ -137,4 +137,21 @@ class UsersController extends BaseController {
 			->with('users', User::adminsFirst()->hasImage()->get());
 	}
 
+	/**
+	 * Pretends to be a user
+	 * 
+	 * @return Response
+	 */
+	public function getPretend($username)
+	{
+		$user = User::where('username', '=', $username)->firstOrFail();
+
+		Auth::logout();
+
+		Auth::login($user);
+
+		return Redirect::to('/')
+			->with('success', "Successfully signed in as {$user->username}");
+	}
+
 }

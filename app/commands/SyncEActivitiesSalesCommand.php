@@ -84,7 +84,8 @@ class SyncEActivitiesSalesCommand extends Command {
 
 		// @todo make a ask prompt for this.
 		// ['1725', '1772', '1772-3']
-		$purchases = $eactivities_client->getPurchasesList(['1725', '1772', '1772-3'], 1983);
+		// $purchases = $eactivities_client->getPurchasesList(['1725', '1772', '1772-3'], 1983);
+		$purchases = $eactivities_client->getPurchasesList(['1725', '1772'], 20226);
 
 		foreach ($purchases as $purchase) {
 			$sale = Sale::find($purchase['order_no']);

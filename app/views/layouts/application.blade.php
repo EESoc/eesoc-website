@@ -33,8 +33,8 @@
       <div id="site-header">
         <nav class="navbar navbar-static-top navbar-inverse hidden-xs" role="navigation">
           <div class="container">
-            <ul class="nav navbar-nav navbar-right">
-              @if (Auth::check())
+            @if (Auth::check())
+              <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-text">
                   Signed in as
                 </li>
@@ -55,13 +55,13 @@
                     Sign Out
                   </a>
                 </li>
-              @else
-                <a href="{{{ action('SessionsController@getNew') }}}" class="btn btn-primary">
-                  <span class="glyphicon glyphicon-lock"></span>
-                  Sign In
-                </a>
-              @endif
-            </ul>
+              </ul>
+            @else
+              <a href="{{{ action('SessionsController@getNew') }}}" class="btn btn-primary pull-right">
+                <span class="glyphicon glyphicon-lock"></span>
+                Sign In
+              </a>
+            @endif
           </div>
         </nav>
         <nav class="navbar navbar-static-top navbar-default" role="navigation">
