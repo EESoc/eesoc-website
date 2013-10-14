@@ -21,4 +21,9 @@ class NewsletterEmailQueue extends Eloquent {
 		return $query->where('sent', '=', '1');
 	}
 
+	public function getTrackingPixelUrlAttribute()
+	{
+		return url('emails/track/' . $this->tracker_token . '.gif');
+	}
+
 }

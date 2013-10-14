@@ -58,7 +58,7 @@ class NewsletterEmail extends Eloquent {
 	{
 		$total = $this->send_queue_length;
 
-		if ($total === 0) {
+		if ($total == 0) {
 			return 0;
 		}
 
@@ -157,6 +157,13 @@ class NewsletterEmail extends Eloquent {
 		} else {
 			foreach ($recipients as $recipient) {
 				$message->setTo($recipient->to_email);
+
+				// @todo move this to template
+				$message->setBody(
+					$message->getBody()
+					.
+					'<img src="' . $recipient->tracking_pixel_url . '" width="1" height="1" />'
+				);
 
 				if ($mailer->send($message)) {
 					$recipient->sent = true;

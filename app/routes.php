@@ -23,6 +23,10 @@ Route::delete('sign-out', 'SessionsController@deleteDestroy');
 # Cron
 Route::controller('cron', 'CronController');
 
+# Emails
+Route::get('emails/track/{tracker_token}.gif', 'EmailsController@getTrack');
+Route::controller('emails', 'EmailsController');
+
 # Events
 Route::controller('events', 'EventsController');
 
