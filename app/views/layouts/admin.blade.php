@@ -85,11 +85,16 @@
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Maintenance
+                Logs
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{{{ URL::route('admin.logs.index') }}}">Logs</a></li>
+                <li>
+                  <a href="{{{ URL::route('admin.sales.index') }}}">EActivities Sales</a>
+                </li>
+                <li>
+                  <a href="{{{ URL::route('admin.logs.index') }}}">Server Logs</a>
+                </li>
               </ul>
             </li>
           </ul>
