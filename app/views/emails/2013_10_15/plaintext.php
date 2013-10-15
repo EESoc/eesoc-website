@@ -57,7 +57,11 @@ Looking to grab a deal at the book sale? You will be able to view a catalogue of
 ### Soc Off
 #################################
 
-https://eesoc.com/assets/email/uploads/email_2_2.png
+https://eesoc.com/assets/email/uploads/email_2_3.png
+
+Join us for the annual soc-off competition! The Soc Off is a friendly night of competition between every society, held at Metric. Each department battles through games of twister, sumo suit competitions and more! There is a £1 entry fee, with the entry money given away to the society with the most present members.
+
+So bring your parents, children, siblings and friends, and help EESoc win. If we are amongst the winning society, we will be giving out a prize to the best picture posted to our instagram (#EESoc), Twitter (@eesoc) or Facbeook!
 
 Best,
 Thomas Lim
