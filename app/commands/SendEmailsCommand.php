@@ -78,8 +78,8 @@ class SendEmailsCommand extends Command {
 			$this->info(sprintf('Sending email `%s` to `%s`', 'Welcome to EESoc 2013/14', $email));
 			$message = Swift_Message::newInstance();
 
-			$message->setFrom(array('eesoc@imperial.ac.uk' => 'EESoc'));
-			$message->setReplyTo('eesoc@imperial.ac.uk');
+			$message->setFrom(array('please-reply@eesoc.com' => 'EESoc'));
+			$message->setReplyTo('please-reply@eesoc.com');
 			$message->setTo($email);
 			$message->setSubject('IndustrEE talk this Thursday, Locker and Book Sale');
 			$message->setBody($html, 'text/html');
