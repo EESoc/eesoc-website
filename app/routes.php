@@ -89,6 +89,9 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 	# Posts
 	Route::resource('posts', 'Admin\PostsController', ['except' => ['show']]);
 
+	# Sales
+	Route::resource('sales', 'Admin\SalesController', ['only' => ['index']]);
+
 	# Sponsors
 	Route::resource('sponsors', 'Admin\SponsorsController', ['except' => ['show']]);
 
