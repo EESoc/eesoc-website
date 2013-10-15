@@ -89,7 +89,7 @@
     </div>
     @foreach ($locker_floor->lockerClusters()->sorted()->get() as $locker_cluster)
       <div class="panel panel-default locker-cluster" id="{{ $locker_cluster->anchor_name }}">
-        <div class="panel-heading">{{{ $locker_cluster->name }}}</div>
+        <div class="panel-heading">Locker Block {{{ $locker_cluster->name }}}</div>
         <div class="lockers">
           <table class="table table-bordered lockers-table">
             <?php
