@@ -484,19 +484,19 @@
                         <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 15px;line-height: 150%;text-align: left;"><p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Hi all,
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">We hope you've survived the first two weeks of college! As we move into the third week, we start our broad lineup of IndustrEE!
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">We hope you've survived the first two weeks of college! As we move into the third week, we kick off our broad lineup of IndustrEE events!
 
 </p>
 <ul>
 <li>BP IndustrEE event with Lunch and iPad Mini Raffle on <strong>Thursday at 1 PM</strong>.</li>
-<li>Deutsche Bank Interview Skills Session &amp; Competency Questions Walkthrough <strong> Tuesday</strong> at <strong>1 PM</strong>.</li>
+<li>Deutsche Bank Interview Skills Session &amp; Competency Questions Walkthrough <strong>today</strong> at <strong>1 PM</strong>.</li>
 <li>Locker Sale <strong>today from 9 AM</strong>!</li>
 <li>Book Sale on <strong>Wednesday</strong> on the 6th floor EE Library from <strong>12 - 2 PM</strong></li>
 <li>SocOff <strong>this Thursday</strong> at the Union! Prizes for the most creative photo</li>
 </ul>
 <hr>
 
-<h3 style="margin: 0;padding: 0;display: block;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 22px;font-style: normal;font-weight: 300;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;">Thursday - BP IndustrEE Event : Instrumentation, Control &amp; EEE Opportunities</h3>
+<h3 style="margin: 0;padding: 0;display: block;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 22px;font-style: normal;font-weight: 300;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;">Thursday - BP IndustrEE Event : Instrumentation, Comms, Control &amp; EEE Opportunities</h3>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><img src="https://eesoc.com/assets/email/uploads/email_2_1.jpg" width="550" style="max-width: 100%">
 
 </p>
@@ -513,7 +513,7 @@
 </p>
 <hr />
 <h3 style="margin: 0;padding: 0;display: block;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 22px;font-style: normal;font-weight: 300;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;">Tuesday - Deutsche Bank : Interview Skills Session &amp; Competency Questions Walkthrough</h3>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">On Tuesday (15th October) Deutsche Bank are coming onto campus to run an interview skills session for all those currently thinking about applying to the bank or those in the interview process ! With representatives from Graduate Recruitment, we'll be playing "Interview Bingo," going through the numerical test and competency questions as well as having small group exercises with business reps to ensure you succeed at interviews ! We highly recommend those applying to Deutsche Bank to attend this session.
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">On Tuesday (15th October) Deutsche Bank are coming onto campus to run an interview skills session for all those currently thinking about applying to the bank or those in the interview process! With representatives from Graduate Recruitment, we'll be playing "Interview Bingo," going through the numerical test and competency questions as well as having small group exercises with business reps to ensure you succeed at interviews! We highly recommend those applying to Deutsche Bank to attend this session.
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><strong>Where</strong> : Physics LT1<br>
@@ -522,7 +522,7 @@
 </p>
 <hr />
 <h3 style="margin: 0;padding: 0;display: block;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 22px;font-style: normal;font-weight: 300;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;">Locker Sale</h3>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Just a short reminder that lockers can be reserved from <strong>from Tuesday</strong> at <strong>9 AM</strong>. Locker sales this year are handled online. To purchase a locker:
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Lockers are on sale <strong>from today</strong>. Locker sales this year are handled completetly online. To purchase a locker:
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">1 - Purchase your locker online on the <a href="http://bit.ly/17oPL9J">Imperial College Union store</a><br>
@@ -546,12 +546,16 @@
 <hr />
 <h3 style="margin: 0;padding: 0;display: block;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 22px;font-style: normal;font-weight: 300;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;">Soc Off</h3>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><img src="https://eesoc.com/assets/email/uploads/email_2_3.jpg" width="550" style="max-width: 100%"></p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Join us for the annual soc-off competition! The Soc Off is a friendly night of competition between every society, held at Metric. Each department battles through games of twister, sumo suit competitions and more! There is a £1 entry fee, with the entry money given away to the society with the most present members.
-</p><p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">So bring your parents, children, siblings and friends, and help EESoc win. If we are amongst the winning society, we will be giving out a prize to the best picture posted to our instagram (#EESoc), Twitter (@eesoc) or Facbeook!
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Join us for the annual Soc Off competition! The Soc Off is a friendly night of competition between every society, held at Metric. Each department battles through games of twister, sumo suit competitions and more! There is a &pound;1 entry fee, with the entry money given away to the society with the most present members.
+</p><p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">So bring your parents, children, siblings and friends, and help EESoc win. If we are amongst the winning society, we will be giving out a prize to the best picture posted to our <a href="http://bit.ly/16QRRVn">instagram</a> (#EESoc), <a href="http://bit.ly/16wDPG7">Twitter</a> (@eesoc) or <a href="http://on.fb.me/1fhTYE3">Facbeook</a>!
+</p><p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">
+<strong>Where</strong> : Metric<br />
+<strong>When</strong> : 8PM, Thursday 17th October
 </p>
 <hr />
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">All the best,<br />
-    Thomas Lim
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Look forward to seeing you at an EESoc event this week!</p
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">EE Love,<br />
+    Thomas Lim <br />
 
 
 </p>
