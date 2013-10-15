@@ -76,11 +76,14 @@ class CronController extends BaseController {
 
 		$purchases = $eactivities_client->getPurchasesList(['1725', '1772'], 20226);
 
+		$emails_sent = 0;
+
 		foreach ($purchases as $purchase) {
 			$sale = Sale::find($purchase['order_no']);
 			if ( ! $sale) {
 				$sale = new Sale;
 				$sale->id = $purchase['order_no'];
+				$sale->notified = false;
 			}
 
 			$user = User::where('username', '=', $purchase['login'])->first();
@@ -100,9 +103,21 @@ class CronController extends BaseController {
 			}
 			$sale->username = $purchase['login'];
 			$sale->save();
+
+			// Is a locker sale and not notified
+			if ($sale->product_name === 'Single Locker' && ! $sale->notified) {
+				if (Notification::sendLockerInformation($user)) {
+					$emails_sent++;
+					$sale->notified = true;
+					$sale->save();
+				}
+			}
 		}
 
-		return Response::json(['success' => true, 'message' => sprintf('Successfully refreshed `%d` sale entries', count($purchases))]);
+		return Response::json([
+			'success' => true,
+			'message' => sprintf('Successfully refreshed %d sale entries. Sent %d emails.', count($purchases), $emails_sent),
+		]);
 	}
 
 }
