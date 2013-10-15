@@ -76,8 +76,8 @@
         </div>
         <div class="panel-footer">
           Please note that any orders made on ICU Shop may take up to 24 hours
-          before it will appear on our system. If you have yet to see your order
-          here, please <a href="#">contact us</a>.
+          before it will appear on our system.<br />
+          If you have any issues, don't hesitate to <a href="mailto:eesoc@imperial.ac.uk">contact us</a>.
         </div>
       </div>
     </div>
