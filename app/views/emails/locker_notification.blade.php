@@ -9,14 +9,14 @@
       Dear {{{ $user->name }}},
     </p>
     <p>
-      We have received your locker order.
+      We have received your order.
     </p>
     <p>
-      You can now claim your locker on this page:
+      You can now claim your locker here:
       <a href="https://eesoc.com/dashboard/lockers">https://eesoc.com/dashboard/lockers</a>
     </p>
     <p>
-      Thank you,
+      Thank you,<br>
       EESoc
     </p>
   </body>

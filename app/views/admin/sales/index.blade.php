@@ -25,7 +25,15 @@
             ({{{ $sale->user->username }}})
           </td>
           <td class="text-right">{{{ $sale->date }}}</td>
-          <td>{{{ $sale->product_name }}}</td>
+          <td>
+            {{{ $sale->product_name }}}
+            @if ($sale->is_locker && $sale->user->unclaimed_lockers_count > 0)
+              <span class="label label-warning">
+                {{{ $sale->user->unclaimed_lockers_count }}}
+                Unclaimed
+              </span>
+            @endif
+          </td>
           <td class="text-right">{{{ $sale->unit_price }}}</td>
           <td class="text-right">{{{ $sale->quantity }}}</td>
           <td class="text-right">{{{ $sale->gross_price }}}</td>

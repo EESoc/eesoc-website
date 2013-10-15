@@ -95,6 +95,9 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 	# Sponsors
 	Route::resource('sponsors', 'Admin\SponsorsController', ['except' => ['show']]);
 
+	# Tests
+	Route::controller('tests', 'Admin\TestsController');
+
 	# User Sign Ins
 	Route::resource('user-sign-ins', 'Admin\UserSignInsController', ['only' => ['index']]);
 
