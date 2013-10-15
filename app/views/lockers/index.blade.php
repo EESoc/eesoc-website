@@ -112,7 +112,11 @@
                         {{ $locker->status_action }}
                       @endif
                       @if (Auth::user()->is_admin)
-                        @if ( ! $locker->is_taken)
+                        @if ($locker->is_taken)
+                          @if ($locker->owner)
+                            <a href="#" class="btn btn-default btn-xs btn-block disabled" style="overflow: hidden">{{{ $locker->owner->name }}}</a>
+                          @endif
+                        @else
                           @if ($locker->is_reserved)
                             <a href="{{{ action('LockersController@putCancelReservation', $locker->id) }}}" class="btn btn-warning btn-xs btn-block" data-method="put">Cancel</a>
                           @else
