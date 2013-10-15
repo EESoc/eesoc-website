@@ -16,8 +16,8 @@
       <a href="https://eesoc.com/dashboard/lockers">https://eesoc.com/dashboard/lockers</a>
     </p>
     <p>
-      Thank you,
-      EESoc
+      Kind Regards, <br/ >
+      EESoc Locker Team
     </p>
   </body>
 </html>
