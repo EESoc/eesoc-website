@@ -12,7 +12,7 @@
           $input.val('');
 
           // Google book id
-          $('#google_book_id').val(item.id);
+          $('[name=google_book_id]').val(item.id);
 
           // ISBN
           // $('#isbn').val(
@@ -36,7 +36,7 @@
         }
         return function() {
           $loader.removeClass('hide');
-          currentRequest = $.get('https://www.googleapis.com/books/v1/volumes', {
+          currentRequest = $.get('https://www.googleapis.com/books/v1/volumes?key={{{ Config::get('google.api_key') }}}', {
             q: searchQuery,
             maxResults: 6
           }, function(data) {
@@ -115,7 +115,7 @@
 </div>
 <div class="form-group {{ $errors->first('condition', 'has-error') }}">
   {{ Form::label('condition', 'Item Condition', array('class' => 'control-label')) }}
-  {{ Form::text('condition', null, array('class' => 'form-control input-lg')) }}
+  {{ Form::text('condition', null, array('class' => 'form-control input-lg', 'placeholder' => 'New? Used?')) }}
   {{ $errors->first('condition', '<span class="help-block">:message</span>') }}
 </div>
 <div class="form-group {{ $errors->first('target_student_groups', 'has-error') }}">
@@ -130,7 +130,10 @@
 </div>
 <div class="form-group {{ $errors->first('price', 'has-error') }}">
   {{ Form::label('price', 'Price', array('class' => 'control-label')) }}
-  {{ Form::text('price', null, array('class' => 'form-control input-lg')) }}
+  <div class="input-group">
+    <span class="input-group-addon">£</span>
+    {{ Form::text('price', null, array('class' => 'form-control input-lg')) }}
+  </div>
   {{ $errors->first('price', '<span class="help-block">:message</span>') }}
 </div>
 <div class="form-group {{ $errors->first('quantity', 'has-error') }}">

@@ -16,9 +16,9 @@
         <span class="glyphicon glyphicon-tower"></span>
         Rent a Locker
       </a>
-      <a href="{{{ route('dashboard.books.index') }}}" class="btn btn-info btn-lg btn-block">
+      <a href="{{{ route('dashboard.books.create') }}}" class="btn btn-info btn-lg btn-block">
         <span class="glyphicon glyphicon-book"></span>
-        Buy/Sell Books
+        Sell Books
       </a>
     </div>
   </div>

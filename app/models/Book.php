@@ -6,4 +6,19 @@ class Book extends Eloquent {
 
 	protected $softDelete = true;
 
+	public function user()
+	{
+		return $this->belongsTo('User');
+	}
+
+	public function setPriceAttribute($price_in_decimal)
+	{
+		$this->price_in_pence = $price_in_decimal * 100;
+	}
+
+	public function getPriceAttribute()
+	{
+		return $this->price_in_pence / 100;
+	}
+
 }

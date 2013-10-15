@@ -41,6 +41,7 @@ class BooksController extends BaseController {
 
 		if ($validator->passes()) {
 			$book = new Book;
+			$book->user()->associate(Auth::user());
 			$book->fill(Input::all());
 			$book->save();
 
