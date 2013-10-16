@@ -13,14 +13,28 @@ class Book extends Eloquent implements PresentableInterface {
 		return $this->belongsTo('User');
 	}
 
+	/**
+	 * Owned by scope
+	 */
 	public function scopeOwnedBy($query, User $user)
 	{
 		return $query->where('user_id', '=', $user->id);
 	}
 
+	/**
+	 * Not owned by scope
+	 */
 	public function scopeNotOwnedBy($query, User $user)
 	{
 		return $query->where('user_id', '<>', $user->id);
+	}
+
+	/**
+	 * Order by google_book_id, nulls last
+	 */
+	public function scopeOrdered($query)
+	{
+		return $query->orderBy('name');
 	}
 
 	public function setPriceAttribute($price_in_decimal)
