@@ -87,26 +87,23 @@
   </script>
 @stop
 
-@if ( ! $book->id)
-  <div class="panel panel-default">
-    <div class="panel-heading">Book finder</div>
-    <div class="panel-body">
-      <input type="text" class="form-control input-lg" placeholder="Search using book title, ISBN, author, etc" data-search-query>
-    </div>
-    <div class="panel-body">
-      <p class="text-center hide" data-loader>
-        <img src="{{ asset('assets/images/loading.gif') }}" alt="Loading">
-      </p>
-      <div class="row book-search-results" data-search-results></div>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-heading">Book finder</div>
+  <div class="panel-body">
+    <input type="text" class="form-control input-lg" placeholder="Search using book title, ISBN, author, etc" data-search-query>
   </div>
+  <div class="panel-body">
+    <p class="text-center hide" data-loader>
+      <img src="{{ asset('assets/images/loading.gif') }}" alt="Loading">
+    </p>
+    <div class="row book-search-results" data-search-results></div>
+  </div>
+</div>
 
-  {{ Form::hidden('google_book_id', null) }}
-  {{ Form::hidden('thumbnail', null) }}
+{{ Form::hidden('google_book_id', null) }}
+{{ Form::hidden('thumbnail', null) }}
 
-  <hr>
-@endif
-
+<hr>
 
 <div class="form-group {{ $errors->first('isbn', 'has-error') }}">
   {{ Form::label('isbn', 'ISBN', array('class' => 'control-label')) }}
