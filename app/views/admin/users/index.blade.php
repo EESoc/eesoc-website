@@ -104,7 +104,7 @@
           <tr>
             <th>#</th>
             <th>Person</th>
-            <th class="text-center">Last Active</th>
+            <th class="text-right">Last Active</th>
             <th class="text-right">Actions</th>
           </tr>
         </thead>
@@ -133,15 +133,15 @@
                 </div>
               </div>
             </td>
-            <td class="text-center">
+            <td class="text-right">
               {{ $user->last_active }}
+              (<a href="{{{ route('admin.user-sign-ins.index', ['user_id' => $user->id]) }}}">Logs</a>)
             </td>
             <td class="text-right">
               @if ($user->id === Auth::user()->id)
                 It's me :-)
               @else
-                <div class="btn-group btn-group-sm">
-
+                <div class="btn-group-vertical btn-group-sm">
                   <a href="{{{ $user->pretend_url }}}" class="btn btn-default">
                     <span class="glyphicon glyphicon-log-in"></span>
                     Pretend
@@ -153,29 +153,29 @@
                       Email
                     </a>
                   @endif
-
-                  <div class="btn-group btn-group-sm">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                      <span class="glyphicon glyphicon-wrench"></span>
-                      Edit
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li>
-                        @if ($user->is_admin)
-                          <a href="{{{ $user->demotion_url }}}" data-method="put">
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Demote from Admin
-                          </a>
-                        @else
-                          <a href="{{{ $user->promotion_url }}}" data-method="put">
-                            <span class="glyphicon glyphicon-star"></span>
-                            Promote to Admin
-                          </a>
-                        @endif
-                      </li>
-                    </ul>
-                  </div>
+                </div>
+                <hr>
+                <div class="btn-group btn-group-sm">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-wrench"></span>
+                    Edit
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li>
+                      @if ($user->is_admin)
+                        <a href="{{{ $user->demotion_url }}}" data-method="put">
+                          <span class="glyphicon glyphicon-star-empty"></span>
+                          Demote from Admin
+                        </a>
+                      @else
+                        <a href="{{{ $user->promotion_url }}}" data-method="put">
+                          <span class="glyphicon glyphicon-star"></span>
+                          Promote to Admin
+                        </a>
+                      @endif
+                    </li>
+                  </ul>
                 </div>
               @endif
             </td>

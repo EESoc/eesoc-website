@@ -17,7 +17,11 @@
       @foreach ($user_sign_ins as $user_sign_in)
         <tr>
           <td class="text-right">{{{ $user_sign_in->created_at->format('r') }}}</td>
-          <td>{{{ $user_sign_in->user->name }}}</td>
+          <td>
+            <a href="{{{ route('admin.user-sign-ins.index', ['user_id' => $user_sign_in->user_id]) }}}">
+              {{{ $user_sign_in->user->name }}}
+            </a>
+          </td>
           <td class="text-right">{{{ $user_sign_in->ip_address }}}</td>
           <td>{{{ $user_sign_in->http_user_agent }}}</td>
         </tr>
