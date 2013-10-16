@@ -13,6 +13,7 @@
 
           // Google book id
           $('[name=google_book_id]').val(item.id);
+          $('[name=thumbnail]').val(item.volumeInfo.imageLinks.thumbnail);
 
           // ISBN
           // $('#isbn').val(
@@ -86,22 +87,26 @@
   </script>
 @stop
 
-<div class="panel panel-default">
-  <div class="panel-heading">Book finder</div>
-  <div class="panel-body">
-    <input type="text" class="form-control input-lg" placeholder="Search using book title, ISBN, author, etc" data-search-query>
+@if ( ! $book->id)
+  <div class="panel panel-default">
+    <div class="panel-heading">Book finder</div>
+    <div class="panel-body">
+      <input type="text" class="form-control input-lg" placeholder="Search using book title, ISBN, author, etc" data-search-query>
+    </div>
+    <div class="panel-body">
+      <p class="text-center hide" data-loader>
+        <img src="{{ asset('assets/images/loading.gif') }}" alt="Loading">
+      </p>
+      <div class="row book-search-results" data-search-results></div>
+    </div>
   </div>
-  <div class="panel-body">
-    <p class="text-center hide" data-loader>
-      <img src="{{ asset('assets/images/loading.gif') }}" alt="Loading">
-    </p>
-    <div class="row book-search-results" data-search-results></div>
-  </div>
-</div>
 
-{{ Form::hidden('google_book_id', null) }}
+  {{ Form::hidden('google_book_id', null) }}
+  {{ Form::hidden('thumbnail', null) }}
 
-<hr>
+  <hr>
+@endif
+
 
 <div class="form-group {{ $errors->first('isbn', 'has-error') }}">
   {{ Form::label('isbn', 'ISBN', array('class' => 'control-label')) }}
@@ -132,7 +137,7 @@
   {{ Form::label('price', 'Price', array('class' => 'control-label')) }}
   <div class="input-group">
     <span class="input-group-addon">£</span>
-    {{ Form::text('price', null, array('class' => 'form-control input-lg')) }}
+    {{ Form::text('price', $book->raw_price, array('class' => 'form-control input-lg')) }}
   </div>
   {{ $errors->first('price', '<span class="help-block">:message</span>') }}
 </div>

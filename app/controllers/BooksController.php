@@ -9,8 +9,12 @@ class BooksController extends BaseController {
 	 */
 	public function index()
 	{
+		$my_books = Book::ownedBy(Auth::user())->get();
+		$other_books = Book::notOwnedBy(Auth::user())->with('user')->get();
+		
 		return View::make('books.index')
-			->with('books', Book::all());
+			->with('my_books', $my_books)
+			->with('other_books', $other_books);
 	}
 
 	/**
@@ -32,9 +36,10 @@ class BooksController extends BaseController {
 	public function store()
 	{
 		$rules = [
-			'name'      => 'required',
-			'condition' => 'required',
-			'price'     => 'required',
+			'name'                 => 'required',
+			'condition'            => 'required',
+			'price'                => 'required',
+			'contact_instructions' => 'required',
 		];
 
 		$validator = Validator::make(Input::all(), $rules);
@@ -73,7 +78,10 @@ class BooksController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$book = Book::ownedBy(Auth::user())->firstOrFail($id);
+
+		return View::make('books.edit')
+			->with('book', $book);
 	}
 
 	/**
@@ -84,7 +92,28 @@ class BooksController extends BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$book = Book::ownedBy(Auth::user())->firstOrFail($id);
+
+		$rules = [
+			'name'                 => 'required',
+			'condition'            => 'required',
+			'price'                => 'required',
+			'contact_instructions' => 'required',
+		];
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->passes()) {
+			$book->fill(Input::all());
+			$book->save();
+
+			return Redirect::route('dashboard.books.index')
+				->with('success', 'Book has been successfully updated');
+		} else {
+			return Redirect::route('dashboard.books.edit', $book->id)
+				->withInput()
+				->withErrors($validator);
+		}
 	}
 
 	/**
@@ -95,7 +124,11 @@ class BooksController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$book = Book::ownedBy(Auth::user())->firstOrFail($id);
+		$book->delete();
+
+		return Redirect::route('dashboard.books.index')
+			->with('success', 'Book has been successfully deleted');
 	}
 
 }

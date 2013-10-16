@@ -80,7 +80,7 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('assets/images/eesoc.png') }}" alt="EESoc" height="100">
+                <img src="{{ asset('assets/images/eesoc-logo.png') }}" alt="EESoc" height="100">
               </a>
             </div>
             <div class="collapse navbar-collapse">
