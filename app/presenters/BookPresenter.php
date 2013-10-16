@@ -7,7 +7,7 @@ class BookPresenter extends Presenter {
 	public function presentThumbnailImage()
 	{
 		if ($this->thumbnail) {
-			return '<img src="' . $this->thumbnail . '" class="img-responsive">';
+			return '<img src="' . $this->thumbnail . '" class="img-thumbnail">';
 		}
 	}
 
@@ -23,9 +23,18 @@ class BookPresenter extends Presenter {
 
 	public function presentContactInstructionParagraphs()
 	{
-		$lines = explode("\n", $this->contact_instructions);
-		$lines = array_map('e', $lines);
-		return '<p>' . implode('</p><p>', $lines) . '</p>';
+		if ($this->contact_instructions) {
+			$lines = explode("\n", $this->contact_instructions);
+			$lines = array_map('e', $lines); // Sanitize string
+			$html = '<p>' . implode('</p><p>', $lines) . '</p>';
+		} else {
+			$html = '<p>Email: ' . $this->user->email . '</p>';
+		}
+
+		$regex = '/(\S+@\S+\.[^<\s]+)/';
+		$replace = '<a href="mailto:$1" class="btn btn-default"><span class="glyphicon glyphicon-envelope"></span> $1</a>';
+
+		return preg_replace($regex, $replace, $html);
 	}
 
 }
