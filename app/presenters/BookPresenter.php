@@ -31,10 +31,12 @@ class BookPresenter extends Presenter {
 			$html = '<p>Email: ' . $this->user->email . '</p>';
 		}
 
-		$regex = '/(\S+@\S+\.[^<\s]+)/';
-		$replace = '<a href="mailto:$1" class="btn btn-default"><span class="glyphicon glyphicon-envelope"></span> $1</a>';
+		return $html;
 
-		return preg_replace($regex, $replace, $html);
+		// $regex = '/(\S+@\S+\.[^<\s]+)/';
+		// $replace = '<a href="mailto:$1" class="btn btn-default"><span class="glyphicon glyphicon-envelope"></span> $1</a>';
+
+		// return preg_replace($regex, $replace, $html);
 	}
 
 }
