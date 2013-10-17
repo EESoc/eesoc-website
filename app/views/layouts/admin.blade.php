@@ -104,12 +104,26 @@
               </ul>
             </li>
           </ul>
-          {{ Form::open(array('action' => 'SessionsController@deleteDestroy', 'method' => 'delete', 'class' => 'navbar-form pull-right')) }}
-            <button type="submit" class="btn btn-default">Sign Out</button>
-          {{ Form::close() }}
-          <p class="navbar-text pull-right">
-            Signed in as <strong>{{ Auth::user()->name }}</strong>.
-          </p>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="{{{ url('/') }}}">
+                <span class="glyphicon glyphicon-home"></span>
+                Main Site
+              </a>
+            </li>
+            <li>
+              <a href="{{{ action('UsersController@getShow', Auth::user()->username) }}}">
+                <span class="glyphicon glyphicon-user"> </span>
+                <strong>{{{ Auth::user()->name }}}</strong>
+              </a>
+            </li>
+            <li>
+              <a href="{{{ action('SessionsController@deleteDestroy') }}}" data-method="delete">
+                <span class="glyphicon glyphicon-off"></span>
+                Sign Out
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
