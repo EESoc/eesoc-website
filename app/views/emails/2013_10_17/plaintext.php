@@ -61,9 +61,9 @@ them wrong!
 
 When : 24th October, at 7pm.
 Where: Royal Route, London. HA9 0WS. [Half an hour tube journey from SK,
-two changes at Wembley PARK]
+two changes at Wembley Park]
 
 
 
-All the best,
-Thomas
+Look forward to seeing you today,
+Thomas Lim and the EESoc team
