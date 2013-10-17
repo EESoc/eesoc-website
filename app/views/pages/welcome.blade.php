@@ -37,6 +37,7 @@ $(function() {
                     .append(
                       $('<img />')
                         .attr('src', photo.image_standard_resolution_url)
+                        .attr('alt', photo.instagram_username)
                         .attr('width', 612)
                         .attr('height', 612)
                         .addClass('img-responsive')

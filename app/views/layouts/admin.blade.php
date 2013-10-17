@@ -53,16 +53,19 @@
                   <a href="{{{ URL::route('admin.contents.index') }}}">Content Blocks</a>
                 </li>
                 <li>
-                  <a href="{{{ URL::route('admin.posts.index') }}}">Posts</a>
-                </li>
-                <li>
-                  <a href="{{{ URL::route('admin.categories.index') }}}">Categories</a>
-                </li>
-                <li>
                   <a href="{{{ URL::route('admin.events.index') }}}">Events</a>
                 </li>
                 <li>
                   <a href="{{{ URL::route('admin.sponsors.index') }}}">Sponsors</a>
+                </li>
+                <li>
+                  <a href="{{{ URL::route('admin.instagram-photos.index') }}}">Instagram Photos</a>
+                </li>
+                <li>
+                  <a href="{{{ URL::route('admin.posts.index') }}}">Posts</a>
+                </li>
+                <li>
+                  <a href="{{{ URL::route('admin.categories.index') }}}">Categories</a>
                 </li>
               </ul>
             </li>

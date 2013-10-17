@@ -30,6 +30,11 @@ class InstagramPhoto extends Eloquent {
 		return $query->orderBy('captured_time', 'desc');
 	}
 
+	public function scopeVisible($query)
+	{
+		return $query->where('hidden', '=', false);
+	}
+
 	/**
 	 * Refresh an Instagram photo's information
 	 * @param  array $photo
