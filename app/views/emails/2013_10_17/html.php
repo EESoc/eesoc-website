@@ -522,8 +522,8 @@
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Lockers are still available! This year they are handled completely online!
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">1 - Purchase your locker online on the Imperial College Union store<br>
-2 - Head to the EEsoc Website, login and reserve your locker number
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">1 - Purchase your locker online on the <a href="http://bit.ly/17oPL9J">Imperial College Union store</a><br>
+2 - Head to the <a href="http://bit.ly/GUx3jZ">EESoc Website</a>, login and reserve your locker number
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">If you have not already emptied your locker, please do so now. Any occupied lockers not registered by us will be forcibly entered and emptied on Friday 18th. Make sure to <a href="mailto:eesoc@imperial.ac.uk">email us</a> if you're unable to empty your locker.
@@ -557,7 +557,7 @@ them wrong!
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><strong>When :</strong> 24th October, at 7pm.<br>
 <strong>Where:</strong> Royal Route, London. HA9 0WS. [Half an hour tube journey from SK,
-two changes at Wembley PARK]
+two changes at Wembley]
 
 </p>
 <hr>
