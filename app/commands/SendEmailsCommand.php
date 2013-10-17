@@ -57,10 +57,10 @@ class SendEmailsCommand extends Command {
 
 		// $email = NewsletterEmail::findOrFail(1);
 
-		$html = View::make('emails.2013_10_15.html')
+		$html = View::make('emails.2013_10_17.html')
 			// ->with('body', $email->body)
 			->render();
-		$plaintext = View::make('emails.2013_10_15.plaintext')
+		$plaintext = View::make('emails.2013_10_17.plaintext')
 			->render();
 
 		// $body = (new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles($html, file_get_contents(base_path() . '/public/assets/css/email.css')))
@@ -81,17 +81,17 @@ class SendEmailsCommand extends Command {
 			$message->setFrom(array('please-reply@eesoc.com' => 'EESoc'));
 			$message->setReplyTo('please-reply@eesoc.com');
 			$message->setTo($email);
-			$message->setSubject('IndustrEE talk this Thursday, Locker and Book Sale');
+			$message->setSubject('BP IndustrEE Talk Today with Lunch and Raffle - Soc Off, Locker and Book Sale');
 			$message->setBody($html, 'text/html');
 			$message->addPart($plaintext, 'text/plain');
 
 			if ($mailer->send($message)) {
-				$this->info(sprintf('Successfully sent email `%s` to `%s`', 'Welcome to EESoc 2013/14', $email));
+				$this->info(sprintf('Successfully sent email `%s` to `%s`', 'IndustrEE talk today - Soc Off, Locker and Book Sale', $email));
 
 				// Remove from queue
 				// $queue->delete();
 			} else {
-				$this->error(sprintf('Something went wrong while sending email `%s` to `%s`', 'Welcome to EESoc 2013/14', $email));
+				$this->error(sprintf('Something went wrong while sending email `%s` to `%s`', 'IndustrEE talk today - Soc Off, Locker and Book Sale', $email));
 			}
 
 			unset($message);
