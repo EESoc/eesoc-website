@@ -13,6 +13,7 @@
 
           // Google book id
           $('[name=google_book_id]').val(item.id);
+          $('[name=thumbnail]').val(item.volumeInfo.imageLinks.thumbnail);
 
           // ISBN
           // $('#isbn').val(
@@ -100,6 +101,7 @@
 </div>
 
 {{ Form::hidden('google_book_id', null) }}
+{{ Form::hidden('thumbnail', null) }}
 
 <hr>
 
@@ -132,7 +134,7 @@
   {{ Form::label('price', 'Price', array('class' => 'control-label')) }}
   <div class="input-group">
     <span class="input-group-addon">£</span>
-    {{ Form::text('price', null, array('class' => 'form-control input-lg')) }}
+    {{ Form::text('price', $book->raw_price, array('class' => 'form-control input-lg')) }}
   </div>
   {{ $errors->first('price', '<span class="help-block">:message</span>') }}
 </div>

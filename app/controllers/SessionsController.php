@@ -40,7 +40,7 @@ class SessionsController extends BaseController {
 		$validator = Validator::make($inputs, $rules);
 
 		if ($validator->passes()) {
-			if (Auth::attempt($inputs)) {
+			if (Auth::attempt($inputs, Input::get('remember_me') === 'true')) {
 				Auth::user()->recordSignIn();
 				$defaultURL = URL::action('UsersController@getDashboard');
 				return Redirect::intended($defaultURL);

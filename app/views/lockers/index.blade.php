@@ -16,10 +16,12 @@
       @endif
       @content('locker-sale-introduction')
       <hr>
-      <a href="{{{ action('LockersController@getRent') }}}" class="btn btn-primary btn-block btn-lg" data-disable-with="Please wait&hellip;">
-        <span class="glyphicon glyphicon-shopping-cart"></span>
-        Rent a Locker
-      </a>
+      <p>
+        <a href="{{{ action('LockersController@getRent') }}}" class="btn btn-primary btn-block btn-lg" data-disable-with="Please wait&hellip;">
+          <span class="glyphicon glyphicon-shopping-cart"></span>
+          Rent a Locker
+        </a>
+      </p>
     </div>
     <div class="col-lg-6">
       @if ( ! $lockers_owned->isEmpty())
@@ -112,11 +114,15 @@
                         {{ $locker->status_action }}
                       @endif
                       @if (Auth::user()->is_admin)
-                        @if ( ! $locker->is_taken)
+                        @if ($locker->is_taken)
+                          @if ($locker->owner)
+                            <a href="#" class="btn btn-default btn-xs btn-block disabled" style="overflow: hidden">{{{ $locker->owner->name }}}</a>
+                          @endif
+                        @else
                           @if ($locker->is_reserved)
-                            <a href="{{{ action('LockersController@putCancelReservation', $locker->id) }}}" class="btn btn-warning btn-xs btn-block" data-method="put">Cancel</a>
+                            <a href="{{{ action('LockersController@putCancelReservation', $locker->id) }}}" class="btn btn-warning btn-xs btn-block" data-method="put" data-confirm="Are you sure?">Cancel</a>
                           @else
-                            <a href="{{{ action('LockersController@putReserve', $locker->id) }}}" class="btn btn-warning btn-xs btn-block" data-method="put">Reserve</a>
+                            <a href="{{{ action('LockersController@putReserve', $locker->id) }}}" class="btn btn-warning btn-xs btn-block" data-method="put" data-confirm="Are you sure?">Reserve</a>
                           @endif
                         @endif
                       @endif

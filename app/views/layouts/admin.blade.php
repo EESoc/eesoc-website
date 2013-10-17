@@ -93,6 +93,9 @@
                   <a href="{{{ URL::route('admin.sales.index') }}}">EActivities Sales</a>
                 </li>
                 <li>
+                  <a href="{{{ URL::route('admin.user-sign-ins.index') }}}">User Sign Ins</a>
+                </li>
+                <li>
                   <a href="{{{ URL::route('admin.logs.index') }}}">Server Logs</a>
                 </li>
               </ul>

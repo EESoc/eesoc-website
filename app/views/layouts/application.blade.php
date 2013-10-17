@@ -80,7 +80,7 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('assets/images/eesoc.png') }}" alt="EESoc" height="100">
+                <img src="{{ asset('assets/images/eesoc-logo.png') }}" alt="EESoc" height="100">
               </a>
             </div>
             <div class="collapse navbar-collapse">
@@ -153,15 +153,15 @@
         @include('shared.flashes')
         @yield('content')
 
-        <div class="row">
-          <footer id="credits" class="col-lg-12">
-            <hr>
+        <footer id="credits">
+          <hr>
+          <p>
             &copy; {{ date('Y') }}
             Code by <a href='&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#105;&#97;&#110;&#46;&#108;&#101;&#101;&#49;&#49;&#64;&#105;&#109;&#112;&#101;&#114;&#105;&#97;&#108;&#46;&#97;&#99;&#46;&#117;&#107;'>&#74;&#105;&#97;&#110;&#32;&#89;&#117;&#97;&#110;&#32;&#76;&#101;&#101;</a>,
             available on
-            <a href="https://github.com/EESoc/eesoc-website">GitHub</a>.
-          </footer>
-        </div>
+            <a href="http://bit.ly/196sso5">GitHub</a>.
+          </p>
+        </footer>
       </div>
     @show
 
