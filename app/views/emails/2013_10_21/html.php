@@ -486,7 +486,7 @@
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">We hope your weekend has been relaxing, and that you're ready for Week 4! Thanks to everyone who came to the Soc Off. I'm sure you'll agree it was a fun evening - including the bit where I had to sumo wrestle RSM (there's a video below)! Our first IndustrEE event with BP was well attended. They provided us with an engaging talk about some of the control behind modern plants and pipelines. This week we bring you another IndustrEE talk, as well as some interesting events being run by our sponsors.
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">By the way, if you haven't yet, I urge you all to <a href="https://vote.union.ic.ac.uk">vote</a> in the Union Elections. Have your say in the people who will be representing you over the coming year. It takes less than 2 minutes, and can be done nicely on your phone too!
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">By the way, if you haven't yet, I urge you all to <a href="http://bit.ly/15Wpm5S">vote</a> in the Union Elections. Have your say in the people who will be representing you over the coming year. It takes less than 2 minutes, and can be done nicely on your phone too!
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Have a great week!
@@ -497,8 +497,8 @@
 </p>
 <hr>
 <ul>
-<li><a href="https://www.facebook.com/events/738625619497451/">Cisco IndustrEE talk</a> Tuesday 22nd October 1:00PM - 2:00PM</li>
-<li>Bank of America Meryll Lynch Careers in Technology Tuesday 22nd October 6:00PM - 7:30PM</li>
+<li><a href="http://on.fb.me/1gZqTfZ">Cisco IndustrEE talk</a>, Tuesday 22nd October 1:00PM - 2:00PM</li>
+<li>Bank of America Meryll Lynch: Careers in Technology, Tuesday 22nd October 6:00PM - 7:30PM</li>
 <li>Accenture Oxygen Bar, Thursday 24th October 10:30AM - 4:00PM</li>
 <li>Soc Off Fun</li>
 <li>Siemens at the Engineering Career Fair, Thursday 24th October 11:00AM - 4:30PM</li>
@@ -522,7 +522,7 @@
 If you are graduating in 2014 and beyond and are looking for a taste of technology in banking, an internship or full time opportunity; join us for an afternoon of presentations, panel discussions and networking in Department of Computing at Imperial College London.
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">To attend, please <a href="https://atsv7.wcn.co.uk/search_engine/jobs.cgi?owner=5030298&amp;ownertype=fair&amp;jcode=1374527&amp;vt_template=698&amp;adminview=1">register</a> by Monday 21st October.
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">To attend, please <a href="http://bit.ly/17ZEaNx">register</a> by Monday 21st October.
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Location: Huxley, LT311<br>
@@ -535,10 +535,10 @@ Date &amp; Time: Tuesday 22nd October, 6:00PM - 7:30PM
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><img src="https://eesoc.com/assets/email/uploads/email_3_1.jpg" width="550" style="max-width: 550px">
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><a href="https://www.facebook.com/events/738625619497451/">Join us</a> for Tuesday's IndustrEE talk with Cisco. Meet two Imperial graduates and listen to their presentations about "Real World Design Issues" and "Don't Panic! Operating Systems and Why They Work". They will also demonstrate some of Cisco's video equipment they work with and answer questions you may have about internships and graduate roles. And don't forget - lunch is on us!
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><a href="http://on.fb.me/1gZqTfZ">Join us</a> for Tuesday's IndustrEE talk with Cisco. Meet two Imperial graduates and listen to their presentations about "Real World Design Issues" and "Don't Panic! Operating Systems and Why They Work". They will also demonstrate some of Cisco's video equipment they work with and answer questions you may have about internships and graduate roles. And don't forget - lunch is on us!
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Location: EEng Building, Room 509<br>
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Location: EEE Building, Room 509<br>
 Date &amp; Time: 22nd October, 1PM - 2PM
 
 </p>
@@ -551,7 +551,7 @@ Date &amp; Time: 22nd October, 1PM - 2PM
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Location: JCR<br>
-Date &amp; Time: 24th October, 10:30 - 4pm
+Date &amp; Time: 24th October, 10:30AM - 4:00PM
 
 </p>
 <hr>
@@ -562,10 +562,10 @@ Date &amp; Time: 24th October, 10:30 - 4pm
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><img src="https://distilleryimage11.s3.amazonaws.com/8718ea8637be11e3bf0322000a1fb08e_8.jpg" width="550" style="max-width: 550px">
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Our President, Thomas, was tasked with taking down RSM in the sumo wrestling ring. <a href="">Watch this clip</a> of him take one for the tEEam!
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Our President, Thomas, was tasked with taking down RSM in the sumo wrestling ring. <a href="http://bit.ly/172Srx8">Watch this clip</a> of him take one for the tEEam!
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><a href="http://instagram.com/p/flPMBapodH/"><img src="https://eesoc.com/assets/email/uploads/email_3_5.jpg" width="550" style="max-width: 550px"></a>
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><a href="http://bit.ly/172Srx8"><img src="https://eesoc.com/assets/email/uploads/email_3_5.jpg" width="550" style="max-width: 550px"></a>
 
 </p>
 <hr>
@@ -577,7 +577,7 @@ Date &amp; Time: 24th October, 10:30 - 4pm
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Location: Queens Lawn<br>
-Date &amp; Time: Thursday 11:00AM - 4:30PM
+Date &amp; Time: Thursday, 11:00AM - 4:30PM
 
 </p>
 <hr>
@@ -585,7 +585,7 @@ Date &amp; Time: Thursday 11:00AM - 4:30PM
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><img src="https://eesoc.com/assets/email/uploads/email_3_3.png" width="550" style="max-width: 550px">
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Make your <a href="https://vote.union.ic.ac.uk/login.php">vote</a> count by midday, 22nd October for your Year Reps, Union Council members and Liberation Officers!</p>
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Make your <a href="http://bit.ly/15Wpm5S">vote</a> count by midday, 22nd October for your Year Reps, Union Council members and Liberation Officers!</p>
 </td>
                     </tr>
                 </tbody></table>
