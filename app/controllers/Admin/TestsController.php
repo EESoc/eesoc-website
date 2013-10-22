@@ -12,4 +12,10 @@ class TestsController extends BaseController {
 		return 'OK';
 	}
 
+	public function getSendLockerReminder()
+	{
+		Notification::sendLockerClaimReminder(Auth::user());
+		return 'OK';
+	}
+
 }

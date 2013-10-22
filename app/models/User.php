@@ -317,4 +317,13 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		return $this->unclaimed_lockers_count;
 	}
 
+	/**
+	 * Return has unclaimed lockers count.
+	 * @return integer
+	 */
+	public function getHasUnclaimedLockersAttribute()
+	{
+		return $this->getUnclaimedLockersCountAttribute() > 0;
+	}
+
 }

@@ -13,6 +13,7 @@
 
 Artisan::add(new BecomeAdminCommand);
 Artisan::add(new InstagramSyncCommand);
+Artisan::add(new RemindUnclaimedLockerCommand);
 Artisan::add(new SendEmailsCommand);
 Artisan::add(new SyncEActivitiesCommand);
 Artisan::add(new SyncEActivitiesSalesCommand);

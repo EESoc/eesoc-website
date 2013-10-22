@@ -27,7 +27,7 @@
           <td class="text-right">{{{ $sale->date }}}</td>
           <td>
             {{{ $sale->product_name }}}
-            @if ($sale->is_locker && $sale->user->unclaimed_lockers_count > 0)
+            @if ($sale->is_locker && $sale->user->has_unclaimed_lockers)
               <span class="label label-warning">
                 {{{ $sale->user->unclaimed_lockers_count }}}
                 Unclaimed
