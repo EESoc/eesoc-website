@@ -18,3 +18,9 @@ Imperial College London EESoc's Offical Website Source Code
 ### Commands
 
 - `php artisan admin:become <imperial-college-login>` - Promotes a user to admin.
+- `php artisan eactivities:sales:sync` - Sync online sales.
+- `php artisan eactivities:sync` - Sync membership with EActivities.
+- `php artisan eepeople:sync` - Sync user info with the departmental directory.
+- `php artisan instagram:sync` - Syncs Instagram feed.
+- `php artisan ldap:sync` - Sync user info with LDAP.
+- `php artisan locker:remind` - Remind users via email to claim their locker.
