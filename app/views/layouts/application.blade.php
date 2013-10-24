@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{{{ isset($page_title) ? $page_title.' | ' : '' }}}EESoc</title>
+    <title>{{{ isset($page_title) ? $page_title.' | ' : '' }}}Imperial College EESoc</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
