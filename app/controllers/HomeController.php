@@ -11,6 +11,7 @@ class HomeController extends BaseController {
 	{
 		$photos = InstagramPhoto::visible()
 			->latest()
+			->take(12)
 			->get();
 
 		return Response::json($photos);
