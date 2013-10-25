@@ -15,11 +15,11 @@
 @stop
 
 @section('content')
-  <div class="page-header">
-    <h1>Sponsors</h1>
-  </div>
   <div class="row">
     <div class="col-lg-6">
+      <div class="page-header">
+        <h1>Sponsors</h1>
+      </div>
       <div class="row sponsors">
         @foreach ($sponsors as $sponsor)
           <div class="col-lg-4">
