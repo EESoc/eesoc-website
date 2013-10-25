@@ -116,8 +116,8 @@ return array(
 
 		'Profiler\ProfilerServiceProvider',
 		'Robbo\Presenter\PresenterServiceProvider',
-
-		'Barryvdh\ElfinderBundle\ElfinderBundleServiceProvider'
+		'Barryvdh\ElfinderBundle\ElfinderBundleServiceProvider',
+		'Gloudemans\Calendar\CalendarServiceProvider',
 
 	),
 
@@ -186,6 +186,7 @@ return array(
 
 		'Profiler' => 'Profiler\Facades\Profiler',
 		'Carbon'   => 'Carbon\Carbon',
+		'Calendar' => 'Gloudemans\Calendar\Facades\Calendar',
 
 	),
 

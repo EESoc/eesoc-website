@@ -16,7 +16,8 @@
 		"nesbot/Carbon": "*",
 		"robclancy/presenter": "1.2.*",
 		"barryvdh/elfinder-bundle": "dev-master",
-		"tijsverkoyen/css-to-inline-styles": "dev-master"
+		"tijsverkoyen/css-to-inline-styles": "dev-master",
+		"gloudemans/calendar": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

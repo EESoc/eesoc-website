@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0ec14d532461b24763e386b15d7902a6",
+    "hash": "8caba6fa6b9e7cfccd7836a2e67d9193",
     "packages": [
         {
             "name": "barryvdh/elfinder-bundle",
@@ -602,6 +602,44 @@
                 "zf2"
             ],
             "time": "2013-06-10 12:22:13"
+        },
+        {
+            "name": "gloudemans/calendar",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Crinsane/LaravelCalendar.git",
+                "reference": "7e6a703ae35c9abfc3fbcc879192b672671e4102"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Crinsane/LaravelCalendar/zipball/7e6a703ae35c9abfc3fbcc879192b672671e4102",
+                "reference": "7e6a703ae35c9abfc3fbcc879192b672671e4102",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.0.x",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Gloudemans\\Calendar": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Rob Gloudemans",
+                    "email": "Rob_Gloudemans@hotmail.com"
+                }
+            ],
+            "description": "Laravel 4 Calendar, port of the CodeIgniter Calender Library",
+            "keywords": [
+                "calendar",
+                "laravel"
+            ],
+            "time": "2013-08-23 07:19:15"
         },
         {
             "name": "guzzle/guzzle",
@@ -2023,7 +2061,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "barryvdh/elfinder-bundle": 20,
-        "tijsverkoyen/css-to-inline-styles": 20
+        "tijsverkoyen/css-to-inline-styles": 20,
+        "gloudemans/calendar": 20
     },
     "platform": {
         "php": ">=5.4.0"
