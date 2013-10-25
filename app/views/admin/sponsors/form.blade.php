@@ -20,6 +20,11 @@
   </div>
   {{ $errors->first('content', '<span class="help-block">:message</span>') }}
 </div>
+<div class="form-group {{ $errors->first('position', 'has-error') }}">
+  {{ Form::label('position', 'Position', array('class' => 'control-label')) }}
+  {{ Form::text('position', null, array('class' => 'form-control input-lg')) }}
+  {{ $errors->first('position', '<span class="help-block">:message</span>') }}
+</div>
 <div class="form-group {{ $errors->first('logo', 'has-error') }}">
   {{ Form::label('logo', 'Logo', array('class' => 'control-label')) }}
   {{ Form::file('logo') }}

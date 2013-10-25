@@ -42,6 +42,7 @@ class SponsorsController extends BaseController {
 			'name'        => 'required',
 			'description' => 'required',
 			'logo'        => 'required|image|mimes:jpeg,bmp,png',
+			'position'    => 'numeric',
 		];
 
 		$validator = Validator::make(Input::all(), $rules);
@@ -86,6 +87,7 @@ class SponsorsController extends BaseController {
 			'name'        => 'required',
 			'description' => 'required',
 			'logo'        => 'image|mimes:jpeg,bmp,png',
+			'position'    => 'numeric',
 		];
 
 		$validator = Validator::make(Input::all(), $rules);

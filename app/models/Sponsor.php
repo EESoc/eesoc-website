@@ -21,6 +21,11 @@ class Sponsor extends Eloquent implements PresentableInterface {
 		return $query->orderBy('name');
 	}
 
+	public function scopeSorted($query)
+	{
+		return $query->orderBy('position');
+	}
+
 	/**
 	 * Return a created presenter.
 	 *
