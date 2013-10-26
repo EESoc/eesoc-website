@@ -24,3 +24,10 @@ Imperial College London EESoc's Offical Website Source Code
 - `php artisan instagram:sync` - Syncs Instagram feed.
 - `php artisan ldap:sync` - Sync user info with LDAP.
 - `php artisan locker:remind` - Remind users via email to claim their locker.
+
+### Writeable folders
+
+Certain folders within the repo must be write-able by the web process in order for the site to operate. They are:
+- /app/storage
+- /public/files
+- /public/assets 
