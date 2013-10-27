@@ -1,3 +1,18 @@
+
+body {
+  background-color: #f6f6f6;
+}
+
+#main {
+  margin: 0;
+  padding: 40px 0;
+  background-color: #fff;
+}
+
+.navbar {
+  margin: 0;
+}
+
 .navbar-default {
   background-color: #F4FAFD;
 }
@@ -36,4 +51,14 @@
 
 .book-search-results a.thumbnail {
   text-decoration: none;
+}
+
+#credits {
+  text-align: center;
+  border-top: 1px solid #eee;
+  padding: 40px 0;
+}
+
+#credits .fb-like {
+  margin-bottom: 40px;
 }
