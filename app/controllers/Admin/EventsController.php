@@ -1,6 +1,7 @@
 <?php
 namespace Admin;
 
+use \DB;
 use \EventDay;
 use \Input;
 use \Redirect;
@@ -16,7 +17,7 @@ class EventsController extends BaseController {
 	 */
 	public function index()
 	{
-		$events = EventDay::orderBy('date')
+		$events = EventDay::orderBy(DB::raw('ISNULL(`date`), `date`'))
 			->get();
 
 		return View::make('admin.events.index')

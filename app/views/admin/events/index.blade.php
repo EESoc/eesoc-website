@@ -11,8 +11,8 @@
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th>Name</th>
         <th>Date</th>
+        <th>Name</th>
         <th>Starts At</th>
         <th>Ends At</th>
         <th>Location</th>
@@ -22,12 +22,17 @@
     <tbody>
       @foreach($events as $event)
         <tr
-          @if ($event->hidden)
-            class="danger"
-          @endif
+          class="
+            @if ($event->hidden)
+              danger
+            @endif
+            @if ( ! $event->date)
+              warning
+            @endif
+          "
         >
-          <td>{{{ $event->name }}}</td>
           <td>{{{ $event->date }}}</td>
+          <td>{{{ $event->name }}}</td>
           <td>{{{ $event->starts_at }}}</td>
           <td>{{{ $event->ends_at }}}</td>
           <td>{{{ $event->location }}}</td>
