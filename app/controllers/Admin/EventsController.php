@@ -116,7 +116,6 @@ class EventsController extends BaseController {
 	{
 		$rules = [
 			'name'        => 'required',
-			'location'    => 'required',
 			'description' => 'required',
 		];
 

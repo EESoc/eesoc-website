@@ -12,6 +12,9 @@
             <div class="panel-heading">
               <h4 class="panel-title">
                 <a href="#event-{{ $event->id }}" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-events">
+                  <small>
+                    {{{ $event->datetime_object->format('jS F') }}}
+                  </small>
                   {{{ $event->name }}}
                 </a>
               </h4>
@@ -19,6 +22,22 @@
             <div id="event-{{ $event->id }}" class="panel-collapse collapse {{ $key === 0 ? 'in' : '' }}">
               <div class="panel-body">
                 {{ $event->description }}
+                <dl>
+                  @if ($event->location)
+                    <dt>Location:</dt>
+                    <dd>{{{ $event->location }}}</dd>
+                  @endif
+                  @if ($event->starts_at || $event->ends_at)
+                    <dt>Time:</dt>
+                    <dd>
+                      {{ $event->starts_at_datetime_object->format('H:i') }}
+                      @if ($event->ends_at)
+                        to
+                        {{ $event->ends_at_datetime_object->format('H:i') }}
+                      @endif
+                    </dd>
+                  @endif
+                </dl>
               </div>
             </div>
           </div>
