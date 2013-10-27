@@ -13,6 +13,7 @@
       <tr>
         <th>Date</th>
         <th>Name</th>
+        <th>Category</th>
         <th>Starts At</th>
         <th>Ends At</th>
         <th>Location</th>
@@ -33,12 +34,17 @@
         >
           <td>{{{ $event->date }}}</td>
           <td>{{{ $event->name }}}</td>
+          <td>
+            @if ($event->category)
+              {{{ $event->category->name }}}
+            @endif
+          </td>
           <td>{{{ $event->starts_at }}}</td>
           <td>{{{ $event->ends_at }}}</td>
           <td>{{{ $event->location }}}</td>
           <td class="text-right">
             @if ($event->hidden)
-              <a href="{{{ action('Admin\EventsController@putVisibility', [$event->id, 'unhide']) }}}" data-method="put" class="btn btn-warning">Unhide</a>
+              <a href="{{{ action('Admin\EventsController@putVisibility', [$event->id, 'unhide']) }}}" data-method="put" class="btn btn-success">Unhide</a>
             @else
               <a href="{{{ action('Admin\EventsController@putVisibility', [$event->id, 'hide']) }}}" data-method="put" class="btn btn-danger">Hide</a>
             @endif

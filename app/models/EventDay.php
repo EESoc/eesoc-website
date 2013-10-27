@@ -4,7 +4,24 @@ class EventDay extends Eloquent {
 
 	protected $table = 'events';
 
-	protected $fillable = ['name', 'date', 'starts_at', 'ends_at', 'location', 'description'];
+	protected $fillable = ['name', 'date', 'starts_at', 'ends_at', 'location', 'description', 'category_id'];
+
+	public function __construct(array $attributes = array())
+	{
+		// Set default category
+		$attributes['category_id'] = Category::uncategorised()->id;
+
+		parent::__construct($attributes);
+	}
+
+	/*
+	Relations
+	 */
+
+	public function category()
+	{
+		return $this->belongsTo('Category');
+	}
 
 	/*
 	Scopes
