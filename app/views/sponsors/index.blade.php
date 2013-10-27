@@ -1,5 +1,7 @@
 @extends('layouts.application')
 
+<?php $page_title = 'Sponsors'; ?>
+
 @section('javascript_for_page')
   <script>
     $(function() {

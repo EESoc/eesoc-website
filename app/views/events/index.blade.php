@@ -1,5 +1,7 @@
 @extends('layouts.application')
 
+<?php $page_title = 'Events'; ?>
+
 @section('content')
   <div class="page-header">
     <h1>Events</h1>
