@@ -59,7 +59,7 @@
                   <a href="{{{ URL::route('admin.sponsors.index') }}}">Sponsors</a>
                 </li>
                 <li>
-                  <a href="{{{ URL::route('admin.instagram-photos.index') }}}">Instagram Photos</a>
+                  <a href="{{{ URL::action('Admin\InstagramPhotosController@getIndex') }}}">Instagram Photos</a>
                 </li>
                 <li>
                   <a href="{{{ URL::route('admin.posts.index') }}}">Posts</a>

@@ -16,8 +16,11 @@ class EventsController extends BaseController {
 	 */
 	public function index()
 	{
+		$events = EventDay::orderBy('date')
+			->get();
+
 		return View::make('admin.events.index')
-			->with('events', EventDay::all());
+			->with('events', $events);
 	}
 
 	/**
@@ -110,6 +113,22 @@ class EventsController extends BaseController {
 			return Redirect::route('admin.events.index')
 				->with('danger', 'This event cannot be deleted');
 		}
+	}
+
+	public function putVisibility($id, $action)
+	{
+		$event = EventDay::findOrFail($id);
+
+		if ($action === 'hide') {
+			$event->hidden = true;
+		} else {
+			$event->hidden = false;
+		}
+
+		$event->save();
+
+		return Redirect::route('admin.events.index')
+			->with('success', 'Event has been successfully updated');
 	}
 
 	private function makeValidator()

@@ -16,21 +16,28 @@
         <th>Starts At</th>
         <th>Ends At</th>
         <th>Location</th>
-        <th>Description</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       @foreach($events as $event)
-        <tr>
+        <tr
+          @if ($event->hidden)
+            class="danger"
+          @endif
+        >
           <td>{{{ $event->name }}}</td>
           <td>{{{ $event->date }}}</td>
           <td>{{{ $event->starts_at }}}</td>
           <td>{{{ $event->ends_at }}}</td>
           <td>{{{ $event->location }}}</td>
-          <td>{{{ $event->description }}}</td>
           <td class="text-right">
-            <a href="{{ URL::route('admin.events.edit', $event->id) }}" class="btn btn-primary btn-xs">
+            @if ($event->hidden)
+              <a href="{{{ action('Admin\EventsController@putVisibility', [$event->id, 'unhide']) }}}" data-method="put" class="btn btn-warning">Unhide</a>
+            @else
+              <a href="{{{ action('Admin\EventsController@putVisibility', [$event->id, 'hide']) }}}" data-method="put" class="btn btn-danger">Hide</a>
+            @endif
+            <a href="{{ route('admin.events.edit', $event->id) }}" class="btn btn-primary">
               <span class="glyphicon glyphicon-edit"></span>
               Edit
             </a>

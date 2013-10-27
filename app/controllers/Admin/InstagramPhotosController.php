@@ -8,17 +8,17 @@ use \View;
 
 class InstagramPhotosController extends BaseController {
 
-	public function index()
+	public function getIndex()
 	{
 		return View::make('admin.instagram_photos.index')
 			->with('photos', InstagramPhoto::latest()->get());
 	}
 
-	public function update($id)
+	public function putVisibility($id, $action)
 	{
 		$photo = InstagramPhoto::findOrFail($id);
 
-		if (Input::get('action') === 'hide') {
+		if ($action === 'hide') {
 			$photo->hidden = true;
 		} else {
 			$photo->hidden = false;
@@ -26,7 +26,7 @@ class InstagramPhotosController extends BaseController {
 
 		$photo->save();
 
-		return Redirect::route('admin.instagram-photos.index')
+		return Redirect::action('Admin\InstagramPhotosController@getIndex')
 			->with('success', 'Instagram Photo has been successfully updated');
 	}
 

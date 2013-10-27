@@ -6,9 +6,18 @@ class EventDay extends Eloquent {
 
 	protected $fillable = ['name', 'date', 'starts_at', 'ends_at', 'location', 'description'];
 
+	/*
+	Scopes
+	 */
+
 	public function scopeHasDate($query)
 	{
 		return $query->whereNotNull('date');
+	}
+
+	public function scopeVisible($query)
+	{
+		return $query->where('hidden', '=', false);
 	}
 
 	/**

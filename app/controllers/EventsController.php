@@ -4,8 +4,9 @@ class EventsController extends BaseController {
 
 	public function getIndex()
 	{
-		$events = EventDay::orderBy('date')
+		$events = EventDay::visible()
 			->hasDate()
+			->orderBy('date')
 			->get();
 
 		return View::make('events.index')

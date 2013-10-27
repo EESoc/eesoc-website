@@ -76,9 +76,10 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 
 	# Events
 	Route::resource('events', 'Admin\EventsController', ['except' => ['show']]);
+	Route::controller('events', 'Admin\EventsController');
 
 	# Instagram Photos
-	Route::resource('instagram-photos', 'Admin\InstagramPhotosController', ['only' => ['index', 'update']]);
+	Route::controller('instagram-photos', 'Admin\InstagramPhotosController');
 
 	# Logs
 	Route::resource('logs', 'Admin\LogsController', ['only' => ['index', 'show']]);
