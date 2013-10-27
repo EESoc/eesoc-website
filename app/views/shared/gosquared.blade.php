@@ -15,3 +15,16 @@
       w.attachEvent("onload", gs);
   })(window);
 </script>
+
+@if (Auth::check())
+<script type="text/javascript">
+  GoSquared.VisitorName = '{{{ Auth::user()->name }}}';
+  GoSquared.Visitor = {
+    userID: {{ Auth::user()->id }},
+    username: '{{{ Auth::user()->username }}}',
+    email: '{{{ Auth::user()->email }}}',
+    information: '{{{ Auth::user()->extras }}}',
+    groupName: '{{{ Auth::user()->student_group ? Auth::user()->student_group->name : '' }}}'
+  };
+</script>
+@endif

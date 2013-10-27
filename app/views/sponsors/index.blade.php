@@ -5,10 +5,17 @@
     $(function() {
       $('[data-sponsor-show]').click(function() {
         var $this = $(this),
-            sponsorId = $this.data('sponsor-show');
+            sponsorId = $this.data('sponsor-show'),
+            sponsorName = $this.data('sponsor-name');
+
+        GoSquared.q.push(['TrackEvent', 'Clicked on a Sponsor', {
+          sponsorName: sponsorName
+        }]);
 
         $('[data-sponsor-id]').addClass('hide');
         $('[data-sponsor-id=' + sponsorId + ']').removeClass('hide');
+
+        return false;
       });
     });
   </script>
@@ -23,7 +30,7 @@
       <div class="row sponsors">
         @foreach ($sponsors as $sponsor)
           <div class="col-lg-4">
-            <a href="#" data-sponsor-show="{{ $sponsor->id }}">
+            <a href="#" data-sponsor-show="{{ $sponsor->id }}" data-sponsor-name="{{{ $sponsor->name }}}">
               {{ $sponsor->logo_image }}
             </a>
           </div>
