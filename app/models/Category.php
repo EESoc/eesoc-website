@@ -2,6 +2,8 @@
 
 class Category extends Eloquent {
 
+	const ID_UNCATEGORISED = 1;
+
 	protected $fillable = array('name', 'slug', 'description');
 
 	public $timestamps = false;
@@ -33,13 +35,31 @@ class Category extends Eloquent {
 	}
 
 	/**
+	 * Get `uncategorised` category
+	 * @return Category
+	 */
+	public static function uncategorised()
+	{
+		return static::find(static::ID_UNCATEGORISED);
+	}
+
+	/*
+	Scopes
+	 */
+
+	public function scopeAlphabetically($query)
+	{
+		return $query->orderBy('name');
+	}
+
+	/**
 	 * Return is deletable attribute.
 	 * 
 	 * @return boolean
 	 */
 	public function getIsDeletableAttribute()
 	{
-		return ((int) $this->id !== 1);
+		return ((int) $this->id !== static::ID_UNCATEGORISED);
 	}
 
 }

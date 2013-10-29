@@ -1,3 +1,18 @@
+
+body {
+  background-color: #f6f6f6;
+}
+
+#main {
+  margin: 0;
+  padding: 40px 0;
+  background-color: #fff;
+}
+
+.navbar {
+  margin: 0;
+}
+
 .navbar-default {
   background-color: #F4FAFD;
 }
@@ -30,10 +45,87 @@
   }
 }
 
+.book-search-results a.thumbnail {
+  text-decoration: none;
+}
+
+#credits {
+  text-align: center;
+  border-top: 1px solid #eee;
+  padding: 40px 0;
+}
+
+#credits .fb-like {
+  margin-bottom: 40px;
+}
+
+/**
+ * Sponsors
+ */
 .sponsors div {
   height: 200px;
 }
 
-.book-search-results a.thumbnail {
-  text-decoration: none;
+/**
+ * Events
+ */
+#accordion-events .panel-heading small {
+  color: #000000;
+  font-weight: bold;
+}
+
+.panel-category-social {
+  border-color: #b8bcdf;
+}
+
+.panel-category-social > .panel-heading {
+  color: #333333;
+  background-color: #dbddef;
+  border-color: #b8bcdf;
+}
+
+.panel-category-social > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #b8bcdf;
+}
+
+.panel-category-social > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #b8bcdf;
+}
+
+
+.panel-category-industry {
+  border-color: #d6c7a0;
+}
+
+.panel-category-industry > .panel-heading {
+  color: #333333;
+  background-color: #eae3cf;
+  border-color: #d6c7a0;
+}
+
+.panel-category-industry > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #d6c7a0;
+}
+
+.panel-category-industry > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #d6c7a0;
+}
+
+
+.panel-category-sports {
+  border-color: #d1a194;
+}
+
+.panel-category-sports > .panel-heading {
+  color: #333333;
+  background-color: #ead5cf;
+  border-color: #d1a194;
+}
+
+.panel-category-sports > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #d1a194;
+}
+
+.panel-category-sports > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #d1a194;
 }

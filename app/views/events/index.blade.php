@@ -1,5 +1,7 @@
 @extends('layouts.application')
 
+<?php $page_title = 'Events'; ?>
+
 @section('content')
   <div class="page-header">
     <h1>Events</h1>
@@ -8,15 +10,19 @@
     <div class="col-lg-9">
       <div class="panel-group" id="accordion-events">
         @foreach ($events as $key => $event)
-          <div class="panel panel-default">
+          <div class="panel {{{ $event->category ? 'panel-category-' . Str::slug($event->category->name) : 'panel-default' }}}">
             <div class="panel-heading">
               <h4 class="panel-title">
                 <a href="#event-{{ $event->id }}" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-events">
                   <small>
                     {{{ $event->datetime_object->format('jS F') }}}
                   </small>
+                  &mdash;
                   {{{ $event->name }}}
                 </a>
+                @if ($event->category)
+                  <span class="label label-default pull-right">{{{ $event->category->name }}}</span>
+                @endif
               </h4>
             </div>
             <div id="event-{{ $event->id }}" class="panel-collapse collapse {{ $key === 0 ? 'in' : '' }}">
@@ -27,6 +33,8 @@
                     <dt>Location:</dt>
                     <dd>{{{ $event->location }}}</dd>
                   @endif
+                  <dt>Date:</dt>
+                  <dd>{{{ $event->datetime_object->format('F jS, Y') }}}</dd>
                   @if ($event->starts_at || $event->ends_at)
                     <dt>Time:</dt>
                     <dd>

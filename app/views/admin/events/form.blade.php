@@ -11,6 +11,11 @@
   {{ Form::text('name', null, array('class' => 'form-control input-lg')) }}
   {{ $errors->first('name', '<span class="help-block">:message</span>') }}
 </div>
+<div class="form-group {{ $errors->first('category_id', 'has-error') }}">
+  {{ Form::label('category_id', 'Category', array('class' => 'control-label')) }}
+  {{ Form::select('category_id', $categories->lists('name', 'id'), null, array('class' => 'form-control input-lg')) }}
+  {{ $errors->first('category_id', '<span class="help-block">:message</span>') }}
+</div>
 <div class="form-group {{ $errors->first('date', 'has-error') }}">
   {{ Form::label('date', 'Date', array('class' => 'control-label')) }}
   {{ Form::text('date', null, array('class' => 'form-control input-lg')) }}

@@ -1,6 +1,7 @@
 <?php
 namespace Admin;
 
+use \Category;
 use \DB;
 use \EventDay;
 use \Input;
@@ -18,6 +19,7 @@ class EventsController extends BaseController {
 	public function index()
 	{
 		$events = EventDay::orderBy(DB::raw('ISNULL(`date`), `date`'))
+			->with('category')
 			->get();
 
 		return View::make('admin.events.index')
@@ -32,6 +34,7 @@ class EventsController extends BaseController {
 	public function create()
 	{
 		return View::make('admin.events.create')
+			->with('categories', Category::alphabetically()->get())
 			->with('event', new EventDay);
 	}
 
@@ -67,6 +70,7 @@ class EventsController extends BaseController {
 	public function edit($id)
 	{
 		return View::make('admin.events.edit')
+			->with('categories', Category::alphabetically()->get())
 			->with('event', EventDay::findOrFail($id));
 	}
 

@@ -1,5 +1,7 @@
 @extends('layouts.application')
 
+<?php $page_title = $user->name; ?>
+
 @section('content')
   <div class="page-header">
     <h1>
