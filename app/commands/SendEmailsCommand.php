@@ -57,10 +57,10 @@ class SendEmailsCommand extends Command {
 
 		// $email = NewsletterEmail::findOrFail(1);
 
-		$html = View::make('emails.2013_10_25.html')
+		$html = View::make('emails.2013_10_30.html')
 			// ->with('body', $email->body)
 			->render();
-		$plaintext = View::make('emails.2013_10_25.plaintext')
+		$plaintext = View::make('emails.2013_10_30.plaintext')
 			->render();
 
 		// $body = (new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles($html, file_get_contents(base_path() . '/public/assets/css/email.css')))
@@ -75,23 +75,23 @@ class SendEmailsCommand extends Command {
 
 		foreach ($emails as $email)
 		{
-			$this->info(sprintf('Sending email `%s` to `%s`', 'Let\'s win £5000 for EESoc - Check out our latest CarEEr updates', $email));
+			$this->info(sprintf('Sending email `%s` to `%s`', 'CarEErs talk with ARM tomrrow - IndustrEE Fair upcoming', $email));
 			$message = Swift_Message::newInstance();
 
 			$message->setFrom(array('please-reply@eesoc.com' => 'EESoc'));
 			$message->setReplyTo('please-reply@eesoc.com');
 			$message->setTo($email);
-			$message->setSubject('Let\'s win £5000 for EESoc - Check out our latest CarEEr updates');
+			$message->setSubject('CarEErs talk with ARM tomrrow - IndustrEE Fair upcoming');
 			$message->setBody($html, 'text/html');
 			$message->addPart($plaintext, 'text/plain');
 
 			if ($mailer->send($message)) {
-				$this->info(sprintf('Successfully sent email `%s` to `%s`', 'Let\'s win £5000 for EESoc - Check out our latest CarEEr updates', $email));
+				$this->info(sprintf('Successfully sent email `%s` to `%s`', 'CarEErs talk with ARM tomrrow - IndustrEE Fair upcoming', $email));
 
 				// Remove from queue
 				// $queue->delete();
 			} else {
-				$this->error(sprintf('Something went wrong while sending email `%s` to `%s`', 'Let\'s win £5000 for EESoc - Check out our latest CarEEr updates', $email));
+				$this->error(sprintf('Something went wrong while sending email `%s` to `%s`', 'CarEErs talk with ARM tomrrow - IndustrEE Fair upcoming', $email));
 			}
 
 			unset($message);
