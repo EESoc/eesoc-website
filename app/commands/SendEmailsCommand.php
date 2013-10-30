@@ -71,6 +71,7 @@ class SendEmailsCommand extends Command {
 		$mailer = Swift_Mailer::newInstance($transport);
 
 		// $emails = array('jianyuan@gmail.com', 'jian.lee11@imperial.ac.uk');
+		// $emails = array('darioml1911@gmail.com', 'dm1911@imperial.ac.uk');
 		$emails = User::hasStudentGroup()->get()->lists('email');
 
 		foreach ($emails as $email)
