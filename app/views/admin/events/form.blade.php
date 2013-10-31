@@ -18,7 +18,7 @@
 </div>
 <div class="form-group {{ $errors->first('date', 'has-error') }}">
   {{ Form::label('date', 'Date', array('class' => 'control-label')) }}
-  {{ Form::text('date', null, array('class' => 'form-control input-lg')) }}
+  {{ Form::text('date', null, array('class' => 'form-control input-lg', 'placeholder' => 'yyyy-mm-dd')) }}
   {{ $errors->first('date', '<span class="help-block">:message</span>') }}
 </div>
 <div class="form-group {{ $errors->first('starts_at', 'has-error') }}">
