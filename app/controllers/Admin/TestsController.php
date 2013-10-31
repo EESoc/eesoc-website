@@ -18,4 +18,10 @@ class TestsController extends BaseController {
 		return 'OK';
 	}
 
+	public function getSendLockerTermsAndConditions()
+	{
+		Notification::sendLockerTermsAndConditions(Auth::user());
+		return 'OK';
+	}
+
 }

@@ -24,6 +24,7 @@ Imperial College London EESoc's Offical Website Source Code
 - `php artisan instagram:sync` - Syncs Instagram feed.
 - `php artisan ldap:sync` - Sync user info with LDAP.
 - `php artisan locker:remind` - Remind users via email to claim their locker.
+- `php artisan locker:send_terms` - Send locker terms and conditions to all owners.
 
 ### Writeable folders
 
