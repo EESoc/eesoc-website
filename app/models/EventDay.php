@@ -43,7 +43,7 @@ class EventDay extends Eloquent {
 	 */
 	public function setDateAttribute($value)
 	{
-		$this->attributes['date'] = empty($value) ? null : $value;
+		$this->attributes['date'] = (empty($value) || $value === '0000-00-00') ? null : $value;
 	}
 
 	/**
