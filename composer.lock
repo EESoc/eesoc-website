@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jianyuan/elfinder-bundle.git",
-                "reference": "52ed6a7fd3ae8d3ba5f130dc9087df8f8474c868"
+                "reference": "bea4f09ccee318d614fecf55f18a216c1ce8523f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jianyuan/elfinder-bundle/zipball/52ed6a7fd3ae8d3ba5f130dc9087df8f8474c868",
-                "reference": "52ed6a7fd3ae8d3ba5f130dc9087df8f8474c868",
+                "url": "https://api.github.com/repos/jianyuan/elfinder-bundle/zipball/bea4f09ccee318d614fecf55f18a216c1ce8523f",
+                "reference": "bea4f09ccee318d614fecf55f18a216c1ce8523f",
                 "shasum": ""
             },
             "require": {
@@ -40,9 +40,9 @@
             ],
             "description": "A Laravel Bundle to integrate elFinder 2.0",
             "support": {
-                "source": "https://github.com/jianyuan/elfinder-bundle/tree/ckeditor"
+                "source": "https://github.com/jianyuan/elfinder-bundle/tree/master"
             },
-            "time": "2013-08-28 23:57:14"
+            "time": "2013-11-05 10:17:32"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -164,16 +164,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "d0e4447707a064a5814b18cb0dcc2f24185f6179"
+                "reference": "e16d7adf45664a50fa86f515b6d5e7f670130449"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/d0e4447707a064a5814b18cb0dcc2f24185f6179",
-                "reference": "d0e4447707a064a5814b18cb0dcc2f24185f6179",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/e16d7adf45664a50fa86f515b6d5e7f670130449",
+                "reference": "e16d7adf45664a50fa86f515b6d5e7f670130449",
                 "shasum": ""
             },
             "require": {
@@ -181,6 +181,10 @@
             },
             "conflict": {
                 "doctrine/common": ">2.2,<2.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=3.7",
+                "satooshi/php-coveralls": "~0.6"
             },
             "type": "library",
             "extra": {
@@ -201,7 +205,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -229,7 +234,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2013-09-26 19:23:25"
+            "time": "2013-10-25 19:04:14"
         },
         {
             "name": "doctrine/collections",
@@ -609,12 +614,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Crinsane/LaravelCalendar.git",
-                "reference": "7e6a703ae35c9abfc3fbcc879192b672671e4102"
+                "reference": "df0b6071fdd0579a0c33b8cb12d873aed8f08b71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Crinsane/LaravelCalendar/zipball/7e6a703ae35c9abfc3fbcc879192b672671e4102",
-                "reference": "7e6a703ae35c9abfc3fbcc879192b672671e4102",
+                "url": "https://api.github.com/repos/Crinsane/LaravelCalendar/zipball/df0b6071fdd0579a0c33b8cb12d873aed8f08b71",
+                "reference": "df0b6071fdd0579a0c33b8cb12d873aed8f08b71",
                 "shasum": ""
             },
             "require": {
@@ -639,7 +644,7 @@
                 "calendar",
                 "laravel"
             ],
-            "time": "2013-08-23 07:19:15"
+            "time": "2013-10-26 23:24:07"
         },
         {
             "name": "guzzle/guzzle",
@@ -1076,16 +1081,16 @@
         },
         {
             "name": "patchwork/utf8",
-            "version": "v1.1.13",
+            "version": "v1.1.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nicolas-grekas/Patchwork-UTF8.git",
-                "reference": "92376c92e7edc281a2ca4e3384f3da9237415db6"
+                "reference": "af1d74b154bc62fab79b428877a9b5ab15f9418a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nicolas-grekas/Patchwork-UTF8/zipball/92376c92e7edc281a2ca4e3384f3da9237415db6",
-                "reference": "92376c92e7edc281a2ca4e3384f3da9237415db6",
+                "url": "https://api.github.com/repos/nicolas-grekas/Patchwork-UTF8/zipball/af1d74b154bc62fab79b428877a9b5ab15f9418a",
+                "reference": "af1d74b154bc62fab79b428877a9b5ab15f9418a",
                 "shasum": ""
             },
             "require": {
@@ -1123,7 +1128,7 @@
                 "utf-8",
                 "utf8"
             ],
-            "time": "2013-10-12 09:48:20"
+            "time": "2013-11-04 16:58:59"
         },
         {
             "name": "predis/predis",
