@@ -14,7 +14,12 @@
         @foreach($emails as $email)
           <a href="{{ URL::route('admin.emails.edit', $email->id) }}" class="list-group-item">
               {{{ $email->subject }}}
-              ({{ $email->send_queue_length}} in send queue)
+              (
+                {{{ $email->sent_count }}}
+                /
+                {{{ $email->send_queue_length }}}
+                emails sent
+              )
           </a>
         @endforeach
       </div>
