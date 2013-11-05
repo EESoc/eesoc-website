@@ -1,10 +1,43 @@
 @section('javascript_for_page')
+<script src="{{{ asset('assets/js/epiceditor/js/epiceditor.min.js') }}}"></script>
 <script>
-  CKEDITOR.inline('body', {
-    filebrowserBrowseUrl: '{{ URL::action('Barryvdh\ElfinderBundle\ElfinderController@showCKEditor') }}'
-  });
-
   $(function() {
+    (function() {
+      var $previewFrame = $('iframe#htmlpreview');
+
+      var editor = new EpicEditor({
+          basePath: '',
+          theme: {
+              base: '{{{ asset('assets/js/epiceditor/themes/base/epiceditor.css') }}}',
+              preview: '{{{ asset('assets/js/epiceditor/themes/preview/preview-dark.css') }}}',
+              editor: '{{{ asset('assets/js/epiceditor/themes/editor/epic-dark.css') }}}'
+          },
+          button: {
+              preview: false,
+              fullscreen: false,
+          },
+          textarea: 'body'
+      }).load();
+   
+      var refreshPreview = function() {
+        var htmlcontent = this.exportFile(null, 'html');
+        htmlcontent = htmlcontent.replace(/<p>/g,"<p style=\"margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;\">")
+        .replace(/<h1>/g,"<h1 style=\"margin: 0;padding: 0;display: block;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 35px;font-style: normal;font-weight: 300;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;\">")
+        .replace(/<h2>/g,"<h2 style=\"margin: 0;padding: 0;display: block;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 28px;font-style: normal;font-weight: 300;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;\">")
+        .replace(/<h3>/g,"<h3 style=\"margin: 0;padding: 0;display: block;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 22px;font-style: normal;font-weight: 300;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;\">")
+
+        $previewFrame.contents().find("table#templateBody tbody.mcnTextBlockOuter td.mcnTextBlockInner td.mcnTextContent").html(htmlcontent)
+      };
+
+      editor.on('update', refreshPreview);
+
+      // @TODO fix this
+      $previewFrame.ready(function() {
+        refreshPreview.call(editor);
+      });
+
+    })();
+
     $('[data-recipients-count]')
       .change(function() {
         var count = 0;
@@ -67,7 +100,14 @@
       {{ Form::label('body', 'Body', array('class' => 'control-label')) }}
       <div class="panel panel-default">
         <div class="panel-body">
-          {{ Form::textarea('body', null, array('class' => 'form-control input-lg', 'data-wysiwyg' => true)) }}
+          <div class="row email-preview">
+            <div id="epiceditor" class="col-lg-6"></div>
+            <div class="col-lg-6 html-preview">
+              <iframe id="htmlpreview" src="{{{ action('Admin\EmailsController@getPreviewTemplate', $email->id) }}}"></iframe>
+            </div>
+          </div>
+
+          {{ Form::textarea('body', null, ['class' => 'hide']) }}
         </div>
       </div>
       {{ $errors->first('body', '<span class="help-block">:message</span>') }}
@@ -97,7 +137,7 @@
           <div class="form-group">
             {{ Form::text('test_email', null, ['class' => 'form-control', 'placeholder' => 'Email']) }}
           </div>
-          <button type="submit" class="btn btn-default" name="action" value="send">
+          <button type="submit" class="btn btn-default" name="action" value="send_test">
             Send Test
           </button>
         @endif

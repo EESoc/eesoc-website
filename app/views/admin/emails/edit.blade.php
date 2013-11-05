@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+<?php $full_width = true; ?>
+
 @section('content')
   <div class="page-header">
     <h1>Editing Email</h1>

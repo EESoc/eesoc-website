@@ -74,6 +74,13 @@ class NewsletterEmail extends Eloquent {
 		return ceil($sent / $total * 100);
 	}
 
+	public function getHtmlOutputAttribute()
+	{
+		return View::make('email_layouts.newsletter')
+			->with('body', $this->body)
+			->render();
+	}
+
 	/**
 	 * Builds an email queue
 	 */
@@ -177,12 +184,9 @@ class NewsletterEmail extends Eloquent {
 			foreach ($recipients as $recipient) {
 				$message->setTo($recipient->to_email);
 
-				// @todo move this to template
-				$message->setBody(
-					$message->getBody()
-					.
-					'<img src="' . $recipient->tracking_pixel_url . '" width="1" height="1" />'
-				);
+				// Process tracking pixel
+				$tracking_pixel_html = '<img src="' . $recipient->tracking_pixel_url . '" width="1" height="1" />';
+				$message->setBody(str_replace($message->getBody(), '<tracking_pixel>', $tracking_pixel_html));
 
 				if ($mailer->send($message)) {
 					// Mark email queue as sent

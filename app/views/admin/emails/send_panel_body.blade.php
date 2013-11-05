@@ -18,7 +18,7 @@
 </strong>
 
 @if ($email->can_pause)
-  <a href="{{{ route('admin.emails.update', $email->id) }}}" class="btn btn-danger" data-method="put">
+  <a href="{{{ action('Admin\EmailsController@putPause', $email->id) }}}" class="btn btn-danger" data-method="put">
     <span class="glyphicon glyphicon-pause"></span>
     Pause
   </a>

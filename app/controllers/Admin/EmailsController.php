@@ -37,6 +37,43 @@ class EmailsController extends BaseController {
 	}
 
 	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param	int	$id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		$email = NewsletterEmail::findOrFail($id);
+
+		if ($email->can_save) {
+			return View::make('admin.emails.edit')
+				->with('email', $email)
+				->with('newsletters', Newsletter::all());
+		} else {
+			return Redirect::route('admin.emails.show', $email->id);
+		}
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		$email = NewsletterEmail::findOrFail($id);
+
+		if ($email->can_save) {
+			return Redirect::route('admin.emails.edit', $email->id);
+		} else {
+			return View::make('admin.emails.show')
+				->with('email', $email);
+		}
+	}
+
+	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
@@ -75,43 +112,6 @@ class EmailsController extends BaseController {
 	}
 
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		$email = NewsletterEmail::findOrFail($id);
-
-		if ($email->can_save) {
-			return Redirect::route('admin.emails.edit', $email->id);
-		} else {
-			return View::make('admin.emails.show')
-				->with('email', $email);
-		}
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param	int	$id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		$email = NewsletterEmail::findOrFail($id);
-
-		if ($email->can_save) {
-			return View::make('admin.emails.edit')
-				->with('email', $email)
-				->with('newsletters', Newsletter::all());
-		} else {
-			return Redirect::route('admin.emails.show', $email->id);
-		}
-	}
-
-	/**
 	 * Update the specified resource in storage.
 	 *
 	 * @param	int	$id
@@ -142,14 +142,6 @@ class EmailsController extends BaseController {
 				$email->newsletters()->sync((array) Input::get('newsletter_ids'));
 			}
 
-			if (Input::get('action') === 'pause' && $email->can_pause) {
-				$email->state = 'draft';
-				$email->save();
-
-				return Redirect::route('admin.emails.show', $email->id)
-					->with('success', 'Email has been successfully updated');
-			}
-
 			if (Input::get('action') === 'send' && $email->can_send) {
 				$email->buildEmailQueue();
 				$email->state = 'sending';
@@ -159,7 +151,7 @@ class EmailsController extends BaseController {
 					->with('success', 'Email has been successfully updated');
 			}
 
-			return Redirect::route('admin.emails.index')
+			return Redirect::route('admin.emails.edit', $email->id)
 				->with('success', 'Email has been successfully updated');
 		} else {
 			return Redirect::route('admin.emails.edit', $email->id)
@@ -222,6 +214,31 @@ class EmailsController extends BaseController {
 			'panel' => $panel,
 			'sent_emails' => $sent_emails,
 		]);
+	}
+
+	public function putPause($id)
+	{
+		$email = NewsletterEmail::findOrFail($id);
+
+		if ($email->can_pause) {
+			$email->state = 'draft';
+			$email->save();
+
+			return Redirect::route('admin.emails.edit', $email->id)
+				->with('success', 'Email sending paused');
+		} else {
+
+			return Redirect::route('admin.emails.show', $email->id)
+				->with('success', 'You cannot pause this email');
+		}
+	}
+
+	public function getPreviewTemplate($id)
+	{
+		$email = NewsletterEmail::findOrFail($id);
+
+		return View::make('email_layouts.newsletter')
+			->with('body', null);
 	}
 
 }

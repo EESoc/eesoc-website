@@ -129,7 +129,12 @@
     </nav>
 
     @section('body')
-      <div class="container">
+      <div class="
+        container
+        @if (isset($full_width) && $full_width)
+          full-width
+        @endif
+      ">
 
         @include('shared.flashes')
         @yield('content')
