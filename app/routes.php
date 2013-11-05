@@ -113,7 +113,6 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 
 	# elFinder
 	Route::get('elfinder',           'Barryvdh\ElfinderBundle\ElfinderController@showIndex');
-	Route::any('elfinder/connector', 'Admin\ElfinderController@showConnector');
 	Route::any('elfinder/connector', 'Barryvdh\ElfinderBundle\ElfinderController@showConnector');
 	Route::get('elfinder/ckeditor',  'Barryvdh\ElfinderBundle\ElfinderController@showCKEditor');
 });
