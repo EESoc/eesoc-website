@@ -57,10 +57,10 @@ class SendEmailsCommand extends Command {
 
 		// $email = NewsletterEmail::findOrFail(1);
 
-		$html = View::make('emails.2013_11_03.html')
+		$html = View::make('emails.2013_11_05.html')
 			// ->with('body', $email->body)
 			->render();
-		$plaintext = View::make('emails.2013_11_03.plaintext')
+		$plaintext = View::make('emails.2013_11_05.plaintext')
 			->render();
 
 		// $body = (new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles($html, file_get_contents(base_path() . '/public/assets/css/email.css')))
