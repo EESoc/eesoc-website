@@ -56,7 +56,7 @@ $(function() {
     </div>
     <div class="col-lg-3">
       <div class="panel panel-default">
-        <div class="panel-heading">Save</div>
+        <div class="panel-heading">Delivery</div>
         <div class="panel-body" data-remote-path="{{{ action('Admin\EmailsController@postSendBatch', $email->id) }}}">
           @include('admin.emails.send_panel_body')
         </div>

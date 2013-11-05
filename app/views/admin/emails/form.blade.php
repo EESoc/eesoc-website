@@ -34,27 +34,29 @@
           {{ Form::label('preheader', 'Preheader', array('class' => 'control-label col-lg-2')) }}
           <div class="col-lg-10">
             {{ Form::text('preheader', null, array('class' => 'form-control')) }}
+            <span class="help-block">A short summary text that follows the subject line when an email is viewed in the inbox.</span>
             {{ $errors->first('preheader', '<span class="help-block">:message</span>') }}
           </div>
         </div>
+        <hr>
         <div class="form-group {{ $errors->first('from_name', 'has-error') }}">
           {{ Form::label('from_name', 'From Name', array('class' => 'control-label col-lg-2')) }}
           <div class="col-lg-10">
-            {{ Form::text('from_name', null, array('class' => 'form-control')) }}
+            {{ Form::text('from_name', 'EESoc', array('class' => 'form-control')) }}
             {{ $errors->first('from_name', '<span class="help-block">:message</span>') }}
           </div>
         </div>
         <div class="form-group {{ $errors->first('from_email', 'has-error') }}">
           {{ Form::label('from_email', 'From Email', array('class' => 'control-label col-lg-2')) }}
           <div class="col-lg-10">
-            {{ Form::text('from_email', null, array('class' => 'form-control')) }}
+            {{ Form::text('from_email', 'please-reply@eesoc.com', array('class' => 'form-control')) }}
             {{ $errors->first('from_email', '<span class="help-block">:message</span>') }}
           </div>
         </div>
         <div class="form-group {{ $errors->first('reply_to_email', 'has-error') }}">
           {{ Form::label('reply_to_email', 'Reply-To Email', array('class' => 'control-label col-lg-2')) }}
           <div class="col-lg-10">
-            {{ Form::text('reply_to_email', null, array('class' => 'form-control')) }}
+            {{ Form::text('reply_to_email', 'please-reply@eesoc.com', array('class' => 'form-control')) }}
             {{ $errors->first('reply_to_email', '<span class="help-block">:message</span>') }}
           </div>
         </div>
@@ -72,23 +74,37 @@
     </div>
   </div>
   <div class="col-lg-3">
-    <div class="panel panel-default">
-      <div class="panel-heading">Save</div>
-      <div class="panel-body">
-        @if ($email->can_save)
+    @if ($email->can_save)
+      <div class="panel panel-default">
+        <div class="panel-body">
           <button type="submit" class="btn btn-primary" name="action" value="save">
             <span class="glyphicon glyphicon-floppy-disk"></span>
             Save
           </button>
-        @endif
+        </div>
+      </div>
+    @endif
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Delivery</div>
+      <div class="panel-body">
         @if ($email->can_send)
           <button type="submit" class="btn btn-default" name="action" value="send">
             <span class="glyphicon glyphicon-send"></span>
             Send Now!
           </button>
+          <hr>
+          <div class="form-group">
+            {{ Form::text('test_email', null, ['class' => 'form-control', 'placeholder' => 'Email']) }}
+          </div>
+          <button type="submit" class="btn btn-default" name="action" value="send">
+            Send Test
+          </button>
         @endif
       </div>
     </div>
+
+
     <div class="panel panel-default">
       <div class="panel-heading">
         Recipients

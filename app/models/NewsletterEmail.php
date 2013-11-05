@@ -84,14 +84,19 @@ class NewsletterEmail extends Eloquent {
 		$inserts = [];
 
 		foreach ($this->newsletters as $newsletter) {
+			// Process student groups
 			$student_group_ids = $newsletter->student_groups->lists('id');
 			if ( ! empty($student_group_ids)) {
-				$users = User::whereIn('student_group_id', $student_group_ids)->get();
+				$users = User::whereIn('student_group_id', $student_group_ids)
+					->whereNotIn('id', function($query) {
+						// Remove duplicate
+						return $query
+							->select('user_id')
+							->from('newsletter_email_queue')
+							->where('newsletter_email_id', '=', $this->id);
+					})
+					->get();
 				foreach ($users as $user) {
-					if ( ! $user->email) {
-						continue;
-					}
-
 					$inserts[] = [
 						'newsletter_email_id' => $this->id,
 						'tracker_token'       => str_random(20),
@@ -101,10 +106,20 @@ class NewsletterEmail extends Eloquent {
 				}
 			}
 
-			$query = $newsletter->subscriptions();
+			// Process normal email subscriptions
+			$subscribers_query = $newsletter
+				->subscriptions()
+				->whereNotIn('email', function($query) {
+					// Remove duplicate
+					return $query
+						->select('to_email')
+						->from('newsletter_email_queue')
+						->where('newsletter_email_id', '=', $this->id);
+				});
 
 			if ( ! empty($student_group_ids)) {
-				$query
+				// Remove duplicate
+				$subscribers_query
 					->whereNull('user_id')
 					->orWhereNotIn('user_id', function($query) use ($student_group_ids) {
 						return $query
@@ -114,12 +129,9 @@ class NewsletterEmail extends Eloquent {
 					});
 			}
 
-			$subscribers = $query->get();
+			// Get subscribers
+			$subscribers = $subscribers_query->get();
 			foreach ($subscribers as $subscriber) {
-				if ( ! $subscriber->email) {
-					continue;
-				}
-
 				$inserts[] = [
 					'newsletter_email_id' => $this->id,
 					'tracker_token'       => str_random(20),
@@ -129,7 +141,9 @@ class NewsletterEmail extends Eloquent {
 			}
 		}
 
-		DB::table('newsletter_email_queue')->insert($inserts);
+		if ( ! empty($inserts)) {
+			DB::table('newsletter_email_queue')->insert($inserts);
+		}
 	}
 
 	/**
