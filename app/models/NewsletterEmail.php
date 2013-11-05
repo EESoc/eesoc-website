@@ -160,19 +160,17 @@ class NewsletterEmail extends Eloquent {
 
 		$mailer = Swift_Mailer::newInstance($transport);
 
-		$message = Swift_Message::newInstance();
-		$message->setFrom([$this->from_email => $this->from_name]);
-		if ($this->reply_to_email) {
-			$message->setReplyTo($this->reply_to_email);
-		}
-		$message->setSubject($this->subject);
-		$message->setBody($this->body, 'text/html');
-		if ($this->preheader) {
-			$message->addPart($this->preheader, 'text/plain');
-		}
+		$message = $this->buildMessage();
 
-		$recipients = $this->queuedEmails()->pendingSend()->take($size)->get();
-		if ($recipients->isEmpty()) {
+		$recipients = $this
+			->queuedEmails()
+			->pendingSend()
+			->take($size)
+			->get();
+
+		$sent_emails = [];
+
+		if ($recipients->isEmpty()) { // Finished sending out emails
 			$this->state = 'completed';
 			$this->save();
 		} else {
@@ -187,11 +185,44 @@ class NewsletterEmail extends Eloquent {
 				);
 
 				if ($mailer->send($message)) {
+					// Mark email queue as sent
 					$recipient->sent = true;
 					$recipient->save();
 				}
+
+				$sent_emails[] = $recipient->to_email;
 			}
 		}
+
+		return $sent_emails;
 	}
+
+
+	/**
+	 * Build Swift_Message instance with all newsletter email data.
+	 * @return Swift_Message
+	 */
+	private function buildMessage()
+	{
+		// Setup message
+		$message = Swift_Message::newInstance();
+
+		$message->setFrom([$this->from_email => $this->from_name]);
+
+		if ($this->reply_to_email) {
+			$message->setReplyTo($this->reply_to_email);
+		}
+
+		$message->setSubject($this->subject);
+
+		$message->setBody($this->body, 'text/html');
+
+		if ($this->preheader) {
+			$message->addPart($this->preheader, 'text/plain');
+		}
+
+		return $message;
+	}
+
 
 }

@@ -202,8 +202,15 @@ class EmailsController extends BaseController {
 	public function postSendBatch($id)
 	{
 		$email = NewsletterEmail::findOrFail($id);
+
+		$sent_emails = [];
+
 		if ($email->is_sending) {
-			$email->sendBatch();
+			try {
+				$sent_emails = $email->sendBatch();
+			} catch (\Swift_TransportException $e) {
+				return Response::json(['error' => $e->getMessage()]);
+			}
 		}
 
 		$panel = View::make('admin.emails.send_panel_body')
@@ -213,6 +220,7 @@ class EmailsController extends BaseController {
 		return Response::json([
 			'sending' => $email->is_sending,
 			'panel' => $panel,
+			'sent_emails' => $sent_emails,
 		]);
 	}
 

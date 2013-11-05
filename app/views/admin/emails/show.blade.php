@@ -13,9 +13,23 @@ $(function() {
       remotePath,
       postParams,
       function(response) {
-        panel.html(response.panel);
-        if (response.sending) {
-          fetchPanel();
+        if (response.error) {
+          $('.delivery-output').prepend(
+            $('<p class="text-danger" />').text(response.error)
+          );
+        } else {
+          $.each(response.sent_emails, function(i, email) {
+            $('.delivery-output').prepend(
+              $('<p class="text-success" />').text(email + ' OK')
+            );
+          });
+
+          panel.html(response.panel);
+
+          if (response.sending) {
+            // Still have more emails to send...
+            fetchPanel();
+          }
         }
       }
     );
@@ -50,8 +64,14 @@ $(function() {
         </div>
       </div>
       <div class="panel panel-default">
+        <div class="panel-heading">Delivery Output</div>
+        <div class="panel-body delivery-output"></div>
+      </div>
+      <div class="panel panel-default">
         <div class="panel-heading">Body</div>
-        <div class="panel-body">{{{ $email->body }}}</div>
+        <div class="panel-body">
+          <pre>{{{ $email->body }}}</pre>
+        </div>
       </div>
     </div>
     <div class="col-lg-3">
