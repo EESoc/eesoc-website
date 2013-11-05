@@ -76,23 +76,23 @@ class SendEmailsCommand extends Command {
 
 		foreach ($emails as $email)
 		{
-			$this->info(sprintf('Sending email `%s` to `%s`', 'T minus 3 Days to find your carEEr - Pub Crawl and DB Dinner', $email));
+			$this->info(sprintf('Sending email `%s` to `%s`', 'T minus One to your graduate Job - Pub Crawl TONIGHT', $email));
 			$message = Swift_Message::newInstance();
 
 			$message->setFrom(array('please-reply@eesoc.com' => 'EESoc'));
 			$message->setReplyTo('please-reply@eesoc.com');
 			$message->setTo($email);
-			$message->setSubject('T minus 3 Days to find your carEEr - Pub Crawl and DB Dinner');
+			$message->setSubject('T minus One to your graduate Job - Pub Crawl TONIGHT');
 			$message->setBody($html, 'text/html');
 			$message->addPart($plaintext, 'text/plain');
 
 			if ($mailer->send($message)) {
-				$this->info(sprintf('Successfully sent email `%s` to `%s`', 'T minus 3 Days to find your carEEr - Pub Crawl and DB Dinner', $email));
+				$this->info(sprintf('Successfully sent email `%s` to `%s`', 'T minus One to your graduate Job - Pub Crawl TONIGHT', $email));
 
 				// Remove from queue
 				// $queue->delete();
 			} else {
-				$this->error(sprintf('Something went wrong while sending email `%s` to `%s`', 'T minus 3 Days to find your carEEr - Pub Crawl and DB Dinner', $email));
+				$this->error(sprintf('Something went wrong while sending email `%s` to `%s`', 'T minus One to your graduate Job - Pub Crawl TONIGHT', $email));
 			}
 
 			unset($message);
