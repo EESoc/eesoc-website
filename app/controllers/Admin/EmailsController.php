@@ -1,6 +1,7 @@
 <?php
 namespace Admin;
 
+use \Auth;
 use \Input;
 use \Newsletter;
 use \NewsletterEmail;
@@ -80,48 +81,7 @@ class EmailsController extends BaseController {
 	 */
 	public function store()
 	{
-		if (Input::get('action') === 'send') {
-			$rules = [
-				'subject'    => 'required',
-				'preheader'  => 'required',
-				'from_name'  => 'required',
-				'from_email' => 'required',
-				'body'       => 'required',
-			];
-		} else {
-			$rules = [];
-		}
-
-		$validator = Validator::make(Input::all(), $rules);
-
-		if ($validator->passes()) {
-			$email = new NewsletterEmail;
-			$email->fill(Input::all());
-			$email->save();
-
-			$email->newsletters()->sync(Input::get('newsletter_ids'));
-
-			if ($inputs['queue_send']) {
-				$this->queueEmail($email);
-			}
-
-			return Redirect::route('admin.emails.index')->with('success', 'Email has been successfully created');
-		} else {
-			return Redirect::route('admin.emails.create')->withInput()->withErrors($validator);
-		}
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param	int	$id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		$email = NewsletterEmail::findOrFail($id);
-
-		if (Input::get('action') === 'send') {
+		if (Input::get('action') === 'send' || Input::get('action') === 'send_test') {
 			$rules = [
 				'subject'    => 'required',
 				'preheader'  => 'required',
@@ -140,15 +100,76 @@ class EmailsController extends BaseController {
 				$email->fill(Input::all());
 				$email->save();
 				$email->newsletters()->sync((array) Input::get('newsletter_ids'));
+
+				if (Input::get('action') === 'send') {
+					$email->buildEmailQueue();
+					$email->state = 'sending';
+					$email->save();
+
+					return Redirect::route('admin.emails.show', $email->id)
+						->with('success', 'Email has been successfully updated');
+				}
+
+				if (Input::get('action') === 'send_test') {
+					$email->sendTestToUser(Auth::user());
+					return Redirect::route('admin.emails.show', $email->id)
+						->with('success', 'Test Email has been successfully sent');
+				}
 			}
 
-			if (Input::get('action') === 'send' && $email->can_send) {
-				$email->buildEmailQueue();
-				$email->state = 'sending';
-				$email->save();
+			return Redirect::route('admin.emails.edit', $email->id)
+				->with('success', 'Email has been successfully created');
+		} else {
+			return Redirect::route('admin.emails.create')
+				->withInput()
+				->withErrors($validator);
+		}
+	}
 
-				return Redirect::route('admin.emails.show', $email->id)
-					->with('success', 'Email has been successfully updated');
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param	int	$id
+	 * @return Response
+	 */
+	public function update($id)
+	{
+		$email = NewsletterEmail::findOrFail($id);
+
+		if (Input::get('action') === 'send' || Input::get('action') === 'send_test') {
+			$rules = [
+				'subject'    => 'required',
+				'preheader'  => 'required',
+				'from_name'  => 'required',
+				'from_email' => 'required',
+				'body'       => 'required',
+			];
+		} else {
+			$rules = [];
+		}
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->passes()) {
+			if ($email->can_save) {
+				$email->fill(Input::all());
+				$email->save();
+				$email->newsletters()->sync((array) Input::get('newsletter_ids'));
+
+				if (Input::get('action') === 'send') {
+					$email->buildEmailQueue();
+					$email->state = 'sending';
+					$email->save();
+
+					return Redirect::route('admin.emails.show', $email->id)
+						->with('success', 'Email has been successfully updated');
+				}
+
+				if (Input::get('action') === 'send_test') {
+					$email->sendTestToUser(Auth::user());
+					return Redirect::route('admin.emails.show', $email->id)
+						->with('success', 'Test Email has been successfully sent');
+				}
 			}
 
 			return Redirect::route('admin.emails.edit', $email->id)

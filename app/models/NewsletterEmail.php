@@ -74,7 +74,7 @@ class NewsletterEmail extends Eloquent {
 		return ceil($sent / $total * 100);
 	}
 
-	public function getHtmlOutputAttribute()
+	public function getHtmlBodyAttribute()
 	{
 		return View::make('email_layouts.newsletter')
 			->with('body', $this->body)
@@ -186,7 +186,7 @@ class NewsletterEmail extends Eloquent {
 
 				// Process tracking pixel
 				$tracking_pixel_html = '<img src="' . $recipient->tracking_pixel_url . '" width="1" height="1" />';
-				$message->setBody(str_replace($message->getBody(), '<tracking_pixel>', $tracking_pixel_html));
+				$message->setBody(str_replace('<tracking_pixel>', $tracking_pixel_html, $message->getBody()));
 
 				if ($mailer->send($message)) {
 					// Mark email queue as sent
@@ -201,6 +201,30 @@ class NewsletterEmail extends Eloquent {
 		return $sent_emails;
 	}
 
+	/**
+	 * Sends a test email to a user
+	 * @param  User   $user
+	 * @return integer
+	 */
+	public function sendTestToUser(User $user)
+	{
+		if (App::environment() === 'local') {
+			// Mailcatcher
+			$transport = Swift_SmtpTransport::newInstance('localhost', 1025);
+		} else {
+			$transport = Swift_MailTransport::newInstance();
+		}
+
+		$mailer = Swift_Mailer::newInstance($transport);
+
+		$message = $this->buildMessage();
+
+		$message->setTo($user->email);
+
+		$message->setBody(str_replace('<tracking_pixel>', '', $message->getBody()));
+
+		return $mailer->send($message);
+	}
 
 	/**
 	 * Build Swift_Message instance with all newsletter email data.
@@ -219,7 +243,7 @@ class NewsletterEmail extends Eloquent {
 
 		$message->setSubject($this->subject);
 
-		$message->setBody($this->body, 'text/html');
+		$message->setBody($this->html_body, 'text/html');
 
 		if ($this->preheader) {
 			$message->addPart($this->preheader, 'text/plain');
@@ -227,6 +251,5 @@ class NewsletterEmail extends Eloquent {
 
 		return $message;
 	}
-
 
 }

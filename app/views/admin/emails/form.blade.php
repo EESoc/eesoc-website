@@ -129,16 +129,13 @@
       <div class="panel-heading">Delivery</div>
       <div class="panel-body">
         @if ($email->can_send)
-          <button type="submit" class="btn btn-default" name="action" value="send">
+          <button type="submit" class="btn btn-info" name="action" value="send" data-confirm="Are you sure?">
             <span class="glyphicon glyphicon-send"></span>
             Send Now!
           </button>
           <hr>
-          <div class="form-group">
-            {{ Form::text('test_email', null, ['class' => 'form-control', 'placeholder' => 'Email']) }}
-          </div>
           <button type="submit" class="btn btn-default" name="action" value="send_test">
-            Send Test
+            Send Test Email
           </button>
         @endif
       </div>

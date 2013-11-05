@@ -17,7 +17,8 @@
 		"robclancy/presenter": "1.2.*",
 		"barryvdh/elfinder-bundle": "dev-master",
 		"tijsverkoyen/css-to-inline-styles": "dev-master",
-		"gloudemans/calendar": "dev-master"
+		"gloudemans/calendar": "dev-master",
+		"michelf/php-markdown": "1.3.*@dev"
 	},
 	"autoload": {
 		"classmap": [
