@@ -112,7 +112,7 @@ class EmailsController extends BaseController {
 
 				if (Input::get('action') === 'send_test') {
 					$email->sendTestToUser(Auth::user());
-					return Redirect::route('admin.emails.show', $email->id)
+					return Redirect::route('admin.emails.edit', $email->id)
 						->with('success', 'Test Email has been successfully sent');
 				}
 			}
@@ -167,7 +167,7 @@ class EmailsController extends BaseController {
 
 				if (Input::get('action') === 'send_test') {
 					$email->sendTestToUser(Auth::user());
-					return Redirect::route('admin.emails.show', $email->id)
+					return Redirect::route('admin.emails.edit', $email->id)
 						->with('success', 'Test Email has been successfully sent');
 				}
 			}
