@@ -81,40 +81,16 @@ class EmailsController extends BaseController {
 	 */
 	public function store()
 	{
-		if (Input::get('action') === 'send' || Input::get('action') === 'send_test') {
-			$rules = [
-				'subject'    => 'required',
-				'preheader'  => 'required',
-				'from_name'  => 'required',
-				'from_email' => 'required',
-				'body'       => 'required',
-			];
-		} else {
-			$rules = [];
-		}
-
-		$validator = Validator::make(Input::all(), $rules);
+		$validator = $this->makeValidator();
 
 		if ($validator->passes()) {
-			if ($email->can_save) {
-				$email->fill(Input::all());
-				$email->save();
-				$email->newsletters()->sync((array) Input::get('newsletter_ids'));
+			$email = new NewsletterEmail;
+			$email->fill(Input::all());
+			$email->save();
+			$email->newsletters()->sync((array) Input::get('newsletter_ids'));
 
-				if (Input::get('action') === 'send') {
-					$email->buildEmailQueue();
-					$email->state = 'sending';
-					$email->save();
-
-					return Redirect::route('admin.emails.show', $email->id)
-						->with('success', 'Email has been successfully updated');
-				}
-
-				if (Input::get('action') === 'send_test') {
-					$email->sendTestToUser(Auth::user());
-					return Redirect::route('admin.emails.edit', $email->id)
-						->with('success', 'Test Email has been successfully sent');
-				}
+			if ($response = $this->afterSaveResponseForEmail($email)) {
+				return $response;
 			}
 
 			return Redirect::route('admin.emails.edit', $email->id)
@@ -136,19 +112,7 @@ class EmailsController extends BaseController {
 	{
 		$email = NewsletterEmail::findOrFail($id);
 
-		if (Input::get('action') === 'send' || Input::get('action') === 'send_test') {
-			$rules = [
-				'subject'    => 'required',
-				'preheader'  => 'required',
-				'from_name'  => 'required',
-				'from_email' => 'required',
-				'body'       => 'required',
-			];
-		} else {
-			$rules = [];
-		}
-
-		$validator = Validator::make(Input::all(), $rules);
+		$validator = $this->makeValidator();
 
 		if ($validator->passes()) {
 			if ($email->can_save) {
@@ -156,19 +120,8 @@ class EmailsController extends BaseController {
 				$email->save();
 				$email->newsletters()->sync((array) Input::get('newsletter_ids'));
 
-				if (Input::get('action') === 'send') {
-					$email->buildEmailQueue();
-					$email->state = 'sending';
-					$email->save();
-
-					return Redirect::route('admin.emails.show', $email->id)
-						->with('success', 'Email has been successfully updated');
-				}
-
-				if (Input::get('action') === 'send_test') {
-					$email->sendTestToUser(Auth::user());
-					return Redirect::route('admin.emails.edit', $email->id)
-						->with('success', 'Test Email has been successfully sent');
+				if ($response = $this->afterSaveResponseForEmail($email)) {
+					return $response;
 				}
 			}
 
@@ -262,4 +215,47 @@ class EmailsController extends BaseController {
 			->with('body', null);
 	}
 
+	/**
+	 * Return validator class with rules based on requested action.
+	 * @return Validator
+	 */
+	private function makeValidator()
+	{
+		if (Input::get('action') === 'send' || Input::get('action') === 'send_test') {
+			$rules = [
+				'subject'    => 'required',
+				'preheader'  => 'required',
+				'from_name'  => 'required',
+				'from_email' => 'required',
+				'body'       => 'required',
+			];
+		} else {
+			$rules = [];
+		}
+
+		return Validator::make(Input::all(), $rules);
+	}
+
+	/**
+	 * Decide what do do based on requested action.
+	 * @param  NewsletterEmail $email
+	 * @return Response
+	 */
+	private function afterSaveResponseForEmail(NewsletterEmail $email)
+	{
+		if (Input::get('action') === 'send') {
+			$email->buildEmailQueue();
+			$email->state = 'sending';
+			$email->save();
+
+			return Redirect::route('admin.emails.show', $email->id)
+				->with('success', 'Email has been successfully updated');
+		}
+
+		if (Input::get('action') === 'send_test') {
+			$email->sendTestToUser(Auth::user());
+			return Redirect::route('admin.emails.edit', $email->id)
+				->with('success', 'Test Email has been successfully sent');
+		}
+	}
 }
