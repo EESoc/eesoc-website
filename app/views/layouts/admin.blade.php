@@ -47,25 +47,25 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a href="{{{ URL::route('admin.pages.index') }}}">Pages</a>
+                  <a href="{{{ route('admin.pages.index') }}}">Pages</a>
                 </li>
                 <li>
-                  <a href="{{{ URL::route('admin.contents.index') }}}">Content Blocks</a>
+                  <a href="{{{ route('admin.contents.index') }}}">Content Blocks</a>
                 </li>
                 <li>
-                  <a href="{{{ URL::route('admin.events.index') }}}">Events</a>
+                  <a href="{{{ route('admin.events.index') }}}">Events</a>
                 </li>
                 <li>
-                  <a href="{{{ URL::route('admin.sponsors.index') }}}">Sponsors</a>
+                  <a href="{{{ route('admin.sponsors.index') }}}">Sponsors</a>
                 </li>
                 <li>
                   <a href="{{{ URL::action('Admin\InstagramPhotosController@getIndex') }}}">Instagram Photos</a>
                 </li>
                 <li>
-                  <a href="{{{ URL::route('admin.posts.index') }}}">Posts</a>
+                  <a href="{{{ route('admin.posts.index') }}}">Posts</a>
                 </li>
                 <li>
-                  <a href="{{{ URL::route('admin.categories.index') }}}">Categories</a>
+                  <a href="{{{ route('admin.categories.index') }}}">Categories</a>
                 </li>
               </ul>
             </li>
@@ -76,15 +76,18 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a href="{{{ URL::route('admin.emails.index') }}}">Emails</a>
+                  <a href="{{{ route('admin.emails.index') }}}">Emails</a>
                 </li>
                 <li>
-                  <a href="{{{ URL::route('admin.newsletters.index') }}}">Lists</a>
+                  <a href="{{{ route('admin.newsletters.index') }}}">Lists</a>
                 </li>
               </ul>
             </li>
             <li class="{{ str_contains(Route::currentRouteAction(), 'Admin\Users') ? 'active' : '' }}">
-              <a href="{{{ URL::route('admin.users.index') }}}">Users</a>
+              <a href="{{{ route('admin.users.index') }}}">Users</a>
+            </li>
+            <li class="{{ str_contains(Route::currentRouteAction(), 'Admin\ChristmasDinnerTickets') ? 'active' : '' }}">
+              <a href="{{{ action('Admin\ChristmasDinnerTicketsController@getIndex') }}}">Xmas Dinner Tickets</a>
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -93,13 +96,13 @@
               </a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="{{{ URL::route('admin.sales.index') }}}">EActivities Sales</a>
+                  <a href="{{{ route('admin.sales.index') }}}">EActivities Sales</a>
                 </li>
                 <li>
-                  <a href="{{{ URL::route('admin.user-sign-ins.index') }}}">User Sign Ins</a>
+                  <a href="{{{ route('admin.user-sign-ins.index') }}}">User Sign Ins</a>
                 </li>
                 <li>
-                  <a href="{{{ URL::route('admin.logs.index') }}}">Server Logs</a>
+                  <a href="{{{ route('admin.logs.index') }}}">Server Logs</a>
                 </li>
               </ul>
             </li>
