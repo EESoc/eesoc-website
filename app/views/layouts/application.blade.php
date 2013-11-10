@@ -129,10 +129,10 @@
                     Events
                   </a>
                 </li>
-                <li class="{{ Request::is('careers-fair') ? 'active' : '' }}">
-                  <a href="{{ url('careers-fair') }}">
+                <li class="{{ Request::is('christmas-dinner') ? 'active' : '' }}">
+                  <a href="{{ url('christmas-dinner') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
-                    Careers Fair
+                    Christmas Dinner
                   </a>
                 </li>
                 <li class="{{ Request::is('sponsors') ? 'active' : '' }}">
@@ -141,14 +141,6 @@
                     Sponsors
                   </a>
                 </li>
-                <!--
-                <li class="{{ Request::is('committee') ? 'active' : '' }}">
-                  <a href="{{ url('committee') }}">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    Committee
-                  </a>
-                </li>
-              -->
               </ul>
             </div><!-- /.navbar-collapse -->
           </div>
