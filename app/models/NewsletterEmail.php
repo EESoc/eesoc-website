@@ -139,6 +139,11 @@ class NewsletterEmail extends Eloquent {
 			// Get subscribers
 			$subscribers = $subscribers_query->get();
 			foreach ($subscribers as $subscriber) {
+				if (empty($subscriber->email)) {
+					// Skip empty emails
+					continue;
+				}
+
 				$inserts[] = [
 					'newsletter_email_id' => $this->id,
 					'tracker_token'       => str_random(20),
