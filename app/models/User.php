@@ -62,6 +62,11 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		return $this->hasMany('Book');
 	}
 
+	public function christmasDinnerSales()
+	{
+		return $this->hasMany('ChristmasDinnerSale');
+	}
+
 	/*
 	Scopes
 	 */

@@ -67,6 +67,9 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 	# Categories
 	Route::resource('categories', 'Admin\CategoriesController', ['except' => ['show']]);
 
+	# Christmas Dinner Tickets
+	Route::controller('christmas-dinner-tickets', 'Admin\ChristmasDinnerTicketsController');
+
 	# Contents
 	Route::resource('contents', 'Admin\ContentsController', ['except' => ['show']]);
 
