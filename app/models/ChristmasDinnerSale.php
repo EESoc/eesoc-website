@@ -11,4 +11,9 @@ class ChristmasDinnerSale extends Eloquent {
 		return $this->belongsTo('User');
 	}
 
+	public function sale()
+	{
+		return $this->belongsTo('Sale');
+	}
+
 }

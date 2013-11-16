@@ -12,6 +12,7 @@
         <th>User</th>
         <th>Quantity</th>
         <th>Date/Time</th>
+        <th>Origin</th>
       </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
           </td>
           <td>{{ $sale->quantity }}</td>
           <td>{{ $sale->created_at }}</td>
+          <td>{{ $sale->origin }}</td>
         </tr>
       @endforeach
     </tbody>

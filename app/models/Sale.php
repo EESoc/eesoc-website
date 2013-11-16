@@ -12,8 +12,7 @@ class Sale extends Eloquent implements PresentableInterface {
 	public function scopeLocker($query)
 	{
 		// Sets the locker scope
-		// @todo in the future: limit year?
-		return $query->where('product_name', '=', 'Single Locker');
+		return $query->where('product_id', '=', Product::ID_EESOC_LOCKER);
 	}
 
 	public function getIsLockerAttribute()

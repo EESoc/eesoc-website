@@ -19,7 +19,7 @@ class Client {
 	const PATH_ADMIN_CSP_DETAILS   = '/admin/csp/details';
 	const PATH_FINANCE_INCOME_SHOP = '/finance/income/shop';
 	const PATH_MEMBERS_REPORT      = '/common/data_handler.php?id=%d&type=csv&name=Members_Report';
-	const PATH_PURCHASE_REPORT     = '/common/data_handler.php?id=1766&type=csv&name=Purchase_Report&searchstr=ProductID&searchvalue=%d';
+	const PATH_PURCHASE_REPORT     = '/common/data_handler.php?id=1774&type=csv&name=Purchase_Report&searchstr=ProductGroup&searchvalue=%d';
 
 	const NAME_SESSION_COOKIE = 'ICU_eActivities';
 
@@ -167,14 +167,15 @@ class Client {
 		}
 	}
 
-	public function getPurchasesList($activate_tabs, $product_id)
+	public function getPurchasesList($product_id)
 	{
 		$response = $this->getPageResponse(self::PATH_FINANCE_INCOME_SHOP);
 		if ( ! $this->isSignedIn($response)) {
 			return []; // @todo raise exception?
 		}
 
-		$response = $this->activateTabs($activate_tabs);
+		// 1725: Purchases Summary
+		$response = $this->activateTabs(['1725']);
 		if ( ! $response->isSuccessful()) {
 			return []; // @todo raise exception?
 		}
@@ -185,9 +186,10 @@ class Client {
 
 		$result = $this->parseCsv($body);
 
-		$result = array_map(function($original) {
-			$original['date'] = DateTime::createFromFormat('d/h/Y', $original['date']);
-			return $original;
+		$result = array_map(function($product) use ($product_id) {
+			$product['product_id'] = $product_id;
+			$product['date'] = DateTime::createFromFormat('d/h/Y', $product['date']);
+			return $product;
 		}, $result);
 
 		return $result;

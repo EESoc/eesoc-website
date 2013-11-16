@@ -5,6 +5,9 @@ class CronController extends BaseController {
 	public function __construct()
 	{
 		// Skip CSRF filter
+
+		// Set no time limit
+		set_time_limit(0);
 	}
 
 	public function getInstagram()
@@ -74,7 +77,10 @@ class CronController extends BaseController {
 
 		$eactivities_client->changeRole(Input::get('role_key'));
 
-		$purchases = $eactivities_client->getPurchasesList(['1725', '1772'], 20226);
+		$purchases = array_merge(
+			$eactivities_client->getPurchasesList(Product::ID_EESOC_LOCKER), // EESoc Locker
+			$eactivities_client->getPurchasesList(Product::ID_EESOC_CHRISTMAS_DINNER) // EESoc Christmas Dinner
+		);
 
 		$emails_sent = 0;
 
@@ -98,18 +104,30 @@ class CronController extends BaseController {
 
 			$sale->user()->associate($user);
 
-			foreach (['year', 'date', 'cid', 'first_name', 'last_name', 'email', 'product_name', 'quantity', 'unit_price', 'gross_price'] as $attribute) {
+			foreach (['year', 'date', 'cid', 'first_name', 'last_name', 'email', 'product_name', 'product_id', 'quantity', 'unit_price', 'gross_price'] as $attribute) {
 				$sale->{$attribute} = $purchase[$attribute];
 			}
 			$sale->username = $purchase['login'];
 			$sale->save();
 
 			// Is a locker sale and not notified
-			if ($sale->product_name === 'Single Locker' && ! $sale->notified) {
+			if ($sale->product_id === Product::ID_EESOC_LOCKER && ! $sale->notified) {
 				if (Notification::sendLockerInformation($user)) {
 					$emails_sent++;
 					$sale->notified = true;
 					$sale->save();
+				}
+			}
+
+			// Is a Christmas dinner sale
+			if ($sale->product_id === Product::ID_EESOC_CHRISTMAS_DINNER) {
+				if ( ! ChristmasDinnerSale::where('sale_id', '=', $sale->id)->exists()) {
+					$xmas_sale = new ChristmasDinnerSale;
+					$xmas_sale->user()->associate($user);
+					$xmas_sale->quantity = $sale->quantity;
+					$xmas_sale->origin = 'eactivities';
+					$xmas_sale->sale()->associate($sale);
+					$xmas_sale->save();
 				}
 			}
 		}
