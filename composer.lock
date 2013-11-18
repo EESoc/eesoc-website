@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "7167122eb07fa1af61553501a0bf34c0",
+    "hash": "f6c6f1df24d32be5d894d1308fa28f5e",
     "packages": [
         {
             "name": "barryvdh/elfinder-bundle",

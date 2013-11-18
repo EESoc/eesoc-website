@@ -16,6 +16,7 @@ Artisan::add(new InstagramSyncCommand);
 Artisan::add(new RemindUnclaimedLockerCommand);
 Artisan::add(new SendEmailsCommand);
 Artisan::add(new SendLockerTermsAndConditionsCommand);
+Artisan::add(new SendXmasDinnerEmailsCommand);
 Artisan::add(new SyncEActivitiesCommand);
 Artisan::add(new SyncEActivitiesSalesCommand);
 Artisan::add(new SyncEEPeopleCommand);
