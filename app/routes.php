@@ -36,13 +36,10 @@ Route::controller('newsletters', 'NewslettersController');
 # Sponsors
 Route::controller('sponsors', 'SponsorsController');
 
-# User
-Route::get('users/{username}', 'UsersController@getShow');
-
 # Oauth
 Route::post('oauth/access_token', ['uses' => 'OAuthController@postAccessToken']);
 Route::get('oauth/authorize', ['before' => 'check-authorization-params|auth', 'uses' => 'OAuthController@getAuthorize']);
-// Route::controller('oauth', 'OAuthController');
+Route::get('api/me', ['before' => 'oauth:basic', 'uses' => 'ApiController@getMe']);
 
 /**
  * Routes for members

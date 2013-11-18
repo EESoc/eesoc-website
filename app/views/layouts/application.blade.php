@@ -36,7 +36,7 @@
             @if (Auth::check())
               <ul class="nav navbar-nav navbar-right">
                 <li>
-                  <a href="{{{ action('UsersController@getShow', Auth::user()->username) }}}">
+                  <a href="{{{ action('UsersController@getDashboard') }}}">
                     <span class="glyphicon glyphicon-user"> </span>
                     <strong>{{{ Auth::user()->name }}}</strong>
                   </a>
@@ -87,7 +87,7 @@
               <ul class="nav navbar-nav visible-xs">
                 @if (Auth::check())
                   <li>
-                    <a href="{{{ action('UsersController@getShow', Auth::user()->username) }}}">
+                    <a href="{{{ action('UsersController@getDashboard') }}}">
                       <strong>{{{ Auth::user()->name }}}</strong>
                     </a>
                   </li>

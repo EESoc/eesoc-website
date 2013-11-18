@@ -2,6 +2,11 @@
 
 class OAuthController extends BaseController {
 
+	public function __construct()
+	{
+		// Skip CSRF filter
+	}
+
 	public function postAccessToken()
 	{
 		return AuthorizationServer::performAccessTokenFlow();
