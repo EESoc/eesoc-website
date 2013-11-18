@@ -118,6 +118,7 @@ return array(
 		'Robbo\Presenter\PresenterServiceProvider',
 		'Barryvdh\ElfinderBundle\ElfinderBundleServiceProvider',
 		'Gloudemans\Calendar\CalendarServiceProvider',
+		'LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider',
 
 	),
 
@@ -187,6 +188,8 @@ return array(
 		'Profiler' => 'Profiler\Facades\Profiler',
 		'Carbon'   => 'Carbon\Carbon',
 		'Calendar' => 'Gloudemans\Calendar\Facades\Calendar',
+		'AuthorizationServer' => 'LucaDegasperi\OAuth2Server\Facades\AuthorizationServerFacade',
+		'ResourceServer' => 'LucaDegasperi\OAuth2Server\Facades\ResourceServerFacade',
 
 	),
 
