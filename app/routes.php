@@ -55,6 +55,12 @@ Route::group(['before' => 'auth.member'], function() {
 
 		# Lockers
 		Route::controller('lockers', 'LockersController');
+
+		# Xmas Dinner
+		Route::group(['prefix' => 'xmas'], function() {
+			# Groups
+			Route::resource('groups', 'ChristmasDinnerGroupsController');
+		});
 	});
 });
 

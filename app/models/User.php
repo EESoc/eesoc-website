@@ -7,8 +7,6 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 
 	private $imperial_college_user;
 
-	private $unclaimed_lockers_count;
-
 	public static function boot()
 	{
 		parent::boot();
@@ -65,6 +63,11 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	public function christmasDinnerSales()
 	{
 		return $this->hasMany('ChristmasDinnerSale');
+	}
+
+	public function christmasDinnerGroupMember()
+	{
+		return $this->hasOne('christmasDinnerGroupMember');
 	}
 
 	/*
@@ -306,6 +309,8 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	Locker methods
 	 */
 
+	private $unclaimed_lockers_count;
+
 	/**
 	 * Get the number of unclaimed lockers.
 	 * @return integer
@@ -329,6 +334,37 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	public function getHasUnclaimedLockersAttribute()
 	{
 		return $this->getUnclaimedLockersCountAttribute() > 0;
+	}
+
+	/*
+	Xmas methods
+	 */
+
+	private $unclaimed_christmas_tickets_count;
+
+	/**
+	 * Get the number of unclaimed lockers.
+	 * @return integer
+	 */
+	public function getUnclaimedChristmasTicketsCountAttribute()
+	{
+		if ($this->unclaimed_christmas_tickets_count === null) {
+			$bought = $this->christmasDinnerSales()->sum('quantity');
+			$claimed = ChristmasDinnerGroupMember::purchasedBy($this)->count();
+
+			$this->unclaimed_christmas_tickets_count = $bought - $claimed;
+		}
+
+		return $this->unclaimed_christmas_tickets_count;
+	}
+
+	/**
+	 * Return has unclaimed lockers count.
+	 * @return integer
+	 */
+	public function getHasUnclaimedChristmasTicketsAttribute()
+	{
+		return $this->getUnclaimedChristmasTicketsCountAttribute() > 0;
 	}
 
 }
