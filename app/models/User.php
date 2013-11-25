@@ -67,7 +67,7 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 
 	public function christmasDinnerGroupMember()
 	{
-		return $this->hasOne('christmasDinnerGroupMember');
+		return $this->hasOne('ChristmasDinnerGroupMember');
 	}
 
 	/*
