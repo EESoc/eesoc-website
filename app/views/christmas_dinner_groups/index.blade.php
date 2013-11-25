@@ -4,14 +4,18 @@
   <div class="page-header">
     <h1>Christmas Dinner Seating Planner</h1>
   </div>
-  @if (Auth::user()->has_unclaimed_christmas_tickets)
+  @if (ChristmasPermission::user(Auth::user())->canCreateNewGroup())
     <p>
       <a href="{{ route('dashboard.xmas.groups.create') }}" class="btn btn-primary">Create New Group</a>
     </p>
   @endif
   @foreach ($groups as $group)
     <div class="well well-sm">
-      <h4>Group #{{ $group->id }}</h4>
+      <h4>
+        <a href="{{ route('dashboard.xmas.groups.show', $group->id) }}">
+          Group #{{ $group->id }}
+        </a>
+      </h4>
       <ul>
         @foreach ($group->members as $member)
           <li>

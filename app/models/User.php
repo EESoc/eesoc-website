@@ -340,7 +340,17 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	Xmas methods
 	 */
 
+	private $christmas_tickets_count;
 	private $unclaimed_christmas_tickets_count;
+
+	public function getChristmasTicketsCountAttribute()
+	{
+		if ($this->christmas_tickets_count === null) {
+			$this->christmas_tickets_count = $this->christmasDinnerSales()->sum('quantity');
+		}
+
+		return $this->christmas_tickets_count;
+	}
 
 	/**
 	 * Get the number of unclaimed lockers.
@@ -349,7 +359,7 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	public function getUnclaimedChristmasTicketsCountAttribute()
 	{
 		if ($this->unclaimed_christmas_tickets_count === null) {
-			$bought = $this->christmasDinnerSales()->sum('quantity');
+			$bought = $this->getChristmasTicketsCountAttribute();
 			$claimed = ChristmasDinnerGroupMember::purchasedBy($this)->count();
 
 			$this->unclaimed_christmas_tickets_count = $bought - $claimed;

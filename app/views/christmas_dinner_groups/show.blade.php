@@ -7,10 +7,17 @@
   <p>
     <a href="{{ route('dashboard.xmas.groups.index') }}" class="btn btn-default">Go Back</a>
   </p>
-  <h4 class="alert alert-info">
-    You purchased <strong>{{ Auth::user()->christmasDinnerSales()->sum('quantity') }} ticket(s)</strong>.
-    Please remember to add <strong>{{ Auth::user()->unclaimed_christmas_tickets_count }} more users</strong>!
-  </h4>
+  @if ($group->owner_id == Auth::user()->id)
+  <p class="alert alert-info">
+    This is your group!
+  </p>
+  @endif
+  @if (ChristmasPermission::user(Auth::user())->canAddUserToGroup($group))
+    {{ Form::model($group, array('route' => array('dashboard.xmas.groups.update', $group->id), 'method' => 'patch')) }}
+      <h3>Add more user</h3>
+      <p>Form here...</p>
+    {{ Form::close() }}
+  @endif
   <div class="well">
     <h2>Group #{{ $group->id }}</h2>
     <ul>
@@ -19,7 +26,7 @@
           @if ($member->is_owner)
             <strong>
           @endif
-          {{ $member->user->name }}
+          {{ $member->name }}
           @if ($member->is_owner)
             </strong>
           @endif

@@ -22,8 +22,9 @@ class CreateChristmasDinnerGroupsTable extends Migration {
 		Schema::create('christmas_dinner_group_members', function($table) {
 			$table->integer('christmas_dinner_group_id')->unsigned();
 			$table->foreign('christmas_dinner_group_id')->references('id')->on('christmas_dinner_groups');
-			$table->integer('user_id')->unsigned();
+			$table->integer('user_id')->unsigned()->nullable()->default(null);
 			$table->foreign('user_id')->references('id')->on('users');
+			$table->string('name');
 			$table->integer('added_by_user_id')->unsigned()->nullable()->default(null);
 			$table->foreign('added_by_user_id')->references('id')->on('users');
 			$table->integer('ticket_purchaser_id')->unsigned();

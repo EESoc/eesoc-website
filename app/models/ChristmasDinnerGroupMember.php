@@ -2,6 +2,8 @@
 
 class ChristmasDinnerGroupMember extends Eloquent {
 
+	public $timestamps = false;
+
 	/*
 	Relations
 	 */
@@ -32,6 +34,15 @@ class ChristmasDinnerGroupMember extends Eloquent {
 	public function scopePurchasedBy($query, User $user)
 	{
 		return $query->where('ticket_purchaser_id', '=', $user->id);
+	}
+
+	public function getNameAttribute()
+	{
+		if ($this->attributes['name']) {
+			return $this->attributes['name'];
+		} else if ($this->user) {
+			return $this->user->name;
+		}
 	}
 
 }
