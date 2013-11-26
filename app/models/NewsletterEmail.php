@@ -104,7 +104,7 @@ class NewsletterEmail extends Eloquent {
 					})
 					->get();
 				foreach ($users as $user) {
-					$inserts[] = [
+					$inserts[$user->email] = [
 						'newsletter_email_id' => $this->id,
 						'tracker_token'       => str_random(20),
 						'to_email'            => $user->email,
@@ -114,8 +114,9 @@ class NewsletterEmail extends Eloquent {
 			}
 
 			// Process normal email subscriptions
-			$subscribers_query = $newsletter
+			$subscriptions_query = $newsletter
 				->subscriptions()
+				->with('user')
 				->whereNotIn('email', function($query) {
 					// Remove duplicate
 					return $query
@@ -124,37 +125,31 @@ class NewsletterEmail extends Eloquent {
 						->where('newsletter_email_id', '=', $this->id);
 				});
 
-			if ( ! empty($student_group_ids)) {
-				// Remove duplicate
-				$subscribers_query
-					->whereNull('user_id')
-					->orWhereNotIn('user_id', function($query) use ($student_group_ids) {
-						return $query
-							->select('id')
-							->from('users')
-							->whereIn('student_group_id', $student_group_ids);
-					});
-			}
-
 			// Get subscribers
-			$subscribers = $subscribers_query->get();
-			foreach ($subscribers as $subscriber) {
-				if (empty($subscriber->email)) {
+			foreach ($subscriptions_query->get() as $subscription) {
+				$email = null;
+				if ($subscription->user && $subscription->user->email) {
+					$email = $subscription->user->email;
+				} else if ($subscription->email) {
+					$email = $subscription->email;
+				}
+
+				if (empty($email)) {
 					// Skip empty emails
 					continue;
 				}
 
-				$inserts[] = [
+				$inserts[$email] = [
 					'newsletter_email_id' => $this->id,
 					'tracker_token'       => str_random(20),
-					'to_email'            => $subscriber->email,
+					'to_email'            => $email,
 					'user_id'             => null,
 				];
 			}
 		}
 
 		if ( ! empty($inserts)) {
-			DB::table('newsletter_email_queue')->insert($inserts);
+			DB::table('newsletter_email_queue')->insert(array_values($inserts));
 		}
 	}
 
@@ -165,12 +160,19 @@ class NewsletterEmail extends Eloquent {
 	{
 		if (App::environment() === 'local') {
 			// Mailcatcher
-			$transport = Swift_SmtpTransport::newInstance('localhost', 1025);
+			$internal_transport = Swift_SmtpTransport::newInstance('localhost', 1025);
+
+			$external_transport = Swift_SmtpTransport::newInstance('localhost', 1025);
 		} else {
-			$transport = Swift_MailTransport::newInstance();
+			$internal_transport = Swift_MailTransport::newInstance();
+
+			$external_transport = Swift_SmtpTransport::newInstance('smtp.zoho.com', 465, 'ssl')
+				->setUsername(Config::get('zoho_smtp.username'))
+				->setPassword(Config::get('zoho_smtp.password'));
 		}
 
-		$mailer = Swift_Mailer::newInstance($transport);
+		$internal_mailer = Swift_Mailer::newInstance($internal_transport);
+		$external_mailer = Swift_Mailer::newInstance($external_transport);
 
 		$message = $this->buildMessage();
 
@@ -192,6 +194,17 @@ class NewsletterEmail extends Eloquent {
 				// Process tracking pixel
 				$tracking_pixel_html = '<img src="' . $recipient->tracking_pixel_url . '" width="1" height="1" />';
 				$message->setBody(str_replace('<tracking_pixel>', $tracking_pixel_html, $message->getBody()));
+
+				if (substr($recipient->to_email, -15) === '@imperial.ac.uk') {
+					// Internal emails
+					$mailer = $internal_mailer;
+
+					$message->setFrom([$this->from_email => $this->from_name]);
+				} else {
+					$mailer = $external_mailer;
+
+					$message->setFrom(['no-reply@eesoc.com' => $this->from_name]);
+				}
 
 				if ($mailer->send($message)) {
 					// Mark email queue as sent
@@ -239,8 +252,6 @@ class NewsletterEmail extends Eloquent {
 	{
 		// Setup message
 		$message = Swift_Message::newInstance();
-
-		$message->setFrom([$this->from_email => $this->from_name]);
 
 		if ($this->reply_to_email) {
 			$message->setReplyTo($this->reply_to_email);
