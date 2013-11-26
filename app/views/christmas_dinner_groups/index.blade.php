@@ -22,7 +22,7 @@
             @if ($member->is_owner)
               <strong>
             @endif
-            {{ $member->user->name }}
+            {{ $member->name }}
             @if ($member->is_owner)
               </strong>
             @endif
