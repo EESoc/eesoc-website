@@ -116,4 +116,61 @@ class ChristmasDinnerGroupsController extends BaseController {
 			->with('group', $group);
 	}
 
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($id)
+	{
+		$user = Auth::user();
+		$target_user = User::findOrFail(Input::get('user_id'));
+		$group = ChristmasDinnerGroup::findOrFail($id);
+
+		if ( ! ChristmasPermission::user($user)->canAddUserToGroup($group)) {
+			return Redirect::route('dashboard.xmas.groups.show', $group->id)
+				->with('danger', 'You cannot add any more users to this group');
+		}
+
+		if ( ! ChristmasPermission::user($target_user)->canJoinGroup($group)) {
+			return Redirect::route('dashboard.xmas.groups.show', $group->id)
+				->with('danger', 'You cannot join this group');
+		}
+
+		$member = new ChristmasDinnerGroupMember;
+		$member->christmasDinnerGroup()->associate($group);
+		$member->user()->associate($target_user);
+		$member->addedByUser()->associate($target_user);
+		$member->ticketPurchaser()->associate($target_user);
+		$member->save();
+
+		return Redirect::route('dashboard.xmas.groups.show', $group->id)
+			->with('success', 'You have joined this group');
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		$user = Auth::user();
+		$group = ChristmasDinnerGroup::findOrFail($id);
+
+		if ( ! ChristmasPermission::user($user)->canLeaveGroup($group)) {
+			return Redirect::route('dashboard.xmas.groups.show', $group->id)
+				->with('danger', 'You cannot leave this group');
+		}
+
+		$group->members()
+			->where('user_id', '=', $user->id)
+			->delete();
+
+		return Redirect::route('dashboard.xmas.groups.show', $group->id)
+			->with('success', 'You have left this group');
+	}
+
 }

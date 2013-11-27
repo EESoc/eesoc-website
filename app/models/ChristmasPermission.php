@@ -20,6 +20,16 @@ class ChristmasPermission {
 
 	public function canAddUserToGroup(ChristmasDinnerGroup $group)
 	{
-		return $group->users->count() < 10;
+		return $group->members->count() < 10;
+	}
+
+	public function canJoinGroup(ChristmasDinnerGroup $group)
+	{
+		return $this->canAddUserToGroup($group) && ! $this->user->christmas_dinner_group_member;
+	}
+
+	public function canLeaveGroup(ChristmasDinnerGroup $group)
+	{
+		return $this->user->christmas_dinner_group_member && $this->user->christmas_dinner_group_member->christmas_dinner_group->id === $group->id;
 	}
 }

@@ -12,13 +12,38 @@
     This is your group!
   </p>
   @endif
+  <hr>
+  @if (ChristmasPermission::user(Auth::user())->canJoinGroup($group))
+    {{ Form::model($group, array('route' => array('dashboard.xmas.groups.update', $group->id), 'method' => 'patch')) }}
+      {{ Form::hidden('user_id', Auth::user()->id) }}
+      {{ Form::submit('Join this Group', ['class' => 'btn btn-primary']) }}
+    {{ Form::close() }}
+    <hr>
+  @endif
+  @if (ChristmasPermission::user(Auth::user())->canLeaveGroup($group))
+    {{ Form::model($group, array('route' => array('dashboard.xmas.groups.destroy', $group->id), 'method' => 'delete')) }}
+      {{ Form::hidden('user_id', Auth::user()->id) }}
+      {{ Form::submit('Leave this Group', ['class' => 'btn btn-danger']) }}
+    {{ Form::close() }}
+    <hr>
+  @endif
   @if (ChristmasPermission::user(Auth::user())->canAddUserToGroup($group))
     {{ Form::model($group, array('route' => array('dashboard.xmas.groups.update', $group->id), 'method' => 'patch')) }}
-      <h3>Add more user</h3>
-      <p>Form here...</p>
+      <h4>Add more users!</h4>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="input-group">
+            {{ Form::select('user_id', User::hasUnclaimedChristmasTickets()->get()->lists('name', 'id'), null, ['class' => 'form-control']) }}
+            <div class="input-group-btn">
+              {{ Form::submit('Add', ['class' => 'btn btn-info']) }}
+            </div>
+          </div>
+        </div>
+      </div>
     {{ Form::close() }}
+    <hr>
   @endif
-  <div class="well">
+  <div>
     <h2>Group #{{ $group->id }}</h2>
     <ul>
       @foreach ($group->members as $member)

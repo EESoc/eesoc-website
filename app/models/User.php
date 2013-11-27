@@ -137,6 +137,23 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		return $query->whereNotNull('image_blob');
 	}
 
+	public function scopeHasUnclaimedChristmasTickets($query)
+	{
+		return $query
+			->whereIn('id', function($query) {
+				return $query
+					->select('user_id')
+					->from('christmas_dinner_sales');
+			})
+			->whereNotIn('id', function($query) {
+				return $query
+					->select('user_id')
+					->from('christmas_dinner_group_members')
+					->whereNotNull('user_id');
+			})
+			->orderBy('name');
+	}
+
 	/*
 	Factories
 	 */

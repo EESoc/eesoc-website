@@ -24,28 +24,26 @@ class Newsletter extends Eloquent {
 
 	public function getRecipientsCountAttribute()
 	{
-		$count = 0;
+		$emails = [];
 
 		$student_group_ids = $this->student_groups->lists('id');
 
 		if ( ! empty($student_group_ids)) {
-			$count += User::whereIn('student_group_id', $student_group_ids)->count();
+			$users = User::whereIn('student_group_id', $student_group_ids)->get();
+			foreach ($users as $user) {
+				$emails[$user->email] = true;
+			}
 		}
 
-		$query = $this->subscribers();
-
-		if ( ! empty($student_group_ids)) {
-			$query->whereNotIn('user_id', function($query) use ($student_group_ids) {
-				return $query
-					->select('id')
-					->from('users')
-					->whereIn('student_group_id', $student_group_ids);
-			});
+		foreach ($this->subscriptions()->with('user')->get() as $subscription) {
+			if ($subscription->user && $subscription->user->email) {
+				$emails[$subscription->user->email] = true;
+			} else if ($subscription->email) {
+				$emails[$subscription->email] = true;
+			}
 		}
 
-		$count += $query->count();
-
-		return $count;
+		return count($emails);
 	}
 
 }

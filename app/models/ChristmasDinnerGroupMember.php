@@ -4,6 +4,22 @@ class ChristmasDinnerGroupMember extends Eloquent {
 
 	public $timestamps = false;
 
+
+	public static function boot()
+	{
+		parent::boot();
+
+		// Auto create membership for group owners
+		static::created(function($member) {
+			$group = $member->christmas_dinner_group;
+
+			if ($group->members->count() >= 10) {
+				$group->is_full = true;
+				$group->save();
+			}
+		});
+	}
+
 	/*
 	Relations
 	 */
