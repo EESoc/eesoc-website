@@ -31,4 +31,5 @@
       </ul>
     </div>
   @endforeach
+  <p>If you experience any issues, please <a href='mailto:christos.karpis11@imperial.ac.uk'>email us</a></p>
 @stop
