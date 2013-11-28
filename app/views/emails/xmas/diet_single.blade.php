@@ -16,7 +16,7 @@
       The event will start at 7:30pm with a drinks and canapé reception.
     </p>
     <p>
-      As a first step, we need to know if you have any dietary requirements. Please <a href="https://docs.google.com/forms/d/1ystXxtiOQw6Zs2kpbOM5WkvXvFVQBAd7MKHD5svNcBE/viewform">fill in the form</a> letting us know of your meal preferences. This form will close on Thursday 24th November and anyone who has not entered anything specific will get the standard choices.
+      As a first step, we need to know if you have any dietary requirements. Please <a href="https://docs.google.com/forms/d/1ystXxtiOQw6Zs2kpbOM5WkvXvFVQBAd7MKHD5svNcBE/viewform">fill in the form</a> letting us know of your meal preferences. This form will close on Thursday 29th November and anyone who has not entered anything specific will get the standard choices.
     </p>
     <p>
       We will soon be sending you another email to sort out seating arrangements, so please watch out for that one!

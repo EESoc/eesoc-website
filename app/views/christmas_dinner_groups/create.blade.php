@@ -6,9 +6,17 @@
   </div>
   <h4 class="alert alert-info">
     You purchased <strong>{{ Auth::user()->christmasDinnerSales()->sum('quantity') }} tickets</strong>.
-    Please enter their names below. They will be placed in a group.
+    Please enter their names below.
+    @if ($group)
+      They will be placed in <strong>Group #{{ $group->id }}</strong>
+    @else
+      They will be placed in a group.
+    @endif
   </h4>
   {{ Form::open(['route' => 'dashboard.xmas.groups.store']) }}
+    @if ($group)
+      {{ Form::hidden('group_id', $group->id) }}
+    @endif
     <div class="form-group">
       {{ Form::text('user_0', Auth::user()->name, array('class' => 'form-control', 'disabled' => true)) }}
     </div>

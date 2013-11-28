@@ -7,7 +7,7 @@ class ChristmasDinnerGroupsController extends BaseController {
 		parent::__construct();
 
 		$this->beforeFilter(function() {
-			if (Auth::user()->christmasDinnerSales()->count() === 0) {
+			if ( ! ChristmasPermission::user(Auth::user())->canManageGroups()) {
 				return Redirect::action('UsersController@getDashboard')
 					->with('danger', 'You don\'t have a ticket');
 			}
@@ -35,13 +35,20 @@ class ChristmasDinnerGroupsController extends BaseController {
 		$user = Auth::user();
 		$member = $user->christmas_dinner_group_member;
 
+		if ($group_id = Input::get('group_id')) {
+			$group = ChristmasDinnerGroup::findOrFail($group_id);
+		} else {
+			$group = null;
+		}
+
 		// Already a member in any group
 		if ($member) {
 			return Redirect::route('dashboard.xmas.groups.show', $member->christmas_dinner_group->id)
 				->with('danger', 'You already belong to this group. If you wish to join another group, please leave this one.');
 		} else {
 			if ($user->christmas_tickets_count > 1) {
-				return View::make('christmas_dinner_groups.create');
+				return View::make('christmas_dinner_groups.create')
+					->with('group', $group);
 			} else {
 				$group = new ChristmasDinnerGroup;
 				$group->owner()->associate($user);
@@ -79,9 +86,20 @@ class ChristmasDinnerGroupsController extends BaseController {
 			$validator = Validator::make(Input::all(), $rules);
 
 			if ($validator->passes()) {
-				$group = new ChristmasDinnerGroup;
-				$group->owner()->associate($user);
-				$group->save();
+				if ($group_id = Input::get('group_id')) {
+					$group = ChristmasDinnerGroup::findOrFail($group_id);
+
+					$member = new ChristmasDinnerGroupMember;
+					$member->christmasDinnerGroup()->associate($group);
+					$member->user()->associate($user);
+					$member->addedByUser()->associate($user);
+					$member->ticketPurchaser()->associate($user);
+					$member->save();
+				} else {
+					$group = new ChristmasDinnerGroup;
+					$group->owner()->associate($user);
+					$group->save();
+				}
 
 				for ($i = 1; $i < $user->christmas_tickets_count; $i++) {
 					$member = new ChristmasDinnerGroupMember;
@@ -95,7 +113,7 @@ class ChristmasDinnerGroupsController extends BaseController {
 				return Redirect::route('dashboard.xmas.groups.show', $group->id)
 					->with('success', 'Your group has been created!');
 			} else {
-				return Redirect::route('dashboard.xmas.groups.create')
+				return Redirect::route('dashboard.xmas.groups.create', ['group_id' => Input::get('group_id')])
 					->withInput()
 					->withErrors($validator);
 			}
@@ -125,24 +143,28 @@ class ChristmasDinnerGroupsController extends BaseController {
 	public function update($id)
 	{
 		$user = Auth::user();
-		$target_user = User::findOrFail(Input::get('user_id'));
+		// $target_user = User::findOrFail(Input::get('user_id'));
 		$group = ChristmasDinnerGroup::findOrFail($id);
 
-		if ( ! ChristmasPermission::user($user)->canAddUserToGroup($group)) {
-			return Redirect::route('dashboard.xmas.groups.show', $group->id)
-				->with('danger', 'You cannot add any more users to this group');
-		}
+		// if ( ! ChristmasPermission::user($user)->canAddUserToGroup($group)) {
+		// 	return Redirect::route('dashboard.xmas.groups.show', $group->id)
+		// 		->with('danger', 'You cannot add any more users to this group');
+		// }
 
-		if ( ! ChristmasPermission::user($target_user)->canJoinGroup($group)) {
+		if ( ! ChristmasPermission::user($user)->canJoinGroup($group)) {
 			return Redirect::route('dashboard.xmas.groups.show', $group->id)
 				->with('danger', 'You cannot join this group');
 		}
 
+		if ($user->christmas_tickets_count > 1) {
+			return Redirect::route('dashboard.xmas.groups.create', ['group_id' => $group->id]);
+		}
+
 		$member = new ChristmasDinnerGroupMember;
 		$member->christmasDinnerGroup()->associate($group);
-		$member->user()->associate($target_user);
-		$member->addedByUser()->associate($target_user);
-		$member->ticketPurchaser()->associate($target_user);
+		$member->user()->associate($user);
+		$member->addedByUser()->associate($user);
+		$member->ticketPurchaser()->associate($user);
 		$member->save();
 
 		return Redirect::route('dashboard.xmas.groups.show', $group->id)
