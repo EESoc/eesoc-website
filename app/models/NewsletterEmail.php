@@ -238,6 +238,7 @@ class NewsletterEmail extends Eloquent {
 		$message = $this->buildMessage();
 
 		$message->setTo($user->email);
+		$message->setFrom([$this->from_email => $this->from_name]);
 
 		$message->setBody(str_replace('<tracking_pixel>', '', $message->getBody()));
 

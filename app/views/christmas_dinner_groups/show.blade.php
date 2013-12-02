@@ -27,22 +27,6 @@
     {{ Form::close() }}
     <hr>
   @endif
-  @if (ChristmasPermission::user(Auth::user())->canAddUserToGroup($group))
-    {{ Form::model($group, array('route' => array('dashboard.xmas.groups.update', $group->id), 'method' => 'patch')) }}
-      <h4>Add more users!</h4>
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="input-group">
-            {{ Form::select('user_id', User::hasUnclaimedChristmasTickets()->get()->lists('name', 'id'), null, ['class' => 'form-control']) }}
-            <div class="input-group-btn">
-              {{ Form::submit('Add', ['class' => 'btn btn-info']) }}
-            </div>
-          </div>
-        </div>
-      </div>
-    {{ Form::close() }}
-    <hr>
-  @endif
   <div>
     <h2>Group #{{ $group->id }}</h2>
     <ul>

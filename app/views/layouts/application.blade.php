@@ -135,6 +135,12 @@
                     Christmas Dinner
                   </a>
                 </li>
+                <li class="{{ Request::is('cebit-international-trip') ? 'active' : '' }}">
+                  <a href="{{ url('cebit-international-trip') }}">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    CeBIT International Trip
+                  </a>
+                </li>
                 <li class="{{ Request::is('sponsors') ? 'active' : '' }}">
                   <a href="{{ url('sponsors') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
