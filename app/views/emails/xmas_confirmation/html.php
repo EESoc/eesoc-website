@@ -533,7 +533,7 @@ h4{
 
                             <div style="text-align: center;">
                                 Sponsored by<br><br>
-                                <img src="/_Detica_logo-white.png" width="200" height="54" style="width: 200px; height: 54px;">
+                                <img src="/_Detica_logo-white.png" width="150" height="41" style="width: 150px; height: 41px;">
                             </div>
 
                         </td>
