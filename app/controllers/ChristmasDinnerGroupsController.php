@@ -11,6 +11,11 @@ class ChristmasDinnerGroupsController extends BaseController {
 				return Redirect::action('UsersController@getDashboard')
 					->with('danger', 'You don\'t have a ticket');
 			}
+
+			if ( ! Auth::user()->isAdmin()) {
+				return Redirect::action('UsersController@getDashboard')
+					->with('danger', 'The period for choosing your seat has ended. Should you require further assistance, please <a href="mailto:christos.karpis11@imperial.ac.uk">email us</a>.');
+			}
 		});
 	}
 
