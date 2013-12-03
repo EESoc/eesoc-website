@@ -443,7 +443,7 @@ h4{
                             <td class="mcnImageContent" align="center" valign="top" style="padding-right: 9px;padding-left: 9px;padding-top: 0;padding-bottom: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
 
 
-                                        <a href="http://bit.ly/19yZzh9"><img align="center" alt="" src="/xmaslogo.png" width="400" style="max-width: 400px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" class="mcnImage"></a>
+                                        <a href="http://bit.ly/19yZzh9"><img align="center" alt="" src="https://eesoc.com/assets/email/xmasdinner/xmaslogo.png" width="400" style="max-width: 400px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" class="mcnImage"></a>
 
 
                             </td>
@@ -533,7 +533,7 @@ h4{
 
                             <div style="text-align: center;">
                                 Sponsored by<br><br>
-                                <img src="/_Detica_logo-white.png" width="150" height="41" style="width: 150px; height: 41px;">
+                                <img src="https://eesoc.com/assets/email/xmasdinner/_Detica_logo-white.png" width="150" height="41" style="width: 150px; height: 41px;">
                             </div>
 
                         </td>
