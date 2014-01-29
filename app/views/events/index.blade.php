@@ -94,6 +94,8 @@ Calendar::initialize([
             </div>
           </div>
         @endforeach
+        <hr>
+        <a href="{{ action('EventsController@getIndex', ['all' => 'yup']) }}" class="btn btn-block btn-primary">Show all events</a>
       </div>
     </div>
     <div class="col-lg-3">
