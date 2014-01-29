@@ -8,13 +8,15 @@
 
     <title>{{{ isset($page_title) ? $page_title.' | ' : '' }}}Imperial College EESoc</title>
 
-    <meta property="og:title" content="{{{ isset($page_title) ? $page_title : '' }}}">
-    <meta property="og:site_name" content="Imperial College EESoc">
-    <meta property="og:image" content="https://eesoc.com/assets/images/eesoc-square-logo.png">
-    <meta property="og:description" content="EESoc is the Society for all Electrical, Electronic and Information Engineering students at Imperial College London. We run social events, events with industry and sports events for our members.">
-    <meta property="og:url" content="{{Request::url()}}">
+    <meta property="og:title" content="{{{ isset($page_title) ? $page_title : '' }}}" />
+    <meta property="og:site_name" content="Imperial College EESoc" />
+    <meta property="og:image" content="https://eesoc.com/assets/images/eesoc.png" />
+    <meta property="og:description" content="EESoc is the Society for all Electrical, Electronic and Information Engineering students at Imperial College London. We run social events, events with industry and sports events for our members." />
+    <meta property="og:url" content="{{Request::url()}}" />
+    <meta property="og:type" content="website" />
 
-
+    <meta property="fb:admins" content="203933066322000" />
+    
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet"> -->
