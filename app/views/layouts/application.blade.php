@@ -117,12 +117,6 @@
                     Home
                   </a>
                 </li>
-                <li class="{{ Request::is('about') ? 'active' : '' }}">
-                  <a href="{{ url('about') }}">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    About Us
-                  </a>
-                </li>
                 <li class="{{ Request::is('events') ? 'active' : '' }}">
                   <a href="{{ url('events') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
@@ -136,10 +130,8 @@
                   </a>
                 </li>
                 <li>
-                  <a href="{{ url('cebit-international-trip') }}">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                      Flagship Events <span class="caret"></span>
+                      <span class="glyphicon glyphicon-chevron-right"></span> Flagship Events <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                       <li class="{{ Request::is('christmas-dinner') ? 'active' : '' }}">
@@ -148,14 +140,13 @@
                           Christmas Dinner
                         </a>
                       </li>
-                      <li class="{{ Request::is('christmas-dinner') ? 'active' : '' }}">
+                      <li class="{{ Request::is('careers-fair') ? 'active' : '' }}">
                         <a href="{{ url('careers-fair') }}">
                           <span class="glyphicon glyphicon-chevron-right"></span>
                           Careers Fair
                         </a>
                       </li>
                     </ul>
-                  </a>
                 </li>
                 <li class="{{ Request::is('sponsors') ? 'active' : '' }}">
                   <a href="{{ url('sponsors') }}">
