@@ -149,21 +149,25 @@
 
       </div>
     </div>
-    <div class="form-group {{ $errors->first('body', 'has-error') }}">
-      {{ Form::label('body', 'Body', array('class' => 'control-label')) }}
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="row email-preview">
-            <div id="epiceditor" class="col-lg-6"></div>
-            <div class="col-lg-6 html-preview">
-              <iframe id="htmlpreview" src="{{{ action('Admin\EmailsController@getPreviewTemplate', $email->id) }}}"></iframe>
-            </div>
-          </div>
 
-          {{ Form::textarea('body', null, ['class' => 'hide']) }}
+    @if ($email->exists)
+    {{-- Only show form for saved emails --}}
+      <div class="form-group {{ $errors->first('body', 'has-error') }}">
+        {{ Form::label('body', 'Body', array('class' => 'control-label')) }}
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row email-preview">
+              <div id="epiceditor" class="col-lg-6"></div>
+              <div class="col-lg-6 html-preview">
+                <iframe id="htmlpreview" src="{{{ action('Admin\EmailsController@getPreviewTemplate', $email->id) }}}"></iframe>
+              </div>
+            </div>
+
+            {{ Form::textarea('body', null, ['class' => 'hide']) }}
+          </div>
         </div>
+        {{ $errors->first('body', '<span class="help-block">:message</span>') }}
       </div>
-      {{ $errors->first('body', '<span class="help-block">:message</span>') }}
-    </div>
+    @endif
   </div>
 </div>
