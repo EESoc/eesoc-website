@@ -129,16 +129,32 @@
                     Events
                   </a>
                 </li>
-                <li class="{{ Request::is('christmas-dinner') ? 'active' : '' }}">
-                  <a href="{{ url('christmas-dinner') }}">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    Christmas Dinner
-                  </a>
-                </li>
                 <li class="{{ Request::is('cebit-international-trip') ? 'active' : '' }}">
                   <a href="{{ url('cebit-international-trip') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     CeBIT International Trip
+                  </a>
+                </li>
+                <li>
+                  <a href="{{ url('cebit-international-trip') }}">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      Flagship Events <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li class="{{ Request::is('christmas-dinner') ? 'active' : '' }}">
+                        <a href="{{ url('christmas-dinner') }}">
+                          <span class="glyphicon glyphicon-chevron-right"></span>
+                          Christmas Dinner
+                        </a>
+                      </li>
+                      <li class="{{ Request::is('christmas-dinner') ? 'active' : '' }}">
+                        <a href="{{ url('careers-fair') }}">
+                          <span class="glyphicon glyphicon-chevron-right"></span>
+                          Careers Fair
+                        </a>
+                      </li>
+                    </ul>
                   </a>
                 </li>
                 <li class="{{ Request::is('sponsors') ? 'active' : '' }}">
