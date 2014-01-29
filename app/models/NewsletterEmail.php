@@ -269,4 +269,16 @@ class NewsletterEmail extends Eloquent {
 		return $message;
 	}
 
+	public function getDates()
+	{
+		return array('created_at', 'updated_at', 'last_updated_at');
+	}
+
+	public function refreshLastUpdatedBy(User $user)
+	{
+		$this->last_updated_at = time();
+		$this->last_updated_by = $user->username;
+		$this->save();
+	}
+
 }

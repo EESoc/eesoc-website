@@ -57,24 +57,34 @@
       <div class="panel-heading">Actions</div>
       <div class="panel-body">
 
-        @if ($email->can_save)
-          <button type="submit" class="btn btn-primary" name="action" value="save">
-            <span class="glyphicon glyphicon-floppy-disk"></span>
-            Save
-          </button>
-        @endif
+        <p>
+          @if ($email->can_save)
+            <button type="submit" class="btn btn-primary" name="action" value="save">
+              <span class="glyphicon glyphicon-floppy-disk"></span>
+              Save
+            </button>
+          @endif
 
-        @if ($email->can_send)
-          <button type="submit" class="btn btn-info" name="action" value="send" data-confirm="Are you sure?">
-            <span class="glyphicon glyphicon-send"></span>
-            Send Now!
-          </button>
-          <button type="submit" class="btn btn-default" name="action" value="send_test">
-            Send Test Email
-          </button>
-        @endif
+          @if ($email->can_send)
+            <button type="submit" class="btn btn-info" name="action" value="send" data-confirm="Are you sure?">
+              <span class="glyphicon glyphicon-send"></span>
+              Send Now!
+            </button>
+            <button type="submit" class="btn btn-default" name="action" value="send_test">
+              Send Test Email
+            </button>
+          @endif
 
-        <a href="{{ action('Barryvdh\ElfinderBundle\ElfinderController@showIndex') }}" class="btn btn-info" target="_blank">File manager</a>
+          <a href="{{ action('Barryvdh\ElfinderBundle\ElfinderController@showIndex') }}" class="btn btn-info" target="_blank">File manager</a>
+        </p>
+
+        @if ( ! empty($email->last_updated_by) && $email->last_updated_by !== Auth::user()->username)
+          <p class="alert alert-danger">
+            Last updated by
+            <strong>{{{ $email->last_updated_by }}}</strong>
+            {{{ $email->last_updated_at->diffForHumans() }}}.
+          </p>
+        @endif
 
       </div>
     </div>

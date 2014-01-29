@@ -48,6 +48,8 @@ class EmailsController extends BaseController {
 		$email = NewsletterEmail::findOrFail($id);
 
 		if ($email->can_save) {
+			$email->refreshLastUpdatedBy(Auth::user());
+
 			return View::make('admin.emails.edit')
 				->with('email', $email)
 				->with('newsletters', Newsletter::all());
