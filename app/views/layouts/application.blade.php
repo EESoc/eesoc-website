@@ -117,12 +117,6 @@
                     Home
                   </a>
                 </li>
-                <li class="{{ Request::is('about') ? 'active' : '' }}">
-                  <a href="{{ url('about') }}">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    About Us
-                  </a>
-                </li>
                 <li class="{{ Request::is('events') ? 'active' : '' }}">
                   <a href="{{ url('events') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
