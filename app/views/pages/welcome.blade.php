@@ -5,7 +5,7 @@
 @section('container')
 
 <div class="container">
-  <div class="row">
+  <div class="row" style="margin-top: -20px;">
     <div class="col-md-6">
       @content('homepage-content')
       <h4>Instagram <strong>#eesoc</strong></h4>
