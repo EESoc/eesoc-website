@@ -22,7 +22,7 @@ class EmailsController extends BaseController {
 	public function index()
 	{
 		return View::make('admin.emails.index')
-			->with('emails', NewsletterEmail::all());
+			->with('emails', NewsletterEmail::orderBy('created_at', 'desc')->get());
 	}
 
 	/**

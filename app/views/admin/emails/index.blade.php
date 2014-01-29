@@ -20,6 +20,10 @@
                 {{{ $email->send_queue_length }}}
                 emails sent
               )
+              <span class="pull-right">
+                Last updated:
+                {{{ $email->updated_at }}}
+              </span>
           </a>
         @endforeach
       </div>
