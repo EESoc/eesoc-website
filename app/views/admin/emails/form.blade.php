@@ -52,7 +52,60 @@
 @stop
 
 <div class="row">
-  <div class="col-lg-9">
+  <div class="col-lg-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">Delivery</div>
+      <div class="panel-body">
+
+        @if ($email->can_save)
+          <button type="submit" class="btn btn-primary" name="action" value="save">
+            <span class="glyphicon glyphicon-floppy-disk"></span>
+            Save
+          </button>
+        @endif
+
+        @if ($email->can_send)
+          <button type="submit" class="btn btn-info" name="action" value="send" data-confirm="Are you sure?">
+            <span class="glyphicon glyphicon-send"></span>
+            Send Now!
+          </button>
+          <button type="submit" class="btn btn-default" name="action" value="send_test">
+            Send Test Email
+          </button>
+        @endif
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Recipients
+        <span class="label label-success"><span data-recipients-total>0</span> total</span>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          @foreach ($newsletters as $newsletter)
+            <div class="checkbox">
+              <label>
+                {{{ $newsletter->name }}}
+                {{ Form::checkbox(
+                    'newsletter_ids[]',
+                    $newsletter->id,
+                    in_array($newsletter->id, $email->newsletters->lists('id')),
+                    array('data-recipients-count' => $newsletter->recipients_count)
+                ) }}
+              </label>
+            </div>
+          @endforeach
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
     <div class="panel panel-default">
       <div class="panel-heading">Details</div>
       <div class="panel-body form-horizontal">
@@ -111,59 +164,6 @@
         </div>
       </div>
       {{ $errors->first('body', '<span class="help-block">:message</span>') }}
-    </div>
-  </div>
-  <div class="col-lg-3">
-    @if ($email->can_save)
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <button type="submit" class="btn btn-primary" name="action" value="save">
-            <span class="glyphicon glyphicon-floppy-disk"></span>
-            Save
-          </button>
-        </div>
-      </div>
-    @endif
-
-    <div class="panel panel-default">
-      <div class="panel-heading">Delivery</div>
-      <div class="panel-body">
-        @if ($email->can_send)
-          <button type="submit" class="btn btn-info" name="action" value="send" data-confirm="Are you sure?">
-            <span class="glyphicon glyphicon-send"></span>
-            Send Now!
-          </button>
-          <hr>
-          <button type="submit" class="btn btn-default" name="action" value="send_test">
-            Send Test Email
-          </button>
-        @endif
-      </div>
-    </div>
-
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Recipients
-        <span class="label label-success"><span data-recipients-total>0</span> total</span>
-      </div>
-      <div class="panel-body">
-        <div class="form-group">
-          @foreach ($newsletters as $newsletter)
-            <div class="checkbox">
-              <label>
-                {{{ $newsletter->name }}}
-                {{ Form::checkbox(
-                    'newsletter_ids[]',
-                    $newsletter->id,
-                    in_array($newsletter->id, $email->newsletters->lists('id')),
-                    array('data-recipients-count' => $newsletter->recipients_count)
-                ) }}
-              </label>
-            </div>
-          @endforeach
-        </div>
-      </div>
     </div>
   </div>
 </div>
