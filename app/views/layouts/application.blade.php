@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="description" content="EESoc is the Society for Electrical & Electronic Engineering students at Imperial College London. We run social events, events with industry and sports events.">
     <meta name="author" content="">
 
     <title>{{{ isset($page_title) ? $page_title.' | ' : '' }}}Imperial College EESoc</title>
