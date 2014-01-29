@@ -139,3 +139,8 @@ Route::any('{path}', function($path) {
 	return View::make('page')
 		->with('page', $page);
 })->where('path', '.*');
+
+App::missing(function($exception)
+{
+    return Response::view('errors.missing', array(), 404);
+});
