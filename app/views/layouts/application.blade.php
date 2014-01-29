@@ -146,7 +146,7 @@
                           Christmas Dinner
                         </a>
                       </li>
-                      <li class="{{ Request::is('christmas-dinner') ? 'active' : '' }}">
+                      <li class="{{ Request::is('careers-fair') ? 'active' : '' }}">
                         <a href="{{ url('careers-fair') }}">
                           <span class="glyphicon glyphicon-chevron-right"></span>
                           Careers Fair
