@@ -54,7 +54,7 @@
 <div class="row">
   <div class="col-lg-8">
     <div class="panel panel-default">
-      <div class="panel-heading">Delivery</div>
+      <div class="panel-heading">Actions</div>
       <div class="panel-body">
 
         @if ($email->can_save)
@@ -73,6 +73,9 @@
             Send Test Email
           </button>
         @endif
+
+        <a href="{{ action('Barryvdh\ElfinderBundle\ElfinderController@showIndex') }}" class="btn btn-info" target="_blank">File manager</a>
+
       </div>
     </div>
   </div>
