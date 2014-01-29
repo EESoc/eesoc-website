@@ -139,7 +139,7 @@
                   <a href="{{ url('cebit-international-trip') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                      Flagship Events <span class="caret"></span>
+                      Flagship Events
                     </a>
                     <ul class="dropdown-menu">
                       <li class="{{ Request::is('christmas-dinner') ? 'active' : '' }}">
