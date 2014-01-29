@@ -136,10 +136,9 @@
                   </a>
                 </li>
                 <li>
-                  <a href="{{ url('cebit-international-trip') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                      Flagship Events
+                      Flagship Events <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                       <li class="{{ Request::is('christmas-dinner') ? 'active' : '' }}">
@@ -155,7 +154,6 @@
                         </a>
                       </li>
                     </ul>
-                  </a>
                 </li>
                 <li class="{{ Request::is('sponsors') ? 'active' : '' }}">
                   <a href="{{ url('sponsors') }}">
