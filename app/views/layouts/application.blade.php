@@ -15,7 +15,7 @@
     <meta property="og:url" content="{{Request::url()}}" />
     <meta property="og:type" content="website" />
 
-    <meta property="fb:admins" content="203933066322000" />
+    <meta property="fb:admins" content="1001561194" />
     
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
