@@ -41,6 +41,9 @@ Route::post('oauth/access_token', ['uses' => 'OAuthController@postAccessToken'])
 Route::get('oauth/authorize', ['before' => 'check-authorization-params|auth', 'uses' => 'OAuthController@getAuthorize']);
 Route::get('api/me', ['before' => 'oauth:basic', 'uses' => 'ApiController@getMe']);
 
+# TV
+Route::get('tv', 'TVController@show');
+
 /**
  * Routes for members
  */

@@ -21,8 +21,8 @@
 
     </div> <!-- /container -->
 
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="{{{ asset('assets/js/bootstrap.min.js') }}}"></script>
     @yield('javascript_for_page')
     @include('shared.gosquared')
 
