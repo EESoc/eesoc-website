@@ -1,5 +1,6 @@
 @section('javascript_for_page')
 <script>
+  CKEDITOR.config.extraPlugins = 'justify';
   CKEDITOR.inline('content', {
     filebrowserBrowseUrl: '{{ URL::action('Barryvdh\ElfinderBundle\ElfinderController@showCKEditor') }}'
   });

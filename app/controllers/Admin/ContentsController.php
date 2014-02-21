@@ -41,7 +41,6 @@ class ContentsController extends BaseController {
 		$rules = array(
 			'name'    => 'required',
 			'slug'    => 'required|unique:contents',
-			'content' => 'required',
 		);
 
 		$validator = Validator::make(Input::all(), $rules);
@@ -85,7 +84,6 @@ class ContentsController extends BaseController {
 		$rules = array(
 			'name'    => 'required',
 			'slug'    => "required|unique:contents,slug,{$content->id}",
-			'content' => 'required',
 		);
 
 		$validator = Validator::make(Input::all(), $rules);
