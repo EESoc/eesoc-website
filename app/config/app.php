@@ -185,11 +185,10 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
-		'Profiler' => 'Profiler\Facades\Profiler',
-		'Carbon'   => 'Carbon\Carbon',
-		'Calendar' => 'Gloudemans\Calendar\Facades\Calendar',
+		'Carbon'          => 'Carbon\Carbon',
+		'Calendar'        => 'Gloudemans\Calendar\Facades\Calendar',
+		'ResourceServer'  => 'LucaDegasperi\OAuth2Server\Facades\ResourceServerFacade',
 		'AuthorizationServer' => 'LucaDegasperi\OAuth2Server\Facades\AuthorizationServerFacade',
-		'ResourceServer' => 'LucaDegasperi\OAuth2Server\Facades\ResourceServerFacade',
 
 	),
 
