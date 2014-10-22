@@ -16,10 +16,10 @@ class Client {
 	const URL_BASE = 'https://eactivities.union.imperial.ac.uk/';
 
 	const PATH_COMMON_AJAX_HANDLER = '/common/ajax_handler.php';
-	const PATH_ADMIN_CSP_DETAILS   = '/admin/csp/details';
+	const PATH_ADMIN_CSP_DETAILS   = '/admin/csp/details/603';
 	const PATH_FINANCE_INCOME_SHOP = '/finance/income/shop';
-	const PATH_MEMBERS_REPORT      = '/common/data_handler.php?id=%d&type=csv&name=Members_Report';
-	const PATH_PURCHASE_REPORT     = '/common/data_handler.php?id=1774&type=csv&name=Purchase_Report&searchstr=ProductGroup&searchvalue=%d';
+	const PATH_MEMBERS_REPORT      = '/admin/csp/details/csv';
+	const PATH_PURCHASE_REPORT     = '/income/shop/product/csv/%d';
 
 	const NAME_SESSION_COOKIE = 'ICU_eActivities';
 
@@ -146,25 +146,18 @@ class Client {
 	public function getMembersList()
 	{
 		$response = $this->getPageResponse(self::PATH_ADMIN_CSP_DETAILS);
-		if ( ! $this->isSignedIn($response)) {
-			return []; // @todo raise exception?
+		if (!$this->isSignedIn($response)) {
+			throw new EActivitiesClientException("Not logged in!");
 		}
+
+		print_r((string) $response);
 
 		$response = $this->activateTabs('395');
+		$request = $this->client->post(self::PATH_MEMBERS_REPORT);
+		$response = $request->send();
 		$body = $response->getBody();
 
-		preg_match('/event="createDataFile\(eObj, \'(\d+)\', \'csv\', \'Members_Report\'\);"/', $body, $output_array);
-		if (isset($output_array[1])) {
-			$file_id = $output_array[1];
-
-			$request = $this->client->post(sprintf(self::PATH_MEMBERS_REPORT, $file_id));
-			$response = $request->send();
-			$body = $response->getBody();
-
-			return $this->parseCsv($body);
-		} else {
-			return [];
-		}
+		return $this->parseCsv($body);
 	}
 
 	public function getPurchasesList($product_id)
@@ -183,9 +176,7 @@ class Client {
 		$request = $this->client->get(sprintf(self::PATH_PURCHASE_REPORT, $product_id));
 		$response = $request->send();
 		$body = $response->getBody();
-
 		$result = $this->parseCsv($body);
-
 		$result = array_map(function($product) use ($product_id) {
 			$product['product_id'] = $product_id;
 			$product['date'] = DateTime::createFromFormat('d/h/Y', $product['date']);
@@ -267,9 +258,20 @@ class Client {
 	protected function parseCsv($body)
 	{
 		$result = explode("\n", trim($body));
+		$groups = ['Full Members', 'Life / Associate'];
 
 		// Get header
 		$headers = str_getcsv(array_shift($result));
+
+		if (in_array($headers[0], $groups)) { // This is a section header
+			/* Add the first column header to the list of things that will 
+			 * cause a row to be ignored */
+			$headers = str_getcsv(array_shift($result));
+			$groups[] = $headers[0];
+		}
+
+		print_r($groups);
+
 		$headers = array_map(function($original) {
 			if ($original === 'CID') {
 				return 'cid';
@@ -278,17 +280,34 @@ class Client {
 			}
 		}, $headers);
 
+		print_r($result);
+		print_r($headers);
+
 		// Format rows
-		$result = array_map(function($original) use ($headers) {
+		$output = array_map(function($original) use ($headers, $groups) {
+			$new_row = [];	
+
 			$row = str_getcsv($original);
-			$new_row = [];
+			$row_size = count($row);
+
 			foreach ($headers as $key => $header) {
+				if ($row_size <= $key || in_array($row[$key], $groups)) {
+					return [];
+				}
+
+				echo "Store row[$key] to output[$header] = {$row[$key]}";
 				$new_row[$header] = $row[$key];
+				echo " [done]\n";
 			}
+
 			return $new_row;
 		}, $result);
 
-		return $result;
+		// Remove blank rows
+		return array_filter($output);
 	}
+}
 
+class EActivitiesClientException extends \Exception
+{
 }

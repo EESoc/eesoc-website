@@ -27,6 +27,8 @@ class Synchronizer {
 		User::resetMemberships();
 		$this->log('info', 'Resetted membership status');
 
+		$this->log('info', print_r($members, true));
+
 		foreach ($members as $member) {
 			// Find or create
 			$user = User::where('username', '=', $member['login'])->first();

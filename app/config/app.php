@@ -118,8 +118,6 @@ return array(
 		'Barryvdh\ElfinderBundle\ElfinderBundleServiceProvider',
 		'Gloudemans\Calendar\CalendarServiceProvider',
 		'LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider',
-		'Barryvdh\Debugbar\ServiceProvider',
-
 	),
 
 	/*

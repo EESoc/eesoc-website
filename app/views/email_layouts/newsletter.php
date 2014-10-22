@@ -182,14 +182,14 @@ h4{
     border-bottom:0;
 }
 .footerContainer .mcnTextContent,.footerContainer .mcnTextContent p{
-    color:#606060;
+    color:#ffffff;
     font-family:HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;
     font-size:11px;
     line-height:125%;
     text-align:left;
 }
 .footerContainer .mcnTextContent a{
-    color:#606060;
+    color:#ffffff;
     font-weight:normal;
     text-decoration:underline;
 }
@@ -397,7 +397,7 @@ h4{
     </head>
     <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="margin: 0;padding: 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #F0F0FA;height: 100% !important;width: 100% !important;">
         <center>
-            <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;background-color: #F0F0FA;height: 100% !important;width: 100% !important; background-image: url('https://eesoc.com/assets/email/20131008/bg.png'); background-position: top right; background-repeat: no-repeat;">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;background-color: #123570;height: 100% !important;width: 100% !important; background-image: url('https://eesoc.com/assets/email/20141006/bg.png'); background-position: top right; background-repeat: no-repeat;">
                 <tbody><tr>
                     <td align="center" valign="top" id="bodyCell" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 30px 20px 20px;border-top: 0;height: 100% !important;width: 100% !important;">
                         <!-- BEGIN TEMPLATE // -->
@@ -452,7 +452,7 @@ h4{
                             <td class="mcnImageContent" align="center" valign="top" style="padding-right: 9px;padding-left: 9px;padding-top: 0;padding-bottom: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
 
 
-                                        <a href="http://bit.ly/19yZzh9"><img align="center" alt="" src="https://eesoc.com/assets/email/20131008/logo.jpg" width="400" style="max-width: 400px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" class="mcnImage"></a>
+                                        <a href="http://bit.ly/19yZzh9"><img align="center" alt="" src="https://eesoc.com/assets/email/20141006/logo.jpg" width="400" style="max-width: 400px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" class="mcnImage"></a>
 
 
                             </td>
@@ -536,7 +536,7 @@ echo $html;
 
                             <div style="text-align: center;">
                                 Sponsored by<br><br>
-                                <img src="https://eesoc.com/assets/email/20131008/sponsors.png" width="500" height="139" style="width: 500px; height: 139px;">
+                                <img src="https://eesoc.com/assets/email/20141006/sponsors.png" width="500" height="139" style="width: 500px; height: 139px;">
                             </div>
 
                         </td>
@@ -577,13 +577,13 @@ echo $html;
                 <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                     <tbody><tr>
 
-                        <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 11px;line-height: 125%;text-align: left;">
+                        <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #ffffff;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 11px;line-height: 125%;text-align: left;">
 
                             <div style="text-align: center;">
                                 <i>Be social - stay in touch</i><br><br>
-                                <a href="http://on.fb.me/1fhTYE3"><img width="30" style="width: 30px;" src="https://eesoc.com/assets/email/20131008/fb.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href="http://bit.ly/16wDPG7"><img width="30" style="width: 30px;" src="https://eesoc.com/assets/email/20131008/tw.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href="http://bit.ly/16QRRVn"><img width="30" style="width: 30px;" src="https://eesoc.com/assets/email/20131008/in.png"></a>
+                                <a href="http://on.fb.me/1fhTYE3"><img width="30" style="width: 30px;" src="https://eesoc.com/assets/email/20141006/fb.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="http://bit.ly/16wDPG7"><img width="30" style="width: 30px;" src="https://eesoc.com/assets/email/20141006/tw.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="http://bit.ly/16QRRVn"><img width="30" style="width: 30px;" src="https://eesoc.com/assets/email/20141006/in.png"></a>
                             </div>
 
                         </td>
@@ -601,7 +601,7 @@ echo $html;
                 <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                     <tbody><tr>
 
-                        <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 11px;line-height: 125%;text-align: left;">
+                        <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #ffffff;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 11px;line-height: 125%;text-align: left;">
 
                             <div style="text-align: center;">
     <span style="text-align: center;"><a href="http://bit.ly/1a9ETgL">eesoc.com</a></span><br>
