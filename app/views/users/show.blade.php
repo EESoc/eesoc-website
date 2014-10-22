@@ -14,7 +14,7 @@
       <pre>{{{ $user->extras }}}</pre>
     </div>
     <div class="col-lg-4">
-    @if ( ChristmasPermission::user(Auth::user())->canManageGroups())
+    @if ( FALSE && ChristmasPermission::user(Auth::user())->canManageGroups())
       <a href="{{{ route('dashboard.xmas.groups.index') }}}" class="btn btn-success btn-lg btn-block">
         <span class="glyphicon glyphicon-tree-conifer"></span>
         Christmas Dinner Seating Preferences

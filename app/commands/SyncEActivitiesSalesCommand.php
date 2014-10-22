@@ -82,7 +82,12 @@ class SyncEActivitiesSalesCommand extends Command {
 		// @todo make a ask prompt for this.
 		// ['1725', '1772', '1772-3']
 		// $purchases = $eactivities_client->getPurchasesList(['1725', '1772', '1772-3'], 1983);
-		$purchases = $eactivities_client->getPurchasesList(['1725', '1772'], 20226);
+		// $purchases = $eactivities_client->getPurchasesList(['1725', '1772'], 20226);
+
+		// Lockers in 2014/15 have product ID 8757. This is also defined in app/models/Product.php,
+		// but who knows if this is accessible here.
+		// @TODO; Software engineering
+		$purchases = $eactivities_client->getPurchasesList(8757);
 
 		foreach ($purchases as $purchase) {
 			$sale = Sale::find($purchase['order_no']);
@@ -103,9 +108,14 @@ class SyncEActivitiesSalesCommand extends Command {
 
 			$sale->user()->associate($user);
 
-			foreach (['year', 'date', 'cid', 'first_name', 'last_name', 'email', 'product_name', 'quantity', 'unit_price', 'gross_price'] as $attribute) {
+			foreach (['year', 'date', 'first_name', 'last_name', 'email', 'product_name', 'quantity', 'unit_price', 'gross_price'] as $attribute) {
 				$sale->{$attribute} = $purchase[$attribute];
 			}
+
+			/* The CSV has the field 'CID/Card Number'. By some magic, this is converted by the parser
+			 * to the string below. */
+                        $sale->cid = $purchase['c_id/_card_number'];
+
 			$sale->username = $purchase['login'];
 			$sale->save();
 		}

@@ -17,9 +17,9 @@ class Client {
 
 	const PATH_COMMON_AJAX_HANDLER = '/common/ajax_handler.php';
 	const PATH_ADMIN_CSP_DETAILS   = '/admin/csp/details/603';
-	const PATH_FINANCE_INCOME_SHOP = '/finance/income/shop';
+	const PATH_FINANCE_INCOME_SHOP = '/finance/income/shop/603';
 	const PATH_MEMBERS_REPORT      = '/admin/csp/details/csv';
-	const PATH_PURCHASE_REPORT     = '/income/shop/product/csv/%d';
+	const PATH_PURCHASE_REPORT     = '/finance/income/shop/group/csv/%d';
 
 	const NAME_SESSION_COOKIE = 'ICU_eActivities';
 
