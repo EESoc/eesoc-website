@@ -150,8 +150,6 @@ class Client {
 			throw new EActivitiesClientException("Not logged in!");
 		}
 
-		print_r((string) $response);
-
 		$response = $this->activateTabs('395');
 		$request = $this->client->post(self::PATH_MEMBERS_REPORT);
 		$response = $request->send();
@@ -270,8 +268,6 @@ class Client {
 			$groups[] = $headers[0];
 		}
 
-		print_r($groups);
-
 		$headers = array_map(function($original) {
 			if ($original === 'CID') {
 				return 'cid';
@@ -279,9 +275,6 @@ class Client {
 				return Str::snake(Str::camel($original));
 			}
 		}, $headers);
-
-		print_r($result);
-		print_r($headers);
 
 		// Format rows
 		$output = array_map(function($original) use ($headers, $groups) {
@@ -295,9 +288,7 @@ class Client {
 					return [];
 				}
 
-				echo "Store row[$key] to output[$header] = {$row[$key]}";
 				$new_row[$header] = $row[$key];
-				echo " [done]\n";
 			}
 
 			return $new_row;
