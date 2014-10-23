@@ -100,7 +100,7 @@ class SyncEActivitiesSalesCommand extends Command {
 			if ( ! $user) {
 				$user = new User;
 				$user->username = $purchase['login'];
-				$user->cid      = $purchase['cid'];
+				$user->cid      = $purchase['c_id/_card_number'];
 				$user->name     = "{$purchase['first_name']} {$purchase['last_name']}";
 				$user->email    = $purchase['email'];
 				$user->save();
@@ -108,15 +108,23 @@ class SyncEActivitiesSalesCommand extends Command {
 
 			$sale->user()->associate($user);
 
-			foreach (['year', 'date', 'first_name', 'last_name', 'email', 'product_name', 'quantity', 'unit_price', 'gross_price'] as $attribute) {
+			foreach (['year',
+				  'date',
+				  'first_name',
+				  'last_name',
+				  'email',
+				  'product_name',
+				  'quantity',
+				  'unit_price',
+				  'gross_price',
+				  'product_id'] as $attribute) {
 				$sale->{$attribute} = $purchase[$attribute];
 			}
 
 			/* The CSV has the field 'CID/Card Number'. By some magic, this is converted by the parser
 			 * to the string below. */
-                        $sale->cid = $purchase['c_id/_card_number'];
-
-			$sale->username = $purchase['login'];
+                        $sale->cid 	  = $purchase['c_id/_card_number'];
+			$sale->username   = $purchase['login'];
 			$sale->save();
 		}
 
