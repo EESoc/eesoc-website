@@ -17,7 +17,10 @@ $(function() {
           $('.delivery-output').prepend(
             $('<p class="text-danger" />').text(response.error)
           );
-        } else {
+        }
+        
+        if (response.sent_emails)
+        {
           $.each(response.sent_emails, function(i, email) {
             $('.delivery-output').prepend(
               $('<p class="text-success" />').text(email + ' OK')
