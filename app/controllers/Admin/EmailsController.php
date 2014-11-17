@@ -176,7 +176,7 @@ class EmailsController extends BaseController {
 		if ($email->is_sending) {
 			try {
 				$sent_emails = $email->sendBatch();
-			} catch (\Swift_TransportException $e) {
+			} catch (\Swift_SwiftException $e) {
 				return Response::json(['error' => $e->getMessage()]);
 			}
 		}

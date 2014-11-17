@@ -187,34 +187,36 @@ class NewsletterEmail extends Eloquent {
 		if ($recipients->isEmpty()) { // Finished sending out emails
 			$this->state = 'completed';
 			$this->save();
-		} else {
-			foreach ($recipients as $recipient) {
-				$message->setTo($recipient->to_email);
 
-				// Process tracking pixel
-				$tracking_pixel_html = '<img src="' . $recipient->tracking_pixel_url . '" width="1" height="1" />';
-				$message->setBody(str_replace('<tracking_pixel>', $tracking_pixel_html, $message->getBody()));
+            return $sent_emails;
+        }
 
-				if (substr($recipient->to_email, -15) === '@imperial.ac.uk') {
-					// Internal emails
-					$mailer = $internal_mailer;
+        foreach ($recipients as $recipient) {
+            $message->setTo($recipient->to_email);
 
-					$message->setFrom([$this->from_email => $this->from_name]);
-				} else {
-					$mailer = $external_mailer;
+            // Process tracking pixel
+            $tracking_pixel_html = '<img src="' . $recipient->tracking_pixel_url . '" width="1" height="1" />';
+            $message->setBody(str_replace('<tracking_pixel>', $tracking_pixel_html, $message->getBody()));
 
-					$message->setFrom(['no-reply@eesoc.com' => $this->from_name]);
-				}
+            if (substr($recipient->to_email, -15) === '@imperial.ac.uk') {
+                // Internal emails
+                $mailer = $internal_mailer;
 
-				if ($mailer->send($message)) {
-					// Mark email queue as sent
-					$recipient->sent = true;
-					$recipient->save();
-				}
+                $message->setFrom([$this->from_email => $this->from_name]);
+            } else {
+                $mailer = $external_mailer;
 
-				$sent_emails[] = $recipient->to_email;
-			}
-		}
+                $message->setFrom(['no-reply@eesoc.com' => $this->from_name]);
+            }
+
+            if ($mailer->send($message)) {
+                // Mark email queue as sent
+                $recipient->sent = true;
+                $recipient->save();
+            }
+
+            $sent_emails[] = $recipient->to_email;
+        }
 
 		return $sent_emails;
 	}
