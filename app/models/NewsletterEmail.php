@@ -192,25 +192,25 @@ class NewsletterEmail extends Eloquent {
         }
 
         foreach ($recipients as $recipient) {
-            $message->setTo($recipient->to_email);
-
-            // Process tracking pixel
-            $tracking_pixel_html = '<img src="' . $recipient->tracking_pixel_url . '" width="1" height="1" />';
-            $message->setBody(str_replace('<tracking_pixel>', $tracking_pixel_html, $message->getBody()));
-
-            if (substr($recipient->to_email, -15) === '@imperial.ac.uk') {
-                // Internal emails
-                $mailer = $internal_mailer;
-
-                $message->setFrom([$this->from_email => $this->from_name]);
-            } else {
-                $mailer = $external_mailer;
-
-                $message->setFrom(['no-reply@eesoc.com' => $this->from_name]);
-            }
-
             try
             {
+                $message->setTo($recipient->to_email);
+
+                // Process tracking pixel
+                $tracking_pixel_html = '<img src="' . $recipient->tracking_pixel_url . '" width="1" height="1" />';
+                $message->setBody(str_replace('<tracking_pixel>', $tracking_pixel_html, $message->getBody()));
+
+                if (substr($recipient->to_email, -15) === '@imperial.ac.uk') {
+                    // Internal emails
+                    $mailer = $internal_mailer;
+
+                    $message->setFrom([$this->from_email => $this->from_name]);
+                } else {
+                    $mailer = $external_mailer;
+
+                    $message->setFrom(['no-reply@eesoc.com' => $this->from_name]);
+                }
+
                 if ($mailer->send($message)) {
                     // Mark email queue as sent
                     $recipient->sent = true;
