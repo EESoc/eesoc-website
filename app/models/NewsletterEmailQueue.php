@@ -13,7 +13,7 @@ class NewsletterEmailQueue extends Eloquent {
 
 	public function scopePendingSend($query)
 	{
-		return $query->where('sent', '=', '0');
+		return $query->where('sent', '=', '0')->where('failed', '=', '0');
 	}
 
 	public function scopeSent($query)

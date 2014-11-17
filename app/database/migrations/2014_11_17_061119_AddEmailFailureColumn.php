@@ -11,7 +11,10 @@ class AddEmailFailureColumn extends Migration {
 	 */
 	public function up()
 	{
-		//
+        Schema::table('newsletter_email_queue', function($table)
+        {
+            $table->boolean('failed')->default(FALSE);
+        });
 	}
 
 	/**
@@ -21,7 +24,6 @@ class AddEmailFailureColumn extends Migration {
 	 */
 	public function down()
 	{
-		//
+        $table->dropColumn('failed');
 	}
-
 }
