@@ -156,7 +156,7 @@ class NewsletterEmail extends Eloquent {
 	/**
 	 * Send batch emails
 	 */
-	public function sendBatch($size = 10)
+	public function sendBatch($size = 10, &$errors = [])
 	{
 		if (App::environment() === 'local') {
 			// Mailcatcher
@@ -209,13 +209,18 @@ class NewsletterEmail extends Eloquent {
                 $message->setFrom(['no-reply@eesoc.com' => $this->from_name]);
             }
 
-            if ($mailer->send($message)) {
-                // Mark email queue as sent
-                $recipient->sent = true;
-                $recipient->save();
-            }
+            try
+            {
+                if ($mailer->send($message)) {
+                    // Mark email queue as sent
+                    $recipient->sent = true;
+                    $recipient->save();
 
-            $sent_emails[] = $recipient->to_email;
+                    $sent_emails[] = $recipient->to_email;
+                }
+			} catch (\Swift_SwiftException $e) {
+				$errors[] = $e;
+            }
         }
 
 		return $sent_emails;

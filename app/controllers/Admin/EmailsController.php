@@ -172,24 +172,33 @@ class EmailsController extends BaseController {
 		$email = NewsletterEmail::findOrFail($id);
 
 		$sent_emails = [];
+        $errors      = [];
 
 		if ($email->is_sending) {
-			try {
-				$sent_emails = $email->sendBatch();
-			} catch (\Swift_SwiftException $e) {
-				return Response::json(['error' => $e->getMessage()]);
-			}
+            $sent_emails = $email->sendBatch(10, $errors);
 		}
 
 		$panel = View::make('admin.emails.send_panel_body')
 			->with('email', $email)
 			->render();
 
-		return Response::json([
-			'sending' => $email->is_sending,
-			'panel' => $panel,
+        $return_data = [
+			'sending'     => $email->is_sending,
+			'panel'       => $panel,
 			'sent_emails' => $sent_emails,
-		]);
+		];
+
+        if ($errors)
+        {
+            $error_string = implode(PHP_EOL, array_map(function($value)
+            {
+                return $value->getMessage();
+            }, $errors));
+
+            $return_data['error'] = $error_string;
+        }
+
+        return Response::json($return_data);
 	}
 
 	public function putPause($id)
