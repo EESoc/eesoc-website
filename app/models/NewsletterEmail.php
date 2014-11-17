@@ -2,191 +2,191 @@
 
 class NewsletterEmail extends Eloquent {
 
-	protected $fillable = ['subject', 'preheader', 'from_name', 'from_email', 'reply_to_email', 'body'];
+    protected $fillable = ['subject', 'preheader', 'from_name', 'from_email', 'reply_to_email', 'body'];
 
-	public function __construct()
-	{
-		parent::__construct();
+    public function __construct()
+    {
+        parent::__construct();
 
-		$this->state = 'draft';
-	}
+        $this->state = 'draft';
+    }
 
-	public function newsletters()
-	{
-		return $this->belongsToMany('Newsletter', 'newsletters_newsletter_emails');
-	}
+    public function newsletters()
+    {
+        return $this->belongsToMany('Newsletter', 'newsletters_newsletter_emails');
+    }
 
-	public function queuedEmails()
-	{
-		return $this->hasMany('NewsletterEmailQueue');
-	}
+    public function queuedEmails()
+    {
+        return $this->hasMany('NewsletterEmailQueue');
+    }
 
-	public function getSentCountAttribute()
-	{
-		return $this->queuedEmails()->sent()->count();
-	}
+    public function getSentCountAttribute()
+    {
+        return $this->queuedEmails()->sent()->count();
+    }
 
-	public function getSendQueueLengthAttribute()
-	{
-		return $this->queuedEmails()->count();
-	}
+    public function getSendQueueLengthAttribute()
+    {
+        return $this->queuedEmails()->count();
+    }
 
-	public function getIsDraftAttribute()
-	{
-		return $this->state === 'draft';
-	}
+    public function getIsDraftAttribute()
+    {
+        return $this->state === 'draft';
+    }
 
-	public function getIsSendingAttribute()
-	{
-		return $this->state === 'sending';
-	}
+    public function getIsSendingAttribute()
+    {
+        return $this->state === 'sending';
+    }
 
-	public function getIsCompletedAttribute()
-	{
-		return $this->state === 'completed';
-	}
+    public function getIsCompletedAttribute()
+    {
+        return $this->state === 'completed';
+    }
 
-	public function getCanSaveAttribute()
-	{
-		return $this->state === 'draft';
-	}
+    public function getCanSaveAttribute()
+    {
+        return $this->state === 'draft';
+    }
 
-	public function getCanSendAttribute()
-	{
-		return $this->state === 'draft';
-	}
+    public function getCanSendAttribute()
+    {
+        return $this->state === 'draft';
+    }
 
-	public function getCanPauseAttribute()
-	{
-		return $this->state === 'sending';
-	}
+    public function getCanPauseAttribute()
+    {
+        return $this->state === 'sending';
+    }
 
-	public function getSentEmailPercentageAttribute()
-	{
-		$total = $this->send_queue_length;
+    public function getSentEmailPercentageAttribute()
+    {
+        $total = $this->send_queue_length;
 
-		if ($total == 0) {
-			return 0;
-		}
+        if ($total == 0) {
+            return 0;
+        }
 
-		$sent = $this->sent_count;
+        $sent = $this->sent_count;
 
-		return ceil($sent / $total * 100);
-	}
+        return ceil($sent / $total * 100);
+    }
 
-	public function getHtmlBodyAttribute()
-	{
-		return View::make('email_layouts.newsletter')
-			->with('body', $this->body)
-			->render();
-	}
+    public function getHtmlBodyAttribute()
+    {
+        return View::make('email_layouts.newsletter')
+            ->with('body', $this->body)
+            ->render();
+    }
 
-	/**
-	 * Builds an email queue
-	 */
-	public function buildEmailQueue()
-	{
-		set_time_limit(0);
+    /**
+     * Builds an email queue
+     */
+    public function buildEmailQueue()
+    {
+        set_time_limit(0);
 
-		$inserts = [];
+        $inserts = [];
 
-		foreach ($this->newsletters as $newsletter) {
-			// Process student groups
-			$student_group_ids = $newsletter->student_groups->lists('id');
-			if ( ! empty($student_group_ids)) {
-				$users = User::whereIn('student_group_id', $student_group_ids)
-					->whereNotIn('id', function($query) {
-						// Remove duplicate
-						return $query
-							->select('user_id')
-							->from('newsletter_email_queue')
-							->where('newsletter_email_id', '=', $this->id);
-					})
-					->get();
-				foreach ($users as $user) {
-					$inserts[$user->email] = [
-						'newsletter_email_id' => $this->id,
-						'tracker_token'       => str_random(20),
-						'to_email'            => $user->email,
-						'user_id'             => $user->id,
-					];
-				}
-			}
+        foreach ($this->newsletters as $newsletter) {
+            // Process student groups
+            $student_group_ids = $newsletter->student_groups->lists('id');
+            if ( ! empty($student_group_ids)) {
+                $users = User::whereIn('student_group_id', $student_group_ids)
+                    ->whereNotIn('id', function($query) {
+                        // Remove duplicate
+                        return $query
+                            ->select('user_id')
+                            ->from('newsletter_email_queue')
+                            ->where('newsletter_email_id', '=', $this->id);
+                    })
+                    ->get();
+                foreach ($users as $user) {
+                    $inserts[$user->email] = [
+                        'newsletter_email_id' => $this->id,
+                        'tracker_token'       => str_random(20),
+                        'to_email'            => $user->email,
+                        'user_id'             => $user->id,
+                    ];
+                }
+            }
 
-			// Process normal email subscriptions
-			$subscriptions_query = $newsletter
-				->subscriptions()
-				->with('user')
-				->whereNotIn('email', function($query) {
-					// Remove duplicate
-					return $query
-						->select('to_email')
-						->from('newsletter_email_queue')
-						->where('newsletter_email_id', '=', $this->id);
-				});
+            // Process normal email subscriptions
+            $subscriptions_query = $newsletter
+                ->subscriptions()
+                ->with('user')
+                ->whereNotIn('email', function($query) {
+                    // Remove duplicate
+                    return $query
+                        ->select('to_email')
+                        ->from('newsletter_email_queue')
+                        ->where('newsletter_email_id', '=', $this->id);
+                });
 
-			// Get subscribers
-			foreach ($subscriptions_query->get() as $subscription) {
-				$email = null;
-				if ($subscription->user && $subscription->user->email) {
-					$email = $subscription->user->email;
-				} else if ($subscription->email) {
-					$email = $subscription->email;
-				}
+            // Get subscribers
+            foreach ($subscriptions_query->get() as $subscription) {
+                $email = null;
+                if ($subscription->user && $subscription->user->email) {
+                    $email = $subscription->user->email;
+                } else if ($subscription->email) {
+                    $email = $subscription->email;
+                }
 
-				if (empty($email)) {
-					// Skip empty emails
-					continue;
-				}
+                if (empty($email)) {
+                    // Skip empty emails
+                    continue;
+                }
 
-				$inserts[$email] = [
-					'newsletter_email_id' => $this->id,
-					'tracker_token'       => str_random(20),
-					'to_email'            => $email,
-					'user_id'             => null,
-				];
-			}
-		}
+                $inserts[$email] = [
+                    'newsletter_email_id' => $this->id,
+                    'tracker_token'       => str_random(20),
+                    'to_email'            => $email,
+                    'user_id'             => null,
+                ];
+            }
+        }
 
-		if ( ! empty($inserts)) {
-			DB::table('newsletter_email_queue')->insert(array_values($inserts));
-		}
-	}
+        if ( ! empty($inserts)) {
+            DB::table('newsletter_email_queue')->insert(array_values($inserts));
+        }
+    }
 
-	/**
-	 * Send batch emails
-	 */
-	public function sendBatch($size = 10)
-	{
-		if (App::environment() === 'local') {
-			// Mailcatcher
-			$internal_transport = Swift_SmtpTransport::newInstance('localhost', 1025);
+    /**
+     * Send batch emails
+     */
+    public function sendBatch($size = 10, &$errors = [])
+    {
+        if (App::environment() === 'local') {
+            // Mailcatcher
+            $internal_transport = Swift_SmtpTransport::newInstance('localhost', 1025);
 
-			$external_transport = Swift_SmtpTransport::newInstance('localhost', 1025);
-		} else {
-			$internal_transport = Swift_MailTransport::newInstance();
+            $external_transport = Swift_SmtpTransport::newInstance('localhost', 1025);
+        } else {
+            $internal_transport = Swift_MailTransport::newInstance();
 
-			$external_transport = Swift_SmtpTransport::newInstance('smtp.zoho.com', 465, 'ssl')
-				->setUsername(Config::get('zoho_smtp.username'))
-				->setPassword(Config::get('zoho_smtp.password'));
-		}
+            $external_transport = Swift_SmtpTransport::newInstance('smtp.zoho.com', 465, 'ssl')
+                ->setUsername(Config::get('zoho_smtp.username'))
+                ->setPassword(Config::get('zoho_smtp.password'));
+        }
 
-		$internal_mailer = Swift_Mailer::newInstance($internal_transport);
-		$external_mailer = Swift_Mailer::newInstance($external_transport);
+        $internal_mailer = Swift_Mailer::newInstance($internal_transport);
+        $external_mailer = Swift_Mailer::newInstance($external_transport);
 
-		$message = $this->buildMessage();
+        $message = $this->buildMessage();
 
-		$recipients = $this
-			->queuedEmails()
-			->pendingSend()
-			->take($size)
-			->get();
+        $recipients = $this
+            ->queuedEmails()
+            ->pendingSend()
+            ->take($size)
+            ->get();
 
-		$sent_emails = [];
+        $sent_emails = [];
 
-		if ($recipients->isEmpty()) { // Finished sending out emails
-			$this->state = 'completed';
-			$this->save();
+        if ($recipients->isEmpty()) { // Finished sending out emails
+            $this->state = 'completed';
+            $this->save();
 
             return $sent_emails;
         }
@@ -209,78 +209,83 @@ class NewsletterEmail extends Eloquent {
                 $message->setFrom(['no-reply@eesoc.com' => $this->from_name]);
             }
 
-            if ($mailer->send($message)) {
-                // Mark email queue as sent
-                $recipient->sent = true;
-                $recipient->save();
-            }
+            try
+            {
+                if ($mailer->send($message)) {
+                    // Mark email queue as sent
+                    $recipient->sent = true;
+                    $recipient->save();
 
-            $sent_emails[] = $recipient->to_email;
+                    $sent_emails[] = $recipient->to_email;
+                }
+            } catch (\Swift_SwiftException $e) {
+                $errors[] = $e;
+            }
         }
 
-		return $sent_emails;
-	}
+        return $sent_emails;
+    }
 
-	/**
-	 * Sends a test email to a user
-	 * @param  User   $user
-	 * @return integer
-	 */
-	public function sendTestToUser(User $user)
-	{
-		if (App::environment() === 'local') {
-			// Mailcatcher
-			$transport = Swift_SmtpTransport::newInstance('localhost', 1025);
-		} else {
-			$transport = Swift_MailTransport::newInstance();
-		}
+    /**
+     * Sends a test email to a user
+     * @param  User   $user
+     * @return integer
+     */
+    public function sendTestToUser(User $user)
+    {
+        if (App::environment() === 'local') {
+            // Mailcatcher
+            $transport = Swift_SmtpTransport::newInstance('localhost', 1025);
+        } else {
+            $transport = Swift_MailTransport::newInstance();
+        }
 
-		$mailer = Swift_Mailer::newInstance($transport);
+        $mailer = Swift_Mailer::newInstance($transport);
 
-		$message = $this->buildMessage();
+        $message = $this->buildMessage();
 
-		$message->setTo($user->email);
-		$message->setFrom([$this->from_email => $this->from_name]);
+        $message->setTo($user->email);
+        $message->setFrom([$this->from_email => $this->from_name]);
 
-		$message->setBody(str_replace('<tracking_pixel>', '', $message->getBody()));
+        $message->setBody(str_replace('<tracking_pixel>', '', $message->getBody()));
 
-		return $mailer->send($message);
-	}
+        return $mailer->send($message);
+    }
 
-	/**
-	 * Build Swift_Message instance with all newsletter email data.
-	 * @return Swift_Message
-	 */
-	private function buildMessage()
-	{
-		// Setup message
-		$message = Swift_Message::newInstance();
+    /**
+     * Build Swift_Message instance with all newsletter email data.
+     * @return Swift_Message
+     */
+    private function buildMessage()
+    {
+        // Setup message
+        $message = Swift_Message::newInstance();
 
-		if ($this->reply_to_email) {
-			$message->setReplyTo($this->reply_to_email);
-		}
+        if ($this->reply_to_email) {
+            $message->setReplyTo($this->reply_to_email);
+        }
 
-		$message->setSubject($this->subject);
+        $message->setSubject($this->subject);
 
-		$message->setBody($this->html_body, 'text/html');
+        $message->setBody($this->html_body, 'text/html');
 
-		if ($this->preheader) {
-			$message->addPart($this->preheader, 'text/plain');
-		}
+        if ($this->preheader) {
+            $message->addPart($this->preheader, 'text/plain');
+        }
 
-		return $message;
-	}
+        return $message;
+    }
 
-	public function getDates()
-	{
-		return array('created_at', 'updated_at', 'last_updated_at');
-	}
+    public function getDates()
+    {
+        return array('created_at', 'updated_at', 'last_updated_at');
+    }
 
-	public function refreshLastUpdatedBy(User $user)
-	{
-		$this->last_updated_at = time();
-		$this->last_updated_by = $user->username;
-		$this->save();
-	}
+    public function refreshLastUpdatedBy(User $user)
+    {
+        $this->last_updated_at = time();
+        $this->last_updated_by = $user->username;
+        $this->save();
+    }
 
 }
