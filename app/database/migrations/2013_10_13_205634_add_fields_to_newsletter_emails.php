@@ -17,10 +17,15 @@ class AddFieldsToNewsletterEmails extends Migration {
 			$table->string('from_name');
 			$table->string('from_email');
 			$table->string('reply_to_email');
-			$table->dropColumn('student_group_ids');
 			$table->dropForeign('newsletter_emails_newsletter_id_foreign');
 			$table->dropColumn('newsletter_id');
 		});
+
+        /* For reasons best known to SQLite and Doctrine, SQLite doesn't think the
+         * field exists if this is used with the previous schemabuilder. */
+        Schema::table('newsletter_emails', function($table) {
+            $table->dropColumn('student_group_ids');
+        });
 	}
 
 	/**
