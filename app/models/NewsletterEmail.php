@@ -219,6 +219,9 @@ class NewsletterEmail extends Eloquent {
                     $sent_emails[] = $recipient->to_email;
                 }
             } catch (\Swift_SwiftException $e) {
+                $recipient->failed = true;
+                $recipient->save();
+
                 $errors[] = $e;
             }
         }
