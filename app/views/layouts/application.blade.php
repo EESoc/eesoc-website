@@ -6,7 +6,7 @@
     <meta name="description" content="EESoc is the Society for Electrical & Electronic Engineering students at Imperial College London. We run social events, events with industry and sports events.">
     <meta name="author" content="">
 
-    <title>{{{ isset($page_title) ? $page_title.' | ' : '' }}}Imperial College EESoc</title>
+    <title>{{{ isset($page_title) ? $page_title.' | ' : '' }}}Imperial College EESoc - Electrical Engineering Society</title>
 
     <meta property="og:title" content="{{{ isset($page_title) ? $page_title : '' }}}" />
     <meta property="og:site_name" content="Imperial College EESoc" />
