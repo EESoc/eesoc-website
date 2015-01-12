@@ -144,9 +144,9 @@
                     </a>
                     <ul class="dropdown-menu">
                       <li class="{{ Request::is('christmas-dinner') ? 'active' : '' }}">
-                        <a href="{{ url('christmas-dinner') }}">
+                        <a href="{{ url('new-years-dinner') }}">
                           <span class="glyphicon glyphicon-chevron-right"></span>
-                          Christmas Dinner
+                          New Year's Dinner
                         </a>
                       </li>
                       <li class="{{ Request::is('careers-fair') ? 'active' : '' }}">
