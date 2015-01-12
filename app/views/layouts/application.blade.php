@@ -132,12 +132,6 @@
                     Events
                   </a>
                 </li>
-                <li class="{{ Request::is('cebit-international-trip') ? 'active' : '' }}">
-                  <a href="{{ url('cebit-international-trip') }}">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    CeBIT International Trip
-                  </a>
-                </li>
                 <li>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                       <span class="glyphicon glyphicon-chevron-right"></span> Flagship Events <span class="caret"></span>
