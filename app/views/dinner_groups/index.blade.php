@@ -2,17 +2,17 @@
 
 @section('content')
   <div class="page-header">
-    <h1>Christmas Dinner Seating Planner</h1>
+    <h1>Dinner Seating Planner</h1>
   </div>
-  @if (ChristmasPermission::user(Auth::user())->canCreateNewGroup())
+  @if (DinnerPermission::user(Auth::user())->canCreateNewGroup())
     <p>
-      <a href="{{ route('dashboard.xmas.groups.create') }}" class="btn btn-primary">Create New Group</a>
+      <a href="{{ route('dashboard.dinner.groups.create') }}" class="btn btn-primary">Create New Group</a>
     </p>
   @endif
   @foreach ($groups as $group)
     <div class="well well-sm">
       <h4>
-        <a href="{{ route('dashboard.xmas.groups.show', $group->id) }}">
+        <a href="{{ route('dashboard.dinner.groups.show', $group->id) }}">
           Group #{{ $group->id }}
         </a>
       </h4>
@@ -31,5 +31,5 @@
       </ul>
     </div>
   @endforeach
-  <p>If you experience any issues, please <a href='mailto:christos.karpis11@imperial.ac.uk'>email us</a></p>
+  <p>If you experience any issues, please <a href='mailto:eesoc.webmaster@imperial.ac.uk'>email us</a></p>
 @stop

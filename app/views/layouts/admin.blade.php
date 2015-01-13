@@ -86,8 +86,8 @@
             <li class="{{ str_contains(Route::currentRouteAction(), 'Admin\Users') ? 'active' : '' }}">
               <a href="{{{ route('admin.users.index') }}}">Users</a>
             </li>
-            <li class="{{ str_contains(Route::currentRouteAction(), 'Admin\ChristmasDinnerTickets') ? 'active' : '' }}">
-              <a href="{{{ action('Admin\ChristmasDinnerTicketsController@getIndex') }}}">Xmas Dinner Tickets</a>
+            <li class="{{ str_contains(Route::currentRouteAction(), 'Admin\DinnerTickets') ? 'active' : '' }}">
+              <a href="{{{ action('Admin\DinnerTicketsController@getIndex') }}}">Dinner Tickets</a>
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">

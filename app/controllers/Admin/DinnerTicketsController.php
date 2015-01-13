@@ -1,7 +1,7 @@
 <?php
 namespace Admin;
 
-use \ChristmasDinnerSale;
+use \DinnerSale;
 use \Input;
 use \Log;
 use \Redirect;
@@ -9,17 +9,17 @@ use \User;
 use \Validator;
 use \View;
 
-class ChristmasDinnerTicketsController extends BaseController {
+class DinnerTicketsController extends BaseController {
 
 	public function getIndex()
 	{
-		return View::make('admin.christmas_dinner_tickets.index')
-			->with('sales', ChristmasDinnerSale::orderBy('created_at', 'desc')->get());
+		return View::make('admin.dinner_tickets.index')
+			->with('sales', DinnerSale::orderBy('created_at', 'desc')->get());
 	}
 
 	public function getNew()
 	{
-		return View::make('admin.christmas_dinner_tickets.new_order');
+		return View::make('admin.dinner_tickets.new_order');
 	}
 
 	public function postConfirmation()
@@ -30,17 +30,17 @@ class ChristmasDinnerTicketsController extends BaseController {
 			// Using IC Username
 			$user = User::findOrCreateWithLDAP(Input::get('ic_username'));
 
-			if ( ! $user) {
+			if (!$user) {
 				// Cannot find user
-				return Redirect::action('Admin\ChristmasDinnerTicketsController@getNew')
+				return Redirect::action('Admin\DinnerTicketsController@getNew')
 					->with('danger', 'Cannot find Imperial College User with this username. Please try again.');
 			}
 
-			return View::make('admin.christmas_dinner_tickets.confirmation')
+			return View::make('admin.dinner_tickets.confirmation')
 				->with('user', $user)
 				->with('quantity', (int) Input::get('quantity'));
 		} else {
-			return Redirect::action('Admin\ChristmasDinnerTicketsController@getNew')
+			return Redirect::action('Admin\DinnerTicketsController@getNew')
 				->withInput()
 				->withErrors($validator);
 		}
@@ -55,25 +55,25 @@ class ChristmasDinnerTicketsController extends BaseController {
 
 			if ( ! $user) {
 				// Cannot find user
-				return Redirect::action('Admin\ChristmasDinnerTicketsController@getNew')
+				return Redirect::action('Admin\DinnerTicketsController@getNew')
 					->with('danger', 'Cannot find Imperial College User with this username. Please try again.');
 			}
 
-			$sale = new ChristmasDinnerSale;
+			$sale = new DinnerSale;
 			$sale->user()->associate($user);
 			$sale->quantity = (int) Input::get('quantity');
-			$sale->origin = 'admin';
+			$sale->origin   = 'admin';
 
 			if ($sale->save()) {
 				// Paper trail
-				Log::info(sprintf('User `%s` purchased `%d` Christmas ticket(s)', $user->username, $sale->quantity), ['context' => 'christmas_dinner_tickets']);
+				Log::info(sprintf('User `%s` purchased `%d` Dinner ticket(s)', $user->username, $sale->quantity), ['context' => 'dinner_tickets']);
 
-				return Redirect::action('Admin\ChristmasDinnerTicketsController@getIndex')
+				return Redirect::action('Admin\DinnerTicketsController@getIndex')
 					->with('success', 'Successfully purchased ticket(s)!');
 			}
 
 		} else {
-			return Redirect::action('Admin\ChristmasDinnerTicketsController@getNew')
+			return Redirect::action('Admin\DinnerTicketsController@getNew')
 				->withInput()
 				->withErrors($validator);
 		}
@@ -89,5 +89,4 @@ class ChristmasDinnerTicketsController extends BaseController {
 
 		return Validator::make(Input::all(), $rules);
 	}
-
 }

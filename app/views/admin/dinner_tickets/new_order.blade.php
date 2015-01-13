@@ -2,9 +2,9 @@
 
 @section('content')
   <div class="page-header">
-    <h1>Christmas Dinner Tickets</h1>
+    <h1>Dinner Tickets</h1>
   </div>
-  {{ Form::open(['action' => 'Admin\ChristmasDinnerTicketsController@postConfirmation']) }}
+  {{ Form::open(['action' => 'Admin\DinnerTicketsController@postConfirmation']) }}
     <div class="form-group {{ $errors->first('ic_username', 'has-error') }}">
       {{ Form::label('ic_username', 'IC Username', array('class' => 'control-label')) }}
       {{ Form::text('ic_username', null, array('class' => 'form-control input-lg')) }}

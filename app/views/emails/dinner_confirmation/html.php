@@ -415,7 +415,7 @@ h4{
                     <tbody><tr>
 
                         <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-left: 18px;padding-bottom: 9px;padding-right: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #ffffff;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 11px;line-height: 125%;text-align: left;">
-                            The EESoc Christmas Dinner, Sponsored by Detica, is only a few days away. Here's some information for the day.
+                            The EESoc New Year's Dinner, Sponsored by BAE Systems Applied Intelligence, is only a few days away. Here's some information for the day.
                         </td>
                     </tr>
                 </tbody></table>
@@ -443,7 +443,7 @@ h4{
                             <td class="mcnImageContent" align="center" valign="top" style="padding-right: 9px;padding-left: 9px;padding-top: 0;padding-bottom: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
 
 
-                                        <a href="http://bit.ly/19yZzh9"><img align="center" alt="" src="https://eesoc.com/assets/email/xmasdinner/xmaslogo.png" width="400" style="max-width: 400px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" class="mcnImage"></a>
+                                        <a href="http://bit.ly/19yZzh9"><img align="center" alt="" src="https://eesoc.com/assets/email/dinner/logo.png" width="400" style="max-width: 400px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" class="mcnImage"></a>
 
 
                             </td>
@@ -471,22 +471,22 @@ h4{
                 <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                     <tbody><tr>
 
-                        <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #dddddd;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 15px;line-height: 150%;text-align: left;"><p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #dddddd;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Thank you for buying your ticket to the EESoc Christmas Dinner, Sponsored by Detica.</p>
+                        <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #dddddd;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 15px;line-height: 150%;text-align: left;"><p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #dddddd;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Thank you for buying your ticket to the EESoc New Year's Dinner, Sponsored by BAE Systems Applied Intelligence.</p>
 
                             <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #dddddd;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">This email is both to confirm your purchase and to provide some information for the evening.</p>
 
                             <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #dddddd;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><b>Date:</b> Thursday, 5th December 2013<br />
                                 <b>Time:</b> 7:30PM - 1:00AM<br />
-                                <b>Venue:</b> BMA House, Tavistock Square London, WC1H 9JP<br />
-                                <b>Dress Code:</b> Black Tie</p>
+                                <b>Venue:</b> Gibson Hall, 13 Bishopsgate, EC2N 3BA<br />
+                                <b>Dress Code:</b> Smart</p>
 
                             <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #dddddd;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Please bring an ID card with you to enter the event. If you have purchased tickets for guests, please ensure they are aware of this.</p>
 
                             <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #dddddd;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">If you have any questions regarding the event, please email <a style="color: #fadd50;" href="mailto:dinner@eesoc.com">dinner@eesoc.com</a>.</p>
 
-                            <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #dddddd;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">I look forward to welcoming you on Thursday!</p>
+                            <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #dddddd;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">I look forward to welcoming you on Thursday 22nd!</p>
 
-                            <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #dddddd;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Christos Karpis,<br />
+                            <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #dddddd;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Pranav Malhotra,<br />
                                 EESoc Events Officer</p>
 </td>
                     </tr>
@@ -532,8 +532,6 @@ h4{
                         <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #ffffff;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 13px;line-height: 125%;text-align: left;">
 
                             <div style="text-align: center;">
-                                Sponsored by<br><br>
-                                <img src="https://eesoc.com/assets/email/xmasdinner/_Detica_logo-white.png" width="150" height="41" style="width: 150px; height: 41px;">
                             </div>
 
                         </td>
@@ -555,13 +553,6 @@ h4{
                 </tr>
                 <tr>
                     <td align="center" valign="top" id="bodyCell" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 20px;border-top: 0;height: 100% !important;width: 100% !important;">
-
-
-
-
-
-
-
 
                         <table border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-top: 0;border-bottom: 0;">
                                         <tbody><tr>
@@ -586,7 +577,6 @@ h4{
                         </td>
                     </tr>
                 </tbody></table>
-
             </td>
         </tr>
     </tbody>
@@ -594,41 +584,25 @@ h4{
     <tbody class="mcnTextBlockOuter">
         <tr>
             <td valign="top" class="mcnTextBlockInner" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-
                 <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                     <tbody><tr>
-
                         <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 11px;line-height: 125%;text-align: left;">
-
                             <div style="text-align: center;">
     <span style="text-align: center;"><a href="http://bit.ly/1a9ETgL">eesoc.com</a></span><br>
     <span style="text-align: center;"><a href="mailto:eesoc@imperial.ac.uk">eesoc@imperial.ac.uk</a></span></div>
-
                         </td>
                     </tr>
                 </tbody></table>
-
             </td>
         </tr>
     </tbody>
 </table></td>
-                                        </tr>
-                                    </tbody></table>
-
-
-
-
-
-
-
-
-
-
+                        </tr>
+                    </tbody></table>
                     </td>
                 </tr>
             </tbody></table>
         </center>
-    
-    <tracking_pixel>
 
+    <tracking_pixel>
 </tracking_pixel></body></html>

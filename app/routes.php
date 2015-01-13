@@ -59,10 +59,10 @@ Route::group(['before' => 'auth.member'], function() {
 		# Lockers
 		Route::controller('lockers', 'LockersController');
 
-		# Xmas Dinner
-		Route::group(['prefix' => 'xmas'], function() {
+		# Dinner
+		Route::group(['prefix' => 'dinner'], function() {
 			# Groups
-			Route::resource('groups', 'ChristmasDinnerGroupsController');
+			Route::resource('groups', 'DinnerGroupsController');
 		});
 	});
 });
@@ -77,8 +77,8 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 	# Categories
 	Route::resource('categories', 'Admin\CategoriesController', ['except' => ['show']]);
 
-	# Christmas Dinner Tickets
-	Route::controller('christmas-dinner-tickets', 'Admin\ChristmasDinnerTicketsController');
+	# Dinner Tickets
+	Route::controller('dinner-tickets', 'Admin\DinnerTicketsController');
 
 	# Contents
 	Route::resource('contents', 'Admin\ContentsController', ['except' => ['show']]);

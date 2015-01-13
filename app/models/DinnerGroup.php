@@ -1,6 +1,6 @@
 <?php
 
-class ChristmasDinnerGroup extends Eloquent {
+class DinnerGroup extends Eloquent {
 
 	/*
 	Relations
@@ -13,12 +13,12 @@ class ChristmasDinnerGroup extends Eloquent {
 
 	public function members()
 	{
-		return $this->hasMany('ChristmasDinnerGroupMember');
+		return $this->hasMany('DinnerGroupMember');
 	}
 
 	public function users()
 	{
-		return $this->belongsToMany('User', 'christmas_dinner_group_members', 'christmas_dinner_group_id', 'user_id');
+		return $this->belongsToMany('User', 'dinner_group_members', 'dinner_group_id', 'user_id');
 	}
 
 	public static function boot()

@@ -60,7 +60,7 @@ class CronController extends BaseController {
 	{
 		$username = Input::get('username');
 
-		if ( ! User::where('username', '=', $username)->firstOrFail()->is_admin) {
+		if (!User::where('username', '=', $username)->firstOrFail()->is_admin) {
 			return Response::json(['success' => false, 'message' => 'You are not an admin!']);
 		}
 
@@ -71,7 +71,7 @@ class CronController extends BaseController {
 
 		$eactivities_client = new EActivities\Client($http_client);
 
-		if ( ! $eactivities_client->signIn($credentials)) {
+		if (!$eactivities_client->signIn($credentials)) {
 			return Response::json(['success' => false, 'message' => 'Error signing in! Please check your username and password.']);
 		}
 
@@ -79,21 +79,21 @@ class CronController extends BaseController {
 
 		$purchases = array_merge(
 			$eactivities_client->getPurchasesList(Product::ID_EESOC_LOCKER), // EESoc Locker
-			$eactivities_client->getPurchasesList(Product::ID_EESOC_CHRISTMAS_DINNER) // EESoc Christmas Dinner
+			$eactivities_client->getPurchasesList(Product::ID_EESOC_DINNER) // EESoc Dinner
 		);
 
 		$emails_sent = 0;
 
 		foreach ($purchases as $purchase) {
 			$sale = Sale::find($purchase['order_no']);
-			if ( ! $sale) {
+			if (!$sale) {
 				$sale = new Sale;
 				$sale->id = $purchase['order_no'];
 				$sale->notified = false;
 			}
 
 			$user = User::where('username', '=', $purchase['login'])->first();
-			if ( ! $user) {
+			if (!$user) {
 				$user = new User;
 				$user->username = $purchase['login'];
 				$user->cid      = $purchase['cid'];
@@ -111,7 +111,7 @@ class CronController extends BaseController {
 			$sale->save();
 
 			// Is a locker sale and not notified
-			if ($sale->product_id === Product::ID_EESOC_LOCKER && ! $sale->notified) {
+			if ($sale->product_id === Product::ID_EESOC_LOCKER && !$sale->notified) {
 				if (Notification::sendLockerInformation($user)) {
 					$emails_sent++;
 					$sale->notified = true;
@@ -119,15 +119,15 @@ class CronController extends BaseController {
 				}
 			}
 
-			// Is a Christmas dinner sale
-			if ($sale->product_id === Product::ID_EESOC_CHRISTMAS_DINNER) {
-				if ( ! ChristmasDinnerSale::where('sale_id', '=', $sale->id)->exists()) {
-					$xmas_sale = new ChristmasDinnerSale;
-					$xmas_sale->user()->associate($user);
-					$xmas_sale->quantity = $sale->quantity;
-					$xmas_sale->origin = 'eactivities';
-					$xmas_sale->sale()->associate($sale);
-					$xmas_sale->save();
+			// Is a dinner sale
+			if ($sale->product_id === Product::ID_EESOC_DINNER) {
+				if (!DinnerSale::where('sale_id', '=', $sale->id)->exists()) {
+					$dinner_sale = new DinnerSale;
+					$dinner_sale->user()->associate($user);
+					$dinner_sale->quantity = $sale->quantity;
+					$dinner_sale->origin = 'eactivities';
+					$dinner_sale->sale()->associate($sale);
+					$dinner_sale->save();
 				}
 			}
 		}

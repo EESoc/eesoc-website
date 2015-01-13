@@ -137,7 +137,7 @@
                       <span class="glyphicon glyphicon-chevron-right"></span> Flagship Events <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                      <li class="{{ Request::is('christmas-dinner') ? 'active' : '' }}">
+                      <li class="{{ Request::is('new-years-dinner') ? 'active' : '' }}">
                         <a href="{{ url('new-years-dinner') }}">
                           <span class="glyphicon glyphicon-chevron-right"></span>
                           New Year's Dinner

@@ -4,8 +4,12 @@ use Illuminate\Auth\UserInterface;
 use Robbo\Presenter\PresentableInterface;
 
 class User extends Eloquent implements UserInterface, PresentableInterface {
-
 	private $imperial_college_user;
+
+	private $unclaimed_lockers_count;
+
+	private $dinner_tickets_count;
+	private $unclaimed_dinner_tickets_count;
 
 	public static function boot()
 	{
@@ -60,14 +64,14 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		return $this->hasMany('Book');
 	}
 
-	public function christmasDinnerSales()
+	public function dinnerSales()
 	{
-		return $this->hasMany('ChristmasDinnerSale');
+		return $this->hasMany('DinnerSale');
 	}
 
-	public function christmasDinnerGroupMember()
+	public function DinnerGroupMember()
 	{
-		return $this->hasOne('ChristmasDinnerGroupMember');
+		return $this->hasOne('DinnerGroupMember');
 	}
 
 	/*
@@ -120,7 +124,7 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 
 	public function scopeInGroup($query, $group)
 	{
-		if ( ! ($group instanceof StudentGroup)) {
+		if (!$group instanceof StudentGroup) {
 			$group = StudentGroup::findOrFail($group);
 		}
 
@@ -137,18 +141,18 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		return $query->whereNotNull('image_blob');
 	}
 
-	public function scopeHasUnclaimedChristmasTickets($query)
+	public function scopeHasUnclaimedDinnerTickets($query)
 	{
 		return $query
 			->whereIn('id', function($query) {
 				return $query
 					->select('user_id')
-					->from('christmas_dinner_sales');
+					->from('dinner_sales');
 			})
 			->whereNotIn('id', function($query) {
 				return $query
 					->select('user_id')
-					->from('christmas_dinner_group_members')
+					->from('dinner_group_members')
 					->whereNotNull('user_id');
 			})
 			->orderBy('name');
@@ -227,7 +231,7 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 
 	public function getImperialCollegeUser()
 	{
-		if ( ! isset($this->imperial_college_user)) {
+		if (!isset($this->imperial_college_user)) {
 			$this->imperial_college_user = new ImperialCollegeUser($this->username);
 		}
 
@@ -261,7 +265,7 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		$this->last_sign_in_at = new DateTime;
 
 		// First time signing in
-		if ( ! $this->first_sign_in_at) {
+		if (!$this->first_sign_in_at) {
 			$this->first_sign_in_at = $this->last_sign_in_at;
 		}
 
@@ -285,7 +289,7 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	 */
 	public function getHasImageAttribute()
 	{
-		return ( ! empty($this->image_blob));
+		return !empty($this->image_blob);
 	}
 
 	/**
@@ -294,7 +298,7 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	 */
 	public function getHasEmailAttribute()
 	{
-		return ( ! empty($this->email));
+		return !empty($this->email);
 	}
 
 	/**
@@ -326,8 +330,6 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	Locker methods
 	 */
 
-	private $unclaimed_lockers_count;
-
 	/**
 	 * Get the number of unclaimed lockers.
 	 * @return integer
@@ -354,44 +356,40 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 	}
 
 	/*
-	Xmas methods
+	 * Dinner methods
 	 */
 
-	private $christmas_tickets_count;
-	private $unclaimed_christmas_tickets_count;
-
-	public function getChristmasTicketsCountAttribute()
+	public function getDinnerTicketsCountAttribute()
 	{
-		if ($this->christmas_tickets_count === null) {
-			$this->christmas_tickets_count = $this->christmasDinnerSales()->sum('quantity');
+		if ($this->dinner_tickets_count === null) {
+			$this->dinner_tickets_count = $this->dinnerSales()->sum('quantity');
 		}
 
-		return $this->christmas_tickets_count;
+		return $this->dinner_tickets_count;
 	}
 
 	/**
-	 * Get the number of unclaimed lockers.
+	 * Get the number of unclaimed dinner tickets.
 	 * @return integer
 	 */
-	public function getUnclaimedChristmasTicketsCountAttribute()
+	public function getUnclaimedDinnerTicketsCountAttribute()
 	{
-		if ($this->unclaimed_christmas_tickets_count === null) {
-			$bought = $this->getChristmasTicketsCountAttribute();
-			$claimed = ChristmasDinnerGroupMember::purchasedBy($this)->count();
+		if ($this->unclaimed_dinner_tickets_count === null) {
+			$bought = $this->getDinnerTicketsCountAttribute();
+			$claimed = DinnerGroupMember::purchasedBy($this)->count();
 
-			$this->unclaimed_christmas_tickets_count = $bought - $claimed;
+			$this->unclaimed_dinner_tickets_count = $bought - $claimed;
 		}
 
-		return $this->unclaimed_christmas_tickets_count;
+		return $this->unclaimed_dinner_tickets_count;
 	}
 
 	/**
-	 * Return has unclaimed lockers count.
+	 * Return has unclaimed dinner tickets count.
 	 * @return integer
 	 */
-	public function getHasUnclaimedChristmasTicketsAttribute()
+	public function getHasUnclaimedDinnerTicketsAttribute()
 	{
-		return $this->getUnclaimedChristmasTicketsCountAttribute() > 0;
+		return $this->getUnclaimedDinnerTicketsCountAttribute() > 0;
 	}
-
 }

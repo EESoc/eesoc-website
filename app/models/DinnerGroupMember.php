@@ -1,9 +1,8 @@
 <?php
 
-class ChristmasDinnerGroupMember extends Eloquent {
-
+class DinnerGroupMember extends Eloquent
+{
 	public $timestamps = false;
-
 
 	public static function boot()
 	{
@@ -11,7 +10,7 @@ class ChristmasDinnerGroupMember extends Eloquent {
 
 		// Auto create membership for group owners
 		static::created(function($member) {
-			$group = $member->christmas_dinner_group;
+			$group = $member->dinner_group;
 
 			if ($group->members->count() >= 10) {
 				$group->is_full = true;
@@ -24,9 +23,9 @@ class ChristmasDinnerGroupMember extends Eloquent {
 	Relations
 	 */
 
-	public function christmasDinnerGroup()
+	public function dinnerGroup()
 	{
-		return $this->belongsTo('christmasDinnerGroup');
+		return $this->belongsTo('dinnerGroup');
 	}
 
 	public function user()
@@ -60,5 +59,4 @@ class ChristmasDinnerGroupMember extends Eloquent {
 			return $this->user->name;
 		}
 	}
-
 }

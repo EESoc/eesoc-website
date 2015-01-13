@@ -1,6 +1,6 @@
 <?php
 
-class ChristmasDinnerSale extends Eloquent {
+class DinnerSale extends Eloquent {
 
 	/*
 	Relations

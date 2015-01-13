@@ -26,7 +26,7 @@ class TestsController extends BaseController {
 		return 'OK';
 	}
 
-	public function getXmasNonAttendees()
+	public function getDinnerNonAttendees()
 	{
 		function array2csv(array &$array)
 		{
@@ -44,7 +44,7 @@ class TestsController extends BaseController {
 		}
 
 		$users = User::whereNotIn('id', function($query) {
-			return $query->select('user_id')->from('christmas_dinner_sales');
+			return $query->select('user_id')->from('dinner_sales');
 		})->get();
 
 		$csv_data = [];
@@ -58,9 +58,8 @@ class TestsController extends BaseController {
 
 		$response = Response::make(array2csv($csv_data), 200);
 		$response->header('Content-Type', 'text/csv');
-		$response->header('Content-disposition', 'attachment;filename=xmas_non_attendees.csv');
+		$response->header('Content-disposition', 'attachment;filename=dinner_non_attendees.csv');
 
 		return $response;
 	}
-
 }

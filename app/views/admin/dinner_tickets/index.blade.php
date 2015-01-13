@@ -2,8 +2,8 @@
 
 @section('content')
   <div class="page-header">
-    <h1>Christmas Dinner Tickets</h1>
-    <a href="{{{ action('Admin\ChristmasDinnerTicketsController@getNew') }}}" class="btn btn-lg btn-primary">New Order</a>
+    <h1>Dinner Tickets</h1>
+    <a href="{{{ action('Admin\DinnerTicketsController@getNew') }}}" class="btn btn-lg btn-primary">New Order</a>
   </div>
   <table class="table table-bordered">
     <thead>

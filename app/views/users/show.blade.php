@@ -14,10 +14,10 @@
       <pre>{{{ $user->extras }}}</pre>
     </div>
     <div class="col-lg-4">
-    @if ( FALSE && ChristmasPermission::user(Auth::user())->canManageGroups())
-      <a href="{{{ route('dashboard.xmas.groups.index') }}}" class="btn btn-success btn-lg btn-block">
+    @if ( FALSE && DinnerPermission::user(Auth::user())->canManageGroups())
+      <a href="{{{ route('dashboard.dinner.groups.index') }}}" class="btn btn-success btn-lg btn-block">
         <span class="glyphicon glyphicon-tree-conifer"></span>
-        Christmas Dinner Seating Preferences
+        Dinner Seating Preferences
       </a>  
     @endif    
       <a href="{{{ action('LockersController@getIndex') }}}" class="btn btn-info btn-lg btn-block">

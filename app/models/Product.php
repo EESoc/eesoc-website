@@ -7,6 +7,6 @@
  */
 
 class Product {
-	const ID_EESOC_LOCKER 		= 8757;
-	const ID_EESOC_CHRISTMAS_DINNER = 0;
+	const ID_EESOC_LOCKER = 8757;
+	const ID_EESOC_DINNER = 9572;
 }
