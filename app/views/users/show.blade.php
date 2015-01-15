@@ -18,8 +18,8 @@
       <a href="{{{ route('dashboard.dinner.groups.index') }}}" class="btn btn-success btn-lg btn-block">
         <span class="glyphicon glyphicon-glass"></span>
         Dinner Seating Preferences
-      </a>  
-    @endif    
+      </a>
+    @endif
       <a href="{{{ action('LockersController@getIndex') }}}" class="btn btn-info btn-lg btn-block">
         <span class="glyphicon glyphicon-tower"></span>
         Rent a Locker

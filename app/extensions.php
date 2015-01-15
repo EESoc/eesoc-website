@@ -4,8 +4,8 @@
  * Imperial Auth Extension
  */
 Auth::extend('imperialcollege', function() {
-	$userProvider = new ImperialCollegeUserProvider(Config::get('auth.model'));
-	return new Illuminate\Auth\Guard($userProvider, App::make('session'));
+    $userProvider = new ImperialCollegeUserProvider(Config::get('auth.model'));
+    return new Illuminate\Auth\Guard($userProvider, App::make('session'));
 });
 
 /*
@@ -16,7 +16,7 @@ Auth::extend('imperialcollege', function() {
  * Content tags: @content('slug')
  */
 Blade::extend(function($value, $blade) {
-	$pattern = $blade->createMatcher('content');
+    $pattern = $blade->createMatcher('content');
 
-	return preg_replace($pattern, '$1<?php echo \Content::fetch$2; ?>', $value);
+    return preg_replace($pattern, '$1<?php echo \Content::fetch$2; ?>', $value);
 });

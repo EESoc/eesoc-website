@@ -13,16 +13,16 @@
 
 App::before(function($request)
 {
-	// Force HTTPS
-	if (App::environment() === 'production' && ! $request->secure()) {
-		return Redirect::secure($request->path());
-	}
+    // Force HTTPS
+    if (App::environment() === 'production' && ! $request->secure()) {
+        return Redirect::secure($request->path());
+    }
 });
 
 
 App::after(function($request, $response)
 {
-	//
+    //
 });
 
 /*
@@ -38,44 +38,44 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) {
-		$signInURL = URL::action('SessionsController@getNew');
-		return Redirect::guest($signInURL);
-	}
+    if (Auth::guest()) {
+        $signInURL = URL::action('SessionsController@getNew');
+        return Redirect::guest($signInURL);
+    }
 });
 
 
 Route::filter('auth.member', function()
 {
-	if (Auth::guest()) {
-		$signInURL = URL::action('SessionsController@getNew');
-		return Redirect::guest($signInURL)->with('info', 'You need to be signed in before you can continue');
-	}
+    if (Auth::guest()) {
+        $signInURL = URL::action('SessionsController@getNew');
+        return Redirect::guest($signInURL)->with('info', 'You need to be signed in before you can continue');
+    }
 
-	// @improve membership logic
-	// if ( ! Auth::user()->is_member) {
-	// 	// @todo redirect to a nice page stating that you are not a member and that he/she should get membership
-	// 	App::abort(401, 'You are not a member of the society');
-	// }
+    // @improve membership logic
+    // if ( ! Auth::user()->is_member) {
+    //  // @todo redirect to a nice page stating that you are not a member and that he/she should get membership
+    //  App::abort(401, 'You are not a member of the society');
+    // }
 });
 
 
 Route::filter('auth.admin', function()
 {
-	if (Auth::guest()) {
-		$signInURL = URL::action('SessionsController@getNew');
-		return Redirect::guest($signInURL)->with('info', 'You need to be signed in before you can continue');
-	}
+    if (Auth::guest()) {
+        $signInURL = URL::action('SessionsController@getNew');
+        return Redirect::guest($signInURL)->with('info', 'You need to be signed in before you can continue');
+    }
 
-	if ( ! Auth::user()->is_admin) {
-		App::abort(401, 'You are not authorized');
-	}
+    if ( ! Auth::user()->is_admin) {
+        App::abort(401, 'You are not authorized');
+    }
 });
 
 
 Route::filter('auth.basic', function()
 {
-	return Auth::basic();
+    return Auth::basic();
 });
 
 /*
@@ -91,7 +91,7 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+    if (Auth::check()) return Redirect::to('/');
 });
 
 /*
@@ -107,8 +107,8 @@ Route::filter('guest', function()
 
 Route::filter('csrf', function()
 {
-	if (Session::token() != Input::get('_token'))
-	{
-		throw new Illuminate\Session\TokenMismatchException;
-	}
+    if (Session::token() != Input::get('_token'))
+    {
+        throw new Illuminate\Session\TokenMismatchException;
+    }
 });

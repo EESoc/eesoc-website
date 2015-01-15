@@ -6,126 +6,126 @@ use Symfony\Component\Console\Input\InputArgument;
 
 class SendEmailsCommand extends Command {
 
-	/**
-	 * The console command name.
-	 *
-	 * @var string
-	 */
-	protected $name = 'emails:dinner:send';
+    /**
+     * The console command name.
+     *
+     * @var string
+     */
+    protected $name = 'emails:dinner:send';
 
-	/**
-	 * The console command description.
-	 *
-	 * @var string
-	 */
-	protected $description = 'Send queued emails.';
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Send queued emails.';
 
-	/**
-	 * Execute the console command.
-	 *
-	 * @return void
-	 */
-	public function fire()
-	{
-		// Mail
-		$transport = Swift_MailTransport::newInstance();
-		$html      = View::make('emails.dinner_confirmation.html')->render();
-		$transport = Swift_MailTransport::newInstance();
-		$mailer    = Swift_Mailer::newInstance($transport);
+    /**
+     * Execute the console command.
+     *
+     * @return void
+     */
+    public function fire()
+    {
+        // Mail
+        $transport = Swift_MailTransport::newInstance();
+        $html      = View::make('emails.dinner_confirmation.html')->render();
+        $transport = Swift_MailTransport::newInstance();
+        $mailer    = Swift_Mailer::newInstance($transport);
 
         // Why?
-		$emails = array('dm1911@imperial.ac.uk', 'ck2211@imperial.ac.uk');
+        $emails = array('dm1911@imperial.ac.uk', 'ck2211@imperial.ac.uk');
 
-		foreach ($emails as $email)
-		{
-			$this->info(sprintf('Sending email `%s` to `%s`', 'EESoc Dinner Confirmation', $email));
-			$message = Swift_Message::newInstance();
+        foreach ($emails as $email)
+        {
+            $this->info(sprintf('Sending email `%s` to `%s`', 'EESoc Dinner Confirmation', $email));
+            $message = Swift_Message::newInstance();
 
-			$message->setFrom(array('dinner@eesoc.com' => 'EESoc'));
-			$message->setReplyTo('dinner@eesoc.com');
-			$message->setTo($email);
-			$message->setSubject('EESoc Dinner Confirmation');
-			$message->setBody($html, 'text/html');
+            $message->setFrom(array('dinner@eesoc.com' => 'EESoc'));
+            $message->setReplyTo('dinner@eesoc.com');
+            $message->setTo($email);
+            $message->setSubject('EESoc Dinner Confirmation');
+            $message->setBody($html, 'text/html');
 
-			if ($mailer->send($message)) {
-				$this->info(sprintf('Successfully sent email `%s` to `%s`', 'EESoc Dinner Confirmation', $email));
-			} else {
-				$this->error(sprintf('Something went wrong while sending email `%s` to `%s`', 'EESoc Dinner Confirmation', $email));
-			}
-		}
-	}
+            if ($mailer->send($message)) {
+                $this->info(sprintf('Successfully sent email `%s` to `%s`', 'EESoc Dinner Confirmation', $email));
+            } else {
+                $this->error(sprintf('Something went wrong while sending email `%s` to `%s`', 'EESoc Dinner Confirmation', $email));
+            }
+        }
+    }
 
     /* This may not function. There was a lot of commented code which I have attempted to preserve here for future use. */
-	public function fireQueue()
-	{
-		$count = NewsletterEmailQueue::count();
+    public function fireQueue()
+    {
+        $count = NewsletterEmailQueue::count();
 
-		if ($count === 0) {
-		    $this->info('There are no emails to send');
-		    return;
-		}
-
-		if (!$this->confirm(sprintf('There\'s %d emails in the send queue. Are you sure you want to send them out now? [yes|no]', $count), true)) {
+        if ($count === 0) {
+            $this->info('There are no emails to send');
             return;
-		}
+        }
 
-		// Mail
-		$transport = Swift_MailTransport::newInstance();
-		$email = NewsletterEmail::findOrFail(1);
+        if (!$this->confirm(sprintf('There\'s %d emails in the send queue. Are you sure you want to send them out now? [yes|no]', $count), true)) {
+            return;
+        }
 
-		$html = View::make('emails.dinner_confirmation.html')
-			->with('body', $email->body)
-			->render();
+        // Mail
+        $transport = Swift_MailTransport::newInstance();
+        $email = NewsletterEmail::findOrFail(1);
 
-		$body = (new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles($html, file_get_contents(base_path() . '/public/assets/css/email.css')))
-			->convert();
+        $html = View::make('emails.dinner_confirmation.html')
+            ->with('body', $email->body)
+            ->render();
 
-		$transport = Swift_MailTransport::newInstance();
-		$mailer    = Swift_Mailer::newInstance($transport);
-		$emails    = User::hasStudentGroup()->get()->lists('email');
+        $body = (new \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles($html, file_get_contents(base_path() . '/public/assets/css/email.css')))
+            ->convert();
 
-		foreach ($emails as $email)
-		{
-			$this->info(sprintf('Sending email `%s` to `%s`', 'EESoc Dinner Confirmation', $email));
-			$message = Swift_Message::newInstance();
+        $transport = Swift_MailTransport::newInstance();
+        $mailer    = Swift_Mailer::newInstance($transport);
+        $emails    = User::hasStudentGroup()->get()->lists('email');
 
-			$message->setFrom(array('dinner@eesoc.com' => 'EESoc'));
-			$message->setReplyTo('dinner@eesoc.com');
-			$message->setTo($email);
-			$message->setSubject('EESoc Dinner Confirmation');
-			$message->setBody($html, 'text/html');
+        foreach ($emails as $email)
+        {
+            $this->info(sprintf('Sending email `%s` to `%s`', 'EESoc Dinner Confirmation', $email));
+            $message = Swift_Message::newInstance();
+
+            $message->setFrom(array('dinner@eesoc.com' => 'EESoc'));
+            $message->setReplyTo('dinner@eesoc.com');
+            $message->setTo($email);
+            $message->setSubject('EESoc Dinner Confirmation');
+            $message->setBody($html, 'text/html');
 
             if (isset($plaintext))
                 $message->addPart($plaintext, 'text/plain');
 
-			if ($mailer->send($message)) {
-				$this->info(sprintf('Successfully sent email `%s` to `%s`', 'EESoc Dinner Confirmation', $email));
+            if ($mailer->send($message)) {
+                $this->info(sprintf('Successfully sent email `%s` to `%s`', 'EESoc Dinner Confirmation', $email));
 
                 // Remove from queue
-				$queue->delete();
-			} else {
-				$this->error(sprintf('Something went wrong while sending email `%s` to `%s`', 'EESoc Dinner Confirmation', $email));
-			}
-		}
-	}
+                $queue->delete();
+            } else {
+                $this->error(sprintf('Something went wrong while sending email `%s` to `%s`', 'EESoc Dinner Confirmation', $email));
+            }
+        }
+    }
 
-	/**
-	 * Get the console command arguments.
-	 *
-	 * @return array
-	 */
-	protected function getArguments()
-	{
-		return array();
-	}
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return array();
+    }
 
-	/**
-	 * Get the console command options.
-	 *
-	 * @return array
-	 */
-	protected function getOptions()
-	{
-		return array();
-	}
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return array();
+    }
 }

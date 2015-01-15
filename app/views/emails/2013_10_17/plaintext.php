@@ -42,7 +42,7 @@ If you have not already emptied your locker, please do so now. Any occupied lock
 ### Book Sales
 ######################
 
-If you missed out on our book sale yesterday, there's still an opportunity to view and advertise books for sale books via the EESoc website! This is a great opportunity to sell your old books, as well as buy second hand books for a fair price (Below Amazon's second hand prices!). Check out available books or list your own at https://eesoc.com/dashboard/books . 
+If you missed out on our book sale yesterday, there's still an opportunity to view and advertise books for sale books via the EESoc website! This is a great opportunity to sell your old books, as well as buy second hand books for a fair price (Below Amazon's second hand prices!). Check out available books or list your own at https://eesoc.com/dashboard/books .
 
 ######################
 ### Sport

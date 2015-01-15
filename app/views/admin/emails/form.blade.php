@@ -18,7 +18,7 @@
           },
           textarea: 'body'
       }).load();
-   
+
       var refreshPreview = function() {
         var htmlcontent = this.exportFile(null, 'html');
         htmlcontent = htmlcontent.replace(/<p>/g,"<p style=\"margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;\">")

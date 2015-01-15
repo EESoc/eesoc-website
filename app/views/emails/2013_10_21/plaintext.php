@@ -11,7 +11,7 @@ Have a great week!
 Thomas & the EEsoc Team
 
 _____________________________
- 
+
 - (Cisco IndustrEE talk)[https://www.facebook.com/events/738625619497451/] Tuesday 22nd October 1:00PM - 2:00PM
 - Bank of America Meryll Lynch Careers in Technology Tuesday 22nd October 6:00PM - 7:30PM
 - Accenture Oxygen Bar, Thursday 24th October 10:30AM - 4:00PM
@@ -26,13 +26,13 @@ _____________________________
 #############################
 
 At Bank of America Merrill Lynch, we’ll match your drive and ambition to where you can make a real impact.
- 
+
 As one of the world’s largest financial institutions, our global connections allow you to create a career on your own terms.
- 
+
 **Have you considered a career in Technology?**
-At Bank of America Merrill Lynch, our Technology teams covers a range of functions from front office systems used by the trading desks through to operational technology used for the bank’s books and records. Technology drives change that keeps us ahead of the competition, so join our world class programme and fulfil your need for a challenging and rewarding career. Be part of that change. 
+At Bank of America Merrill Lynch, our Technology teams covers a range of functions from front office systems used by the trading desks through to operational technology used for the bank’s books and records. Technology drives change that keeps us ahead of the competition, so join our world class programme and fulfil your need for a challenging and rewarding career. Be part of that change.
 If you are graduating in 2014 and beyond and are looking for a taste of technology in banking, an internship or full time opportunity; join us for an afternoon of presentations, panel discussions and networking in Department of Computing at Imperial College London.
- 
+
 **THERE SHOULD BE A URL HERE? **To attend, please register by Monday 21st October.
 
 When: Tuesday 22nd October, 6:00PM - 7:30PM
@@ -41,7 +41,7 @@ Where: Huxley, LT311
 _____________________________
 
 #############################
-### Cisco IndustrEE Talk: 
+### Cisco IndustrEE Talk:
 #############################
 
 Join us for Tuesday's IndustrEE talk with Cisco. Meet two Imperial graduates and listen to their presentations about "Real World Design Issues" and "Don't Panic! Operating Systems and Why They Work". They will also demonstrate some of Cisco's video equipment they work with and answer questions you may have about internships and graduate roles. And don't to forget - lunch is on us!
@@ -49,11 +49,11 @@ Join us for Tuesday's IndustrEE talk with Cisco. Meet two Imperial graduates and
 _____________________________
 
 #############################
-### Accenture Oxygen Bar: The Oxygen Experience 
+### Accenture Oxygen Bar: The Oxygen Experience
 #############################
 
-Our Oxygen Experience combines the breath of fresh air that is our flavoured oxygen bar with the opportunity to connect with our people and get their first-hand take on what it’s like to work at Accenture. What’s more, you can take time out to open your mind with our brain training games and be in with the chance of winning a GoPro camera. 
- 
+Our Oxygen Experience combines the breath of fresh air that is our flavoured oxygen bar with the opportunity to connect with our people and get their first-hand take on what it’s like to work at Accenture. What’s more, you can take time out to open your mind with our brain training games and be in with the chance of winning a GoPro camera.
+
 Location: JCR
 Date & Time: 24thOctober, 10:30 – 4pm
 
@@ -76,7 +76,7 @@ _____________________________
 ### Siemens at the Engineering Careers Fair
 #############################
 
-Interested in a career at Siemens? Make sure you visit them at [Imperial's Engineering Careers Fair](http://www3.imperial.ac.uk/careers/employers/promotion/careersfair/eng) on Thursday. 
+Interested in a career at Siemens? Make sure you visit them at [Imperial's Engineering Careers Fair](http://www3.imperial.ac.uk/careers/employers/promotion/careersfair/eng) on Thursday.
 
 When: Thursday 11:00AM - 4:30PM
 Where: Queens Lawn

@@ -48,23 +48,23 @@ Route::get('tv', 'TVController@show');
  * Routes for members
  */
 Route::group(['before' => 'auth.member'], function() {
-	# Dashboard
-	Route::get('dashboard', 'UsersController@getDashboard');
+    # Dashboard
+    Route::get('dashboard', 'UsersController@getDashboard');
 
-	Route::group(['prefix' => 'dashboard'], function() {
-		# Books
-		Route::resource  ('books', 'BooksController');
-		Route::controller('books', 'BooksController');
+    Route::group(['prefix' => 'dashboard'], function() {
+        # Books
+        Route::resource  ('books', 'BooksController');
+        Route::controller('books', 'BooksController');
 
-		# Lockers
-		Route::controller('lockers', 'LockersController');
+        # Lockers
+        Route::controller('lockers', 'LockersController');
 
-		# Dinner
-		Route::group(['prefix' => 'dinner'], function() {
-			# Groups
-			Route::resource('groups', 'DinnerGroupsController');
-		});
-	});
+        # Dinner
+        Route::group(['prefix' => 'dinner'], function() {
+            # Groups
+            Route::resource('groups', 'DinnerGroupsController');
+        });
+    });
 });
 
 /**
@@ -72,75 +72,75 @@ Route::group(['before' => 'auth.member'], function() {
  */
 Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 
-	Route::get('/', 'Admin\DashboardController@getShow');
+    Route::get('/', 'Admin\DashboardController@getShow');
 
-	# Categories
-	Route::resource('categories', 'Admin\CategoriesController', ['except' => ['show']]);
+    # Categories
+    Route::resource('categories', 'Admin\CategoriesController', ['except' => ['show']]);
 
-	# Dinner Tickets
-	Route::controller('dinner-tickets', 'Admin\DinnerTicketsController');
+    # Dinner Tickets
+    Route::controller('dinner-tickets', 'Admin\DinnerTicketsController');
 
-	# Contents
-	Route::resource('contents', 'Admin\ContentsController', ['except' => ['show']]);
+    # Contents
+    Route::resource('contents', 'Admin\ContentsController', ['except' => ['show']]);
 
-	# Emails
-	Route::resource('emails', 'Admin\EmailsController');
-	Route::controller('emails', 'Admin\EmailsController');
+    # Emails
+    Route::resource('emails', 'Admin\EmailsController');
+    Route::controller('emails', 'Admin\EmailsController');
 
-	# Events
-	Route::resource('events', 'Admin\EventsController', ['except' => ['show']]);
-	Route::controller('events', 'Admin\EventsController');
+    # Events
+    Route::resource('events', 'Admin\EventsController', ['except' => ['show']]);
+    Route::controller('events', 'Admin\EventsController');
 
-	# Instagram Photos
-	Route::controller('instagram-photos', 'Admin\InstagramPhotosController');
+    # Instagram Photos
+    Route::controller('instagram-photos', 'Admin\InstagramPhotosController');
 
-	# Logs
-	Route::resource('logs', 'Admin\LogsController', ['only' => ['index', 'show']]);
+    # Logs
+    Route::resource('logs', 'Admin\LogsController', ['only' => ['index', 'show']]);
 
-	# Newsletters
-	Route::resource('newsletters', 'Admin\NewslettersController');
+    # Newsletters
+    Route::resource('newsletters', 'Admin\NewslettersController');
 
-	# Pages
-	Route::resource('pages', 'Admin\PagesController', ['except' => ['show']]);
+    # Pages
+    Route::resource('pages', 'Admin\PagesController', ['except' => ['show']]);
 
-	# Posts
-	Route::resource('posts', 'Admin\PostsController', ['except' => ['show']]);
+    # Posts
+    Route::resource('posts', 'Admin\PostsController', ['except' => ['show']]);
 
-	# Sales
-	Route::resource('sales', 'Admin\SalesController', ['only' => ['index']]);
+    # Sales
+    Route::resource('sales', 'Admin\SalesController', ['only' => ['index']]);
 
-	# Sponsors
-	Route::resource('sponsors', 'Admin\SponsorsController', ['except' => ['show']]);
+    # Sponsors
+    Route::resource('sponsors', 'Admin\SponsorsController', ['except' => ['show']]);
 
-	# Tests
-	Route::controller('tests', 'Admin\TestsController');
+    # Tests
+    Route::controller('tests', 'Admin\TestsController');
 
-	# User Sign Ins
-	Route::resource('user-sign-ins', 'Admin\UserSignInsController', ['only' => ['index']]);
+    # User Sign Ins
+    Route::resource('user-sign-ins', 'Admin\UserSignInsController', ['only' => ['index']]);
 
-	# Users
-	Route::controller('users/eactivities', 'Admin\UsersEActivitiesController');
-	Route::controller('users/eepeople',    'Admin\UsersEEPeopleController');
-	Route::controller('users',             'Admin\UsersController');
-	Route::resource  ('users',             'Admin\UsersController', ['only' => ['index']]);
+    # Users
+    Route::controller('users/eactivities', 'Admin\UsersEActivitiesController');
+    Route::controller('users/eepeople',    'Admin\UsersEEPeopleController');
+    Route::controller('users',             'Admin\UsersController');
+    Route::resource  ('users',             'Admin\UsersController', ['only' => ['index']]);
 
-	# elFinder
-	Route::get('elfinder',           'Barryvdh\ElfinderBundle\ElfinderController@showIndex');
-	Route::any('elfinder/connector', 'Barryvdh\ElfinderBundle\ElfinderController@showConnector');
-	Route::get('elfinder/ckeditor',  'Barryvdh\ElfinderBundle\ElfinderController@showCKEditor');
+    # elFinder
+    Route::get('elfinder',           'Barryvdh\ElfinderBundle\ElfinderController@showIndex');
+    Route::any('elfinder/connector', 'Barryvdh\ElfinderBundle\ElfinderController@showConnector');
+    Route::get('elfinder/ckeditor',  'Barryvdh\ElfinderBundle\ElfinderController@showCKEditor');
 });
 
 # Catch all
 Route::any('{path}', function($path) {
-	$path = rtrim($path, '/');
-	$page = Page::where('slug', '=', $path)->first();
+    $path = rtrim($path, '/');
+    $page = Page::where('slug', '=', $path)->first();
 
-	if ( ! $page) {
-		App::abort(404);
-	}
+    if ( ! $page) {
+        App::abort(404);
+    }
 
-	return View::make('page')
-		->with('page', $page);
+    return View::make('page')
+        ->with('page', $page);
 })->where('path', '.*');
 
 App::missing(function($exception)

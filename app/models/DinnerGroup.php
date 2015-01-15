@@ -8,30 +8,30 @@ class DinnerGroup extends Eloquent {
     // 'Final year' group IDs from the live database (sorry...)
     protected static $finalYearGroups = [3, 4, 5, 7, 8, 11, 12, 13, 14];
 
-	/*
-	Relations
-	 */
+    /*
+    Relations
+     */
 
-	public function owner()
-	{
-		return $this->belongsTo('User', 'owner_id');
-	}
+    public function owner()
+    {
+        return $this->belongsTo('User', 'owner_id');
+    }
 
-	public function members()
-	{
-		return $this->hasMany('DinnerGroupMember');
-	}
+    public function members()
+    {
+        return $this->hasMany('DinnerGroupMember');
+    }
 
-	public function users()
-	{
-		return $this->belongsToMany('User', 'dinner_group_members', 'dinner_group_id', 'user_id');
-	}
+    public function users()
+    {
+        return $this->belongsToMany('User', 'dinner_group_members', 'dinner_group_id', 'user_id');
+    }
 
     public function addMember($user, User $actor = NULL)
     {
         $actor  = $actor ? $actor : Auth::user();
-		$member = new DinnerGroupMember;
-		$member->DinnerGroup()->associate($this);
+        $member = new DinnerGroupMember;
+        $member->DinnerGroup()->associate($this);
 
         if ($user instanceOf User)
         {
@@ -43,14 +43,14 @@ class DinnerGroup extends Eloquent {
             $member->name = $user;
         }
 
-		$member->addedByUser()->associate($actor);
-		$member->ticketPurchaser()->associate($actor);
-		$member->save();
+        $member->addedByUser()->associate($actor);
+        $member->ticketPurchaser()->associate($actor);
+        $member->save();
     }
 
     public function removeMember(User $user)
     {
-		$this->members()->where('user_id', '=', $user->id)->delete();
+        $this->members()->where('user_id', '=', $user->id)->delete();
     }
 
     public function isFull()
@@ -63,19 +63,19 @@ class DinnerGroup extends Eloquent {
         return $query->where('max_size', '=', $limit);
     }
 
-	public static function boot()
-	{
-		parent::boot();
+    public static function boot()
+    {
+        parent::boot();
 
-		// Auto create membership for group owners
-		static::created(function($group) {
-			$owner = $group->owner;
-			$group->users()->save($owner, [
-				'ticket_purchaser_id' => $owner->id,
-				'is_owner' => true,
-			]);
-		});
-	}
+        // Auto create membership for group owners
+        static::created(function($group) {
+            $owner = $group->owner;
+            $group->users()->save($owner, [
+                'ticket_purchaser_id' => $owner->id,
+                'is_owner' => true,
+            ]);
+        });
+    }
 
     public static function createWithOwner(User $owner)
     {

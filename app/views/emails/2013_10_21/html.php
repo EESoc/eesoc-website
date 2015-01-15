@@ -518,7 +518,7 @@
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><strong>Have you considered a career in Technology?</strong>
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">At Bank of America Merrill Lynch, our Technology teams covers a range of functions from front office systems used by the trading desks through to operational technology used for the bank's books and records. Technology drives change that keeps us ahead of the competition, so join our world class programme and fulfil your need for a challenging and rewarding career. Be part of that change. 
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">At Bank of America Merrill Lynch, our Technology teams covers a range of functions from front office systems used by the trading desks through to operational technology used for the bank's books and records. Technology drives change that keeps us ahead of the competition, so join our world class programme and fulfil your need for a challenging and rewarding career. Be part of that change.
 If you are graduating in 2014 and beyond and are looking for a taste of technology in banking, an internship or full time opportunity; join us for an afternoon of presentations, panel discussions and networking in Department of Computing at Imperial College London.
 
 </p>
@@ -547,7 +547,7 @@ Date &amp; Time: 22nd October, 1PM - 2PM
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><img src="https://eesoc.com/assets/email/uploads/Accenture_logo.png" width="550" style="max-width: 550px">
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Our Oxygen Experience combines the breath of fresh air that is our flavoured oxygen bar with the opportunity to connect with our people and get their first-hand take on what it's like to work at Accenture. What's more, you can take time out to open your mind with our brain training games and be in with the chance of winning a GoPro camera. 
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Our Oxygen Experience combines the breath of fresh air that is our flavoured oxygen bar with the opportunity to connect with our people and get their first-hand take on what it's like to work at Accenture. What's more, you can take time out to open your mind with our brain training games and be in with the chance of winning a GoPro camera.
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Location: JCR<br>
@@ -573,7 +573,7 @@ Date &amp; Time: 24th October, 10:30AM - 4:00PM
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><img src="https://eesoc.com/assets/email/uploads/email_3_4.png" width="550" style="max-width: 550px">
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Interested in a career at Siemens? Make sure you visit them at Imperial's Engineering Careers Fair on Thursday. 
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Interested in a career at Siemens? Make sure you visit them at Imperial's Engineering Careers Fair on Thursday.
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Location: Queens Lawn<br>
@@ -726,6 +726,6 @@ Date &amp; Time: Thursday, 11:00AM - 4:30PM
                 </tr>
             </tbody></table>
         </center>
-    
+
 
 </body></html>

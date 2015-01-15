@@ -8,7 +8,7 @@
       Dear {{{ $sale->user->name }}},
     </p>
     <p>
-      Thank you for buying a ticket to the EESoc New Year's Dinner, Sponsored by BAE Systems Applied Intelligence. We are very glad you have decided to spend your evening on Thursday January 22<sup>nd</sup> with us and look forward to welcoming you at Gibson Hall! 
+      Thank you for buying a ticket to the EESoc New Year's Dinner, Sponsored by BAE Systems Applied Intelligence. We are very glad you have decided to spend your evening on Thursday January 22<sup>nd</sup> with us and look forward to welcoming you at Gibson Hall!
     </p>
       The dress code for this event is smart.
     </p>

@@ -41,7 +41,7 @@ day? Yup. That very cheesy one. Watch it again, and laugh! ( http://bit.ly/16wDI
 See what we have planned in what will be an action packed Autumn
 term. Watch the launch video:
 
-http://bit.ly/1bGxPPk 
+http://bit.ly/1bGxPPk
 
 Locker Sale
 -----------

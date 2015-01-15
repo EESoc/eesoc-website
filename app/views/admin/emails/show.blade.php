@@ -18,7 +18,7 @@ $(function() {
             $('<p class="text-danger" />').text(response.error)
           );
         }
-        
+
         if (response.sent_emails)
         {
           $.each(response.sent_emails, function(i, email) {

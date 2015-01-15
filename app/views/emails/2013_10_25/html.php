@@ -11,7 +11,7 @@
         <![endif]-->
     <style type="text/css"></style></head>
     <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="margin: 0;padding: 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #F0F0FA;height: 100% !important;width: 100% !important;">
-        
+
         <style type="text/css">
         body,#bodyTable,#bodyCell{
             font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;
@@ -548,7 +548,7 @@ When: Thursday, 31st October 1PM - 2PM
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><img width="550" style="max-width: 100%;" src="https://eesoc.com/assets/email/uploads/DB_logo.png" alt="DB">
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Where would modern investment banking be without the cutting edge technology that drives it? It's our Group Technology &amp; Operations (GTO) divisions that has delivered some of the solutions that have had the biggest impact on our success. 
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Where would modern investment banking be without the cutting edge technology that drives it? It's our Group Technology &amp; Operations (GTO) divisions that has delivered some of the solutions that have had the biggest impact on our success.
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">We would like to invite you to join us next week for our Demystifying Technology in Investment Banking Series Speed Networking Event.
@@ -735,6 +735,6 @@ When: Wednesday 6th November, 12PM - 5PM
                 </tr>
             </tbody></table>
         </center>
-    
+
 
 </body></html>

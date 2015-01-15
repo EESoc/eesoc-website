@@ -54,7 +54,7 @@ Incorrect measurement data caused the planes control system and pilot to take in
 
 ![DB](https://eesoc.com/assets/email/uploads/DB_logo.png)
 
-Where would modern investment banking be without the cutting edge technology that drives it? It's our Group Technology & Operations (GTO) divisions that has delivered some of the solutions that have had the biggest impact on our success. 
+Where would modern investment banking be without the cutting edge technology that drives it? It's our Group Technology & Operations (GTO) divisions that has delivered some of the solutions that have had the biggest impact on our success.
 
 We would like to invite you to join us next week for our Demystifying Technology in Investment Banking Series Speed Networking Event.
 
@@ -64,7 +64,7 @@ Please register your interest in attending this event by emailing <a href="http:
 _Please include your expected date of graduation and the subject you are studying. CV's NOT required!_
 
 
-Location: Imperial Campus (details TBC following registration) 
+Location: Imperial Campus (details TBC following registration)
 When: Tuesday 29th October, 6PM
 
 #################################
@@ -83,9 +83,9 @@ When: Wednesday 6th November, 12PM - 5PM
 #################################
 
 Charity Week is back! And so is Battle of the Societies Quiz. This year we are going to make it Bigger, Better and Bashier than ever! Take part and show off the talent, cunning and intelligence of your society and you could win the coveted Battle of the Societies Quiz 2013 trophy!
- 
+
 All proceeds from this event will go to charity for orphans and needy children around the world. Last year we at Imperial Charity Week raised an incredible &pound;46,939 through our various events in only ONE week and this year we would like your help to raise more. Last year's champions took home the winner's trophy - It is now your chance to beat them and have the honour of being crowned champions of Battle of the Societies 2013.
- 
+
 The quiz will be held in Sir Alexander Fleming Building in rooms 119-121 on Monday 28th October. There is no limit on the team sized, but we suggest around 5-6 people.
 
 Interested? Send an <a href="mailto:events@eesoc.com">email</a> to EESoc for more information!

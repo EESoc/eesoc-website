@@ -481,7 +481,7 @@ h4{
                     <tbody><tr>
 
                         <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 15px;line-height: 150%;text-align: left;">
-                            
+
 <?php
 $html = \Michelf\Markdown::defaultTransform($body);
 $html = str_replace('<p>', "<p style=\"margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;\">", $html);
@@ -631,7 +631,7 @@ echo $html;
                 </tr>
             </tbody></table>
         </center>
-    
+
     <tracking_pixel>
 
 </body></html>

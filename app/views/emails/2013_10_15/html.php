@@ -10,7 +10,7 @@
             table.mcnShareContent {width:100% !important;}
         </style>
         <![endif]-->
-        
+
     <style type="text/css"></style></head>
     <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="margin: 0;padding: 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #F0F0FA;height: 100% !important;width: 100% !important;">
         <style type="text/css">
@@ -699,6 +699,6 @@
                 </tr>
             </tbody></table>
         </center>
-    
+
 
 </body></html>

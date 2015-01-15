@@ -16,7 +16,7 @@
     <meta property="og:type" content="website" />
 
     <meta property="fb:admins" content="1001561194" />
-    
+
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet"> -->

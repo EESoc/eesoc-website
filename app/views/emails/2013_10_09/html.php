@@ -46,7 +46,7 @@
 
                 <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0;mso-table-rspace: 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%"><tbody><tr><td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-table-lspace: 0;mso-table-rspace: 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, &quot;Helvetica Neue Light&quot;, &quot;Helvetica Neue&quot;, &quot;Trade Gothic W01 Light&quot;, Helvetica, Arial, &quot;Lucida Grande&quot;, sans-serif;font-size: 15px;line-height: 150%;text-align: left">
 
-                            
+
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, &quot;Helvetica Neue Light&quot;, &quot;Helvetica Neue&quot;, &quot;Trade Gothic W01 Light&quot;, Helvetica, Arial, &quot;Lucida Grande&quot;, sans-serif;font-size: 14px;line-height: 150%;text-align: left">Dear All,</p>
 
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, &quot;Helvetica Neue Light&quot;, &quot;Helvetica Neue&quot;, &quot;Trade Gothic W01 Light&quot;, Helvetica, Arial, &quot;Lucida Grande&quot;, sans-serif;font-size: 14px;line-height: 150%;text-align: left">I trust you have had a wonderful first week at Imperial! If you're new, I'm sure between the departments, halls and societies that you've been taken care of. If you are returning, I hope London has retained its charm﻿!</p>

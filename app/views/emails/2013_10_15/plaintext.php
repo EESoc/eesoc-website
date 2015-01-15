@@ -28,7 +28,7 @@ __When__ : 1pm, Thursday 17th October
 #################################
 
 On Tuesday (15th October) Deutsche Bank are coming onto campus to run an interview skills session for all those currently thinking about applying to the bank or those in the interview process ! With representatives from Graduate Recruitment, we’ll be playing “Interview Bingo,” going through the numerical test and competency questions as well as having small group exercises with business reps to ensure you succeed at interviews ! We highly recommend those applying to Deutsche Bank to attend this session.
- 
+
 __Where__ : Physics LT1
 __When__ : 1pm, Tuesday 15th October
 

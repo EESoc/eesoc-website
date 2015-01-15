@@ -2,18 +2,18 @@
 
 class DinnerSale extends Eloquent {
 
-	/*
-	Relations
-	 */
+    /*
+    Relations
+     */
 
-	public function user()
-	{
-		return $this->belongsTo('User');
-	}
+    public function user()
+    {
+        return $this->belongsTo('User');
+    }
 
-	public function sale()
-	{
-		return $this->belongsTo('Sale');
-	}
+    public function sale()
+    {
+        return $this->belongsTo('Sale');
+    }
 
 }

@@ -4,25 +4,25 @@ use Illuminate\Database\Migrations\Migration;
 
 class LessChristmas extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
         $this->doRename("christmas_", "", "dinner_");
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
         $this->doRename("", "christmas_", "dinner_");
-	}
+    }
 
     protected function doRename($prefixFrom, $prefixTo, $prefixBoth)
     {

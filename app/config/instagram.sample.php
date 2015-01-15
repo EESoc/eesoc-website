@@ -2,7 +2,7 @@
 
 return array(
 
-	// Instagram Client ID
-	'client_id' => '',
+    // Instagram Client ID
+    'client_id' => '',
 
 );

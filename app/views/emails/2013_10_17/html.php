@@ -532,7 +532,7 @@
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"></p><hr>
 <p></p>
 <h3 style="margin: 0;padding: 0;display: block;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 22px;font-style: normal;font-weight: 300;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;">Book Sale</h3>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">If you missed out on our book sale yesterday, there's still an opportunity to view and advertise books for sale books via the EESoc website! This is a great opportunity to sell your old books, as well as buy second hand books for a fair price (Below Amazon's second hand prices!). Check out available books or list your own at <a href="https://eesoc.com/dashboard/books">https://eesoc.com/dashboard/books</a> . 
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">If you missed out on our book sale yesterday, there's still an opportunity to view and advertise books for sale books via the EESoc website! This is a great opportunity to sell your old books, as well as buy second hand books for a fair price (Below Amazon's second hand prices!). Check out available books or list your own at <a href="https://eesoc.com/dashboard/books">https://eesoc.com/dashboard/books</a> .
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"></p><hr>
@@ -704,6 +704,6 @@ Thomas Lim and the EESoc Team</p>
                 </tr>
             </tbody></table>
         </center>
-    
+
 
 </body></html>

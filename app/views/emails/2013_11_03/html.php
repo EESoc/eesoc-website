@@ -506,23 +506,23 @@
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><img src="https://eesoc.com/assets/email/uploads/email_6_1.gif" width="550" style="max-width: 100%">
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">You'll find plenty of heritage at Deutsche Bank. We're one of the most esteemed names in global finance with a history stretching back to 1870. However, what really excites us is where we're going. Not only are we delivering a solid and stable performance in these difficult times, we have a clear and compelling strategy for the years ahead. Discover more about us and our graduate opportunities over dinner! 
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">You'll find plenty of heritage at Deutsche Bank. We're one of the most esteemed names in global finance with a history stretching back to 1870. However, what really excites us is where we're going. Not only are we delivering a solid and stable performance in these difficult times, we have a clear and compelling strategy for the years ahead. Discover more about us and our graduate opportunities over dinner!
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Our Corporate Banking &amp; Securities (CB&amp;S): Markets &amp; Corporate Finance divisions are looking for students will talent and enthusiasm. Not studying Economics, Accounting &amp; Finance, Business or Management? No worries! We are offering this exclusive networking opportunity for penultimate and first year students studying a STEM degree course. This is your opportunity to learn if investment banking could be a career option for you. 
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Our Corporate Banking &amp; Securities (CB&amp;S): Markets &amp; Corporate Finance divisions are looking for students will talent and enthusiasm. Not studying Economics, Accounting &amp; Finance, Business or Management? No worries! We are offering this exclusive networking opportunity for penultimate and first year students studying a STEM degree course. This is your opportunity to learn if investment banking could be a career option for you.
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Discover something different at <a href="http://bit.ly/1fcvCci">db.com/careers/uk</a>
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><strong>Location</strong>: Deutsche Bank Office - London<br>
-<strong>When</strong>: November 7th 2013, 6:30 - 8:30pm 
+<strong>When</strong>: November 7th 2013, 6:30 - 8:30pm
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">To register your interest in attending this event, please send your CV to <a href="mailto:imperial.events@db.com">imperial.events@db.com</a> no later than Sunday, 3rd November. Subject should be <strong>DB CB&amp;S Dinner RSVP</strong>
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">An attendance confirmation will be sent following the registration deadline. 
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">An attendance confirmation will be sent following the registration deadline.
 
 </p>
 <hr>
@@ -531,7 +531,7 @@
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;"><img src="https://eesoc.com/assets/email/uploads/email_6_3.jpg" width="550" style="max-width: 100%">
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">The EESoc Pub Crawl is back by popular demand, and this time its going to massEEve! 
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">The EESoc Pub Crawl is back by popular demand, and this time its going to massEEve!
 
 </p>
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">We are going to start at the Union and "crawl" through pubs in South Kensington before having our last drinks back at the Union.
@@ -569,7 +569,7 @@
 <p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">Rate my Placement is an organisation which aims to help students find summer internships and graduate jobs. Every year, a &pound;5000 prize is given to one society in the country for its impact to student life. Help put us on the map and vote for us as the best student society!
 
 </p>
-<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">All you need to do is register for RateMyPlacement with our <a href="http://bit.ly/16zAliE">special link</a>. 
+<p style="margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;">All you need to do is register for RateMyPlacement with our <a href="http://bit.ly/16zAliE">special link</a>.
 
 </p>
 </td>
@@ -712,6 +712,6 @@
                 </tr>
             </tbody></table>
         </center>
-    
+
 
 </body></html>

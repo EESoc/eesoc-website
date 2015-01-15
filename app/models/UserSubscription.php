@@ -2,18 +2,18 @@
 
 class UserSubscription extends Eloquent {
 
-	/*
-	Relations
-	 */
+    /*
+    Relations
+     */
 
-	public function user()
-	{
-		return $this->belongsTo('User');
-	}
+    public function user()
+    {
+        return $this->belongsTo('User');
+    }
 
-	public function newsletter()
-	{
-		return $this->belongsTo('Newsletter');
-	}
+    public function newsletter()
+    {
+        return $this->belongsTo('Newsletter');
+    }
 
 }
