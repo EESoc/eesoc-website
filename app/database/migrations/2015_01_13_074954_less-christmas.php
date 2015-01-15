@@ -11,7 +11,7 @@ class LessChristmas extends Migration {
 	 */
 	public function up()
 	{
-		//
+        $this->doRename("christmas_", "", "dinner_");
 	}
 
 	/**
@@ -21,7 +21,14 @@ class LessChristmas extends Migration {
 	 */
 	public function down()
 	{
-		//
+        $this->doRename("", "christmas_", "dinner_");
 	}
 
+    protected doRename($prefixFrom, $prefixTo, $prefixBoth)
+    {
+        foreach ($this->tables as $table)
+            Schema::rename("$prefixFrom$prefixBoth$table", "$prefixTo$prefixBoth$table");
+    }
+
+    protected $tables = ['group_members', 'groups', 'sales'];
 }
