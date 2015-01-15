@@ -24,7 +24,7 @@ class LessChristmas extends Migration {
         $this->doRename("", "christmas_", "dinner_");
 	}
 
-    protected doRename($prefixFrom, $prefixTo, $prefixBoth)
+    protected function doRename($prefixFrom, $prefixTo, $prefixBoth)
     {
         foreach ($this->tables as $table)
             Schema::rename("$prefixFrom$prefixBoth$table", "$prefixTo$prefixBoth$table");
