@@ -2,6 +2,8 @@
 
 class DinnerGroupsController extends BaseController {
 
+    protected $hasExpired = FALSE;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -9,10 +11,10 @@ class DinnerGroupsController extends BaseController {
 		$this->beforeFilter(function() {
 			if (!DinnerPermission::user(Auth::user())->canManageGroups()) {
 				return Redirect::action('UsersController@getDashboard')
-					->with('danger', 'You don\'t have a ticket');
+					->with('danger', "You don't have a ticket");
 			}
 
-			if (!Auth::user()->is_admin) {
+			if ($this->hasExpired && !Auth::user()->is_admin) {
 				return Redirect::action('UsersController@getDashboard')
 					->with('danger', 'The period for choosing your seat has ended. Should you require further assistance, please <a href="mailto:eesoc.webmaster@imperial.ac.uk">email us</a>.');
 			}
@@ -27,18 +29,20 @@ class DinnerGroupsController extends BaseController {
 	public function index()
 	{
 		return View::make('dinner_groups.index')
+            ->with('user', Auth::user())
 			->with('groups', DinnerGroup::all());
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+     * Creates a single group, redirecting to a form requesting more information
+     * (handled by the store() method) if more than one ticket is owned by the
+     * user
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
 		$user = Auth::user();
-		$member = $user->dinner_group_member;
 
 		if ($group_id = Input::get('group_id')) {
 			$group = DinnerGroup::findOrFail($group_id);
@@ -47,82 +51,83 @@ class DinnerGroupsController extends BaseController {
 		}
 
 		// Already a member in any group
-		if ($member) {
-			return Redirect::route('dashboard.dinner.groups.show', $member->dinner_group->id)
-				->with('danger', 'You already belong to this group. If you wish to join another group, please leave this one.');
-		} else {
-			if ($user->tickets_count > 1) {
-				return View::make('dinner_groups.create')
-					->with('group', $group);
-			} else {
-				$group = new DinnerGroup;
-				$group->owner()->associate($user);
-				$group->save();
-				return Redirect::route('dashboard.dinner.groups.show', $group->id)
-					->with('success', 'Your group has been created!');
-			}
+		if ($member = $user->dinner_group_member) {
+            return Redirect::route('dashboard.dinner.groups.show',
+                                   $member->dinner_group->id)
+                       ->with('danger', 'You already belong to this group. '
+                                       .'If you wish to join another group, '
+                                       .'please leave this one.');
 		}
+
+        // Show multiple user info form if multiple tickets owned to allocate.
+        if ($user->unclaimed_dinner_tickets_count > 1) {
+            $limit = DinnerGroup::maxSizeByOwner($user);
+            $alloc = min($limit, $user->unclaimed_dinner_tickets_count - 1);
+
+            if ($limit >= $user->unclaimed_dinner_tickets_count)
+                $limit = null;
+
+            return View::make('dinner_groups.create')
+                ->with('group', $group)
+                ->with('to_allocate', $alloc)
+                ->with('limit', $limit);
+        }
+
+        $group = DinnerGroup::createWithOwner($user);
+
+        return Redirect::route('dashboard.dinner.groups.show', $group->id)
+                   ->with('success', 'Your group has been created!');
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Adds multiple users to a group.
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
 		$user = Auth::user();
-		$member = $user->dinner_group_member;
 
 		// Already a member in any group
-		if ($member) {
-			return Redirect::route('dashboard.dinner.groups.show', $member->dinner_group->id)
-				->with('danger', 'You already belong to this group. If you wish to join another group, please leave this one.');
-		} else {
-			if ($user->dinner_tickets_count === 1) {
-				return Redirect::route('dashboard.dinner.groups.create');
-			}
-
-			$rules = [];
-			for ($i = 1; $i < $user->dinner_tickets_count; $i++) {
-				$rules["user_{$i}"] = 'required';
-			}
-
-			$validator = Validator::make(Input::all(), $rules);
-
-			if ($validator->passes()) {
-				if ($group_id = Input::get('group_id')) {
-					$group = DinnerGroup::findOrFail($group_id);
-
-					$member = new DinnerGroupMember;
-					$member->dinnerGroup()->associate($group);
-					$member->user()->associate($user);
-					$member->addedByUser()->associate($user);
-					$member->ticketPurchaser()->associate($user);
-					$member->save();
-				} else {
-					$group = new DinnerGroup;
-					$group->owner()->associate($user);
-					$group->save();
-				}
-
-				for ($i = 1; $i < $user->dinner_tickets_count; $i++) {
-					$member = new DinnerGroupMember;
-					$member->dinnerGroup()->associate($group);
-					$member->name = Input::get("user_{$i}");
-					$member->addedByUser()->associate($user);
-					$member->ticketPurchaser()->associate($user);
-					$member->save();
-				}
-
-				return Redirect::route('dashboard.dinner.groups.show', $group->id)
-					->with('success', 'Your group has been created!');
-			} else {
-				return Redirect::route('dashboard.dinner.groups.create', ['group_id' => Input::get('group_id')])
-					->withInput()
-					->withErrors($validator);
-			}
+		if ($member = $user->dinner_group_member) {
+            return Redirect::route('dashboard.dinner.groups.show',
+                                   $member->dinner_group->id)
+                   ->with('danger',
+                          'You already belong to a group.'
+                         .'If you wish to join another group, '
+                         .'please leave this one.');
 		}
+
+        if ($user->unclaimed_dinner_tickets_count === 1)
+            return Redirect::route('dashboard.dinner.groups.create');
+
+        if ($group_id = Input::get('group_id')) {
+            $group = DinnerGroup::findOrFail($group_id);
+            $group->addMember($user);
+        } else {
+            $group = DinnerGroup::createWithOwner($user);
+        }
+
+        $rules     = [];
+        $sizeLimit = min($group->max_size, $user->unclaimed_dinner_tickets_count);
+
+        for ($i = 1; $i < $sizeLimit; $i++)
+            $rules["user_{$i}"] = 'required';
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if (!$validator->passes()) {
+            return Redirect::route('dashboard.dinner.groups.create',
+                                   ['group_id' => Input::get('group_id')])
+                    ->withInput()
+                    ->withErrors($validator);
+        }
+
+        for ($i = 1; $i < $sizeLimit; $i++)
+            $group->addMember(Input::get("user_$i"));
+
+        return Redirect::route('dashboard.dinner.groups.show', $group->id)
+            ->with('success', 'Your group has been created!');
 	}
 
 	/**
@@ -135,14 +140,13 @@ class DinnerGroupsController extends BaseController {
 	{
 		$group = DinnerGroup::findOrFail($id);
 
-		return View::make('dinner_groups.show')
-			->with('group', $group);
+		return View::make('dinner_groups.show')->with('group', $group);
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Add the current user to a group.
 	 *
-	 * @param  int  $id
+	 * @param  $id The group to which users should be added.
 	 * @return Response
 	 */
 	public function update($id)
@@ -150,8 +154,7 @@ class DinnerGroupsController extends BaseController {
 		$user  = Auth::user();
 		$group = DinnerGroup::findOrFail($id);
 
-        // @TODO: Why has this been disabled?
-		if (FALSE && !DinnerPermission::user($user)->canAddUserToGroup($group)) {
+		if (!DinnerPermission::user($user)->canAddUserToGroup($group)) {
 			return Redirect::route('dashboard.dinner.groups.show', $group->id)
 				->with('danger', 'You cannot add any more users to this group');
 		}
@@ -161,25 +164,16 @@ class DinnerGroupsController extends BaseController {
 				->with('danger', 'You cannot join this group');
 		}
 
-		if ($user->dinner_tickets_count > 1) {
-			return Redirect::route('dashboard.dinner.groups.create', ['group_id' => $group->id]);
-		}
-
-		$member = new DinnerGroupMember;
-		$member->dinnerGroup()->associate($group);
-		$member->user()->associate($user);
-		$member->addedByUser()->associate($user);
-		$member->ticketPurchaser()->associate($user);
-		$member->save();
+        $group->addMember($user);
 
 		return Redirect::route('dashboard.dinner.groups.show', $group->id)
 			->with('success', 'You have joined this group');
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the current user from the group.
 	 *
-	 * @param  int  $id
+	 * @param  int  $id The group id.
 	 * @return Response
 	 */
 	public function destroy($id)
@@ -192,9 +186,7 @@ class DinnerGroupsController extends BaseController {
 				->with('danger', 'You cannot leave this group');
 		}
 
-		$group->members()
-			->where('user_id', '=', $user->id)
-			->delete();
+        $group->removeMember($user);
 
 		return Redirect::route('dashboard.dinner.groups.show', $group->id)
 			->with('success', 'You have left this group');

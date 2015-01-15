@@ -41,7 +41,7 @@
       <div class="panel panel-info">
         <div class="panel-heading">Total</div>
         <div class="panel-body">
-          <h1>&pound; {{{ $quantity * 27 }}}</h1>
+          <h1>&pound; {{{ $quantity * 28 }}}</h1>
         </div>
       </div>
       {{ Form::open(['action' => 'Admin\DinnerTicketsController@postPurchase']) }}

@@ -8,11 +8,11 @@ class DinnerGroupMember extends Eloquent
 	{
 		parent::boot();
 
-		// Auto create membership for group owners
+		// Set group full flag when member added if full.
 		static::created(function($member) {
 			$group = $member->dinner_group;
 
-			if ($group->members->count() >= 10) {
+			if ($group->isFull()) {
 				$group->is_full = true;
 				$group->save();
 			}
@@ -25,7 +25,7 @@ class DinnerGroupMember extends Eloquent
 
 	public function dinnerGroup()
 	{
-		return $this->belongsTo('dinnerGroup');
+		return $this->belongsTo('DinnerGroup');
 	}
 
 	public function user()
@@ -34,7 +34,7 @@ class DinnerGroupMember extends Eloquent
 	}
 
 	public function addedByUser()
-	{
+{
 		return $this->belongsTo('User', 'added_by_user_id');
 	}
 

@@ -122,13 +122,37 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 		return $query->orderBy('is_admin', 'DESC');
 	}
 
-	public function scopeInGroup($query, $group)
+	public function scopeInGroup($query, $group, $getRelated = TRUE)
 	{
-		if (!$group instanceof StudentGroup) {
-			$group = StudentGroup::findOrFail($group);
-		}
+        if (!is_array($group));
+            $group = [$group];
 
-		return $query->whereIn('student_group_id', $group->related_group_ids);
+        $groupIds = [];
+
+        if ($getRelated)
+        {
+            foreach ($group as $groupInstance)
+            {
+                if ($groupInstance instanceof StudentGroup)
+                    $groupObj = $groupInstance;
+                else
+                    $groupObj = StudentGroup::findOrFail($groupInstance);
+
+                $groupIds += $groupObj->getRelatedGroupIdsAttribute();
+            }
+        }
+        else
+        {
+            foreach ($group as $groupInstance)
+            {
+                if ($groupInstance instanceOf StudentGroup)
+                    $groupIds[] = $groupInstance->id;
+                else
+                    $groupIds = $groupInstance;
+            }
+        }
+
+		return $query->whereIn('student_group_id', $groupIds);
 	}
 
 	public function scopeHasStudentGroup($query)
@@ -151,9 +175,9 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
 			})
 			->whereNotIn('id', function($query) {
 				return $query
-					->select('user_id')
+					->select('ticket_purchaser_id')
 					->from('dinner_group_members')
-					->whereNotNull('user_id');
+					->whereNotNull('ticket_purchaser_id');
 			})
 			->orderBy('name');
 	}

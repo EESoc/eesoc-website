@@ -14,9 +14,9 @@
       <pre>{{{ $user->extras }}}</pre>
     </div>
     <div class="col-lg-4">
-    @if ( FALSE && DinnerPermission::user(Auth::user())->canManageGroups())
+    @if ( DinnerPermission::user(Auth::user())->canManageGroups())
       <a href="{{{ route('dashboard.dinner.groups.index') }}}" class="btn btn-success btn-lg btn-block">
-        <span class="glyphicon glyphicon-tree-conifer"></span>
+        <span class="glyphicon glyphicon-glass"></span>
         Dinner Seating Preferences
       </a>  
     @endif    

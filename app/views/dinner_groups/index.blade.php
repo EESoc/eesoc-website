@@ -2,13 +2,19 @@
 
 @section('content')
   <div class="page-header">
-    <h1>Dinner Seating Planner</h1>
+    <h1>Dinner Seating & Meal Planner</h1>
   </div>
-  @if (DinnerPermission::user(Auth::user())->canCreateNewGroup())
-    <p>
-      <a href="{{ route('dashboard.dinner.groups.create') }}" class="btn btn-primary">Create New Group</a>
-    </p>
+  @if ($user && ($unclaimed = $user->unclaimed_dinner_tickets_count))
+      <h4 class="alert alert-info">
+      You have <strong>{{ $unclaimed }}</strong> unclaimed tickets.
+
+      @if (DinnerPermission::user(Auth::user())->canCreateNewGroup())
+            You may either join one of the below groups, or you may <a href="{{ route('dashboard.dinner.groups.create') }}" class="btn btn-primary">Create A New Group</a>.
+      @else
+            You may not currently create a new group as you are currently in a group; leave that group first.
+      @endif
   @endif
+    </h4>
   @foreach ($groups as $group)
     <div class="well well-sm">
       <h4>

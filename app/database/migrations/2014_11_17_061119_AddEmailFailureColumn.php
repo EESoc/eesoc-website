@@ -24,6 +24,9 @@ class AddEmailFailureColumn extends Migration {
      */
     public function down()
     {
-        $table->dropColumn('failed');
+        Schema::table('newsletter_email_queue', function($table)
+        {
+            $table->dropColumn('failed');
+        });
     }
 }

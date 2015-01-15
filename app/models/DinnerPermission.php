@@ -15,7 +15,7 @@ class DinnerPermission {
 
 	public function canManageGroups()
 	{
-		return $this->user->dinnerSales()->count() > 0;
+		return $this->user->dinnerSales()->count();
 	}
 
 	public function canCreateNewGroup()
@@ -25,16 +25,17 @@ class DinnerPermission {
 
 	public function canAddUserToGroup(DinnerGroup $group)
 	{
-		return $group->members->count() < 12;
+        return !$group->isFull();
 	}
 
 	public function canJoinGroup(DinnerGroup $group)
 	{
-		return $this->canAddUserToGroup($group) && ! $this->user->dinner_group_member;
+		return $this->canAddUserToGroup($group) && !$this->user->dinner_group_member;
 	}
 
 	public function canLeaveGroup(DinnerGroup $group)
 	{
-		return $this->user->dinner_group_member && $this->user->dinner_group_member->dinner_group->id === $group->id;
+        return $this->user->dinner_group_member &&
+               $this->user->dinner_group_member->dinner_group->id === $group->id;
 	}
 }
