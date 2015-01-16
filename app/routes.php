@@ -63,6 +63,7 @@ Route::group(['before' => 'auth.member'], function() {
         Route::group(['prefix' => 'dinner'], function() {
             # Groups
             Route::resource('groups', 'DinnerGroupsController');
+            Route::post('update-menu', ['uses' => 'DinnerGroupsController@updateMenuChoice']);
         });
     });
 });

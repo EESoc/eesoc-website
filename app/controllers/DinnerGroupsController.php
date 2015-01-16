@@ -191,4 +191,42 @@ class DinnerGroupsController extends BaseController {
         return Redirect::route('dashboard.dinner.groups.show', $group->id)
             ->with('success', 'You have left this group');
     }
+
+    public function updateMenuChoice()
+    {
+        $member = DinnerGroupMember::findOrFail((integer) Input::get('member'));
+        $course = Input::get('course');
+        $choice = Input::get('choice');
+
+        switch ($course)
+        {
+        case 'starter':
+        case 'main':
+            $vName = "vegetarian_$course";
+            break;
+
+        default:
+            throw new \InvalidArgumentException("An invalid course type was specified.");
+        }
+
+        switch ($choice)
+        {
+        case 'meat':
+            $vegetarian = FALSE;
+            break;
+
+        case 'vegetarian':
+            $vegetarian = TRUE;
+            break;
+
+        default:
+            throw new \InvalidArgumentException("An invalid choice was specified.");
+        }
+
+        $member->$vName = $vegetarian;
+        $member->save();
+
+        return Redirect::route('dashboard.dinner.groups.show', $member->dinner_group->id)
+            ->with('success', 'Menu choice updated.');
+    }
 }
