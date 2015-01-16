@@ -97,8 +97,6 @@ class SyncEActivitiesSalesCommand extends Command {
             $dSale->sale_id  = $sale->id;
             $dSale->save();
         });
-
-        $this->syncTickets();
     }
 
     protected function syncProduct($eactivities_client, $productId, $newCallback = NULL)
