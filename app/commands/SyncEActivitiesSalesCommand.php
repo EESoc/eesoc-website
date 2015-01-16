@@ -129,8 +129,8 @@ class SyncEActivitiesSalesCommand extends Command {
 
             /* The CSV has the field 'CID/Card Number'. By some magic, this is converted by the parser
              * to the string below. */
-                        $sale->cid    = $purchase['c_id/_card_number'];
-            $sale->username   = $purchase['login'];
+            $sale->cid      = $purchase['c_id/_card_number'];
+            $sale->username = $purchase['login'];
             $sale->save();
         }
 
