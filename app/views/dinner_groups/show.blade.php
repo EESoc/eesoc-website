@@ -23,7 +23,7 @@
             <h5><strong>Vegetarian Menu</strong></h5>
             <ul>
                 <li><strong>Wild mushroom and pine nuts</strong>, pickled mushroom, crispy shallots, wasabi crème, coriander cress (<strong>V</strong>)</li>
-                <li><strong>Butternut squash risotto</strong>, gorgonzola, toasted walnuts, olive oil, thyme braised endive, celeriac fondant, celeriac purée(<strong>V</strong>)</li>
+                <li><strong>Butternut squash risotto</strong>, gorgonzola, toasted walnuts, olive oil, thyme braised endive, celeriac fondant, celeriac purée (<strong>V</strong>)</li>
             </ul>
         </div>
     </div>
