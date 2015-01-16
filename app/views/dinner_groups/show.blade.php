@@ -15,15 +15,15 @@
         <div class="panel-heading"><h4>Menu Choices</h4></div>
         <div class="panel-body">
             <p>Please choose your menu options from the following choices for each of your guests:</p>
-            <h5><strong>Starter</strong></h5>
+            <h5><strong>Meat Menu</strong></h5>
             <ul>
-                <li><strong>Wild mushroom and pine nuts</strong>, pickled mushroom, crispy shallots, wasabi crème, coriander cress</li>
                 <li><strong>Smoked haddock kedgeree cake</strong>, poached hens egg, crisp winter salad and Bombay dressing</li>
-            </ul>
-            <h5><strong>Main Course</strong></h5>
-            <ul>
-                <li><strong>Butternut squash risotto</strong>, gorgonzola, toasted walnuts, olive oil, thyme braised endive, celeriac fondant, celeriac purée</li>
                 <li><strong>Beer braised blade of beef</strong>, truffled mac ‘n’ cheese pave, roasted chantey carrots, sautéed spinach and beef cooking juices</li>
+            </ul>
+            <h5><strong>Vegetarian Menu</strong></h5>
+            <ul>
+                <li><strong>Wild mushroom and pine nuts</strong>, pickled mushroom, crispy shallots, wasabi crème, coriander cress (<strong>V</strong>)</li>
+                <li><strong>Butternut squash risotto</strong>, gorgonzola, toasted walnuts, olive oil, thyme braised endive, celeriac fondant, celeriac purée(<strong>V</strong>)</li>
             </ul>
         </div>
     </div>
@@ -31,7 +31,7 @@
         <p><em>(Empty Group)</em></p>
     @else
         <table class='table'>
-            <tr><th>#</th><th>Name</th><th>Starter</th><th>Main</th><th></th></tr>
+            <tr><th>#</th><th>Name</th><th>Menu Choice</th><th></th></tr>
         @foreach ($group->members as $i => $member)
             <tr>
             <td>{{$i + 1}}</td>
@@ -42,10 +42,6 @@
                 {{ $member->name }}
                 @if ($member->is_owner)
                 </strong>
-            @endif
-            </td><td>
-            @if ($member->ticket_purchaser_id == Auth::user()->id)
-              @include('dinner_groups.menu_choice', ['member' => $member, 'course' => 'starter'])
             @endif
             </td><td>
             @if ($member->ticket_purchaser_id == Auth::user()->id)

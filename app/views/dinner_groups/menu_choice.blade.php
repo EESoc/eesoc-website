@@ -11,7 +11,7 @@
 
         default:
         case 'main':
-            return $vegetarian ? 'Butternut Squash Risotto' : 'Beer Braised Beef';
+            return $vegetarian ? 'Vegetarian' : 'Meat';
         }
     };
 ?>
