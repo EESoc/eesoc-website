@@ -87,7 +87,13 @@ class SyncEActivitiesSalesCommand extends Command {
         // Lockers in 2014/15 have product ID 8757. This is also defined in app/models/Product.php,
         // but who knows if this is accessible here.
         // @TODO; Software engineering
-        $purchases = $eactivities_client->getPurchasesList(8757);
+        $this->syncProduct($eactivities_client, 8757);
+        $this->syncProduct($eactivities_client, 9572);
+    }
+
+    protected function syncProduct($eactivities_client, $productId)
+    {
+        $purchases = $eactivities_client->getPurchasesList($productId);
 
         foreach ($purchases as $purchase) {
             $sale = Sale::find($purchase['order_no']);
