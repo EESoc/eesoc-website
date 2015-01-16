@@ -88,22 +88,34 @@ class SyncEActivitiesSalesCommand extends Command {
         // but who knows if this is accessible here.
         // @TODO; Software engineering
         $this->syncProduct($eactivities_client, 8757);
-        $this->syncProduct($eactivities_client, 9572);
+        $this->syncProduct($eactivities_client, 9572, function($purchase, $sale, $user)
+        {
+            $dSale           = new DinnerSale;
+            $dSale->user_id  = $user->id;
+            $dSale->quantity = $purchase['quantity'];
+            $dSale->origin   = "EActivities";
+            $dSale->sale_id  = $sale->id;
+            $dSale->save();
+        });
+
+        $this->syncTickets();
     }
 
-    protected function syncProduct($eactivities_client, $productId)
+    protected function syncProduct($eactivities_client, $productId, $newCallback = NULL)
     {
         $purchases = $eactivities_client->getPurchasesList($productId);
 
         foreach ($purchases as $purchase) {
             $sale = Sale::find($purchase['order_no']);
-            if ( ! $sale) {
+            $new  = FALSE;
+            if (!$sale) {
                 $sale = new Sale;
                 $sale->id = $purchase['order_no'];
+                $new = TRUE;
             }
 
             $user = User::where('username', '=', $purchase['login'])->first();
-            if ( ! $user) {
+            if (!$user) {
                 $user = new User;
                 $user->username = $purchase['login'];
                 $user->cid      = $purchase['c_id/_card_number'];
@@ -132,6 +144,9 @@ class SyncEActivitiesSalesCommand extends Command {
             $sale->cid      = $purchase['c_id/_card_number'];
             $sale->username = $purchase['login'];
             $sale->save();
+
+            if ($new && $newCallback)
+                $newCallback($purchase, $sale, $user);
         }
 
         $this->info(sprintf('Successfully refreshed `%d` sale entries', count($purchases)));
