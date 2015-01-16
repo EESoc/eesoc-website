@@ -192,6 +192,42 @@ class DinnerGroupsController extends BaseController {
             ->with('success', 'You have left this group');
     }
 
+    public function removeMember()
+    {
+        $user     = Auth::user();
+        $member   = DinnerGroupMember::findOrFail((integer) Input::get('remove'));
+        $oldGroup = $member->dinner_group_id;
+
+        if ($user->id !== $member->ticket_purchaser_id)
+        {
+            return Redirect::route('dashboard.dinner.groups.show', $oldGroup)
+                ->with('danger', 'You cannot remove that guest from their table.');
+        }
+
+        $member->delete();
+
+        return Redirect::route('dashboard.dinner.groups.show', $oldGroup)
+            ->with('success', 'Your guest was removed.');
+    }
+
+    public function addMember()
+    {
+        $user     = Auth::user();
+        $group    = DinnerGroup::findOrFail((integer) Input::get('group'));
+        $oldGroup = $group->id;
+
+        if (!DinnerPermission::user($user)->canAddUserToGroup($group) ||
+            ($user->DinnerGroupMember() && $user->unclaimed_dinner_tickets_count <= 1)) {
+            return Redirect::route('dashboard.dinner.groups.show', $group->id)
+                ->with('danger', 'You cannot add any more guests to this group.');
+        }
+
+        $group->addMember(Input::get("new_guest"));
+
+        return Redirect::route('dashboard.dinner.groups.show', $oldGroup)
+            ->with('success', 'Your guest was added.');
+    }
+
     public function updateMenuChoice()
     {
         $member = DinnerGroupMember::findOrFail((integer) Input::get('member'));

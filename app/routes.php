@@ -64,6 +64,8 @@ Route::group(['before' => 'auth.member'], function() {
             # Groups
             Route::resource('groups', 'DinnerGroupsController');
             Route::post('update-menu', ['uses' => 'DinnerGroupsController@updateMenuChoice']);
+            Route::post('remove-member', ['uses' => 'DinnerGroupsController@removeMember']);
+            Route::post('add-member', ['uses' => 'DinnerGroupsController@addMember']);
         });
     });
 });

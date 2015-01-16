@@ -31,7 +31,7 @@
         <p><em>(Empty Group)</em></p>
     @else
         <table class='table'>
-            <tr><th>#</th><th>Name</th><th>Starter</th><th>Main</th></tr>
+            <tr><th>#</th><th>Name</th><th>Starter</th><th>Main</th><th></th></tr>
         @foreach ($group->members as $i => $member)
             <tr>
             <td>{{$i + 1}}</td>
@@ -51,13 +51,31 @@
             @if ($member->ticket_purchaser_id == Auth::user()->id)
               @include('dinner_groups.menu_choice', ['member' => $member, 'course' => 'main'])
             @endif
-            </td></tr>
+            </td><td>
+            @if ($member->ticket_purchaser_id == Auth::user()->id)
+                {{Form::open(['action' => ['DinnerGroupsController@removeMember']])}}
+                <button type="submit" name="remove" value="{{$member->id}}"  class="btn btn-danger">Remove</button>
+                {{Form::close()}}
+            @endif
+            </td>
+            </tr>
         @endforeach
         </table>
     @endif
     <hr>
 </div>
 <p>
+<?php $user = Auth::user(); ?>
+@if ($user->unclaimed_dinner_tickets_count > 1 || ($user->dinnerGroupMember() && $user->unclaimed_dinner_tickets_count == 1))
+{{Form::open(['action' => ['DinnerGroupsController@addMember']])}}
+<div class="input-group col-xs-4" style="padding-left: 0;">
+    <span class="input-group-addon">Add a new guest:</span>
+    <input type="text" size="10" class="form-control" name="new_guest" placeholder="Your guest's name">
+    <input type="hidden" name="group" value="{{$group->id}}">
+</div>
+<button type="submit" class="btn btn-primary">Add guest</button>
+{{Form::close()}}<br>
+@endif
   @if (DinnerPermission::user(Auth::user())->canJoinGroup($group))
     {{ Form::model($group, array('route' => array('dashboard.dinner.groups.update', $group->id), 'method' => 'patch')) }}
       {{ Form::hidden('user_id', Auth::user()->id) }}
