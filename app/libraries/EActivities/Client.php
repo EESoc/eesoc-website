@@ -13,7 +13,7 @@ use \Str;
 
 class Client {
 
-    const URL_BASE = 'https://eactivities.union.imperial.ac.uk/';
+    const URL_BASE = 'https://eactivities.union.ic.ac.uk/';
 
     const PATH_COMMON_AJAX_HANDLER = '/common/ajax_handler.php';
     const PATH_ADMIN_CSP_DETAILS   = '/admin/csp/details/603';

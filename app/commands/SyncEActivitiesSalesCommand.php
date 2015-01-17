@@ -41,9 +41,7 @@ class SyncEActivitiesSalesCommand extends Command {
         $password = $this->secret('Password?');
 
         $credentials = new ImperialCollegeCredential($username, $password);
-
         $http_client = new Guzzle\Http\Client;
-        $http_client->setSslVerification(false);
 
         $eactivities_client = new EActivities\Client($http_client);
 
