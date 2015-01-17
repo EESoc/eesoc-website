@@ -62,7 +62,7 @@
 </div>
 <p>
 <?php $user = Auth::user(); ?>
-@if ($user->unclaimed_dinner_tickets_count > 1 || ($user->dinnerGroupMember() && $user->unclaimed_dinner_tickets_count == 1))
+@if ($user->unclaimed_dinner_tickets_count > 1 || ($user->dinnerGroupMember && $user->unclaimed_dinner_tickets_count == 1))
 {{Form::open(['action' => ['DinnerGroupsController@addMember']])}}
 <div class="input-group col-xs-4" style="padding-left: 0;">
     <span class="input-group-addon">Add a new guest:</span>

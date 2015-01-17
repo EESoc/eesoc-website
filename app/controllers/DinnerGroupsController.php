@@ -217,7 +217,8 @@ class DinnerGroupsController extends BaseController {
         $oldGroup = $group->id;
 
         if (!DinnerPermission::user($user)->canAddUserToGroup($group) ||
-            ($user->DinnerGroupMember() && $user->unclaimed_dinner_tickets_count <= 1)) {
+            (!$user->DinnerGroupMember && $user->unclaimed_dinner_tickets_count <= 1) ||
+            ($user->DinnerGroupMember && $user->unclaimed_dinner_tickets_count < 1)) {
             return Redirect::route('dashboard.dinner.groups.show', $group->id)
                 ->with('danger', 'You cannot add any more guests to this group.');
         }
