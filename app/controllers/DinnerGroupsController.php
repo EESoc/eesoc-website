@@ -2,6 +2,8 @@
 
 class DinnerGroupsController extends BaseController {
 
+    const MAX_TABLES = 19;
+
     protected $hasExpired = FALSE;
 
     public function __construct()
@@ -42,13 +44,13 @@ class DinnerGroupsController extends BaseController {
      */
     public function create()
     {
-        $user = Auth::user();
-
-        if ($group_id = Input::get('group_id')) {
-            $group = DinnerGroup::findOrFail($group_id);
-        } else {
-            $group = null;
+        if (self::MAX_TABLES <= DinnerGroup::count())
+        {
+            return Redirect::route('dashboard.dinner.groups.index')
+                    ->with('danger', 'All available tables have already been created. Please join an existing table.');
         }
+
+        $user = Auth::user();
 
         // Already a member in any group
         if ($member = $user->dinner_group_member) {
@@ -68,7 +70,7 @@ class DinnerGroupsController extends BaseController {
                 $limit = null;
 
             return View::make('dinner_groups.create')
-                ->with('group', $group)
+                ->with('group', null)
                 ->with('to_allocate', $alloc)
                 ->with('limit', $limit);
         }
