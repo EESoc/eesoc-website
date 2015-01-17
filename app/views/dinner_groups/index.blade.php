@@ -29,6 +29,9 @@
               <strong>
             @endif
             {{ $member->name }}
+            @if ($member->user_id && ($user = User::find($member->user_id)))
+                <small>({{ $user->username}})</small>
+            @endif
             @if ($member->is_owner)
               </strong>
             @endif
