@@ -44,6 +44,12 @@ Route::get('api/me', ['before' => 'oauth:basic', 'uses' => 'ApiController@getMe'
 # TV
 Route::get('tv', 'TVController@show');
 
+# Sponsor Link
+Route::get('bae', function()
+{
+    return Redirect::to('https://career012.successfactors.eu/sfcareer/jobreqcareer?jobId=43&company=BAE&username', 303, ['X-Why' => 'Yes']);
+});
+
 /**
  * Routes for members
  */
