@@ -4,7 +4,7 @@ class DinnerGroupsController extends BaseController {
 
     const MAX_TABLES = 19;
 
-    protected $hasExpired = FALSE;
+    protected $hasExpired = TRUE;
 
     public function __construct()
     {
