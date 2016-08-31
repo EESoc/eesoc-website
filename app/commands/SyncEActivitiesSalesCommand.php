@@ -82,11 +82,13 @@ class SyncEActivitiesSalesCommand extends Command {
         // $purchases = $eactivities_client->getPurchasesList(['1725', '1772', '1772-3'], 1983);
         // $purchases = $eactivities_client->getPurchasesList(['1725', '1772'], 20226);
 
-        // Lockers in 2014/15 have product ID 8757. This is also defined in app/models/Product.php,
+        // Lockers in 2015/16 have product ID 13472. This is also defined in app/models/Product.php,
         // but who knows if this is accessible here.
-        // @TODO; Software engineering
-        $this->syncProduct($eactivities_client, 8757);
-        $this->syncProduct($eactivities_client, 9572, function($purchase, $sale, $user)
+        // @TODO; Software engineering... 
+        $this->syncProduct($eactivities_client, 13472);
+
+       # Sync dinner sales 2015/16
+        $this->syncProduct($eactivities_client, 14655, function($purchase, $sale, $user)
         {
             $dSale           = new DinnerSale;
             $dSale->user_id  = $user->id;
@@ -115,7 +117,7 @@ class SyncEActivitiesSalesCommand extends Command {
                 $user = new User;
                 $user->username = $purchase['login'];
                 $user->cid      = $purchase['c_id/_card_number'];
-                $user->name     = "{$purchase['first_name']} {$purchase['last_name']}";
+                $user->name     = "{$purchase['first_name']} {$purchase['surname']}";
                 $user->email    = $purchase['email'];
                 $user->save();
             }
@@ -125,7 +127,6 @@ class SyncEActivitiesSalesCommand extends Command {
             foreach (['year',
                   'date',
                   'first_name',
-                  'last_name',
                   'email',
                   'product_name',
                   'quantity',
@@ -139,6 +140,9 @@ class SyncEActivitiesSalesCommand extends Command {
              * to the string below. */
             $sale->cid      = $purchase['c_id/_card_number'];
             $sale->username = $purchase['login'];
+			//Changed in 2015/16... added for consistency with before
+			$sale->last_name = $purchase['surname'];
+
             $sale->save();
 
             if ($new && $newCallback)

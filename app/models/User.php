@@ -64,6 +64,12 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
         return $this->hasMany('Book');
     }
 
+  /*  public function applications()
+    {
+        return $this->hasMany('Application');
+    }
+  */
+
     public function dinnerSales()
     {
         return $this->hasMany('DinnerSale');
@@ -74,7 +80,7 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
         return $this->hasOne('DinnerGroupMember');
     }
 
-    /*
+        /*
     Scopes
      */
 
@@ -182,6 +188,16 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
             ->orderBy('name');
     }
 
+    public function scopeFamilyParent($query, $familyId)
+    {
+        return $query->where('parent_of_family_id', '=', $familyId)->orderBy('username');
+    }
+
+    public function scopeFamilyChild($query, $familyId)
+    {
+        return $query->where('child_of_family_id', '=', $familyId)->orderBy('username');
+    }
+
     /*
     Factories
      */
@@ -221,6 +237,16 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
     {
         $user = new static;
         return $user->update(array('is_member' => false));
+    }
+
+    /**
+     * Revoke all users' Mums and Dads status.
+     * @return mixed
+     */
+    public static function resetFamilies()
+    {
+        $user = new static;
+        return $user->update(array('child_of_family_id' => null, 'parent_of_family_id' => null));
     }
 
     /**

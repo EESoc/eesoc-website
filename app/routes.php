@@ -36,6 +36,9 @@ Route::controller('newsletters', 'NewslettersController');
 # Sponsors
 Route::controller('sponsors', 'SponsorsController');
 
+# Careers Fair
+Route::controller('careersfair', 'CareersFairController');
+
 # Oauth
 Route::post('oauth/access_token', ['uses' => 'OAuthController@postAccessToken']);
 Route::get('oauth/authorize', ['before' => 'check-authorization-params|auth', 'uses' => 'OAuthController@getAuthorize']);
@@ -50,12 +53,21 @@ Route::get('bae', function()
     return Redirect::to('https://career012.successfactors.eu/sfcareer/jobreqcareer?jobId=43&company=BAE&username', 303, ['X-Why' => 'Yes']);
 });
 
+//Temp short linking
+Route::get('dinner', function()
+{
+    return Redirect::to('https://eesoc.com/dashboard/dinner/groups', 302);
+});
+
 /**
  * Routes for members
  */
 Route::group(['before' => 'auth.member'], function() {
     # Dashboard
     Route::get('dashboard', 'UsersController@getDashboard');
+
+    #Mums and Dads
+    Route::controller('mums-and-dads', 'MumsAndDadsController');
 
     Route::group(['prefix' => 'dashboard'], function() {
         # Books
@@ -73,6 +85,12 @@ Route::group(['before' => 'auth.member'], function() {
             Route::post('remove-member', ['uses' => 'DinnerGroupsController@removeMember']);
             Route::post('add-member', ['uses' => 'DinnerGroupsController@addMember']);
         });
+
+        /*# Applications
+        Route::resource  ('applications', 'ApplicationsController');
+        Route::controller('applications', 'ApplicationsController');
+        */
+
     });
 });
 
@@ -120,6 +138,9 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 
     # Sponsors
     Route::resource('sponsors', 'Admin\SponsorsController', ['except' => ['show']]);
+
+    # Careers Fair
+    Route::resource('careersfair', 'Admin\CareersFairController', ['except' => ['show']]);
 
     # Tests
     Route::controller('tests', 'Admin\TestsController');

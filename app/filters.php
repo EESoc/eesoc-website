@@ -17,6 +17,12 @@ App::before(function($request)
     if (App::environment() === 'production' && ! $request->secure()) {
         return Redirect::secure($request->path());
     }
+	
+	//Temp fix
+	/*if (App::environment() === 'production' && strpos($request->path(),"sign-in") !== false && ! $request->secure()) {
+        return Redirect::secure($request->path());
+    }*/
+	
 });
 
 
