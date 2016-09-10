@@ -29,7 +29,7 @@ class Newsletter extends Eloquent {
         $student_group_ids = $this->student_groups->lists('id');
 
         if ( ! empty($student_group_ids)) {
-            $users = User::whereIn('student_group_id', $student_group_ids)->get();
+            $users = User::where('is_member','=',1)->whereIn('student_group_id', $student_group_ids)->get();
             foreach ($users as $user) {
                 $emails[$user->email] = true;
             }

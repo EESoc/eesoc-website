@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="EESoc is the Society for Electrical & Electronic Engineering students at Imperial College London. We run social events, events with industry and sports events.">
-    <meta name="author" content="">
+    <meta name="author" content="Imperial College EESoc">
 
     <title>{{{ isset($page_title) ? $page_title.' | ' : '' }}}Imperial College EESoc - Electrical Engineering Society</title>
 
@@ -42,6 +42,7 @@
       <div id="site-header">
         <nav class="navbar navbar-static-top navbar-inverse hidden-xs" role="navigation">
           <div class="container">
+				
             @if (Auth::check())
               <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -55,6 +56,12 @@
                     <span class="glyphicon glyphicon-dashboard"></span>
                     Dashboard
                   </a>
+                </li>
+                 <li>
+                    <a href="{{{ url('mums-and-dads') }}}">
+                      <span class="glyphicon glyphicon-flag"></span>
+                      Mums &amp; Dads
+                    </a>
                 </li>
                 @if (Auth::user()->is_admin)
                   <li>
@@ -72,10 +79,19 @@
                 </li>
               </ul>
             @else
-              <a href="{{{ action('SessionsController@getNew') }}}" class="btn btn-primary pull-right">
+				 <div class="btn-group pull-right" role="group">
+		  @if (time() < strtotime("2015-10-06"))
+                 
+				<a href="{{{ url('mums-and-dads') }}}" class="btn btn-info">
+				  <span class="glyphicon glyphicon-flag"></span>
+				  Mums &amp; Dads
+				</a>
+            @endif
+				<a href="{{{ action('SessionsController@getNew') }}}" class="btn btn-primary">
                 <span class="glyphicon glyphicon-lock"></span>
                 Sign In
-              </a>
+				</a>
+			</div>
             @endif
           </div>
         </nav>
@@ -106,6 +122,12 @@
                       Settings
                     </a>
                   </li>
+					 <li>
+					<a href="{{{ url('mums-and-dads') }}}">
+					  <span class="glyphicon glyphicon-flag"></span>
+					  Mums &amp; Dads
+					</a>
+					</li>
                   <li>
                     <a href="{{{ action('SessionsController@deleteDestroy') }}}" data-method="delete">
                       <span class="glyphicon glyphicon-off"></span>
@@ -113,10 +135,19 @@
                     </a>
                   </li>
                 @else
+					
+				 <div class="btn-group" role="group">
+					@if (time() < strtotime("2015-10-06"))
+					<a href="{{{ url('mums-and-dads') }}}" class="btn btn-info">
+					  <span class="glyphicon glyphicon-flag"></span>
+					  Mums &amp; Dads
+					</a>
+					@endif
                   <a href="{{{ action('SessionsController@getNew') }}}" class="btn btn-primary">
                     <span class="glyphicon glyphicon-lock"></span>
                     Sign In
                   </a>
+				</div>
                 @endif
               </ul>
               <ul class="nav navbar-nav navbar-right">
@@ -132,7 +163,13 @@
                     Events
                   </a>
                 </li>
-                <li>
+                <li class="{{ Request::is('/careersfair') ? 'active' : '' }}">
+                  <a href="{{ url('/careersfair') }}">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    Careers Fair
+                  </a>
+                </li>
+                <!-- li>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                       <span class="glyphicon glyphicon-chevron-right"></span> Flagship Events <span class="caret"></span>
                     </a>
@@ -150,6 +187,12 @@
                         </a>
                       </li>
                     </ul>
+                </li -->
+                <li class="{{ Request::is('/guide') ? 'active' : '' }}">
+                  <a href="{{ url('/guide') }}">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    Guide Book
+                  </a>
                 </li>
                 <li class="{{ Request::is('sponsors') ? 'active' : '' }}">
                   <a href="{{ url('sponsors') }}">
@@ -180,12 +223,11 @@
         </p>
         <p>
           &copy; {{ date('Y') }}
-          Imperial College Electrical Engineering Society.
+          Imperial College Electrical Engineering Society. <a href="mailto:eesoc@imperial.ac.uk">Contact us.</a>
         </p>
         <p>
           Code by <a href='&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#105;&#97;&#110;&#46;&#108;&#101;&#101;&#49;&#49;&#64;&#105;&#109;&#112;&#101;&#114;&#105;&#97;&#108;&#46;&#97;&#99;&#46;&#117;&#107;'>&#74;&#105;&#97;&#110;&#32;&#89;&#117;&#97;&#110;&#32;&#76;&#101;&#101;</a>,
-          available on
-          <a href="http://bit.ly/196sso5">GitHub</a>.
+          maintained by <a href="/about">the EESoc Webmaster</a>.
         </p>
       </div>
     </footer>

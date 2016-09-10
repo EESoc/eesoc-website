@@ -11,11 +11,11 @@
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
     <link href="{{ asset('assets/css/tv.css') }}" rel="stylesheet">
   </head>
 
   <body>
-
     <div class="container">
       <div class="row">
         <div class="col-lg-6 left-col text-center">
@@ -50,17 +50,27 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6">
-          real content here!
+        <div class="col-lg-6" style="">
+         
         </div>
       </div>
+	  
+	<div class="slideshow-container">
+ <div class="slideshow">
+@foreach ($files as $file)
+			<div><img src="{{ asset('assets/images/slideshow/'.$file) }}" class="slideshow-img"/></div>
+@endforeach	
+</div>
+</div>
     </div>
+	
 
     <script src="//code.jquery.com/jquery.js"></script>
     <!-- <script src="{{{ asset('assets/js/live.js') }}}"></script> -->
     <script src="{{{ asset('assets/js/bootstrap.min.js') }}}"></script>
     <script src="{{{ asset('assets/js/moment.min.js') }}}"></script>
-    <script src="{{{ asset('assets/js/jquery.simpleWeather-2.5.min.js') }}}"></script>
+    <script src="{{{ asset('assets/js/jquery.simpleWeather.min.js') }}}"></script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
     <script src="{{{ asset('assets/js/tv.js') }}}"></script>
 
   </body>

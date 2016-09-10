@@ -16,12 +16,20 @@
       @endif
       @content('locker-sale-introduction')
       <hr>
-      <p>
-        <a href="{{{ action('LockersController@getRent') }}}" class="btn btn-primary btn-block btn-lg" data-disable-with="Please wait&hellip;">
-          <span class="glyphicon glyphicon-shopping-cart"></span>
-          Rent a Locker
-        </a>
-      </p>
+      <div class="row">
+		  <div class="col-lg-6">
+			<a href="{{{ action('LockersController@getRent') }}}" class="btn btn-primary btn-block btn-lg" data-disable-with="Please wait&hellip;">
+			  <span class="glyphicon glyphicon-shopping-cart"></span>
+			  Rent a Locker
+			</a>
+		  </div>
+		  <div class="col-lg-6">
+			<a href="http://goo.gl/forms/5ii2IfE5dp" class="btn btn-danger btn-block btn-lg" data-disable-with="Please wait&hellip;">
+			  <span class="glyphicon glyphicon-envelope"></span>
+			  Report an Issue
+			</a>
+		  </div>
+	  </div>
     </div>
     <div class="col-lg-6">
       @if ( ! $lockers_owned->isEmpty())
