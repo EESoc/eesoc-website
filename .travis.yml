@@ -11,7 +11,6 @@ install:
    - mv bootstrap/start.sample.php bootstrap/start.php
    - composer install
    - php artisan migrate
-   - php artisan serve
+   - php artisan serve &
 
-script:
-  - phpunit --configuration phpunit.xml --coverage-text
+
