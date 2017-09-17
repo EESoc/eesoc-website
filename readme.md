@@ -1,5 +1,7 @@
 ## EESoc Website Source Code
 
+[![Build Status](https://travis-ci.org/hsed/eesoc-website.svg?branch=master)](https://travis-ci.org/hsed/eesoc-website)
+
 Imperial College London EESoc's Offical Website Source Code
 
 ### Major Technologies Used
