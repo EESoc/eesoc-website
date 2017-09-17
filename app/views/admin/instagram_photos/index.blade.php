@@ -4,6 +4,10 @@
   <div class="page-header">
     <h1>Instagram Photos</h1>
   </div>
+  
+  <a href="{{ action('Admin\InstagramPhotosController@getUpdate') }}" class="btn btn-info" >Update Database</a>
+  <br>
+  <br>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>

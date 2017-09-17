@@ -59,6 +59,9 @@
                   <a href="{{{ route('admin.sponsors.index') }}}">Sponsors</a>
                 </li>
                 <li>
+                  <a href="{{{ route('admin.careersfair.index') }}}">Careers Fair</a>
+                </li>
+                <li>
                   <a href="{{{ URL::action('Admin\InstagramPhotosController@getIndex') }}}">Instagram Photos</a>
                 </li>
                 <li>
@@ -80,6 +83,9 @@
                 </li>
                 <li>
                   <a href="{{{ route('admin.newsletters.index') }}}">Lists</a>
+                </li>
+                <li>
+                  <a href="{{{ URL::action('Barryvdh\ElfinderBundle\ElfinderController@showIndex') }}}">File Manager</a>
                 </li>
               </ul>
             </li>
