@@ -1,0 +1,19 @@
+dist: trusty
+services:
+  - mysql
+language: php
+php:
+  - '5.5'
+before_install:
+  - mysql -e 'CREATE DATABASE test_db;'
+install:
+   - mv app/config/database.sample.php app/config/database.php
+   - mv bootstrap/start.sample.php bootstrap/start.php
+   - composer install
+   - php artisan migrate
+   - php artisan serve &
+   
+script:
+   - phpunit --verbose --configuration phpunit.xml
+
+

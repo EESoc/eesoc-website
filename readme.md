@@ -1,5 +1,8 @@
 ## EESoc Website Source Code
 
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.5-8892BF.svg)](https://php.net/)
+[![Build Status](https://travis-ci.org/hsed/eesoc-website.svg?branch=master)](https://travis-ci.org/hsed/eesoc-website)
+
 Imperial College London EESoc's Offical Website Source Code
 
 ### Major Technologies Used
