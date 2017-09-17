@@ -5,6 +5,5 @@ install:
    - mv app/config/database.sample.php app/config/database.php
    - mv bootstrap/start.sample.php bootstrap/start.php
    - composer install
-   - php composer.phar install
    - php artisan migrate
    - php artisan serve
