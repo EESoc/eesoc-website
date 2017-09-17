@@ -12,3 +12,6 @@ install:
    - composer install
    - php artisan migrate
    - php artisan serve
+
+script:
+  - phpunit --configuration phpunit.xml --coverage-text
