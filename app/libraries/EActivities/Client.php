@@ -13,12 +13,13 @@ use \Str;
 
 class Client {
 
-    const URL_BASE = 'https://eactivities.union.ic.ac.uk/';
+    const URL_BASE = 'https://eactivities.union.ic.ac.uk';
 
-    const PATH_COMMON_AJAX_HANDLER = '/common/ajax_handler.php';
-    const PATH_ADMIN_CSP_DETAILS   = '/admin/csp/details/603';
+    const PATH_COMMON_AJAX_HANDLER = '/';
+    const PATH_CSP_DETAILS         = '/API/CSP/603';
+    const PATH_COMMITEE_REPORT   = '/API/CSP/603/reports/committee?year=17-18';
     const PATH_FINANCE_INCOME_SHOP = '/finance/income/shop/603';
-    const PATH_MEMBERS_REPORT      = '/admin/csp/details/csv';
+    const PATH_MEMBERS_REPORT      = '/API/CSP/603/reports/members?year=17-18';
     const PATH_PURCHASE_REPORT     = '/finance/income/shop/group/csv/%d';
 
     const NAME_SESSION_COOKIE = 'ICU_eActivities';
@@ -75,68 +76,31 @@ class Client {
 
     /**
      * Sign in a given credential
-     *
+     * 
      * @param  ImperialCollegeCredential $credential
-     * @return boolean
+     * @return ARRAY OF JSON
      */
-    public function signIn(ImperialCollegeCredential $credential)
+    public function getBasicInfo()
     {
-        $response = $this->getAjaxHandlerResponse(array(
-            'ajax' => 'login',
-            'name' => $credential->getUsername(),
-            'pass' => $credential->getPassword(),
-            'objid' => '1'
-        ));
+        $response = $this->getAjaxHandlerResponse(self::PATH_CSP_DETAILS);
+        
+        $html_content = $response->getBody(true);
+        $json_array=array(
+            
+            'content'=>50,
+            'html_content'=>$html_content
+            );
 
-        return $this->isSignedIn();
-    }
-
-    /**
-     * Check if user is signed in.
-     * Will check the response of the root page if no response is given.
-     *
-     * @param  Response  $response
-     * @return boolean
-     */
-    public function isSignedIn(Response $response = null)
-    {
-        if ( ! isset($response)) {
-            $response = $this->getPageResponse('/');
+        if ($response->isSuccessful()){
+            return  $response->json();
+        }
+        else {
+             //due to some formatting issues last %s must not have quotes!!, getBody(true) returns string but we must encode to remove formatting issues.
+             return json_decode(sprintf('{"error": "unsuccessful response", "status_code":"%s", "response_body": %s }', $response->getStatusCode(), json_encode($response->getBody(true))));
         }
 
-        return ($response->isSuccessful() && strpos($response->getBody(), 'Log out') !== false);
     }
 
-    /**
-     * Get user's currently selected and other roles
-     *
-     * @return array
-     */
-    public function getCurrentAndOtherRoles()
-    {
-        $response = $this->getAjaxHandlerResponse(array(
-            'ajax' => 'setupinlineinfo',
-            'navigate' => '1'
-        ));
-        $body = $response->getBody();
-
-        $result = array(
-            'current' => null,
-            'others' => []
-        );
-
-        preg_match('/<p class="currentrole">([^<]+)<\/p>/', $body, $output_array);
-        if (isset($output_array[1])) {
-            $result['current'] = $output_array[1];
-        }
-
-        preg_match_all('/<span class="changerole" onclick="changeRole\(this, \'(\d+)\'\)">([^<]+)<\/span>/', $body, $output_array);
-        foreach ($output_array[1] as $key => $role_key) {
-            $result['others'][$role_key] = $output_array[2][$key];
-        }
-
-        return $result;
-    }
 
     /**
      * Download and parse members report file
@@ -145,25 +109,24 @@ class Client {
      */
     public function getMembersList()
     {
-        $response = $this->getPageResponse(self::PATH_ADMIN_CSP_DETAILS);
-        if (!$this->isSignedIn($response)) {
-            throw new EActivitiesClientException("Not logged in!");
+        $response = $this->getAjaxHandlerResponse(self::PATH_MEMBERS_REPORT);
+        
+        if ($response->isSuccessful()){
+            return  $response->json();
         }
-
-        $response = $this->activateTabs('395');
-        $request = $this->client->post(self::PATH_MEMBERS_REPORT);
-        $response = $request->send();
-        $body = $response->getBody();
-
-        return $this->parseCsv($body);
+        else {
+             //due to some formatting issues last %s must not have quotes!!, getBody(true) returns string but we must encode to remove formatting issues.
+             return json_decode(sprintf('{"error": "unsuccessful response", "status_code":"%s", "response_body": %s }', $response->getStatusCode(), json_encode($response->getBody(true))));
+        }
     }
 
     public function getPurchasesList($product_id)
     {
+        //TODO: UPDATE THIS for new api!!!
         $response = $this->getPageResponse(self::PATH_FINANCE_INCOME_SHOP);
-        if ( ! $this->isSignedIn($response)) {
-            return []; // @todo raise exception?
-        }
+        //if ( ! $this->isSignedIn($response)) {
+            //return []; // @todo raise exception?
+        //}
 
         // 1725: Purchases Summary
         $response = $this->activateTabs(['1725']);
@@ -177,52 +140,13 @@ class Client {
         $result = $this->parseCsv($body);
         $result = array_map(function($product) use ($product_id) {
             $product['product_id'] = $product_id;
-            $product['date'] = DateTime::createFromFormat('d/h/Y', $product['date']);
+			$product['date'] = DateTime::createFromFormat('d/h/Y', $product['date']);
             return $product;
         }, $result);
 
         return $result;
     }
 
-    /**
-     * Change user's role
-     *
-     * @param  integer|string $role_id
-     * @return Response
-     */
-    public function changeRole($role_id)
-    {
-        return $this->getAjaxHandlerResponse(array(
-            'ajax' => 'changerole',
-            'navigate' => '1',
-            'id' => $role_id,
-        ));
-    }
-
-    /**
-     * Activate tabs
-     *
-     * @param  integer|string $navigate
-     * @return Response
-     */
-    protected function activateTabs($navigate)
-    {
-        $navigate = (array) $navigate;
-        $last_response = null;
-
-        while (($current_navigate = array_shift($navigate))) {
-            $last_response = $this->getAjaxHandlerResponse(array(
-                'ajax' => 'activatetabs',
-                'navigate' => $current_navigate,
-            ));
-
-            if ( ! $last_response->isSuccessful()) {
-                break;
-            }
-        }
-
-        return $last_response;
-    }
 
     /**
      * Send a GET request
@@ -237,66 +161,21 @@ class Client {
     }
 
     /**
-     * Send a POST request to the ajax handler
+     * Send a GET request to API
      *
      * @param  array $params
      * @return Response
      */
-    protected function getAjaxHandlerResponse($params)
+    protected function getAjaxHandlerResponse($request_url)
     {
-        $request = $this->client->post(self::PATH_COMMON_AJAX_HANDLER, [], $params);
+        
+        $request =  $this->client->get($request_url, [
+            'X-API-Key' => \Config::get('eactivities.api_key')
+        ]);
         return $request->send();
     }
 
-    /**
-     * Parse CSV body. Normalizes column names.
-     * @param  string $body
-     * @return array
-     */
-    protected function parseCsv($body)
-    {
-        $result = explode("\n", trim($body));
-        $groups = ['Full Members', 'Life / Associate'];
 
-        // Get header
-        $headers = str_getcsv(array_shift($result));
-
-        if (in_array($headers[0], $groups)) { // This is a section header
-            /* Add the first column header to the list of things that will
-             * cause a row to be ignored */
-            $headers = str_getcsv(array_shift($result));
-            $groups[] = $headers[0];
-        }
-
-        $headers = array_map(function($original) {
-            if ($original === 'CID') {
-                return 'cid';
-            } else {
-                return Str::snake(Str::camel($original));
-            }
-        }, $headers);
-
-        // Format rows
-        $output = array_map(function($original) use ($headers, $groups) {
-            $new_row = [];
-
-            $row = str_getcsv($original);
-            $row_size = count($row);
-
-            foreach ($headers as $key => $header) {
-                if ($row_size <= $key || in_array($row[$key], $groups)) {
-                    return [];
-                }
-
-                $new_row[$header] = $row[$key];
-            }
-
-            return $new_row;
-        }, $result);
-
-        // Remove blank rows
-        return array_filter($output);
-    }
 }
 
 class EActivitiesClientException extends \Exception
