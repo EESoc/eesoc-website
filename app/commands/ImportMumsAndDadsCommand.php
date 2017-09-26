@@ -41,7 +41,7 @@ class ImportMumsAndDadsCommand extends Command {
 
         //Import CSV
         $row = 0;
-        $group = 0;
+        $group = 0; // Starts at 1
         $parents = array("","");
 
         if (($handle = fopen($this->argument("path"), "r")) !== FALSE) {
@@ -83,8 +83,10 @@ class ImportMumsAndDadsCommand extends Command {
                     $this->info("Family {$group}: ".$parents[0]." & ".$parents[1]);
 
                     for($i=0; $i < 2; $i++){
-                        $parent = User::where('name', '=', $parents[$i])->firstOrFail();
+                        $parent = User::where('username', '=', $parents[$i])->firstOrFail();
 
+						//$this->info($group.",".$parent->name);
+						
                         $parent->parent_of_family_id = $group;
                         $parent->save();
 
@@ -93,12 +95,14 @@ class ImportMumsAndDadsCommand extends Command {
 
                 }
 
-                $child = User::where('name', '=', $data[0])->firstOrFail();
+                $child = User::where('username', '=', $data[0])->firstOrFail();
 
                 $child->child_of_family_id = $group;
                 $child->save();
+				
 
                 $this->info(" ++ ".$child->name);
+                //$this->info($group.",".$child->name);
 
             }
 

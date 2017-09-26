@@ -7,6 +7,11 @@ class Locker extends Eloquent implements PresentableInterface {
     const STATUS_VACANT = 'vacant';
     const STATUS_RESERVED = 'reserved';
     const STATUS_TAKEN = 'taken';
+	const STATUS_TRANSITION = 'transition';
+	
+    const AUDIT_LOCKED = 'locked';
+    const AUDIT_GOOD = 'available';
+    const AUDIT_BROKEN = 'broken';
 
     /*
     Relations
@@ -42,12 +47,23 @@ class Locker extends Eloquent implements PresentableInterface {
 
     public function getIsReservedAttribute()
     {
-        return ($this->status === self::STATUS_RESERVED);
+        return ($this->status === self::STATUS_RESERVED || $this->status === self::STATUS_TRANSITION );
+    }
+	
+    public function getIsTransitionAttribute()
+    {
+        return ($this->status === self::STATUS_TRANSITION);
     }
 
     public function getIsTakenAttribute()
     {
         return ($this->status === self::STATUS_TAKEN);
+    }	
+	
+    public function getIsAvailbleAttribute()
+    {
+		
+		return (( $this->audit == self::AUDIT_GOOD  && $this->is_vacant ) || ( $this->audit == self::AUDIT_LOCKED && $this->is_transition ));
     }
 
     /**
@@ -57,7 +73,7 @@ class Locker extends Eloquent implements PresentableInterface {
      */
     public function canBeClaimedBy(User $user)
     {
-        return ($this->is_vacant && $user->unclaimed_lockers_count > 0);
+        return (($this->is_vacant || ($this->is_transition && $this->owner_id === $user->id)) && $user->unclaimed_lockers_count > 0);
     }
 
     /**

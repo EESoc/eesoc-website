@@ -1,9 +1,13 @@
 <?php
 
 class DinnerGroup extends Eloquent {
-    const MAX_SIZE_REDUCED = 9;
-    const MAX_SIZE_FULL    = 10;
-    const REDUCED_COUNT    = 8;
+
+    //Max size reduced for BAE delegate at the table
+    const MAX_SIZE_REDUCED = 7;
+    const MAX_SIZE_FULL    = 8;
+    const REDUCED_COUNT    = 9;
+
+    const CAN_LEAVE_OWN_GRP = false;
 
     // 'Final year' group IDs from the live database (sorry...)
     protected static $finalYearGroups = [3, 4, 5, 7, 8, 11, 12, 13, 14];
@@ -31,12 +35,22 @@ class DinnerGroup extends Eloquent {
     {
         $actor  = $actor ? $actor : Auth::user();
         $member = new DinnerGroupMember;
+
+        //$existingMembers = $this->members()->count();
+        $existingMembers = DinnerGroupMember::where('dinner_group_id','=',$this->id)->count();
+
         $member->DinnerGroup()->associate($this);
 
         if ($user instanceOf User)
         {
             $member->user()->associate($user);
             $member->is_owner = $user->id === $this->owner->id;
+
+            //If the group was left empty, then make the first member (again) the owner.
+            if ($existingMembers == 0){
+                $this->owner->id = $user->id;
+                $member->is_owner = true;
+            }
         }
         else
         {
@@ -50,7 +64,29 @@ class DinnerGroup extends Eloquent {
 
     public function removeMember(User $user)
     {
-        $this->members()->where('user_id', '=', $user->id)->delete();
+        $member = $this->members()->where('user_id', '=', $user->id)->first();
+        $membersInGroup = DinnerGroupMember::where('dinner_group_id','=',$this->id)->count();
+
+        if ($member->is_owner  && !DinnerGroup::CAN_LEAVE_OWN_GRP)
+        {
+            return Redirect::route('dashboard.dinner.groups.show', $member->dinner_group_id)
+                ->with('danger', 'You cannot leave from your own group..');
+        }
+
+        $member->delete();
+
+        if ($membersInGroup <= 1){
+            $this->delete();
+
+            return Redirect::route('dashboard.dinner.groups.index')
+                ->with('success', 'You have left the group.');
+        }
+				
+		$this->is_full = $membersInGroup - 1 >= $group->max_size;
+        
+		$this->save();	
+
+        return true;
     }
 
     public function isFull()
@@ -93,7 +129,7 @@ class DinnerGroup extends Eloquent {
         $candidate = $owner->inGroup(self::$finalYearGroups, FALSE);
 
         if ($candidate &&
-            DinnerGroup::hasLimit(self::MAX_SIZE_REDUCED)->count() <                self::REDUCED_COUNT)
+            DinnerGroup::hasLimit(self::MAX_SIZE_REDUCED)->count() < self::REDUCED_COUNT)
         {
             return self::MAX_SIZE_REDUCED;
         }

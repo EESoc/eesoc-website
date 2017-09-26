@@ -11,7 +11,8 @@
 
 html, body, .container, .row, .left-col {
   height: 100%;
-}
+  overflow: hidden;
+  }
 
 .container {
   max-width: 100%;
@@ -29,6 +30,7 @@ h3 {
   background-color: #DDF2FC;
 }
 
+
 #logo {
   margin: 30px auto 60px;
 }
@@ -43,6 +45,32 @@ h3 {
 #tv-header img {
   margin: 0 auto;
   padding: 0 20%;
+}
+
+.slideshow-container {
+position: absolute;
+top:0;
+right:0;
+float:right;
+z-index:-999999;
+height:100%;
+width: 100%;
+margin: 0;
+padding: 0;
+}
+
+.slideshow, .slideshow div {
+height: 100%;
+width: 100%;
+background-size: 100%;
+/*float:right;*/
+text-align:right;
+
+}
+.slideshow-img{
+float:right;
+height:100%;
+/*width:100%;*/
 }
 
 

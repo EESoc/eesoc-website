@@ -67,7 +67,7 @@ class CronController extends BaseController {
         $credentials = new ImperialCollegeCredential($username, Input::get('password'));
 
         $http_client = new Guzzle\Http\Client;
-        //$http_client->setSslVerification(false);
+        $http_client->setSslVerification(false);
 
         $eactivities_client = new EActivities\Client($http_client);
 
@@ -75,7 +75,7 @@ class CronController extends BaseController {
             return Response::json(['success' => false, 'message' => 'Error signing in! Please check your username and password.']);
         }
 
-        $eactivities_client->changeRole(Input::get('role_key'));
+        //$eactivities_client->changeRole(Input::get('role_key'));
 
         $purchases = array_merge(
             $eactivities_client->getPurchasesList(Product::ID_EESOC_LOCKER), // EESoc Locker
@@ -85,7 +85,13 @@ class CronController extends BaseController {
         $emails_sent = 0;
 
         foreach ($purchases as $purchase) {
+
+            //eAcivities Update 2017 temp fix
+            $purchase['cid'] = $purchase['c_id/_card_number'];
+            $purchase['last_name'] = $purchase['surname'];
+
             $sale = Sale::find($purchase['order_no']);
+
             if (!$sale) {
                 $sale = new Sale;
                 $sale->id = $purchase['order_no'];
@@ -96,22 +102,18 @@ class CronController extends BaseController {
             if (!$user) {
                 $user = new User;
                 $user->username = $purchase['login'];
-                $user->cid      = $purchase['c_id/_card_number'];
-                $user->name     = "{$purchase['first_name']} {$purchase['surname']}";
+                $user->cid      = $purchase['cid'];
+                $user->name     = "{$purchase['first_name']} {$purchase['last_name']}";
                 $user->email    = $purchase['email'];
                 $user->save();
             }
 
             $sale->user()->associate($user);
 
-            foreach (['year', 'date', 'first_name', 'email', 'product_name', 'product_id', 'quantity', 'unit_price', 'gross_price'] as $attribute) {
+            foreach (['year', 'date', 'cid', 'first_name', 'last_name', 'email', 'product_name', 'product_id', 'quantity', 'unit_price', 'gross_price'] as $attribute) {
                 $sale->{$attribute} = $purchase[$attribute];
             }
-			
-            $sale->cid      = $purchase['c_id/_card_number'];
             $sale->username = $purchase['login'];
-			//Changed in 2015/16... added for consistency with before
-			$sale->last_name = $purchase['surname'];
             $sale->save();
 
             // Is a locker sale and not notified
@@ -126,10 +128,10 @@ class CronController extends BaseController {
             // Is a dinner sale
             if ($sale->product_id === Product::ID_EESOC_DINNER) {
                 if (!DinnerSale::where('sale_id', '=', $sale->id)->exists()) {
-					$dinner_sale = new DinnerSale;
+                    $dinner_sale = new DinnerSale;
                     $dinner_sale->user()->associate($user);
                     $dinner_sale->quantity = $sale->quantity;
-                    $dinner_sale->origin = 'EActivities';
+                    $dinner_sale->origin = 'eactivities';
                     $dinner_sale->sale()->associate($sale);
                     $dinner_sale->save();
                 }

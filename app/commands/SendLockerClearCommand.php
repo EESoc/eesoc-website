@@ -11,14 +11,14 @@ class SendLockerIssuesCommand extends Command {
      *
      * @var string
      */
-    protected $name = 'locker:send_issues';
+    protected $name = 'locker:send_clear';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Send locker issues reporting email to all owners.';
+    protected $description = 'Send end-of-year locker clear email to all owners.';
 
     /**
      * Create a new command instance.
@@ -44,14 +44,24 @@ class SendLockerIssuesCommand extends Command {
             if ( ! $user->lockers()->exists()) {
                 continue;
             }
+	
+			$locker_name = "";
+			
+			foreach ($user->lockers() as $locker){
+				$locker_name .= $locker->name." ";
 				
+			}
+			
+			$locker_name = trim($locker_name);
+			
+			
             $this->info(sprintf(
                 '`%s` is an owner for locker `%s`.',
                 $user->username, $locker_name
             ));
 
             if ( ! $this->option('pretend')) {
-                Notification::sendLockerIssues($user);
+                Notification::sendLockerClear($user);
             }
         }
     }

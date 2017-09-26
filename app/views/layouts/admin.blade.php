@@ -74,16 +74,17 @@
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Newsletter
+                Email
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a href="{{{ route('admin.emails.index') }}}">Emails</a>
+                  <a href="{{{ route('admin.emails.index') }}}">Main List</a>
                 </li>
-                <li>
-                  <a href="{{{ route('admin.newsletters.index') }}}">Lists</a>
-                </li>
+                <!--do not use as no controller exists, also comment on href-->
+                <!--li>
+                  <a href=" { {# { route('admin.newsletters.index') }}}">Lists</a>
+                </li-->
                 <li>
                   <a href="{{{ URL::action('Barryvdh\ElfinderBundle\ElfinderController@showIndex') }}}">File Manager</a>
                 </li>

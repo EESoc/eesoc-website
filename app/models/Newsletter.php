@@ -30,10 +30,22 @@ class Newsletter extends Eloquent {
 
         if ( ! empty($student_group_ids)) {
             $users = User::where('is_member','=',1)->whereIn('student_group_id', $student_group_ids)->get();
-            foreach ($users as $user) {
+            /*
+			$users = User::where('is_member','=',1)->where(function ($query) use ($student_group_ids) {
+						return $query->whereIn('student_group_id', $student_group_ids)
+							  ->orWhere('student_group_id', 'IS', "NULL");
+					})->get();
+					*/
+			foreach ($users as $user) {
                 $emails[$user->email] = true;
             }
-        }
+
+		}
+		
+		$ousideUsers = User::where('is_member','=',1)->whereNull('student_group_id')->get();
+        foreach ($ousideUsers as $user) {
+                $emails[$user->email] = true;
+            }
 
         foreach ($this->subscriptions()->with('user')->get() as $subscription) {
             if ($subscription->user && $subscription->user->email) {

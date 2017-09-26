@@ -107,6 +107,29 @@ class Notification {
         return $mailer->send($message);
     }
 
+	 public static function sendLockerClear(User $user, String $locker_name)
+    {
+        extract(static::mailInstances());
+			
+
+        $subject = 'Clearing Your Locker ('.$locker_name.')';
+
+        $message->setFrom(array('lockers@eesoc.com' => 'EESoc Locker Team'));
+        $message->setReplyTo('lockers@eesoc.com');
+        $message->setTo($user->email);
+        $message->setSubject($subject);
+
+        $html = View::make('emails.locker_clear')
+            ->with('subject', $subject)
+            ->with('user', $user)
+			->with('locker_name', $locker_name)
+            ->render();
+        $message->setBody($html, 'text/html');
+        $message->addPart('End of year locker procedures. Please read!', 'text/plain');
+
+        return $mailer->send($message);
+    }
+
 
     /**
      * Returns mail transport, mailer and message instance.

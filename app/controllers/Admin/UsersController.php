@@ -25,7 +25,7 @@ class UsersController extends BaseController {
      */
     public function index()
     {
-        $users = User::with('studentGroup')->adminsFirst();
+        $users = User::with('studentGroup')->adminsFirst()->orderBy('is_member', 'DESC');
 
         $request_params = array(
             'filter'   => Input::get('filter'),

@@ -49,7 +49,7 @@ class LockersController extends BaseController {
     public function getRent()
     {
         return View::make('lockers.redirect_to_shop')
-            ->with('redirect_to', 'https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/7721/locker-rental');
+            ->with('redirect_to', 'https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/14123/locker-rental');
     }
 
     public function putCancelReservation($id)
@@ -69,7 +69,7 @@ class LockersController extends BaseController {
     {
         $locker = Locker::findOrFail($id);
 
-        if ( ! $locker->is_taken) {
+        if ( ! $locker->is_taken && !$locker->is_transition) {
             $locker->status = Locker::STATUS_RESERVED;
             $locker->save();
         }
@@ -84,7 +84,7 @@ class LockersController extends BaseController {
 
         if ( ! $locker->canBeClaimedBy(Auth::user())) {
             return Redirect::action('LockersController@getIndex')
-                ->with('danger', 'You cannot claim this locker');
+                ->with('danger', 'You cannot claim this locker - have you brought a locker rental yet? Click "Rent a Locker" below.');
         }
 
         return $locker;

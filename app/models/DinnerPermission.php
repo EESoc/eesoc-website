@@ -35,7 +35,7 @@ class DinnerPermission {
 
     public function canLeaveGroup(DinnerGroup $group)
     {
-        return $this->user->dinner_group_member &&
+        return $this->user->dinner_group_member && ($this->user->id != $group->owner_id  || DinnerGroup::CAN_LEAVE_OWN_GRP) &&
                $this->user->dinner_group_member->dinner_group->id === $group->id;
     }
 }

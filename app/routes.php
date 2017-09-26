@@ -44,19 +44,40 @@ Route::post('oauth/access_token', ['uses' => 'OAuthController@postAccessToken'])
 Route::get('oauth/authorize', ['before' => 'check-authorization-params|auth', 'uses' => 'OAuthController@getAuthorize']);
 Route::get('api/me', ['before' => 'oauth:basic', 'uses' => 'ApiController@getMe']);
 
+#Event API
+Route::post('api/event/cid', 'ApiController@postEventCID');
+Route::post('api/event/name', 'ApiController@postEventName');
+
 # TV
 Route::get('tv', 'TVController@show');
 
 # Sponsor Link
 Route::get('bae', function()
 {
-    return Redirect::to('https://career012.successfactors.eu/sfcareer/jobreqcareer?jobId=43&company=BAE&username', 303, ['X-Why' => 'Yes']);
+    return Redirect::to('https://career012.successfactors.eu/career?company=BAE&site=SITE_ID', 303, ['X-Why' => 'Yes']);
 });
 
 //Temp short linking
 Route::get('dinner', function()
 {
     return Redirect::to('https://eesoc.com/dashboard/dinner/groups', 302);
+});
+Route::get('mumsanddads', function()
+{
+    return Redirect::to('https://eesoc.com/mums-and-dads', 302);
+});
+Route::get('mums_and_dads', function()
+{
+    return Redirect::to('https://eesoc.com/mums-and-dads', 302);
+});
+
+Route::get('locker', function()
+{
+    return Redirect::to('https://eesoc.com/dashboard/lockers', 302);
+});
+Route::get('lockers', function()
+{
+    return Redirect::to('https://eesoc.com/dashboard/lockers', 302);
 });
 
 /**
@@ -125,7 +146,7 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
     Route::resource('logs', 'Admin\LogsController', ['only' => ['index', 'show']]);
 
     # Newsletters
-    Route::resource('newsletters', 'Admin\NewslettersController');
+    // Route::resource('newsletters', 'Admin\NewslettersController');
 
     # Pages
     Route::resource('pages', 'Admin\PagesController', ['except' => ['show']]);

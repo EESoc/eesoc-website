@@ -10,9 +10,18 @@ class LogStorage {
     {
         $files = glob(storage_path().'/logs/log-*.txt');
         $logs = [];
-        foreach ($files as $file) {
+        $sorted = [];
+        
+		foreach ($files as $file) {
+			$sorted[filectime($file)] = $file;
+		}
+        
+		krsort($sorted, SORT_NUMERIC);
+		
+		foreach ($sorted as $file) {
             $logs[basename($file)] = new static($file);
         }
+		
         return $logs;
     }
 

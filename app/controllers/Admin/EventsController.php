@@ -18,7 +18,8 @@ class EventsController extends BaseController {
      */
     public function index()
     {
-        $events = EventDay::orderBy(DB::raw('ISNULL(`date`), `date`'))
+        $events = EventDay::orderBy('hidden')
+			->orderBy(DB::raw('ISNULL(`date`), `date`'))
             ->with('category')
             ->get();
 

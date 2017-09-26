@@ -37,14 +37,6 @@ class SyncEActivitiesCommand extends Command implements Loggable {
      */
     public function fire()
     {
-        $this->info('addWarning: This is a broken feature, will be fixed soon.');
-        //$username = $this->ask('What is your Imperial College login?');
-        //$password = $this->secret('Password?');
-        
-        //api key can be stored and retrieved from config file
-
-        //$credentials = new ImperialCollegeCredential($username, $password);
-
         $http_client = new Guzzle\Http\Client;
         //$http_client->setSslVerification(false);
 

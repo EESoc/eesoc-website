@@ -94,8 +94,20 @@ class NewsletterEmail extends Eloquent {
             // Process student groups
             $student_group_ids = $newsletter->student_groups->lists('id');
             if ( ! empty($student_group_ids)) {
-                $users = User::whereIn('student_group_id', $student_group_ids)
-                    ->whereNotIn('id', function($query) {
+				//TO DO fix
+                /*$users = User::where('is_member','=',1)->where(function ($query) use ($student_group_ids) {
+						return $query->whereIn('student_group_id', $student_group_ids)
+							  ->orWhere('student_group_id', 'IS', "NULL");
+					})->whereNotIn('id', function($query) {
+                        // Remove duplicate
+                        return $query
+                            ->select('user_id')
+                            ->from('newsletter_email_queue')
+                            ->where('newsletter_email_id', '=', $this->id);
+                    })
+                    ->get();*/
+					$users = User::where('is_member','=',1)->whereIn('student_group_id', $student_group_ids)
+					->whereNotIn('id', function($query) {
                         // Remove duplicate
                         return $query
                             ->select('user_id')
@@ -111,6 +123,27 @@ class NewsletterEmail extends Eloquent {
                         'user_id'             => $user->id,
                     ];
                 }
+            }
+			
+			$outsideUsers = User::where('is_member','=',1)
+					->whereNull('student_group_id')
+					->whereNotIn('id', function($query) {
+                        // Remove duplicate
+                        return $query
+                            ->select('user_id')
+                            ->from('newsletter_email_queue')
+                            ->where('newsletter_email_id', '=', $this->id);
+                    })
+					->get();
+   
+			// Get subscribers
+            foreach ($outsideUsers as $user) {
+				$inserts[$user->email] = [
+					'newsletter_email_id' => $this->id,
+					'tracker_token'       => str_random(20),
+					'to_email'            => $user->email,
+					'user_id'             => $user->id,
+                    ];
             }
 
             // Process normal email subscriptions
@@ -204,12 +237,14 @@ class NewsletterEmail extends Eloquent {
                     // Internal emails
                     $mailer = $internal_mailer;
 
-                    $message->setFrom([$this->from_email => $this->from_name]);
+                    //$message->setFrom([$this->from_email => $this->from_name]);
+                    $message->setFrom(["eesoc@imperial.ac.uk" => $this->from_name]);
                 } else {
                     $mailer = $external_mailer;
 
-                    $message->setFrom(['no-reply@eesoc.com' => $this->from_name]);
-                }
+//                    $message->setFrom(['no-reply@eesoc.com' => $this->from_name]);
+$message->setFrom(["eesoc@imperial.ac.uk" => $this->from_name]);  
+  }
 
                 if ($mailer->send($message)) {
                     // Mark email queue as sent

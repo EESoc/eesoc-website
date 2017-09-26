@@ -14,13 +14,15 @@ use \Str;
 class Client {
 
     const URL_BASE = 'https://eactivities.union.ic.ac.uk';
+    const YEAR_CODE = '17-18';
 
-    const PATH_COMMON_AJAX_HANDLER = '/';
-    const PATH_CSP_DETAILS         = '/API/CSP/603';
-    const PATH_COMMITEE_REPORT   = '/API/CSP/603/reports/committee?year=17-18';
-    const PATH_FINANCE_INCOME_SHOP = '/finance/income/shop/603';
-    const PATH_MEMBERS_REPORT      = '/API/CSP/603/reports/members?year=17-18';
-    const PATH_PURCHASE_REPORT     = '/finance/income/shop/group/csv/%d';
+    const PATH_CSP_DETAILS          = '/API/CSP/603';
+    const PATH_COMMITTEE_REPORT     = '/API/CSP/603/reports/committee?year={constant(self::YEAR_CODE)}';
+    const PATH_PRODUCTS_REPORT      = '/API/CSP/603/reports/products?year={constant(self::YEAR_CODE)}';
+    const PATH_PRODUCT_INFO         = '/API/CSP/603/products/%d';
+    const PATH_PRODUCT_SALES        = '/API/CSP/603/products/%d/sales';
+    const PATH_MEMBERS_REPORT       = '/API/CSP/603/reports/members?year={constant(self::YEAR_CODE)}';
+    const PATH_PURCHASE_REPORT      = '/finance/income/shop/group/csv/%d';
 
     const NAME_SESSION_COOKIE = 'ICU_eActivities';
 
@@ -82,23 +84,12 @@ class Client {
      */
     public function getBasicInfo()
     {
-        $response = $this->getAjaxHandlerResponse(self::PATH_CSP_DETAILS);
-        
-        $html_content = $response->getBody(true);
-        $json_array=array(
-            
-            'content'=>50,
-            'html_content'=>$html_content
-            );
+        return $this->getJSONResponse(self::PATH_CSP_DETAILS);
+    }
 
-        if ($response->isSuccessful()){
-            return  $response->json();
-        }
-        else {
-             //due to some formatting issues last %s must not have quotes!!, getBody(true) returns string but we must encode to remove formatting issues.
-             return json_decode(sprintf('{"error": "unsuccessful response", "status_code":"%s", "response_body": %s }', $response->getStatusCode(), json_encode($response->getBody(true))));
-        }
-
+    public function getCommitteeList()
+    {
+        return $this->getJSONResponse(self::PATH_COMMITTEE_REPORT);
     }
 
 
@@ -109,8 +100,52 @@ class Client {
      */
     public function getMembersList()
     {
-        $response = $this->getAjaxHandlerResponse(self::PATH_MEMBERS_REPORT);
+        return $this->getJSONResponse(self::PATH_MEMBERS_REPORT);
+    }
+
+    public function getProductList()
+    {
+        return $this->getJSONResponse(self::PATH_PRODUCTS_REPORT);
+    }
+
+    public function getProductInfo($product_id)
+    {
+        return $this->getJSONResponse(sprintf(self::PATH_PRODUCT_INFO, $product_id));
+    }
+
+    public function getPurchasesList($product_id)
+    {
+        //TODO: UPDATE THIS for new api!!!
         
+
+
+        $response = $this->getJSONResponse(sprintf(self::PATH_PRODUCT_SALES, $product_id));
+        // For each product, rewrite the date&time as d/m/Y format (still a string), for consistency with old data (as in sales table)
+        // Using new method cause old method was now returning NULL for some reason
+        // Returns an array which is then returned by function
+        // Format from API: 2017-02-26 18:03:00 need to convert this to 2017-02-26 which is the only format db accepts.
+        return array_map(function($product) {
+            $product['SaleDateTime'] = DateTime::createFromFormat('Y-m-d H:i:s', $product['SaleDateTime'])->format('Y-m-d');
+            return $product;
+        }, $response);
+
+    }
+
+
+    /**
+     * Send a GET request to API
+     *
+     * @param  string $request_url
+     * @return JSON Response
+     */
+    protected function getJSONResponse($request_url)
+    {
+        
+        $request =  $this->client->get($request_url, [
+            'X-API-Key' => \Config::get('eactivities.api_key')
+        ]);
+        $response = $request->send();
+
         if ($response->isSuccessful()){
             return  $response->json();
         }
@@ -118,61 +153,6 @@ class Client {
              //due to some formatting issues last %s must not have quotes!!, getBody(true) returns string but we must encode to remove formatting issues.
              return json_decode(sprintf('{"error": "unsuccessful response", "status_code":"%s", "response_body": %s }', $response->getStatusCode(), json_encode($response->getBody(true))));
         }
-    }
-
-    public function getPurchasesList($product_id)
-    {
-        //TODO: UPDATE THIS for new api!!!
-        $response = $this->getPageResponse(self::PATH_FINANCE_INCOME_SHOP);
-        //if ( ! $this->isSignedIn($response)) {
-            //return []; // @todo raise exception?
-        //}
-
-        // 1725: Purchases Summary
-        $response = $this->activateTabs(['1725']);
-        if ( ! $response->isSuccessful()) {
-            return []; // @todo raise exception?
-        }
-
-        $request = $this->client->get(sprintf(self::PATH_PURCHASE_REPORT, $product_id));
-        $response = $request->send();
-        $body = $response->getBody();
-        $result = $this->parseCsv($body);
-        $result = array_map(function($product) use ($product_id) {
-            $product['product_id'] = $product_id;
-			$product['date'] = DateTime::createFromFormat('d/h/Y', $product['date']);
-            return $product;
-        }, $result);
-
-        return $result;
-    }
-
-
-    /**
-     * Send a GET request
-     *
-     * @param  integer $path
-     * @return Response
-     */
-    protected function getPageResponse($path = null)
-    {
-        $request = $this->client->get($path);
-        return $request->send();
-    }
-
-    /**
-     * Send a GET request to API
-     *
-     * @param  array $params
-     * @return Response
-     */
-    protected function getAjaxHandlerResponse($request_url)
-    {
-        
-        $request =  $this->client->get($request_url, [
-            'X-API-Key' => \Config::get('eactivities.api_key')
-        ]);
-        return $request->send();
     }
 
 

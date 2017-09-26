@@ -16,8 +16,11 @@ class MumsAndDadsController extends BaseController {
         $parentOf = $me->parent_of_family_id;
         $childOf = $me->child_of_family_id;
 
+		$isParent = false;
+		
         if (!is_null($parentOf)){
             $groupId = $parentOf;
+			$isParent = true;
         }else if(!is_null($childOf)){
             $groupId = $childOf;
         }else{
@@ -28,12 +31,26 @@ class MumsAndDadsController extends BaseController {
         $parents = User::familyParent($groupId)->get();
         $children = User::familyChild($groupId)->where('name','<>',$me->name)->get();
 
-
+		$roomtext = "";
+		
+		if ($groupId >= 1 && $groupId <= 14){
+			$roomtext = "403a";
+		}else if ($groupId >= 15 && $groupId <= 26){
+			$roomtext = "403b";
+		}else if ($groupId >= 27 && $groupId <= 40){
+			$roomtext = "406";
+		}else if ($groupId >= 41 && $groupId <= 52){
+			$roomtext = "407a";
+		}
+		
 
         $myname = explode(" ",$me->name);
 
        return View::make('mums_and_dads.index')
            ->with('me', $myname[0])
+            ->with('group', $groupId)
+            ->with('room', $roomtext)
+            ->with('isParent', $isParent)
             ->with('parents', $parents)
             ->with('children', $children);
 
