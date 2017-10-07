@@ -30,6 +30,11 @@ class Sale extends Eloquent implements PresentableInterface {
         return $this->unit_price_in_pence / 100;
     }
 
+    public function getGrossPriceAttribute()
+    {
+        return ($this->unit_price_in_pence / 100) * ($this->quantity);
+    }
+
     /*public function setDateAttribute($date)
     {
         $this->date = DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d');

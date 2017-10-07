@@ -81,6 +81,16 @@ class SyncEActivitiesSalesCommand extends Command {
         $product_info = $eactivities_client->getProductInfo($productId);
         $purchases = $eactivities_client->getPurchasesList($productId);
 
+        if (array_key_exists('error', $product_info) || array_key_exists('error', $purchases)){
+            $this->error("An error occurred, see dump below:\n");
+            $this->info("\$product_info =>");
+            print_r($product_info);
+            $this->info("\$purchases =>");
+            print_r($purchases);
+            $this->error("Failed to sync product with ID {$productId}, terminating...");
+            return;
+        }
+        
         //debug only
         /*$this->info("Current Product: " . $product_info['Name']); 
         $this->info(print_r($purchases));*/
@@ -119,7 +129,7 @@ class SyncEActivitiesSalesCommand extends Command {
             $sale->user()->associate($user); //Create link using foreign key, sets user_id field
 
             //Add remaining fields in sale record
-            //API doesn't return year code so need to use our own const (please update constant every year!)
+            //API doesn't return year code so need to use our own calculated value
             $sale->year         = $year_code;
             $sale->product_name = $product_info['Name'];
             $sale->date         = $purchase['SaleDateTime'];

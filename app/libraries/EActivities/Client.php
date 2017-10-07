@@ -124,10 +124,15 @@ class Client {
         // Using new method cause old method was now returning NULL for some reason
         // Returns an array which is then returned by function
         // Format from API: 2017-02-26 18:03:00 need to convert this to 2017-02-26 which is the only format db accepts.
-        return array_map(function($product) {
-            $product['SaleDateTime'] = DateTime::createFromFormat('Y-m-d H:i:s', $product['SaleDateTime'])->format('Y-m-d');
-            return $product;
-        }, $response);
+        if (!array_key_exists('error', $response)){
+            return array_map(function($product) {
+                $product['SaleDateTime'] = DateTime::createFromFormat('Y-m-d H:i:s', $product['SaleDateTime'])->format('Y-m-d');
+                return $product;
+            }, $response);
+        }
+        else {
+            return $response; //just directly return error, no parsing required.
+        }
 
     }
 

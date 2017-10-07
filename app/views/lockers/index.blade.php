@@ -24,7 +24,7 @@
 			</a>
 		  </div>
 		  <div class="col-lg-6">
-			<a href="http://goo.gl/forms/5ii2IfE5dp" class="btn btn-danger btn-block btn-lg" data-disable-with="Please wait&hellip;">
+			<a href="https://goo.gl/forms/3Hl6MtWflrcbtXHz1" class="btn btn-danger btn-block btn-lg" data-disable-with="Please wait&hellip;">
 			  <span class="glyphicon glyphicon-envelope"></span>
 			  Report an Issue
 			</a>
@@ -34,7 +34,7 @@
     <div class="col-lg-6">
       @if ( ! $lockers_owned->isEmpty())
         <div class="panel panel-success">
-          <div class="panel-heading">Lockers I currently own</div>
+          <div class="panel-heading">Lockers I currently own / could renew</div>
           <div class="panel-body">
             <div class="row">
               @foreach ($lockers_owned as $locker)
@@ -47,7 +47,15 @@
                   <h4>
                     {{{ $locker->lockerCluster->lockerFloor->name }}}
                     <small>{{{ $locker->lockerCluster->name }}}</small>
-                  </h4>
+                  
+				  @if ($locker->is_transition && $locker->isOwnedBy(Auth::user()))
+						@if ($unclaimed_lockers_count > 0)
+							<a href="{{{ URL::action('LockersController@getClaim', $locker->id) }}}" class="btn btn-success btn-block btn-lg" data-disable-with="Wait&hellip;">Renew</a>					
+						@else
+							<a href="{{{ action('LockersController@getRent') }}}" class="btn btn-success btn-block btn-lg" data-disable-with="Wait&hellip;">Renew</a>
+						@endif
+				  @endif
+				  </h4>
                 </div>
               @endforeach
             </div>
@@ -114,19 +122,44 @@
                     <?php $locker = $locker->getPresenter(); ?>
                     <td class="{{{ $locker->{$locker->isOwnedBy(Auth::user()) ? 'owner_css_class' : 'css_class'} }}}" id="{{{ $locker->anchor_id }}}">
                       <h4>{{{ $locker->name }}}</h4>
-                      @if ($locker->isOwnedBy(Auth::user()))
+                      @if ($locker->isOwnedBy(Auth::user()) && $locker->is_taken)
                         <a href="#" class="btn btn-default btn-sm btn-block disabled">Owned</a>
+                      @elseif ($locker->is_transition && $locker->isOwnedBy(Auth::user()))
+						            @if ($unclaimed_lockers_count > 0)
+							            <a href="{{{ URL::action('LockersController@getClaim', $locker->id) }}}" class="btn btn-success btn-sm btn-block"  data-disable-with="Wait&hellip;">Renew Now!</a>							
+						            @else
+							            <a href="{{{ action('LockersController@getRent') }}}" class="btn btn-success btn-sm btn-block"  data-disable-with="Wait&hellip;">Renew Now!</a>
+						            @endif
+					            @elseif ($locker->audit == "broken")
+                          @if (Auth::user()->is_admin)
+                            <a href="{{{ action('LockersController@putMakeLocked', $locker->id) }}}" class="btn btn-danger btn-sm btn-block" data-method="put" data-confirm="Make locked?">Broken</a>
+                          @else
+                            <a href="#" class="btn btn-danger btn-sm btn-block disabled">Broken</a>
+                          @endif
+                      @elseif ($locker->is_vacant && $locker->audit == "locked")
+                          @if (Auth::user()->is_admin)
+                            <a href="{{{ action('LockersController@putMakeAvailable', $locker->id) }}}" class="btn btn-danger btn-sm btn-block" data-method="put" data-confirm="Make available?">Locked</a>
+                          @else
+                            <a href="#" class="btn btn-danger btn-sm btn-block disabled">Locked</a>
+                          @endif     
                       @elseif ($locker->is_vacant && ! $locker->canBeClaimedBy(Auth::user()))
-                        <a href="#" class="btn btn-success btn-sm btn-block disabled">Available</a>
-                      @else
-                        {{ $locker->status_action }}
+                          @if (Auth::user()->is_admin)
+                            <a href="{{{ action('LockersController@putMakeBroken', $locker->id) }}}" class="btn btn-success btn-sm btn-block" data-method="put" data-confirm="Make broken?">Available</a>
+                          @else
+                            <a href="#" class="btn btn-success btn-sm btn-block disabled">Available</a>
+                          @endif
+					            @else
+                          {{ $locker->status_action }}
                       @endif
+					  
                       @if (Auth::user()->is_admin)
-                        @if ($locker->is_taken)
+                        @if ($locker->is_taken || $locker->is_transition)
+                          <!-- If taken, then show ownername -->
                           @if ($locker->owner)
                             <a href="#" class="btn btn-default btn-xs btn-block disabled" style="overflow: hidden">{{{ $locker->owner->name }}}</a>
                           @endif
                         @else
+                          <!-- Else allow admin to reserve/unreserve -->
                           @if ($locker->is_reserved)
                             <a href="{{{ action('LockersController@putCancelReservation', $locker->id) }}}" class="btn btn-warning btn-xs btn-block" data-method="put" data-confirm="Are you sure?">Cancel</a>
                           @else
