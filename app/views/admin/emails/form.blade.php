@@ -21,6 +21,7 @@
 
       var refreshPreview = function() {
         var htmlcontent = this.exportFile(null, 'html');
+        //console.log(htmlcontent) Content is loaded (without timeout), but doesn't replace in DOM, must be that previewframe.find() fails.
         htmlcontent = htmlcontent.replace(/<p>/g,"<p style=\"margin: 1em 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #606060;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 14px;line-height: 150%;text-align: left;\">")
         .replace(/<h1>/g,"<h1 style=\"margin: 0;padding: 0;display: block;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 35px;font-style: normal;font-weight: 300;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;\">")
         .replace(/<h2>/g,"<h2 style=\"margin: 0;padding: 0;display: block;font-family: HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', 'Trade Gothic W01 Light', Helvetica, Arial, 'Lucida Grande', sans-serif;font-size: 28px;font-style: normal;font-weight: 300;line-height: 125%;letter-spacing: -.5px;text-align: left;color: #606060 !important;\">")
@@ -31,9 +32,12 @@
 
       editor.on('update', refreshPreview);
 
-      // @TODO fix this
+      // Fix: Add a simple timeout
       $previewFrame.ready(function() {
-        refreshPreview.call(editor);
+        setTimeout(function(){
+          refreshPreview.call(editor);
+        }, 500)
+       
       });
 
     })();
@@ -72,6 +76,9 @@
             </button>
             <button type="submit" class="btn btn-default" name="action" value="send_test">
               Send Test Email
+            </button>
+            <button type="submit" class="btn btn-default" name="action" value="send_test_to_president">
+              Send To President
             </button>
           @endif
 

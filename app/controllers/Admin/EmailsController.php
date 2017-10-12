@@ -268,5 +268,11 @@ class EmailsController extends BaseController {
             return Redirect::route('admin.emails.edit', $email->id)
                 ->with('success', 'Test Email has been successfully sent');
         }
+
+        if (Input::get('action') === 'send_test_to_president') {
+            $email->sendTestToPresident();
+            return Redirect::route('admin.emails.edit', $email->id)
+                ->with('success', 'Test Email to president has been successfully sent');
+        }
     }
 }

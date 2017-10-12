@@ -291,6 +291,32 @@ $message->setFrom(["eesoc@imperial.ac.uk" => $this->from_name]);
     }
 
     /**
+     * Sends a test email to a user
+     * @param  User   $user
+     * @return integer
+     */
+     public function sendTestToPresident()
+     {
+         if (App::environment() === 'local') {
+             // Mailcatcher
+             $transport = Swift_SmtpTransport::newInstance('localhost', 1025);
+         } else {
+             $transport = Swift_MailTransport::newInstance();
+         }
+ 
+         $mailer = Swift_Mailer::newInstance($transport);
+ 
+         $message = $this->buildMessage();
+ 
+         $message->setTo("eesoc.president@imperial.ac.uk");    // $user->email
+         $message->setFrom(["eesoc.webmaster@imperial.ac.uk" => "EESoc Webmaster"]); //$this->from_email
+ 
+         $message->setBody(str_replace('<tracking_pixel>', '', $message->getBody()));
+ 
+         return $mailer->send($message);
+     }
+
+    /**
      * Build Swift_Message instance with all newsletter email data.
      * @return Swift_Message
      */

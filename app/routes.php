@@ -39,6 +39,15 @@ Route::controller('sponsors', 'SponsorsController');
 # Careers Fair
 Route::controller('careersfair', 'CareersFairController');
 
+# Beta
+# Events
+Route::controller('beta', 'BetaController');
+
+# API
+# API
+Route::controller('api/v2', 'ApiV2Controller');
+Route::post('api/v2/event', 'ApiV2Controller@postEvent');
+
 # Oauth
 Route::post('oauth/access_token', ['uses' => 'OAuthController@postAccessToken']);
 Route::get('oauth/authorize', ['before' => 'check-authorization-params|auth', 'uses' => 'OAuthController@getAuthorize']);
