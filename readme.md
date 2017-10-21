@@ -6,8 +6,8 @@
 Imperial College London EESoc's Offical Website Source Code
 
 ### Major Technologies Used
-* [Laravel 4](http://laravel.com/)
-* [Bootstrap 3](http://getbootstrap.com/)
+* [Laravel 4.0.7](http://laravel.com/)
+* [Bootstrap 3.0.0](http://getbootstrap.com/)
 
 ### Installation
 1. Rename `app/config/database.sample.php` to `app/config/database.php` and make modifications as necessary.
@@ -35,3 +35,15 @@ Certain folders within the repo must be write-able by the web process in order f
 - /app/storage
 - /public/files
 - /public/assets 
+
+
+### TODO
+
+Heres the todo for 2017/18, most items may not be completable due to time constraints but should be looked into in future.
+- [X] Use new API from union for sync functions
+- [ ] Upgrade laravel at least to level of PHP5.5
+- [ ] Upgrade bootstrap to v4
+- [ ] Create user/admin dashboard
+- [ ] Create minimalist + responsive public pages
+- [ ] Re-design website
+- [ ] Create custom subscribable lists for categorical newsletters
