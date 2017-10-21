@@ -12,7 +12,7 @@
     <link href="{{{ asset('assets/css/bootstrap.min.css') }}}" rel="stylesheet">
     <!-- <link href="{{{ asset('assets/css/bootstrap-theme.min.css') }}}" rel="stylesheet"> -->
     <link href="{{{ asset('assets/css/animate.min.css') }}}" rel="stylesheet">
-    <link href="{{{ asset('assets/css/admin.css') }}}" rel="stylesheet">
+    <link href="{{{ asset('assets/css/admin.css?t=1') }}}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -103,7 +103,7 @@
               </a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="{{{ route('admin.sales.index') }}}">EActivities Sales</a>
+                  <a href="{{{ URL::action('Admin\SalesController@getIndex') }}}">EActivities Sales</a>
                 </li>
                 <li>
                   <a href="{{{ route('admin.user-sign-ins.index') }}}">User Sign Ins</a>
@@ -145,10 +145,9 @@
           full-width
         @endif
       ">
-
+        
         @include('shared.flashes')
         @yield('content')
-
       </div>
     @show
 
@@ -156,7 +155,8 @@
       <footer id="credits">
         <hr>
         &copy; {{ date('Y') }}
-        Code by <a href="#">Jian Yuan Lee</a>
+        Code by <a href='&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#105;&#97;&#110;&#46;&#108;&#101;&#101;&#49;&#49;&#64;&#105;&#109;&#112;&#101;&#114;&#105;&#97;&#108;&#46;&#97;&#99;&#46;&#117;&#107;'>&#74;&#105;&#97;&#110;&#32;&#89;&#117;&#97;&#110;&#32;&#76;&#101;&#101;</a>
+          and <a href="https://github.com/EESoc/eesoc-website/graphs/contributors">others</a>
       </footer>
     </div>
 

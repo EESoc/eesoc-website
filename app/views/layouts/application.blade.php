@@ -22,6 +22,7 @@
     <!-- <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
     <!-- The time trick forces server to serve new version, even disabling browser cache doesn't help (its some sever time issue prob) -->
+    <!-- TODO: Revert to normal after final css -->
     <link href="{{ asset('assets/css/application.css?ts='.time()) }}" rel="stylesheet">
     <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/user.css') }}" rel="stylesheet">
@@ -58,12 +59,18 @@
                     Dashboard
                   </a>
                 </li>
-                 <li>
+                <li>
+                    <a href="{{{ url('dashboard/lockers') }}}">
+                      <span class="glyphicon glyphicon-lock"></span>
+                      Lockers
+                    </a>
+                </li>
+                 <!--li>
                     <a href="{{{ url('mums-and-dads') }}}">
                       <span class="glyphicon glyphicon-flag"></span>
                       Mums &amp; Dads
                     </a>
-                </li>
+                </li-->
                 @if (Auth::user()->is_admin)
                   <li>
                     <a href="{{{ url('admin') }}}">
@@ -80,19 +87,12 @@
                 </li>
               </ul>
             @else
-				 <div class="btn-group pull-right" role="group">
-		  @if (time() < strtotime("2015-10-06"))
-                 
-				<a href="{{{ url('mums-and-dads') }}}" class="btn btn-info">
-				  <span class="glyphicon glyphicon-flag"></span>
-				  Mums &amp; Dads
-				</a>
-            @endif
-				<a href="{{{ action('SessionsController@getNew') }}}" class="btn btn-primary">
-                <span class="glyphicon glyphicon-lock"></span>
-                Sign In
-				</a>
-			</div>
+				      <div class="btn-group pull-right" role="group">
+				        <a href="{{{ action('SessionsController@getNew') }}}" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-lock"></span>
+                    Sign In
+				        </a>
+			        </div>
             @endif
           </div>
         </nav>
@@ -120,15 +120,21 @@
                   <li>
                     <a href="{{{ action('UsersController@getDashboard') }}}">
                       <span class="glyphicon glyphicon-wrench"></span>
-                      Settings
+                      Dashboard
                     </a>
                   </li>
-					 <li>
-					<a href="{{{ url('mums-and-dads') }}}">
-					  <span class="glyphicon glyphicon-flag"></span>
-					  Mums &amp; Dads
-					</a>
-					</li>
+                  <li>
+                    <a href="{{{ url('dashboard/lockers') }}}">
+                      <span class="glyphicon glyphicon-lock"></span>
+                      Lockers
+                    </a>
+                  </li>
+					        <!--li>
+					          <a href="{{{ url('mums-and-dads') }}}">
+					            <span class="glyphicon glyphicon-flag"></span>
+					              Mums &amp; Dads
+					          </a>
+					        </li-->
                   <li>
                     <a href="{{{ action('SessionsController@deleteDestroy') }}}" data-method="delete">
                       <span class="glyphicon glyphicon-off"></span>
@@ -137,18 +143,12 @@
                   </li>
                 @else
 					
-				 <div class="btn-group" role="group">
-					@if (time() < strtotime("2015-10-06"))
-					<a href="{{{ url('mums-and-dads') }}}" class="btn btn-info">
-					  <span class="glyphicon glyphicon-flag"></span>
-					  Mums &amp; Dads
-					</a>
-					@endif
+				        <div class="btn-group" role="group">
                   <a href="{{{ action('SessionsController@getNew') }}}" class="btn btn-primary">
                     <span class="glyphicon glyphicon-lock"></span>
                     Sign In
                   </a>
-				</div>
+				        </div>
                 @endif
               </ul>
               <ul class="nav navbar-nav navbar-right">
@@ -164,8 +164,8 @@
                     Events
                   </a>
                 </li>
-                <li class="{{ Request::is('/careersfair') ? 'active' : '' }}">
-                  <a href="{{ url('/careersfair') }}">
+                <li class="{{ Request::is('careersfair') ? 'active' : '' }}">
+                  <a href="{{ url('careersfair') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     Careers Fair
                   </a>
@@ -189,8 +189,8 @@
                       </li>
                     </ul>
                 </li -->
-                <li class="{{ Request::is('/guide') ? 'active' : '' }}">
-                  <a href="{{ url('/guide') }}">
+                <li class="{{ Request::is('guide') ? 'active' : '' }}">
+                  <a href="{{ url('guide') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     Guide Book
                   </a>
@@ -201,14 +201,12 @@
                     Sponsors
                   </a>
                 </li>
-                @if (Auth::check() and Auth::user()->is_admin)
-                <li class="{{ Request::is('/about') ? 'active' : '' }}">
-                  <a href="{{ url('/about') }}">
+                <li class="{{ Request::is('about') ? 'active' : '' }}">
+                  <a href="{{ url('about') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     About
                   </a>
                 </li>
-                @endif
               </ul>
             </div><!-- /.navbar-collapse -->
           </div>

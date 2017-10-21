@@ -17,7 +17,7 @@
         <th>Starts At</th>
         <th>Ends At</th>
         <th>Location</th>
-        <th></th>
+        <th style="width: 160px;"></th>
       </tr>
     </thead>
     <tbody>
@@ -42,13 +42,21 @@
           <td>{{{ $event->starts_at }}}</td>
           <td>{{{ $event->ends_at }}}</td>
           <td>{{{ $event->location }}}</td>
-          <td class="text-right">
+          <td class="text-right" style="width: 160px;">
             @if ($event->hidden)
-              <a href="{{{ action('Admin\EventsController@putVisibility', [$event->id, 'unhide']) }}}" data-method="put" class="btn btn-success">Unhide</a>
+              <a href="{{{ action('Admin\EventsController@putVisibility', [$event->id, 'unhide']) }}}" data-method="put" class="btn-sm btn-success">
+                <span class="glyphicon glyphicon-eye-open"></span>
+              </a>
             @else
-              <a href="{{{ action('Admin\EventsController@putVisibility', [$event->id, 'hide']) }}}" data-method="put" class="btn btn-danger">Hide</a>
+              <a href="{{{ action('Admin\EventsController@putVisibility', [$event->id, 'hide']) }}}" data-method="put" class="btn-sm btn-danger">
+                <span class="glyphicon glyphicon-eye-close"></span>
+              </a>
             @endif
-            <a href="{{ route('admin.events.edit', $event->id) }}" class="btn btn-primary">
+            &nbsp;
+            <a href="{{{ action('Admin\EventsController@putDelete', $event->id) }}}" data-method="put" data-confirm="Are you sure?" class="btn-sm btn-danger">
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+            <a href="{{ route('admin.events.edit', $event->id) }}" class="btn btn-sm">
               <span class="glyphicon glyphicon-edit"></span>
               Edit
             </a>

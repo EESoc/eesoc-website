@@ -114,7 +114,13 @@ class SponsorsController extends BaseController {
     public function destroy($id)
     {
         $sponsor = Sponsor::findOrFail($id);
+        $sponsor->delete();
+        
+        return Redirect::route('admin.sponsors.index')
+            ->with('success', 'Sponsor has been successfully deleted');
 
+        // same deletable issues
+        /*
         if ($sponsor->is_deletable) {
             $sponsor->delete();
 
@@ -124,6 +130,7 @@ class SponsorsController extends BaseController {
             return Redirect::route('admin.sponsors.index')
                 ->with('danger', 'This sponsor cannot be deleted');
         }
+        */
     }
 
 }
