@@ -49,7 +49,7 @@ class LockersController extends BaseController {
     public function getRent()
     {
         return View::make('lockers.redirect_to_shop')
-            ->with('redirect_to', 'https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/7721/locker-rental');
+            ->with('redirect_to', 'https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/14123/locker-rental');
     }
 
     public function putCancelReservation($id)
@@ -69,7 +69,7 @@ class LockersController extends BaseController {
     {
         $locker = Locker::findOrFail($id);
 
-        if ( ! $locker->is_taken) {
+        if ( ! $locker->is_taken && !$locker->is_transition) {
             $locker->status = Locker::STATUS_RESERVED;
             $locker->save();
         }
@@ -78,13 +78,52 @@ class LockersController extends BaseController {
             ->with('success', 'Locker reserved');
     }
 
+    public function putMakeAvailable($id)
+    {
+        $locker = Locker::findOrFail($id);
+
+        if ( !$locker->is_taken && $locker->audit == Locker::AUDIT_LOCKED ) {
+            $locker->audit = Locker::AUDIT_GOOD;
+            $locker->save();
+        }
+
+        return Redirect::action('LockersController@getIndex')
+            ->with('success', 'Locker ' . $locker->name . ' was made available');
+    }
+
+    public function putMakeBroken($id)
+    {
+        $locker = Locker::findOrFail($id);
+
+        if ( !$locker->is_taken && $locker->audit == Locker::AUDIT_GOOD ) {
+            $locker->audit = Locker::AUDIT_BROKEN;
+            $locker->save();
+        }
+
+        return Redirect::action('LockersController@getIndex')
+            ->with('danger', 'Locker ' . $locker->name . ' is now regarded as \'broken\'');
+    }
+
+    public function putMakeLocked($id)
+    {
+        $locker = Locker::findOrFail($id);
+
+        if ( !$locker->is_taken && $locker->audit == Locker::AUDIT_BROKEN ) {
+            $locker->audit = Locker::AUDIT_LOCKED;
+            $locker->save();
+        }
+
+        return Redirect::action('LockersController@getIndex')
+            ->with('danger', 'Locker ' . $locker->name . ' is now regarded as \'locked\'');
+    }
+
     private function findLockerAndAuthorizeClaim($id)
     {
         $locker = Locker::findOrFail($id);
 
         if ( ! $locker->canBeClaimedBy(Auth::user())) {
             return Redirect::action('LockersController@getIndex')
-                ->with('danger', 'You cannot claim this locker');
+                ->with('danger', 'You cannot claim this locker - have you brought a locker rental yet? Click "Rent a Locker" below.');
         }
 
         return $locker;

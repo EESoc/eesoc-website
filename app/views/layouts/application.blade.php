@@ -21,7 +21,9 @@
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- <link href="{{ asset('assets/css/bootstrap-theme.min.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/application.css') }}" rel="stylesheet">
+    <!-- The time trick forces server to serve new version, even disabling browser cache doesn't help (its some sever time issue prob) -->
+    <!-- TODO: Revert to normal after final css -->
+    <link href="{{ asset('assets/css/application.css?ts='.time()) }}" rel="stylesheet">
     <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/user.css') }}" rel="stylesheet">
 
@@ -57,12 +59,18 @@
                     Dashboard
                   </a>
                 </li>
-                 <li>
+                <li>
+                    <a href="{{{ url('dashboard/lockers') }}}">
+                      <span class="glyphicon glyphicon-lock"></span>
+                      Lockers
+                    </a>
+                </li>
+                 <!--li>
                     <a href="{{{ url('mums-and-dads') }}}">
                       <span class="glyphicon glyphicon-flag"></span>
                       Mums &amp; Dads
                     </a>
-                </li>
+                </li-->
                 @if (Auth::user()->is_admin)
                   <li>
                     <a href="{{{ url('admin') }}}">
@@ -79,19 +87,12 @@
                 </li>
               </ul>
             @else
-				 <div class="btn-group pull-right" role="group">
-		  @if (time() < strtotime("2015-10-06"))
-                 
-				<a href="{{{ url('mums-and-dads') }}}" class="btn btn-info">
-				  <span class="glyphicon glyphicon-flag"></span>
-				  Mums &amp; Dads
-				</a>
-            @endif
-				<a href="{{{ action('SessionsController@getNew') }}}" class="btn btn-primary">
-                <span class="glyphicon glyphicon-lock"></span>
-                Sign In
-				</a>
-			</div>
+				      <div class="btn-group pull-right" role="group">
+				        <a href="{{{ action('SessionsController@getNew') }}}" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-lock"></span>
+                    Sign In
+				        </a>
+			        </div>
             @endif
           </div>
         </nav>
@@ -105,7 +106,7 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('assets/images/eesoc-logo.png') }}" alt="EESoc" height="100">
+                <img id="main-logo" src="{{ asset('assets/images/eesoc-logo.png') }}" alt="EESoc" height="100">
               </a>
             </div>
             <div class="collapse navbar-collapse">
@@ -119,15 +120,21 @@
                   <li>
                     <a href="{{{ action('UsersController@getDashboard') }}}">
                       <span class="glyphicon glyphicon-wrench"></span>
-                      Settings
+                      Dashboard
                     </a>
                   </li>
-					 <li>
-					<a href="{{{ url('mums-and-dads') }}}">
-					  <span class="glyphicon glyphicon-flag"></span>
-					  Mums &amp; Dads
-					</a>
-					</li>
+                  <li>
+                    <a href="{{{ url('dashboard/lockers') }}}">
+                      <span class="glyphicon glyphicon-lock"></span>
+                      Lockers
+                    </a>
+                  </li>
+					        <!--li>
+					          <a href="{{{ url('mums-and-dads') }}}">
+					            <span class="glyphicon glyphicon-flag"></span>
+					              Mums &amp; Dads
+					          </a>
+					        </li-->
                   <li>
                     <a href="{{{ action('SessionsController@deleteDestroy') }}}" data-method="delete">
                       <span class="glyphicon glyphicon-off"></span>
@@ -136,18 +143,12 @@
                   </li>
                 @else
 					
-				 <div class="btn-group" role="group">
-					@if (time() < strtotime("2015-10-06"))
-					<a href="{{{ url('mums-and-dads') }}}" class="btn btn-info">
-					  <span class="glyphicon glyphicon-flag"></span>
-					  Mums &amp; Dads
-					</a>
-					@endif
+				        <div class="btn-group" role="group">
                   <a href="{{{ action('SessionsController@getNew') }}}" class="btn btn-primary">
                     <span class="glyphicon glyphicon-lock"></span>
                     Sign In
                   </a>
-				</div>
+				        </div>
                 @endif
               </ul>
               <ul class="nav navbar-nav navbar-right">
@@ -163,8 +164,8 @@
                     Events
                   </a>
                 </li>
-                <li class="{{ Request::is('/careersfair') ? 'active' : '' }}">
-                  <a href="{{ url('/careersfair') }}">
+                <li class="{{ Request::is('careersfair') ? 'active' : '' }}">
+                  <a href="{{ url('careersfair') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     Careers Fair
                   </a>
@@ -188,8 +189,8 @@
                       </li>
                     </ul>
                 </li -->
-                <li class="{{ Request::is('/guide') ? 'active' : '' }}">
-                  <a href="{{ url('/guide') }}">
+                <li class="{{ Request::is('guide') ? 'active' : '' }}">
+                  <a href="{{ url('guide') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     Guide Book
                   </a>
@@ -198,6 +199,12 @@
                   <a href="{{ url('sponsors') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     Sponsors
+                  </a>
+                </li>
+                <li class="{{ Request::is('about') ? 'active' : '' }}">
+                  <a href="{{ url('about') }}">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    About
                   </a>
                 </li>
               </ul>
@@ -223,11 +230,12 @@
         </p>
         <p>
           &copy; {{ date('Y') }}
-          Imperial College Electrical Engineering Society. <a href="mailto:eesoc@imperial.ac.uk">Contact us.</a>
+          Imperial College Electrical Engineering Society.
         </p>
         <p>
-          Code by <a href='&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#105;&#97;&#110;&#46;&#108;&#101;&#101;&#49;&#49;&#64;&#105;&#109;&#112;&#101;&#114;&#105;&#97;&#108;&#46;&#97;&#99;&#46;&#117;&#107;'>&#74;&#105;&#97;&#110;&#32;&#89;&#117;&#97;&#110;&#32;&#76;&#101;&#101;</a>,
-          maintained by <a href="/about">the EESoc Webmaster</a>.
+          Code by <a href='&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#105;&#97;&#110;&#46;&#108;&#101;&#101;&#49;&#49;&#64;&#105;&#109;&#112;&#101;&#114;&#105;&#97;&#108;&#46;&#97;&#99;&#46;&#117;&#107;'>&#74;&#105;&#97;&#110;&#32;&#89;&#117;&#97;&#110;&#32;&#76;&#101;&#101;</a>
+          and <a href="https://github.com/EESoc/eesoc-website/graphs/contributors">others</a>, available on
+          <a href="http://bit.ly/196sso5">GitHub</a>.
         </p>
       </div>
     </footer>

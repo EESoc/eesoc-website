@@ -63,6 +63,11 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
     {
         return $this->hasMany('Book');
     }
+	
+	public function events()
+    {
+        return $this->belongsToMany('EventDay', 'event_user', 'user_id', 'event_id')->withTimestamps();
+    }
 
   /*  public function applications()
     {
@@ -388,7 +393,7 @@ class User extends Eloquent implements UserInterface, PresentableInterface {
     {
         if ($this->unclaimed_lockers_count === null) {
             $bought = $this->sales()->locker()->sum('quantity');
-            $owned = $this->lockers()->count();
+            $owned = $this->lockers()->where('status', '=', "taken")->count();
 
             $this->unclaimed_lockers_count = $bought - $owned;
         }

@@ -1,7 +1,7 @@
-@import url(//fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Arimo:400,400italic,700);
 
 body, h1, h2, h3, h4, h5, h6 {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Arimo', sans-serif;
 }
 
 .container.full-width {
@@ -34,4 +34,8 @@ body, h1, h2, h3, h4, h5, h6 {
 .email-preview iframe {
   width: 100%;
   height: 100%;
+}
+
+a.btn-sm:hover {
+  text-decoration: none;
 }

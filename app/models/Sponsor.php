@@ -7,6 +7,11 @@ class Sponsor extends Eloquent implements PresentableInterface {
 
     protected $fillable = ['name', 'description', 'logo', 'position'];
 
+	public function events()
+    {
+        return $this->belongsToMany('EventDay', 'event_sponsor', 'sponsor_id', 'event_id')->withTimestamps();
+    }
+	
     public function setLogoAttribute($file)
     {
         if ($file instanceof UploadedFile) {
@@ -25,6 +30,7 @@ class Sponsor extends Eloquent implements PresentableInterface {
     {
         return $query->orderBy('position');
     }
+	
 
     /**
      * Return a created presenter.

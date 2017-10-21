@@ -37,45 +37,22 @@ class SyncEActivitiesSalesCommand extends Command {
      */
     public function fire()
     {
-        $username = $this->ask('What is your Imperial College login?');
-        $password = $this->secret('Password?');
+        $this->info('Warning: This feature is U/C...');
 
-        $credentials = new ImperialCollegeCredential($username, $password);
-        $http_client = new Guzzle\Http\Client;
 
-        $eactivities_client = new EActivities\Client($http_client);
+        //new DateTime('2000-01-01');
+        //echo ;
+        //return;
 
-        if ( ! $eactivities_client->signIn($credentials)) {
-            $this->error('Error signing in! Please check your username and password.');
-            return;
-        }
+        $eactivities_client = new EActivities\Client( new Guzzle\Http\Client);
 
-        // Role changing
-        while (true) {
-            $roles = $eactivities_client->getCurrentAndOtherRoles();
-            $this->info(sprintf('Your current role is `%s`', $roles['current']));
 
-            if ($this->confirm('Continue with this role? [yes|no]')) {
-                break;
-            }
+        $this->syncProduct($eactivities_client, Product::ID_EESOC_LOCKER);
 
-            $this->info('Other roles:');
-            foreach ($roles['others'] as $role_key => $role) {
-                $this->info(sprintf('[%d] %s', $role_key, $role));
-            }
-
-            while (true) {
-                $role_key = $this->ask('Enter role key:');
-
-                if (ctype_digit($role_key) && isset($roles['others'][(int) $role_key])) {
-                    break;
-                } else {
-                    $this->error('Role key does not exist, please try again');
-                }
-            }
-
-            $eactivities_client->changeRole($role_key);
-        }
+        //for debugging
+        //$this->info(print_r($eactivities_client->getProductList()));
+        return; /*END OF CODE*/
+        
 
         // @todo make a ask prompt for this.
         // ['1725', '1772', '1772-3']
@@ -85,10 +62,10 @@ class SyncEActivitiesSalesCommand extends Command {
         // Lockers in 2015/16 have product ID 13472. This is also defined in app/models/Product.php,
         // but who knows if this is accessible here.
         // @TODO; Software engineering... 
-        $this->syncProduct($eactivities_client, 13472);
+        $this->syncProduct($eactivities_client, Product::ID_EESOC_LOCKER);
 
        # Sync dinner sales 2015/16
-        $this->syncProduct($eactivities_client, 14655, function($purchase, $sale, $user)
+        $this->syncProduct($eactivities_client, Product::ID_EESOC_DINNER, function($purchase, $sale, $user)
         {
             $dSale           = new DinnerSale;
             $dSale->user_id  = $user->id;
@@ -101,47 +78,69 @@ class SyncEActivitiesSalesCommand extends Command {
 
     protected function syncProduct($eactivities_client, $productId, $newCallback = NULL)
     {
+        $product_info = $eactivities_client->getProductInfo($productId);
         $purchases = $eactivities_client->getPurchasesList($productId);
 
+        if (array_key_exists('error', $product_info) || array_key_exists('error', $purchases)){
+            $this->error("An error occurred, see dump below:\n");
+            $this->info("\$product_info =>");
+            print_r($product_info);
+            $this->info("\$purchases =>");
+            print_r($purchases);
+            $this->error("Failed to sync product with ID {$productId}, terminating...");
+            return;
+        }
+        
+        //debug only
+        /*$this->info("Current Product: " . $product_info['Name']); 
+        $this->info(print_r($purchases));*/
+        
+        //syncronise each sale for given product
         foreach ($purchases as $purchase) {
-            $sale = Sale::find($purchase['order_no']);
+            $purchase_date_array = preg_split('/-/', $purchase['SaleDateTime']);
+            $year_code = ((int) $purchase_date_array[1] >= 9) ? sprintf( '%2d-%2d', (int) ($purchase_date_array[0][2] . $purchase_date_array[0][3]), (int) ($purchase_date_array[0][2] . $purchase_date_array[0][3]) + 1) : sprintf( '%2d-%2d', (int) ($purchase_date_array[0][2] . $purchase_date_array[0][3]) - 1, (int) ($purchase_date_array[0][2] . $purchase_date_array[0][3]));
+            
+            //debug only
+            //$this->info(print_r($purchase['OrderNumber'] . " --- " . $purchase['SaleDateTime'] . " --- " . $purchase_date_array[1] . " --- " . $year_code));
+
+            $sale = Sale::find($purchase['OrderNumber']);
             $new  = FALSE;
+
+            //If not in EESoc dB, create new sale record
             if (!$sale) {
                 $sale = new Sale;
-                $sale->id = $purchase['order_no'];
+                $sale->id = $purchase['OrderNumber'];
                 $new = TRUE;
             }
 
-            $user = User::where('username', '=', $purchase['login'])->first();
+           
+            $user = User::where('username', '=', $purchase['Customer']['Login'])->first();
+            
+            //If not in EESoc dB, create new user record
             if (!$user) {
                 $user = new User;
-                $user->username = $purchase['login'];
-                $user->cid      = $purchase['c_id/_card_number'];
-                $user->name     = "{$purchase['first_name']} {$purchase['surname']}";
-                $user->email    = $purchase['email'];
+                $user->username = $purchase['Customer']['Login'];
+                $user->cid      = $purchase['Customer']['CID'];
+                $user->name     = "{$purchase['Customer']['FirstName']} {$purchase['Customer']['Surname']}";
+                $user->email    = $purchase['Customer']['Email'];
                 $user->save();
             }
 
-            $sale->user()->associate($user);
+            $sale->user()->associate($user); //Create link using foreign key, sets user_id field
 
-            foreach (['year',
-                  'date',
-                  'first_name',
-                  'email',
-                  'product_name',
-                  'quantity',
-                  'unit_price',
-                  'gross_price',
-                  'product_id'] as $attribute) {
-                $sale->{$attribute} = $purchase[$attribute];
-            }
-
-            /* The CSV has the field 'CID/Card Number'. By some magic, this is converted by the parser
-             * to the string below. */
-            $sale->cid      = $purchase['c_id/_card_number'];
-            $sale->username = $purchase['login'];
-			//Changed in 2015/16... added for consistency with before
-			$sale->last_name = $purchase['surname'];
+            //Add remaining fields in sale record
+            //API doesn't return year code so need to use our own calculated value
+            $sale->year         = $year_code;
+            $sale->product_name = $product_info['Name'];
+            $sale->date         = $purchase['SaleDateTime'];
+            $sale->quantity     = $purchase['Quantity'];
+            $sale->unit_price   = $purchase['Price'];
+            $sale->product_id   = $purchase['ProductID'];
+            $sale->cid          = $purchase['Customer']['CID'];
+            $sale->username     = $purchase['Customer']['Login'];
+            $sale->email        = $purchase['Customer']['Email'];
+            $sale->first_name   = $purchase['Customer']['FirstName'];
+			$sale->last_name    = $purchase['Customer']['Surname'];
 
             $sale->save();
 
@@ -149,7 +148,7 @@ class SyncEActivitiesSalesCommand extends Command {
                 $newCallback($purchase, $sale, $user);
         }
 
-        $this->info(sprintf('Successfully refreshed `%d` sale entries', count($purchases)));
+        $this->info(sprintf('Successfully refreshed `%d` sale entries for product `%s`', count($purchases), $product_info['Name']));
     }
 
     /**

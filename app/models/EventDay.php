@@ -22,6 +22,16 @@ class EventDay extends Eloquent {
     {
         return $this->belongsTo('Category');
     }
+	
+	public function users()
+    {
+        return $this->belongsToMany('User', 'event_user', 'event_id', 'user_id')->withPivot('created_at', 'updated_at');
+    }
+	
+	public function sponsors()
+    {
+        return $this->belongsToMany('Sponsor', 'event_sponsor', 'event_id', 'sponsor_id')->withTimestamps();
+    }
 
     /*
     Scopes

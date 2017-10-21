@@ -4,7 +4,7 @@ class SponsorsController extends BaseController {
 
     public function getIndex()
     {
-        $sponsors = Sponsor::sorted()
+        $sponsors = Sponsor::alphabetically()
             ->get();
 
         return View::make('sponsors.index')

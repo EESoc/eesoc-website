@@ -10,7 +10,7 @@
         @include('admin.sponsors.form')
       {{ Form::close() }}
       {{ Form::open(array('route' => array('admin.sponsors.destroy', $sponsor->id), 'method' => 'delete')) }}
-        <button type="submit" class="btn btn-danger btn-lg pull-right" data-confirm="Are you sure?">
+        <button type="submit" class="btn btn-danger btn-lg pull-right" data-confirm="{{ 'Are you sure you want to delete ' . $sponsor->name . '?' }}">
           <span class="glyphicon glyphicon-remove"></span>
           Delete
         </button>

@@ -18,7 +18,8 @@ class EventsController extends BaseController {
      */
     public function index()
     {
-        $events = EventDay::orderBy(DB::raw('ISNULL(`date`), `date`'))
+        $events = EventDay::orderBy('hidden')
+			->orderBy(DB::raw('ISNULL(`date`), `date`'),'DESC')
             ->with('category')
             ->get();
 
@@ -108,7 +109,11 @@ class EventsController extends BaseController {
     public function destroy($id)
     {
         $event = EventDay::findOrFail($id);
-
+        $event->delete();   //is_deletable is always returning false, this overrides it.
+        
+        return Redirect::route('admin.events.index')
+                ->with('success', 'Event has been successfully deleted');
+        /*
         if ($event->is_deletable) {
             $event->delete();
 
@@ -118,6 +123,18 @@ class EventsController extends BaseController {
             return Redirect::route('admin.events.index')
                 ->with('danger', 'This event cannot be deleted');
         }
+        */
+    }
+
+    public function putDelete($id)
+    {
+        $event = EventDay::findOrFail($id);
+        $event->delete();   //is_deletable is always returning false, this overrides it.
+        
+        return Redirect::route('admin.events.index')
+                ->with('success', 'Event has been successfully deleted');
+
+
     }
 
     public function putVisibility($id, $action)

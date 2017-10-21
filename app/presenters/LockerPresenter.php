@@ -12,7 +12,13 @@ class LockerPresenter extends Presenter {
             case Locker::STATUS_RESERVED:
                 return 'warning';
             case Locker::STATUS_VACANT:
-                return 'success';
+				if ($this->audit == Locker::AUDIT_GOOD){
+					return 'success';
+				}else{
+					return 'danger';
+				}
+			case Locker::STATUS_TRANSITION:
+                return 'warning';
         }
     }
 
@@ -51,6 +57,8 @@ class LockerPresenter extends Presenter {
         switch ($this->status) {
             case Locker::STATUS_TAKEN:
                 return '<a href="#" class="btn btn-danger btn-sm btn-block disabled">Taken</a>';
+			case Locker::STATUS_TRANSITION:
+                return '<a href="#" class="btn btn-warning btn-sm btn-block disabled">Expired</a>';
             case Locker::STATUS_RESERVED:
                 return '<a href="#" class="btn btn-warning btn-sm btn-block disabled">Reserved</a>';
             case Locker::STATUS_VACANT:
@@ -59,6 +67,7 @@ class LockerPresenter extends Presenter {
                 $html .= 'Claim';
                 $html .= '</a>';
                 return $html;
+				
         }
     }
 
@@ -69,11 +78,14 @@ class LockerPresenter extends Presenter {
         if ( ! $this->is_vacant) {
             $html .= '<a href="#" class="btn btn-success">Vacant</a>';
         }
-
+		
         if ( ! $this->is_taken) {
             $html .= '<a href="#" class="btn btn-danger">Taken</a>';
         }
 
+        if ( ! $this->is_transition) {
+            $html .= '<a href="#" class="btn btn-warning">Expired</a>';
+        }else
         if ( ! $this->is_reserved) {
             $html .= '<a href="#" class="btn btn-warning">Reserved</a>';
         }

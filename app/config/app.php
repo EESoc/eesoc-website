@@ -13,7 +13,7 @@ return array(
     |
     */
 
-    'debug' => false,
+    'debug' => true,    // helpful to keep true for travis builds
 
     /*
     |--------------------------------------------------------------------------
