@@ -60,6 +60,12 @@ Route::post('api/event/name', 'ApiController@postEventName');
 # TV
 Route::get('tv', 'TVController@show');
 
+# Bar Night 2017 (temp redirect)
+Route::get('barnight', function()
+{
+    return Redirect::to('https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/19111/eesoc-bar-night-tickets');
+});
+
 # Sponsor Link
 Route::get('bae', function()
 {
@@ -93,17 +99,14 @@ Route::get('lockers', function()
  * Routes for members
  */
 Route::group(['before' => 'auth.member'], function() {
-    # Dashboard
-    Route::get('dashboard', 'UsersController@getDashboard');
-
-    #Mums and Dads
-    Route::controller('mums-and-dads', 'MumsAndDadsController');
-
+    # Dashboard sub-links
     Route::group(['prefix' => 'dashboard'], function() {
+        # Subscriptions
+       
+        
         # Books
-        Route::resource  ('books', 'BooksController');
-        Route::controller('books', 'BooksController');
-
+        Route::resource('books', 'BooksController');
+        
         # Lockers
         Route::controller('lockers', 'LockersController');
 
@@ -116,12 +119,16 @@ Route::group(['before' => 'auth.member'], function() {
             Route::post('add-member', ['uses' => 'DinnerGroupsController@addMember']);
         });
 
-        /*# Applications
-        Route::resource  ('applications', 'ApplicationsController');
-        Route::controller('applications', 'ApplicationsController');
-        */
-
+        Route::post('update', ['uses' => 'UsersController@updateSubscription']);
     });
+
+    # All direct function calls must be defined AFTER sub-links are defined    
+    Route::controller('dashboard', 'UsersController');
+    
+    #Mums and Dads
+    Route::controller('mums-and-dads', 'MumsAndDadsController');
+
+    
 });
 
 /**
@@ -164,7 +171,8 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
     Route::resource('posts', 'Admin\PostsController', ['except' => ['show']]);
 
     # Sales
-    Route::resource('sales', 'Admin\SalesController', ['only' => ['index']]);
+    #Route::resource('sales', 'Admin\SalesController');
+    Route::controller('sales', 'Admin\SalesController');
 
     # Sponsors
     Route::resource('sponsors', 'Admin\SponsorsController', ['except' => ['show']]);

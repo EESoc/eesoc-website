@@ -9,7 +9,7 @@ class Newsletter extends Eloquent {
 
     public function subscribers()
     {
-        return $this->belongsToMany('User', 'user_subscriptions');
+        return $this->belongsToMany('User', 'newsletters_users');
     }
 
     public function subscriptions()
@@ -57,5 +57,11 @@ class Newsletter extends Eloquent {
 
         return count($emails);
     }
+
+    //not needed as same as from dB
+    //public function getIsSubscribableAttribute()
+    //{
+        //return $this->is_subscribable === 1;
+    //}
 
 }
