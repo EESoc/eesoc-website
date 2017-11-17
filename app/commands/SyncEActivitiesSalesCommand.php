@@ -48,11 +48,17 @@ class SyncEActivitiesSalesCommand extends Command {
 
 
         $this->syncProduct($eactivities_client, Product::ID_EESOC_LOCKER);
+        $this->syncProduct($eactivities_client, Product::ID_EESOC_BAR_NIGHT);
+        $this->syncProduct($eactivities_client, Product::ID_EESOC_HOODIE);
+        $this->syncProduct($eactivities_client, Product::ID_EESOC_SWEAT_SHIRT);
+        $this->syncProduct($eactivities_client, Product::ID_EESOC_MEMBERSHIP);
+        
 
         //for debugging
         //$this->info(print_r($eactivities_client->getProductList()));
         return; /*END OF CODE*/
         
+        /*--- NOT IMPLEMENTED YET ---*/
 
         // @todo make a ask prompt for this.
         // ['1725', '1772', '1772-3']

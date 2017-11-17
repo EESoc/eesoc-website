@@ -167,6 +167,8 @@
     <script src="{{{ asset('assets/js/jquery.slugify.js') }}}"></script>
     <script src="{{{ asset('assets/js/ckeditor/ckeditor.js') }}}"></script>
     <script src="{{{ asset('assets/js/admin.js') }}}"></script>
+
+    
     @yield('javascript_for_page')
 
   </body>
