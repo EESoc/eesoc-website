@@ -142,10 +142,13 @@
                 It's me :-)
               @else
                 <div class="btn-group-vertical btn-group-sm">
+                  <!-- selective pretend hack -->
+                  @if (Auth::user()->id == 2944)
                   <a href="{{{ $user->pretend_url }}}" class="btn btn-default">
                     <span class="glyphicon glyphicon-log-in"></span>
                     Pretend
                   </a>
+                  @endif
 
                   @if ($user->has_email)
                     <a href="{{{ $user->email_url }}}" class="btn btn-default">

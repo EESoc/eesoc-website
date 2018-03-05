@@ -1,9 +1,9 @@
 <?php
 
-use Newsletter;
-use Input;
-use Redirect;
-use View;
+
+//use Input;
+//use Redirect;
+//use View;
 
 class UsersController extends BaseController {
 

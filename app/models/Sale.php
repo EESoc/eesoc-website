@@ -17,7 +17,7 @@ class Sale extends Eloquent implements PresentableInterface {
 
     public function getIsLockerAttribute()
     {
-        return ($this->product_name === 'Single Locker');
+        return ($this->product_id === Product::ID_EESOC_LOCKER);
     }
 
     public function setUnitPriceAttribute($unit_price_in_decimal)
@@ -33,6 +33,11 @@ class Sale extends Eloquent implements PresentableInterface {
     public function getGrossPriceAttribute()
     {
         return ($this->unit_price_in_pence / 100) * ($this->quantity);
+    }
+
+    //Query all purchases with given product id
+    public function scopeProductPurchases($query, $product_id){
+        return $query->where('product_id', '=', $product_id);
     }
 
     /*public function setDateAttribute($date)

@@ -1,7 +1,8 @@
 <?php
 
-use \Artisan;
+//use \Artisan; //can work without this, but it messes up php artisan console command if uncommented.
 use Symfony\Component\Console\Output\StreamOutput;
+use \Guzzle\Http\Client as Http_Client;
 
 class ApiV2Controller extends BaseController {
 
@@ -206,6 +207,24 @@ class ApiV2Controller extends BaseController {
             'recieved' => Input::all()
         ];
 
+        //special for dinner only
+        //Now disabled
+        /*$chunks = explode("\n", $slack_text); //SPLIT BY NEWLINE
+        $dinner_text = "";
+        foreach($chunks as $chunk){
+            //Add 'SalesStat' and 'Dinner' keyword sentences
+            if (strpos($chunk,"Dinner") !== false || strpos($chunk,"SalesStat") !== false){
+                $dinner_text .= ($chunk . "\n");
+            }
+        }
+        if ($dinner_text != "") {
+            //Only send wehn not empty as empty string may cause errors
+            $this->sendJSONToWebhook(json_encode([ "text" => $dinner_text ]), Config::get('slack.webhook.dinner_channel'));
+        }*/
+
+        //Send full log to logs channel
+        $this->sendJSONToWebhook(json_encode($data['data']['slack']), Config::get('slack.webhook.logs_channel'));
+
         return $this->createJSONResponse($data);
     }
 
@@ -213,5 +232,11 @@ class ApiV2Controller extends BaseController {
         $response = Response::make(json_encode($data), 200);
         $response->header('Content-Type', 'application/json');
         return $response;
+    }
+
+    /* Sends a copy of the output to  */
+    protected function sendJSONToWebhook($json, $webhook){
+        $client = new Http_Client('https://hooks.slack.com');
+        return $client->post($webhook, ['Content-type' => 'application/json'], $json)->send();
     }
 }

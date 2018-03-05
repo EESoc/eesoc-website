@@ -2,7 +2,7 @@
 
 class DinnerGroupsController extends BaseController {
 
-    const MAX_TABLES = 24;
+    const MAX_TABLES = DinnerGroup::MAX_NO_OF_GROUPS; //TODO: this shuld be in model!!!
 
     protected $hasExpired = FALSE; /* (time() >= strtotime("2017-01-13 23:59")); */
 
@@ -11,17 +11,17 @@ class DinnerGroupsController extends BaseController {
     {
         parent::__construct();
 
-        $this->hasExpired = time() >= strtotime("2017-01-14 23:59");
+        $this->hasExpired = (time() >= strtotime("2018-01-08 23:59"));
 
         $this->beforeFilter(function() {
             if (!DinnerPermission::user(Auth::user())->canManageGroups()) {
                 return Redirect::action('UsersController@getDashboard')
-                    ->with('danger', "You don't have a ticket");
+                    ->with('danger', "You don't have a ticket, please purchase one <a href='https:\/\/eesoc.com/dinner'>here</a>");
             }
 
             if ($this->hasExpired && !Auth::user()->is_admin) {
                 return Redirect::action('UsersController@getDashboard')
-                    ->with('danger', 'The period for choosing your seat has ended. Should you require further assistance, please <a href="mailto:eesoc.events@imperial.ac.uk">email us</a>.');
+                    ->with('danger', 'The period for choosing your seat has ended. Should you require further assistance, please <a href="mailto:eesocweb@ic.ac.uk">email us</a>.');
             }
         });
     }
@@ -165,7 +165,7 @@ class DinnerGroupsController extends BaseController {
 
         if (!DinnerPermission::user($user)->canAddUserToGroup($group)) {
             return Redirect::route('dashboard.dinner.groups.show', $group->id)
-                ->with('danger', 'You cannot add any more users to this group');
+                ->with('danger', 'You cannot add any more guests to this group');
         }
 
         if (!DinnerPermission::user($user)->canJoinGroup($group)) {
@@ -275,7 +275,7 @@ class DinnerGroupsController extends BaseController {
             "dessert"
         ];
 
-        foreach($courses as $course){
+        /*foreach($courses as $course){
             $vName = "choice_$course";
             $choice = Input::get($vName);
 
@@ -298,7 +298,7 @@ class DinnerGroupsController extends BaseController {
             }
 
             $member->$vName = $choice;
-        }
+        }*/
 
 
         $member->special_req = Input::get('special_req');
@@ -306,6 +306,6 @@ class DinnerGroupsController extends BaseController {
         $member->save();
 
         return Redirect::route('dashboard.dinner.groups.show', $member->dinner_group->id)
-            ->with('success', 'Thanks! The menu choice updated for '.$member->name.'.');
+            ->with('success', 'Thanks! The dietary requirements for '.$member->name.' have been updated.');
     }
 }

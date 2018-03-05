@@ -3,14 +3,15 @@
 class DinnerGroup extends Eloquent {
 
     //Max size reduced for BAE delegate at the table
-    const MAX_SIZE_REDUCED = 7;
-    const MAX_SIZE_FULL    = 8;
-    const REDUCED_COUNT    = 9;
+    //const MAX_SIZE_REDUCED = 7;
+    const MAX_NO_OF_GROUPS = 17;
+    const MAX_SIZE_FULL    = 10;
+    //const REDUCED_COUNT    = 9;
 
-    const CAN_LEAVE_OWN_GRP = false;
+    const CAN_LEAVE_OWN_GRP = false; //only change this temporarily otherwise don't touch this!
 
     // 'Final year' group IDs from the live database (sorry...)
-    protected static $finalYearGroups = [3, 4, 5, 7, 8, 11, 12, 13, 14];
+    //protected static $finalYearGroups = [3, 4, 5, 7, 8, 11, 12, 13, 14];
 
     /*
     Relations
@@ -44,7 +45,7 @@ class DinnerGroup extends Eloquent {
         if ($user instanceOf User)
         {
             $member->user()->associate($user);
-            $member->is_owner = $user->id === $this->owner->id;
+            $member->is_owner = ($user->id === $this->owner->id);
 
             //If the group was left empty, then make the first member (again) the owner.
             if ($existingMembers == 0){
@@ -82,7 +83,7 @@ class DinnerGroup extends Eloquent {
                 ->with('success', 'You have left the group.');
         }
 				
-		$this->is_full = $membersInGroup - 1 >= $group->max_size;
+		$this->is_full = (($membersInGroup - 1) >= $this->max_size);
         
 		$this->save();	
 
@@ -91,7 +92,12 @@ class DinnerGroup extends Eloquent {
 
     public function isFull()
     {
-        return $this->members->count() >= $this->max_size;
+        return ($this->members->count() >= $this->max_size);
+    }
+
+    public function emptyCount()
+    {
+        return ($this->max_size - $this->members->count());
     }
 
     public function scopeHasLimit($query, $limit)
@@ -126,13 +132,13 @@ class DinnerGroup extends Eloquent {
 
     public static function maxSizeByOwner(User $owner)
     {
-        $candidate = $owner->inGroup(self::$finalYearGroups, FALSE);
+        //$candidate = $owner->inGroup(self::$finalYearGroups, FALSE);
 
-        if ($candidate &&
-            DinnerGroup::hasLimit(self::MAX_SIZE_REDUCED)->count() < self::REDUCED_COUNT)
-        {
-            return self::MAX_SIZE_REDUCED;
-        }
+        //if ($candidate &&
+            //DinnerGroup::hasLimit(self::MAX_SIZE_REDUCED)->count() < self::REDUCED_COUNT)
+        //{
+            //return self::MAX_SIZE_REDUCED;
+        //}
 
         return self::MAX_SIZE_FULL;
     }

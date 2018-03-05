@@ -24,11 +24,11 @@
 
       datasets: [
         {
-          title: "Lockers", color: "light-blue",
+          title: "Members", color: "light-blue",
           values: {{ json_encode($list['results_lockers']) }}
         },
         {
-          title: "Bar Night", color: "violet",
+          title: "Non-members", color: "violet",
           values: {{ json_encode($list['results_bar_night']) }}
         },
       ]
@@ -36,7 +36,7 @@
 
     var chart = new Chart({
       parent: "#chart",
-      title: "Daily Sales (last 14 days)",
+      title: "Daily Dinner Sales (last 14 days)",
       data: data,
       type: 'line', // or 'line', 'scatter', 'pie', 'percentage'
       height: 250,
