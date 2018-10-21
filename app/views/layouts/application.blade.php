@@ -65,6 +65,14 @@
                       Lockers
                     </a>
                 </li>
+                @if ( DinnerPermission::user(Auth::user())->canManageGroups())
+                  <li>
+                    <a href="{{{ url('dashboard/dinner/groups') }}}">
+                      <span class="glyphicon glyphicon-glass"></span>
+                      Dinner
+                    </a>
+                  </li>
+                @endif
                  <!--li>
                     <a href="{{{ url('mums-and-dads') }}}">
                       <span class="glyphicon glyphicon-flag"></span>
@@ -129,6 +137,14 @@
                       Lockers
                     </a>
                   </li>
+                  @if ( DinnerPermission::user(Auth::user())->canManageGroups())
+                  <li>
+                    <a href="{{{ url('dashboard/dinner/groups') }}}">
+                      <span class="glyphicon glyphicon-glass"></span>
+                      Dinner
+                    </a>
+                  </li>
+                  @endif
 					        <!--li>
 					          <a href="{{{ url('mums-and-dads') }}}">
 					            <span class="glyphicon glyphicon-flag"></span>
@@ -164,12 +180,12 @@
                     Events
                   </a>
                 </li>
-                <li class="{{ Request::is('careersfair') ? 'active' : '' }}">
+                <!-- <li class="{{ Request::is('careersfair') ? 'active' : '' }}">
                   <a href="{{ url('careersfair') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     Careers Fair
                   </a>
-                </li>
+                </li> -->
                 <!-- li>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                       <span class="glyphicon glyphicon-chevron-right"></span> Flagship Events <span class="caret"></span>
@@ -201,12 +217,12 @@
                     Sponsors
                   </a>
                 </li>
-                <li class="{{ Request::is('about') ? 'active' : '' }}">
+                <!-- <li class="{{ Request::is('about') ? 'active' : '' }}">
                   <a href="{{ url('about') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     About
                   </a>
-                </li>
+                </li> -->
               </ul>
             </div><!-- /.navbar-collapse -->
           </div>

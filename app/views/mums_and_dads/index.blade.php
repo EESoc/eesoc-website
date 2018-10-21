@@ -5,8 +5,14 @@
     <div class="jumbotron">
         <h1>Welcome {{{ $me }}}!</h1>
 
-        <h2>Your Mums and Dads</h2>
-
+		<h3>Group {{ $group }} - Room {{ $room }} for Lunch</h3>
+		
+		@if ($isParent)
+            <h2>Your Partner</h2>
+        @else
+			<h2>Your Mums and Dads</h2>
+		@endif
+		
         <div class="row">
             @foreach ($parents as $parent)
 
@@ -19,8 +25,12 @@
             @endforeach
         </div>
     </div>
-
-    <h2>Your Siblings</h2>
+		
+	@if ($isParent)
+		<h2>Your FamilEEE</h2>
+	@else
+		<h2>Your Siblings</h2>
+	@endif    
 
     <?php $counter = 0; ?>
 

@@ -56,16 +56,7 @@ Calendar::initialize([
     <div class="col">@content('homepage-content')</div>
   </div>
   <div class="row">
-    <div class="col-md-6">  
-      <h2 style="display: inline;">Instagram</h2><p style="display: inline;">   <a href="https://instagram.com/EESoc" target="_blank">@eesoc</a>
-      <hr style="clear:both; margin-top: 15px;">
-      <div id="photos" class="row">
-        <p class="text-center">
-          <img src="{{ asset('assets/images/loading.gif') }}" alt="Loading" data-loader>
-        </p>
-      </div>
-    </div>
-    <div class="col-md-6"  style="margin-top: -10px;">
+    <div class="col-md-6"  style="margin-top: -5px;">
       <div style="">
         <!--a class="twitter-timeline"  href="https://twitter.com/EESoc"  data-widget-id="428571579799203840">Tweets by @EESoc</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script-->
@@ -73,15 +64,9 @@ Calendar::initialize([
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </div>
     </div>
-  </div>
-  <div class="row">
-  <div class="col">
-            <h2>Upcoming Events</h2>
+    <div class="col-md-6">
+    <h2>Upcoming Events</h2>
             <hr>
-  </div>
-  </row>
-  <div class="row">
-    <div class="col">
       <div class="panel-group" id="accordion-events">
         @foreach ($events as $key => $event)
           <div class="panel {{{ $event->category ? 'panel-category-' . Str::slug($event->category->name) : 'panel-default' }}}">

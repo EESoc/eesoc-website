@@ -4,7 +4,7 @@
 
 <p><strong class="pull-left">Keep page open whilst sending!</strong></p>
 
-  <div class="progress progress-striped active">
+  <div class="progress progress-striped active" style="clear:both;">
     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{{ $email->sent_email_percentage }}}" aria-valuemin="0" aria-valuemax="100" style="width: {{{ $email->sent_email_percentage }}}%;">
       <span class="sr-only">{{{ $email->sent_email_percentage }}}% Complete</span>
     </div>

@@ -69,7 +69,7 @@ Route::get('barnight', function()
 # Sponsor Link
 Route::get('bae', function()
 {
-    return Redirect::to('https://career012.successfactors.eu/career?company=BAE&site=SITE_ID', 303, ['X-Why' => 'Yes']);
+    return Redirect::to('https://career012.successfactors.eu/career?company=BAE&site=VjItSE43VDBudHJlU3UwSGpKcUVacWFRQT09', 303, ['X-Why' => 'Yes']);
 });
 
 //Temp short linking
@@ -188,6 +188,9 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 
     # Sponsors
     Route::resource('sponsors', 'Admin\SponsorsController', ['except' => ['show']]);
+
+    # Committee
+    Route::resource('committee', 'Admin\CommitteeController', ['except' => ['show']]);
 
     # Careers Fair
     Route::resource('careersfair', 'Admin\CareersFairController', ['except' => ['show']]);
