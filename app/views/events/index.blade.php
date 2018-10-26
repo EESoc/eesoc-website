@@ -48,7 +48,7 @@ Calendar::initialize([
 
 @section('content')
   <div class="page-header">
-    <h1>Events</h1>
+    <h1>This page is outdated please click <a href="https://www.facebook.com/ImperialEESoc/events">here</a> to view our latest events.</h1>
   </div>
   <div class="row">
     <div class="col-lg-9">

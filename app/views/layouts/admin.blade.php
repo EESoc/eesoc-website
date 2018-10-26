@@ -70,6 +70,9 @@
                 <li>
                   <a href="{{{ route('admin.categories.index') }}}">Categories</a>
                 </li>
+                <li>
+                  <a href="{{{ route('admin.committee.index') }}}">Committee Details</a>
+                </li>
               </ul>
             </li>
             <li class="dropdown">
@@ -116,9 +119,15 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="{{{ url('/') }}}">
+              <a href="{{{ url('/dashboard') }}}">
+                <span class="glyphicon glyphicon-dashboard"></span>
+                Member Dashboard
+              </a>
+            </li>
+            <li>
+              <a href="{{{ url('/beta') }}}">
                 <span class="glyphicon glyphicon-home"></span>
-                Main Site
+                Beta Site
               </a>
             </li>
             <li>
@@ -155,7 +164,7 @@
       <footer id="credits">
         <hr>
         &copy; {{ date('Y') }}
-        Code by <a href='&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#105;&#97;&#110;&#46;&#108;&#101;&#101;&#49;&#49;&#64;&#105;&#109;&#112;&#101;&#114;&#105;&#97;&#108;&#46;&#97;&#99;&#46;&#117;&#107;'>&#74;&#105;&#97;&#110;&#32;&#89;&#117;&#97;&#110;&#32;&#76;&#101;&#101;</a>
+        Code by <a href='https://github.com/hsed'>Haaris Mehmood</a>
           and <a href="https://github.com/EESoc/eesoc-website/graphs/contributors">others</a>
       </footer>
     </div>

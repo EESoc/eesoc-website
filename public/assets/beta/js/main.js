@@ -18,7 +18,9 @@
 
 	// Parallax
 	var parallax = function() {
-		$(window).stellar();
+		if(!Modernizr.touch){ 
+			$(window).stellar({ horizontalScrolling: false });
+		}
 	};
 
 

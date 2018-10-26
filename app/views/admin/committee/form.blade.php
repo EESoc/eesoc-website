@@ -36,7 +36,7 @@
   {{ $errors->first('list_position', '<span class="help-block">:message</span>') }}
 </div>
 <div class="form-group {{ $errors->first('logo', 'has-error') }}">
-  {{ Form::label('logo', 'Logo', array('class' => 'control-label')) }}
+  {{ Form::label('logo', 'Profile Pic (*.jp(e)g with 1:1 crop ratio)', array('class' => 'control-label')) }}
   {{ Form::file('logo') }}
   {{ $errors->first('logo', '<span class="help-block">:message</span>') }}
 </div>

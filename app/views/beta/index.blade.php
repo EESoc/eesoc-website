@@ -7,11 +7,11 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>EESoc</title>
+	<title>EESoc - Beta Homepage</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+	<meta name="description" content="Electrical Engineering Society" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
-	<meta name="author" content="FREEHTML5.CO" />
+	<meta name="author" content="Haaris" />
 
   <!-- 
 	//////////////////////////////////////////////////////
@@ -73,7 +73,7 @@
 				<div class="navbar-header">
 					<!-- Mobile Toggle Menu Button -->
 					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-					<a class="navbar-brand" href="index.html"><img src="{{ asset('assets/images/eesoc-logo.png') }}" alt="EESoc"></a> 
+					<a class="navbar-brand" href="/beta"><img src="{{ asset('assets/images/eesoc-logo.png') }}" alt="EESoc"></a> 
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -90,15 +90,15 @@
 	  </div>
 	</header>
 	
-	<section id="fh5co-home" data-section="home" style="background-image: url({{ asset('assets/beta/images/soc2018.jpg') }});" data-stellar-background-ratio="0.5">
+	<section id="fh5co-home" data-section="home" style="background-image: url({{ asset('assets/beta/images/soc2018.jpg') }}); background-position-x: 50%;" data-stellar-background-ratio="0.5">
 		<div class="gradient"></div>
 		<div class="container">
 			<div class="text-wrap">
 				<div class="text-inner">
 					<div class="row">
-						<div class="col-md-8 col-md-offset-2">
+						<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-xs-12">
 							<h1 class="to-animate">Welcome to EESoc</h1>
-							<h2 class="to-animate">"If I ever manage to get free time then this will be a new revolution..." - Haaris</h2>
+							<h2 class="to-animate">We run frequent, varied and engaging events, all with the goal of creating a close knit community within the Electrical Engineering Department.</h2>
 							<!--h2 class="to-animate">100% Free HTML5 Template. Licensed under <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">Creative Commons Attribution 3.0.</a> <br> Crafted with love by <a href="http://freehtml5.co/" target="_blank" title="Free HTML5 Bootstrap Templates" class="fh5co-link">FREEHTML5.co</a></h2-->
 							<div class="call-to-action">
 								<a href="#" class="demo to-animate read-on-btn" data-nav-section="events">Read On</a>
@@ -118,7 +118,7 @@
 					<h2 class="to-animate">Upcoming Events</h2>
 					<div class="row">
 						<div class="col-md-8 col-md-offset-2 subtext to-animate">
-							<h3>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</h3>
+							<h3>We boast a broad range of events — with socials, events with industry, sports fixtures, and more, we have it all covered.</h3>
 						</div>
 					</div>
 				</div>
@@ -152,7 +152,7 @@
 					<div class="card-media">
 						<!-- media container -->
 						<div class="card-media-object-container">
-						<div class="card-media-object" style="background-image: url({{ asset('assets/beta/images/test.png?2') }}); background-size: 50%; background-repeat: no-repeat;"></div>
+						<div class="card-media-object" style="background-image: url({{ asset('assets/beta/images/test.png') }}); background-size: 50%; background-repeat: no-repeat;"></div>
 						</div>
 						<!-- body container -->
 						<div class="card-media-body">
@@ -202,69 +202,6 @@
 		</div-->
 	</section>
 	
-	<!--section id="fh5co-pricing" data-section="pricing">
-		<div class="fh5co-pricing">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 section-heading text-center">
-						<h2 class="to-animate">sponsor Us</h2>
-						<div class="row">
-							<div class="col-md-8 col-md-offset-2 subtext">
-								<h3 class="to-animate">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove. </h3>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="pricing">
-						<div class="col-md-3">
-							<div class="price-box to-animate-2">
-								<h2 class="pricing-plan">Starter</h2>
-								<div class="price"><sup class="currency">$</sup>9<small>/month</small></div>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
-								<a href="#" class="btn btn-select-plan btn-sm">Select Plan</a>
-							</div>
-						</div>
-
-						<div class="col-md-3">
-							<div class="price-box to-animate-2">
-								<h2 class="pricing-plan">Basic</h2>
-								<div class="price"><sup class="currency">$</sup>27<small>/month</small></div>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
-								<a href="#" class="btn btn-select-plan btn-sm">Select Plan</a>
-							</div>
-						</div>
-
-						<div class="col-md-3">
-							<div class="price-box to-animate-2 popular">
-								<h2 class="pricing-plan pricing-plan-offer">Pro <span>Best Offer</span></h2>
-								<div class="price"><sup class="currency">$</sup>74<small>/month</small></div>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
-								<a href="#" class="btn btn-select-plan btn-sm">Select Plan</a>
-							</div>
-						</div>
-
-						<div class="col-md-3">
-							<div class="price-box to-animate-2">
-								<h2 class="pricing-plan">Unlimited</h2>
-								<div class="price"><sup class="currency">$</sup>140<small>/month</small></div>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
-								<a href="#" class="btn btn-select-plan btn-sm">Select Plan</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-6 col-md-offset-3 to-animate">
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. <a href="#">Learn More</a></p>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</section-->
 
 	<hr>
 
@@ -276,7 +213,7 @@
 						<h2 class="to-animate">What We Do</h2>
 						<div class="row">
 							<div class="col-md-8 col-md-offset-2 subtext">
-								<h3 class="to-animate">Here are some of the highlights of what we as a society aim to deliver year-on-year to make your university experience an unforgettable one. </h3>
+								<h3 class="to-animate">We hold our own Careers Fair, and we start the year in style with our New Years Dinner. With an unparalleled range of activities, there is something for everyone. </h3>
 							</div>
 						</div>
 					</div>
@@ -287,7 +224,7 @@
 							<i class="icon-people to-animate-2"></i>
 							<div class="fh5co-post to-animate">
 								<h3>Mums and Dads</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in.</p>
+								<p>We run a scheme each year which pairs up higher year students with freshers. Helping you (freshers) to settle down at university guide you through your first year in the department.<br><br></p>
 							</div>
 						</div>
 
@@ -295,7 +232,7 @@
 							<i class="icon-disc to-animate-2"></i>
 							<div class="fh5co-post to-animate">
 								<h3>Bar Nights</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in.</p>
+								<p>No college experience would be complete without a night spent tuning your bowling skills. Last year EESoc organized an event at the Kingpin Suite, a venue that offers drinks, arcade games, karaoke and yes you guessed it, five bowling lanes.</p>
 							</div>
 						</div>
 					</div>
@@ -304,7 +241,7 @@
 							<i class="icon-book-open to-animate-2"></i>
 							<div class="fh5co-post to-animate">
 								<h3>EESoc Dinner</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in.</p>
+								<p>Every year, EESoc organizes a glamorous black-tie dinner party — a great opportunity for you to mingle with both professors and fellow students while enjoying a formal 3-course meal at a lavish venue.</p>
 							</div>
 						</div>
 
@@ -312,7 +249,7 @@
 							<i class="icon-briefcase to-animate-2"></i>
 							<div class="fh5co-post to-animate">
 								<h3>Careers Fair</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in.</p>
+								<p>Our Careers Fair was attended by over 25 firms from the banking, consulting and engineering industries last year. Its the perfect platform for the top engineering and technology companies to meet the best technical engineers in the UK in an intimate environment. </p>
 							</div>
 						</div>
 					</div>
@@ -321,7 +258,7 @@
 							<i class="icon-info to-animate-2"></i>
 							<div class="fh5co-post to-animate">
 								<h3>Industry Talks</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in.</p>
+								<p>EESoc runs careers talks throughout the year. Such talks are typically held in the department during lunchtime. We invite guest companies, many of whom are sponsors, to give tailored presentation to you, our members. </p>
 							</div>
 						</div>
 
@@ -329,12 +266,12 @@
 							<i class="icon-screen-desktop to-animate-2"></i>
 							<div class="fh5co-post to-animate">
 								<h3>Hackathons</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in.</p>
+								<p>Last year, we worked with Microsoft to run a ‘hackathon’. This was an event where students pitted their wits against each other to create the most effective algorithm to solve an array of classical problems.</p>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="call-to-action text-center to-animate"><a href="{{ asset('files/other/pdf/EESocFresherGuidebook2018.pdf') }}" class="btn btn-learn" target="_blank">Learn More</a></div>
+				<div class="call-to-action text-center to-animate"><a href="{{ asset('files/other/pdf/EESocFresherGuidebook2018.pdf') }}" class="btn btn-learn" target="_blank" title="EESoc Freshers Guidebook 2018 Edition (PDF)">Learn More</a></div>
 			</div>
 		</div>
 	</section>
@@ -343,7 +280,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 to-animate">
-					<h3>Join Us</h3>
+					<h3 style="margin: 0 0 7px 0;">Join Us</h3>
 					<p>Want exclusive access to our amazing events?<br>Buy our membership now, it's only £10 for the entire year!</p>
 				</div>
 				<div class="col-md-6 to-animate-2">
@@ -363,7 +300,7 @@
 						<h2 class="to-animate">Meet The Team</h2>
 						<div class="row">
 							<div class="col-md-8 col-md-offset-2 subtext">
-								<h3 class="to-animate">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove. </h3>
+								<h3 class="to-animate">The backbone of EESoc is its diverse committee, working tirelessly in each of their roles to make sure you have an unforgettable university experience.</h3>
 							</div>
 						</div>
 					</div>
@@ -380,7 +317,7 @@
 								<p>
 									{{ $member->short_description }}
 									@if ($member->description != "")
-										<a class="more-desc" data-committee-show="{{ $member->id }}" style="text-decoration: none; cursor: pointer;">Read more...</a>
+										<br><a class="more-desc" data-committee-show="{{ $member->id }}" style="text-decoration: none; cursor: pointer;">Read more...</a>
 									@endif
 								</p>
 								<ul class="social-media">
@@ -399,8 +336,8 @@
 								</div>
 							</div>
 						</div>
-						<!--hacks to prevent overcrowding -->
-						@if (($indexKey+1) % 4 == 0)
+						@if (($indexKey+1) % 3 == 0)
+							<!--hacks to prevent overcrowding -->
 							</div><div class="row">
 						@endif
 					 @endforeach
@@ -502,8 +439,8 @@
 								</div>
 							</div>
 						</div>
-						<!--hacks to prevent overcrowding -->
 						@if (($indexKey+1) % 4 == 0)
+							<!--hacks to prevent overcrowding -->
 							</div><div class="row">
 						@endif
 					 @endforeach
@@ -528,32 +465,32 @@
 	<div id="fh5co-footer" role="contentinfo">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4 to-animate">
+				<div class="col-md-6 to-animate">
 					<h3 class="section-title">About Us</h3>
-					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics.</p>
-					<p class="copy-right">&copy; 2015 Union Free Template. <br>All Rights Reserved. <br>
-						Designed by <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a>
-						Demo Images: <a href="http://unsplash.com/" target="_blank">Unsplash</a> &amp; Dribbble Image by <a href="https://dribbble.com/tibi_neamu" target="_blank">Tiberiu</a>
+					<p style="margin-bottom: 60px;"> We boast a broad range of events— with socials, events with industry, sports fixtures, and more, we have it all covered. We hold our own Careers Fair, and we start the term in style with our New Years Dinner. With an unparalled range of activities, there is something for everyone. This year we'll be working hard to create a standout society.</p>
+					<p class="copy-right">&copy; 2018 EESoc<br>
+						Designed by <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a><br>
+						Code by <a href='https://github.com/hsed'>Haaris Mehmood</a>
+          and <a href="https://github.com/EESoc/eesoc-website/graphs/contributors">others</a>, available on
+          <a href="http://bit.ly/196sso5">GitHub</a>.
 					</p>
 				</div>
 
-				<div class="col-md-4 to-animate">
+				<div class="col-md-6 to-animate">
 					<h3 class="section-title">Our Address</h3>
 					<ul class="contact-info">
-						<li><i class="icon-map-marker"></i>198 West 21th Street, Suite 721 New York NY 10016</li>
-						<li><i class="icon-phone"></i>+ 1235 2355 98</li>
-						<li><i class="icon-envelope"></i><a href="#">eesoc@imperial.ac.uk</a></li>
-						<li><i class="icon-globe2"></i><a href="#">www.yoursite.com</a></li>
+						<li><i class="icon-map-marker"></i>Imperial College Union, Beit Quadrangle, Prince Consort Rd, London<br>SW7 2BB</li>
+						<li><i class="icon-envelope"></i><a href="mailto:eesoc@imperial.ac.uk">eesoc@imperial.ac.uk</a></li>
+						<li><i class="icon-globe2"></i><a href="https://www.eesoc.com">www.eesoc.com</a></li>
 					</ul>
 					<h3 class="section-title">Connect with Us</h3>
 					<ul class="social-media">
-						<li><a href="#" class="facebook"><i class="icon-facebook"></i></a></li>
-						<li><a href="#" class="twitter"><i class="icon-twitter"></i></a></li>
-						<li><a href="#" class="dribbble"><i class="icon-dribbble"></i></a></li>
-						<li><a href="#" class="github"><i class="icon-github-alt"></i></a></li>
+						<li><a href="https://facebook.com/ImperialEESoc" target="_blank" class="facebook"><i class="icon-facebook"></i></a></li>
+						<li><a href="https://twitter.com/EESoc" class="twitter"><i class="icon-twitter"></i></a></li>
+						<li><a href="https://github.com/EESoc" class="github"><i class="icon-github-alt"></i></a></li>
 					</ul>
 				</div>
-				<div class="col-md-4 to-animate">
+				<!--div class="col-md-4 to-animate">
 					<h3 class="section-title">Drop us a line</h3>
 					<form class="contact-form">
 						<div class="form-group">
@@ -572,7 +509,7 @@
 							<input type="submit" id="btn-submit" class="btn btn-send-message btn-md" value="Send Message">
 						</div>
 					</form>
-				</div>
+				</div-->
 			</div>
 		</div>
 	</div>
