@@ -1,5 +1,9 @@
 <?php
 
+//use \Artisan; //can work without this, but it messes up php artisan console command if uncommented.
+use Symfony\Component\Console\Output\StreamOutput;
+use \Guzzle\Http\Client as Http_Client;
+
 class ApiV2Controller extends BaseController {
 
     public function __construct()
@@ -7,12 +11,49 @@ class ApiV2Controller extends BaseController {
         // Skip CSRF filter
     }
 
-    public function getIndex()
+    /*
+     * POST FUNCTION CAUSE API.AI FOLLOWS THIS
+    */
+
+    public function postIndex()
     {
-        return View::make('beta.index');
+        if ( !Request::header('X-API-Key')) {
+			return json_encode(json_decode('{"error": "malformed request"}'));
+        }
+        
+        if ( Request::header('X-API-Key') != Config::get('eesocapi.eesoc_api_key')) {
+			return json_encode(json_decode('{"error": "unauthorized request"}'));
+        }
+
+        $results = Input::get('result');
+        $action = "no_action";
+
+        if (is_array($results) && array_key_exists('action', $results)){
+            $action = $results['action'];
+        }
+
+        switch ($action){
+            // returning so no breaks required.
+            case "no_action": {
+                return json_encode(json_decode('{"error": "no action was specified."}'));
+            }
+            case "create_event": {
+                return $this->postEvent($results);
+            }
+
+            case "sync_sales": {
+                return $this->postSyncSales($results);
+            }
+
+            default: {
+                return json_encode(json_decode('{"error": "malformed or invalid action type."}'));
+            }
+        }
+
+        return;
     }
 
-    public function postEvent()
+    public function postEvent($results)
     {
         /*if ( !Input::has('apikey')) {
 			return json_encode(json_decode('{"error": "malformed request"}'));
@@ -22,20 +63,15 @@ class ApiV2Controller extends BaseController {
 			return json_encode(json_decode('{"error": "unauthorized request"}'));
         }*/
 
-        if ( !Request::header('X-API-Key')) {
-			return json_encode(json_decode('{"error": "malformed request"}'));
-        }
         
-        if ( Request::header('X-API-Key') != Config::get('eesocapi.eesoc_api_key')) {
-			return json_encode(json_decode('{"error": "unauthorized request"}'));
-        }
 
         //print_r(Request::header('X-API-Key'));
         //$response =  $this->client->post(Request::url(), [
         //    'Content-type' => 'application/json'
         //]);
         $params; //= (object)[]; //emty object, not neccessary gets overwritten later
-        $results = Input::get('result');
+        //$results = Input::get('result');
+
         if (is_array($results) && array_key_exists('parameters', $results)){
             $params = $results['parameters'];
         }
@@ -77,14 +113,17 @@ class ApiV2Controller extends BaseController {
         //since all three are required, if one exits then all must exist.
         if ($event_data['name'] != ''){
             $speech_text = '[WEBHOOK] Got some data: ' . $event_data['name'] . '; ' . $event_data['date'] . '; ' . $event_data['starts_at'];
-            // + ', ' . $params['duration']['amount'] . $params['duration']['unit']
+            
+
+            /* Actual event creation */
             $event = new EventDay;
             $event->fill($event_data);
             $event->save();
             $speech_text = $speech_text . ' EVENT SAVED!';
+            /* End */
 
             //Slack needs double quotes for newlines!!
-            $slack_text = "[WEBHOOK-SLACK] Got some data:\nName: " . $event_data['name'] . "\nDate: " . $event_data['date'] . "\nStart_Time: " . $event_data['starts_at'] . "\nEnd_Time: " . $event_data['ends_at'] . "\nEVENT SAVED!";//str_replace('; ','"\n"', str_replace(': ','"\n"',$speech_text)); 
+            $slack_text = "[WEBHOOK-SLACK] Received create event command.\nName: " . $event_data['name'] . "\nDate: " . $event_data['date'] . "\nStart_Time: " . $event_data['starts_at'] . "\nEnd_Time: " . $event_data['ends_at'] . "\nEVENT SAVED!";//str_replace('; ','"\n"', str_replace(': ','"\n"',$speech_text)); 
 
             $params['slack'] = [
                 "text" => $slack_text //str_replace('; ','\n',$speech_text) //user-friendly //This is a line of text.\nAnd this is another one.
@@ -135,13 +174,69 @@ class ApiV2Controller extends BaseController {
 
 
 
-        $response = Response::make(json_encode($data), 200);
-        
-        $response->header('Content-Type', 'application/json');
+        return $this->createJSONResponse($data);
+    }
 
-        //return json_encode(Input::all());
-        return $response;
+    public function postSyncSales(){
+        $params = []; //Don't need to parse/read any post data, just need to know that sync is requested
+
+        $stream = fopen('php://temp/sync', 'r+');   //read+write mode
+        Artisan::call('eactivities:sales:sync', [], new StreamOutput($stream)); //send ref to stream handle
+
+        rewind($stream);                            //point handle back to beginning
+        $output = stream_get_contents($stream);
+        fclose($stream);                            //close after use
+
         
-        //print_r(Input::all());
+        
+        
+
+        //Slack needs double quotes for newlines!!
+        $slack_text = "[WEBHOOK-SLACK] Received sales sync command.\nOutput: " .  $output;
+        $speech_text = preg_replace('[WEBHOOK-SLACK]', '[WEBHOOK]', $slack_text);
+
+        $params['slack'] = [
+            "text" => $slack_text
+        ];
+
+
+        $data = [
+            'speech' => $speech_text,
+            'displayText' => $speech_text,
+            'data' => $params,
+            'recieved' => Input::all()
+        ];
+
+        //special for dinner only
+        //Now disabled
+        /*$chunks = explode("\n", $slack_text); //SPLIT BY NEWLINE
+        $dinner_text = "";
+        foreach($chunks as $chunk){
+            //Add 'SalesStat' and 'Dinner' keyword sentences
+            if (strpos($chunk,"Dinner") !== false || strpos($chunk,"SalesStat") !== false){
+                $dinner_text .= ($chunk . "\n");
+            }
+        }
+        if ($dinner_text != "") {
+            //Only send wehn not empty as empty string may cause errors
+            $this->sendJSONToWebhook(json_encode([ "text" => $dinner_text ]), Config::get('slack.webhook.dinner_channel'));
+        }*/
+
+        //Send full log to logs channel
+        $this->sendJSONToWebhook(json_encode($data['data']['slack']), Config::get('slack.webhook.logs_channel'));
+
+        return $this->createJSONResponse($data);
+    }
+
+    protected function createJSONResponse($data){
+        $response = Response::make(json_encode($data), 200);
+        $response->header('Content-Type', 'application/json');
+        return $response;
+    }
+
+    /* Sends a copy of the output to  */
+    protected function sendJSONToWebhook($json, $webhook){
+        $client = new Http_Client('https://hooks.slack.com');
+        return $client->post($webhook, ['Content-type' => 'application/json'], $json)->send();
     }
 }

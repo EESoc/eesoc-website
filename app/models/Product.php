@@ -13,10 +13,30 @@
  *     const ID_EESOC_DINNER = 18961;
  */
 
+/*
+ * Previous product IDs - 2017/18
+ *      const ID_EESOC_LOCKER = 23605;
+ *      const ID_EESOC_DINNER = 24788;
+ *      const ID_EESOC_DINNER_NON_MEMBER = 24787;
+ *      const ID_EESOC_BAR_NIGHT = 23992;
+ *      const ID_EESOC_HOODIE = 23865;
+ *      const ID_EESOC_SWEAT_SHIRT = 23868;
+ *      const ID_EESOC_MEMBERSHIP = 22544;
+ */
+
 
 class Product {
 
-    const ID_EESOC_LOCKER = 19104;
-    const ID_EESOC_DINNER = 18961; // TODO: THIS IS OLD ONE PLEASE CHANGE!!!
+    const ID_EESOC_LOCKER = 28476;
+    const ID_EESOC_DINNER = 24788;
+    const ID_EESOC_DINNER_NON_MEMBER = 24787;
+    const ID_EESOC_BAR_NIGHT = 23992;
+    const ID_EESOC_HOODIE = 23865;
+    const ID_EESOC_SWEAT_SHIRT = 23868;
+    const ID_EESOC_MEMBERSHIP = 22544;
+
+    public static function totalQuantity($product_id){
+        return Sale::productPurchases($product_id)->sum('quantity');
+    }
 
 }

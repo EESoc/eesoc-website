@@ -54,6 +54,12 @@
                   </a>
                 </li>
                 <li>
+                  <a href="{{{ url('/beta') }}}">
+                    <span class="glyphicon glyphicon-home"></span>
+                    Beta Site
+                  </a>
+                </li>
+                <li>
                   <a href="{{{ action('UsersController@getDashboard') }}}">
                     <span class="glyphicon glyphicon-dashboard"></span>
                     Dashboard
@@ -65,6 +71,14 @@
                       Lockers
                     </a>
                 </li>
+                @if ( DinnerPermission::user(Auth::user())->canManageGroups())
+                  <li>
+                    <a href="{{{ url('dashboard/dinner/groups') }}}">
+                      <span class="glyphicon glyphicon-glass"></span>
+                      Dinner
+                    </a>
+                  </li>
+                @endif
                  <!--li>
                     <a href="{{{ url('mums-and-dads') }}}">
                       <span class="glyphicon glyphicon-flag"></span>
@@ -129,6 +143,14 @@
                       Lockers
                     </a>
                   </li>
+                  @if ( DinnerPermission::user(Auth::user())->canManageGroups())
+                  <li>
+                    <a href="{{{ url('dashboard/dinner/groups') }}}">
+                      <span class="glyphicon glyphicon-glass"></span>
+                      Dinner
+                    </a>
+                  </li>
+                  @endif
 					        <!--li>
 					          <a href="{{{ url('mums-and-dads') }}}">
 					            <span class="glyphicon glyphicon-flag"></span>
@@ -159,17 +181,17 @@
                   </a>
                 </li>
                 <li class="{{ Request::is('events') ? 'active' : '' }}">
-                  <a href="{{ url('events') }}">
+                  <a href="{{ url('https://www.facebook.com/ImperialEESoc/events') }}" target="_blank">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     Events
                   </a>
                 </li>
-                <li class="{{ Request::is('careersfair') ? 'active' : '' }}">
+                <!-- <li class="{{ Request::is('careersfair') ? 'active' : '' }}">
                   <a href="{{ url('careersfair') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     Careers Fair
                   </a>
-                </li>
+                </li> -->
                 <!-- li>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                       <span class="glyphicon glyphicon-chevron-right"></span> Flagship Events <span class="caret"></span>
@@ -201,12 +223,12 @@
                     Sponsors
                   </a>
                 </li>
-                <li class="{{ Request::is('about') ? 'active' : '' }}">
+                <!-- <li class="{{ Request::is('about') ? 'active' : '' }}">
                   <a href="{{ url('about') }}">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     About
                   </a>
-                </li>
+                </li> -->
               </ul>
             </div><!-- /.navbar-collapse -->
           </div>
@@ -233,7 +255,7 @@
           Imperial College Electrical Engineering Society.
         </p>
         <p>
-          Code by <a href='&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#105;&#97;&#110;&#46;&#108;&#101;&#101;&#49;&#49;&#64;&#105;&#109;&#112;&#101;&#114;&#105;&#97;&#108;&#46;&#97;&#99;&#46;&#117;&#107;'>&#74;&#105;&#97;&#110;&#32;&#89;&#117;&#97;&#110;&#32;&#76;&#101;&#101;</a>
+          Code by <a href='https://github.com/hsed'>Haaris Mehmood</a>
           and <a href="https://github.com/EESoc/eesoc-website/graphs/contributors">others</a>, available on
           <a href="http://bit.ly/196sso5">GitHub</a>.
         </p>

@@ -60,16 +60,34 @@ Route::post('api/event/name', 'ApiController@postEventName');
 # TV
 Route::get('tv', 'TVController@show');
 
+# Bar Night 2017 (temp redirect)
+Route::get('barnight', function()
+{
+    return Redirect::to('https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/19111/eesoc-bar-night-tickets');
+});
+
 # Sponsor Link
 Route::get('bae', function()
 {
-    return Redirect::to('https://career012.successfactors.eu/career?company=BAE&site=SITE_ID', 303, ['X-Why' => 'Yes']);
+    return Redirect::to('https://career012.successfactors.eu/career?company=BAE&site=VjItSE43VDBudHJlU3UwSGpKcUVacWFRQT09', 303, ['X-Why' => 'Yes']);
 });
 
 //Temp short linking
 Route::get('dinner', function()
 {
-    return Redirect::to('https://eesoc.com/dashboard/dinner/groups', 302);
+    return Redirect::to('https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/19974/eesoc-new-years-dinner-ticket-members', 302);
+});
+Route::get('dinner/non-member', function()
+{
+    return Redirect::to('https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/19973/eesoc-new-years-dinner-ticket-non-members', 302);
+});
+Route::get('dinner/staff', function()
+{
+    return Redirect::to('https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/19975/eesoc-new-years-dinner-ticket-staff', 302);
+});
+Route::get('dinner/afterparty', function()
+{
+    return Redirect::to('https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/20003/eesoc-new-years-dinner-afterparty-ticket-members-only', 302);
 });
 Route::get('mumsanddads', function()
 {
@@ -93,17 +111,14 @@ Route::get('lockers', function()
  * Routes for members
  */
 Route::group(['before' => 'auth.member'], function() {
-    # Dashboard
-    Route::get('dashboard', 'UsersController@getDashboard');
-
-    #Mums and Dads
-    Route::controller('mums-and-dads', 'MumsAndDadsController');
-
+    # Dashboard sub-links
     Route::group(['prefix' => 'dashboard'], function() {
+        # Subscriptions
+       
+        
         # Books
-        Route::resource  ('books', 'BooksController');
-        Route::controller('books', 'BooksController');
-
+        Route::resource('books', 'BooksController');
+        
         # Lockers
         Route::controller('lockers', 'LockersController');
 
@@ -116,12 +131,16 @@ Route::group(['before' => 'auth.member'], function() {
             Route::post('add-member', ['uses' => 'DinnerGroupsController@addMember']);
         });
 
-        /*# Applications
-        Route::resource  ('applications', 'ApplicationsController');
-        Route::controller('applications', 'ApplicationsController');
-        */
-
+        Route::post('update', ['uses' => 'UsersController@updateSubscription']);
     });
+
+    # All direct function calls must be defined AFTER sub-links are defined    
+    Route::controller('dashboard', 'UsersController');
+    
+    #Mums and Dads
+    Route::controller('mums-and-dads', 'MumsAndDadsController');
+
+    
 });
 
 /**
@@ -164,10 +183,14 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
     Route::resource('posts', 'Admin\PostsController', ['except' => ['show']]);
 
     # Sales
-    Route::resource('sales', 'Admin\SalesController', ['only' => ['index']]);
+    #Route::resource('sales', 'Admin\SalesController');
+    Route::controller('sales', 'Admin\SalesController');
 
     # Sponsors
     Route::resource('sponsors', 'Admin\SponsorsController', ['except' => ['show']]);
+
+    # Committee
+    Route::resource('committee', 'Admin\CommitteeController', ['except' => ['show']]);
 
     # Careers Fair
     Route::resource('careersfair', 'Admin\CareersFairController', ['except' => ['show']]);

@@ -214,7 +214,7 @@ class EmailsController extends BaseController {
         } else {
 
             return Redirect::route('admin.emails.show', $email->id)
-                ->with('success', 'You cannot pause this email');
+                ->with('danger', 'You cannot pause this email');
         }
     }
 
@@ -255,12 +255,22 @@ class EmailsController extends BaseController {
     private function afterSaveResponseForEmail(NewsletterEmail $email)
     {
         if (Input::get('action') === 'send') {
-            $email->buildEmailQueue();
+            $count = $email->buildEmailQueue();
             $email->state = 'sending';
             $email->save();
-
             return Redirect::route('admin.emails.show', $email->id)
-                ->with('success', 'Email has been successfully updated');
+            ->with('success', 'Email has been successfully updated');
+
+            //Only for debugging
+            /*if($count > 0){
+                return Redirect::route('admin.emails.edit', $email->id)
+                ->with('success', 'Added ' . $count . ' new emails to the queue');
+            }
+            else {
+                return Redirect::route('admin.emails.edit', $email->id)
+                ->with('success', 'No new emails were added to the queue<br>Either an error or duplicates were found');
+            }*/
+            
         }
 
         if (Input::get('action') === 'send_test') {

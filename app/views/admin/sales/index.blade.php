@@ -4,6 +4,9 @@
   <div class="page-header">
     <h1>Sales</h1>
   </div>
+  <a href="{{ action('Admin\SalesController@getSync') }}" class="btn btn-info" >Sync Sales</a>
+  <br>
+  <br>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
@@ -22,7 +25,7 @@
           <td class="text-right">{{{ $sale->id }}}</td>
           <td>
             {{{ $sale->user->name }}}
-            ({{{ $sale->user->username }}})
+            {{{ $sale->user->username }}}
           </td>
           <td class="text-right">{{{ $sale->date }}}</td>
           <td>

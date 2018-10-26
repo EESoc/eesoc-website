@@ -37,7 +37,7 @@ class SyncEActivitiesSalesCommand extends Command {
      */
     public function fire()
     {
-        $this->info('Warning: This feature is U/C...');
+        $this->info('SalesStat@' . date('H:i_d-m-y'));
 
 
         //new DateTime('2000-01-01');
@@ -48,11 +48,37 @@ class SyncEActivitiesSalesCommand extends Command {
 
 
         $this->syncProduct($eactivities_client, Product::ID_EESOC_LOCKER);
+        //$this->syncProduct($eactivities_client, Product::ID_EESOC_BAR_NIGHT); OFFSALE
+        //$this->syncProduct($eactivities_client, Product::ID_EESOC_HOODIE); //OFFSALE
+        //$this->syncProduct($eactivities_client, Product::ID_EESOC_SWEAT_SHIRT); //OFFSALE
+        $this->syncProduct($eactivities_client, Product::ID_EESOC_MEMBERSHIP);
+        $this->syncProduct($eactivities_client, Product::ID_EESOC_DINNER, function($purchase, $sale, $user)
+        {
+            //$this->info(sprintf('New Member DinnerSale!'));
+            $dSale           = new DinnerSale;
+            $dSale->user_id  = $user->id;
+            $dSale->quantity = $purchase['Quantity'];
+            $dSale->origin   = "EActivities";
+            $dSale->sale_id  = $sale->id;
+            $dSale->save();
+        });
+        $this->syncProduct($eactivities_client, Product::ID_EESOC_DINNER_NON_MEMBER, function($purchase, $sale, $user)
+        {
+            //$this->info(sprintf('New Non-member DinnerSale!'));
+            $dSale           = new DinnerSale;
+            $dSale->user_id  = $user->id;
+            $dSale->quantity = $purchase['Quantity'];
+            $dSale->origin   = "EActivities";
+            $dSale->sale_id  = $sale->id;
+            $dSale->save();
+        });
 
+       
         //for debugging
         //$this->info(print_r($eactivities_client->getProductList()));
         return; /*END OF CODE*/
         
+        /*--- NOT IMPLEMENTED YET ---*/
 
         // @todo make a ask prompt for this.
         // ['1725', '1772', '1772-3']
@@ -62,18 +88,7 @@ class SyncEActivitiesSalesCommand extends Command {
         // Lockers in 2015/16 have product ID 13472. This is also defined in app/models/Product.php,
         // but who knows if this is accessible here.
         // @TODO; Software engineering... 
-        $this->syncProduct($eactivities_client, Product::ID_EESOC_LOCKER);
-
-       # Sync dinner sales 2015/16
-        $this->syncProduct($eactivities_client, Product::ID_EESOC_DINNER, function($purchase, $sale, $user)
-        {
-            $dSale           = new DinnerSale;
-            $dSale->user_id  = $user->id;
-            $dSale->quantity = $purchase['quantity'];
-            $dSale->origin   = "EActivities";
-            $dSale->sale_id  = $sale->id;
-            $dSale->save();
-        });
+       
     }
 
     protected function syncProduct($eactivities_client, $productId, $newCallback = NULL)
@@ -94,6 +109,9 @@ class SyncEActivitiesSalesCommand extends Command {
         //debug only
         /*$this->info("Current Product: " . $product_info['Name']); 
         $this->info(print_r($purchases));*/
+
+        //Count existing quantity purchased BEFORE NEW SYNC
+        $orig_count = Product::totalQuantity($productId);
         
         //syncronise each sale for given product
         foreach ($purchases as $purchase) {
@@ -102,16 +120,31 @@ class SyncEActivitiesSalesCommand extends Command {
             
             //debug only
             //$this->info(print_r($purchase['OrderNumber'] . " --- " . $purchase['SaleDateTime'] . " --- " . $purchase_date_array[1] . " --- " . $year_code));
+            $count = Sale::where('order_number', '=', $purchase['OrderNumber'])
+            ->where('product_id', '=', $purchase['ProductID'])->count();
+            if ($count > 1) { $this->info("Duplicate entries, needed 1 found " . $count); }
 
-            $sale = Sale::find($purchase['OrderNumber']);
+            $sale = Sale::where('order_number', '=', $purchase['OrderNumber'])
+                    ->where('product_id', '=', $purchase['ProductID'])->first();
             $new  = FALSE;
+
+
+
+            //UNDETECTED FOR YEARS, RACE CONDITION CHECK
+            //When 2 distinct products bought of same id
+            //This should never run now
+            if ($sale && $sale->product_id != $purchase['ProductID']){
+                $this->info("SameOrder-DiffProd\tOriginal Prod: " . $sale->product_name . "\tNew Prod: " . $product_info['Name'] . "\tUsername: " . $sale->username . "\n");
+            }
+
 
             //If not in EESoc dB, create new sale record
             if (!$sale) {
                 $sale = new Sale;
-                $sale->id = $purchase['OrderNumber'];
                 $new = TRUE;
             }
+
+            
 
            
             $user = User::where('username', '=', $purchase['Customer']['Login'])->first();
@@ -132,6 +165,7 @@ class SyncEActivitiesSalesCommand extends Command {
             //API doesn't return year code so need to use our own calculated value
             $sale->year         = $year_code;
             $sale->product_name = $product_info['Name'];
+            $sale->order_number = $purchase['OrderNumber']; //don't set id (it is auto) only order number!
             $sale->date         = $purchase['SaleDateTime'];
             $sale->quantity     = $purchase['Quantity'];
             $sale->unit_price   = $purchase['Price'];
@@ -148,7 +182,8 @@ class SyncEActivitiesSalesCommand extends Command {
                 $newCallback($purchase, $sale, $user);
         }
 
-        $this->info(sprintf('Successfully refreshed `%d` sale entries for product `%s`', count($purchases), $product_info['Name']));
+        $this->info(sprintf("Product: `%s`\tNew Purchases: `%d`\tTotal Purchases: `%d`", $product_info['Name'], (Product::totalQuantity($productId) - $orig_count), Product::totalQuantity($productId)));
+        //$this->info(sprintf('Successfully refreshed `%d` sale entries for product `%s`', count($purchases), $product_info['Name']));
     }
 
     /**

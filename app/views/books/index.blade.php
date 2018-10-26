@@ -1,5 +1,7 @@
 @extends('layouts.application')
 
+<?php $page_title = 'Book Sales'; ?>
+
 @section('content')
   <div class="page-header">
     <a href="{{{ route('dashboard.books.create') }}}" class="btn btn-primary btn-lg pull-right">

@@ -43,7 +43,13 @@ class SessionsController extends BaseController {
             if (Auth::attempt($inputs, Input::get('remember_me') === 'true')) {
                 Auth::user()->recordSignIn();
                 $defaultURL = URL::action('UsersController@getDashboard');
-                return Redirect::intended($defaultURL);
+                $adminURL = URL::action('Admin\DashboardController@getShow');
+                if (Auth::user()->is_admin){
+                    return Redirect::intended($adminURL);
+                }
+                else {
+                    return Redirect::intended($defaultURL);
+                }
             } else {
                 return Redirect::action('SessionsController@getNew')
                     ->withInput()

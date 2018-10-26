@@ -37,40 +37,46 @@
         }
         return function() {
           $loader.removeClass('hide');
-          currentRequest = $.get('https://www.googleapis.com/books/v1/volumes?key={{{ Config::get('google.api_key') }}}', {
-            q: searchQuery,
-            maxResults: 6
-          }, function(data) {
-            $loader.addClass('hide');
-            $results.empty();
-            $.each(data.items, function(i, item) {
-              console.log(item);
-              $results
-                .append(
-                  $('<div class="col-lg-2" />')
-                    .append(
-                      $('<a href="#" class="thumbnail" />')
-                        .append(
-                          (
-                            typeof item.volumeInfo.imageLinks !== 'undefined'
-                            ? $('<img />')
-                                .attr('src', item.volumeInfo.imageLinks.thumbnail)
-                                .attr('alt', item.volumeInfo.title)
-                            : ''
-                          )
-                        )
-                        .append(
-                          $('<div class="caption" />')
-                            .append(
-                              $('<h4 />')
-                                .text(item.volumeInfo.title)
-                            )
-                        )
-                        .click(selectBook(item))
-                    )
-                );
-            });
-          });
+          currentRequest = $.ajax({
+				url: 'https://www.googleapis.com/books/v1/volumes?key={{{ Config::get('google.api_key') }}}',
+				data: {
+					q: searchQuery,
+					country: 'UK',
+					maxResults: 6
+				},
+				success: function(data) {
+					$loader.addClass('hide');
+					$results.empty();
+					$.each(data.items, function(i, item) {
+						  console.log(item);
+						  $results
+							.append(
+							  $('<div class="col-lg-2" />')
+								.append(
+								  $('<a href="#" class="thumbnail" />')
+									.append(
+									  (
+										typeof item.volumeInfo.imageLinks !== 'undefined'
+										? $('<img />')
+											.attr('src', item.volumeInfo.imageLinks.thumbnail)
+											.attr('alt', item.volumeInfo.title)
+										: ''
+									  )
+									)
+									.append(
+									  $('<div class="caption" />')
+										.append(
+										  $('<h4 />')
+											.text(item.volumeInfo.title)
+										)
+									)
+									.click(selectBook(item))
+								)
+							);
+						});
+				},
+				crossDomain: true
+			});
           return false;
         }
       };

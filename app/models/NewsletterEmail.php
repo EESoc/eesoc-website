@@ -124,9 +124,14 @@ class NewsletterEmail extends Eloquent {
                     ];
                 }
             }
-			
-			$outsideUsers = User::where('is_member','=',1)
-					->whereNull('student_group_id')
+            
+            //special case for subscribable lists
+            // in this case each user is linked to a category
+            if($newsletter->is_subscribable){
+                $subscriber_ids = $newsletter->subscribers->lists('id');
+
+                if ( ! empty($subscriber_ids)) {
+                    $users = User::where('is_member','=',1)->whereIn('id', $subscriber_ids)
 					->whereNotIn('id', function($query) {
                         // Remove duplicate
                         return $query
@@ -134,56 +139,32 @@ class NewsletterEmail extends Eloquent {
                             ->from('newsletter_email_queue')
                             ->where('newsletter_email_id', '=', $this->id);
                     })
-					->get();
-   
-			// Get subscribers
-            foreach ($outsideUsers as $user) {
-				$inserts[$user->email] = [
-					'newsletter_email_id' => $this->id,
-					'tracker_token'       => str_random(20),
-					'to_email'            => $user->email,
-					'user_id'             => $user->id,
-                    ];
-            }
+                    ->get();
 
-            // Process normal email subscriptions
-            $subscriptions_query = $newsletter
-                ->subscriptions()
-                ->with('user')
-                ->whereNotIn('email', function($query) {
-                    // Remove duplicate
-                    return $query
-                        ->select('to_email')
-                        ->from('newsletter_email_queue')
-                        ->where('newsletter_email_id', '=', $this->id);
-                });
+                    //$output = "Emails: <br>";
+                    foreach ($users as $user) {
+                        $inserts[$user->email] = [
+                            'newsletter_email_id' => $this->id,
+                            'tracker_token'       => str_random(20),
+                            'to_email'            => $user->email,
+                            'user_id'             => $user->id,
+                        ];
 
-            // Get subscribers
-            foreach ($subscriptions_query->get() as $subscription) {
-                $email = null;
-                if ($subscription->user && $subscription->user->email) {
-                    $email = $subscription->user->email;
-                } else if ($subscription->email) {
-                    $email = $subscription->email;
+                        //$output .= $user->email . " <br>";
+                    }
+                    //return $output;
                 }
-
-                if (empty($email)) {
-                    // Skip empty emails
-                    continue;
-                }
-
-                $inserts[$email] = [
-                    'newsletter_email_id' => $this->id,
-                    'tracker_token'       => str_random(20),
-                    'to_email'            => $email,
-                    'user_id'             => null,
-                ];
+               
             }
+    
         }
 
         if ( ! empty($inserts)) {
             DB::table('newsletter_email_queue')->insert(array_values($inserts));
+            return count($inserts);
         }
+
+        return 0; //if no email to send, count == 0
     }
 
     /**

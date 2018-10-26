@@ -24,7 +24,7 @@
 			</a>
 		  </div>
 		  <div class="col-lg-6">
-			<a href="https://goo.gl/forms/3Hl6MtWflrcbtXHz1" class="btn btn-danger btn-block btn-lg" data-disable-with="Please wait&hellip;">
+			<a href="mailto:eesocweb@ic.ac.uk?Subject=Locker%20Issue" class="btn btn-danger btn-block btn-lg" data-disable-with="Please wait&hellip;">
 			  <span class="glyphicon glyphicon-envelope"></span>
 			  Report an Issue
 			</a>

@@ -73,7 +73,7 @@ $failed = array();
                 if ($google){
 
                     $this->info('Searching on Google '.$data[0]);
-                    $search = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=isbn:".urlencode($data[0])."&key=INSERT_KEY_HERE&country=UK&maxResults=1");
+                    $search = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=isbn:".urlencode($data[0])."&key=AIzaSyABWOEVCQ83nB81klr3V_6i6XmGE9Oiz04&country=UK&maxResults=1");
 
                     $results = json_decode($search, true);
 
@@ -126,7 +126,7 @@ $failed = array();
                      *
                      * */
 
-                    $private_key = "INSERT_PRIVATE_KEY_HERE";
+                    $private_key = "l3XC2Kft00cja2VZyOpNt79I4jxnRXYUaBeBHzM9";
                     $params = array();
                     $method = "GET";
                     $host = "webservices.amazon.com";
@@ -140,7 +140,7 @@ $failed = array();
                     $params["IdType"] = "ISBN";
                     $params["ItemId"] = $data[0];
 
-                    $params["AWSAccessKeyId"] = "INSERT__AWS_KEY_HERE";
+                    $params["AWSAccessKeyId"] = "AKIAI4OV6KZBMHKOS6MQ";
                     $params["AssociateTag"] = "e03ef-21";
 // GMT timestamp
                     $params["Timestamp"] = gmdate("Y-m-d\TH:i:s\Z");
