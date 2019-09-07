@@ -39,55 +39,38 @@ class SyncEActivitiesSalesCommand extends Command {
     {
         $this->info('SalesStat@' . date('H:i_d-m-y'));
 
-
-        //new DateTime('2000-01-01');
-        //echo ;
-        //return;
-
         $eactivities_client = new EActivities\Client( new Guzzle\Http\Client);
 
-
-        $this->syncProduct($eactivities_client, Product::ID_EESOC_LOCKER);
-        //$this->syncProduct($eactivities_client, Product::ID_EESOC_BAR_NIGHT); OFFSALE
-        //$this->syncProduct($eactivities_client, Product::ID_EESOC_HOODIE); //OFFSALE
-        //$this->syncProduct($eactivities_client, Product::ID_EESOC_SWEAT_SHIRT); //OFFSALE
-        $this->syncProduct($eactivities_client, Product::ID_EESOC_MEMBERSHIP);
-        $this->syncProduct($eactivities_client, Product::ID_EESOC_DINNER, function($purchase, $sale, $user)
-        {
-            //$this->info(sprintf('New Member DinnerSale!'));
-            $dSale           = new DinnerSale;
-            $dSale->user_id  = $user->id;
-            $dSale->quantity = $purchase['Quantity'];
-            $dSale->origin   = "EActivities";
-            $dSale->sale_id  = $sale->id;
-            $dSale->save();
-        });
-        $this->syncProduct($eactivities_client, Product::ID_EESOC_DINNER_NON_MEMBER, function($purchase, $sale, $user)
-        {
-            //$this->info(sprintf('New Non-member DinnerSale!'));
-            $dSale           = new DinnerSale;
-            $dSale->user_id  = $user->id;
-            $dSale->quantity = $purchase['Quantity'];
-            $dSale->origin   = "EActivities";
-            $dSale->sale_id  = $sale->id;
-            $dSale->save();
-        });
-
-       
         //for debugging
+        // UNCOMMENT AND RUN THIS COMMAND IN TERMINAL TO SEE PROD_IDS
+        // OR ELSE IF >1 SALES, FIND ID IN EACTIVITES UNION PAGE
         //$this->info(print_r($eactivities_client->getProductList()));
-        return; /*END OF CODE*/
+
+        // only sync products with well-defined IDs
+        foreach (Product::is_product_syncable() as $prod_id => $is_syncable) {
+            //$this->info('Product: ' . $prod_id . ' IsSyncable: ' . ((string) $is_syncable)); //for debugging
+            if ($is_syncable == 1){
+                if ($prod_id == Product::ID_EESOC_DINNER || $prod_id == Product::ID_EESOC_DINNER_NON_MEMBER){
+                    // special case
+                    $this->syncProduct($eactivities_client, $prod_id, 
+                        function($purchase, $sale, $user){
+                            //$this->info(sprintf('New Member/Non-member DinnerSale!'));
+                            $dSale           = new DinnerSale;
+                            $dSale->user_id  = $user->id;
+                            $dSale->quantity = $purchase['Quantity'];
+                            $dSale->origin   = "EActivities";
+                            $dSale->sale_id  = $sale->id;
+                            $dSale->save();
+                        });
+                }
+                else {
+                    $this->syncProduct($eactivities_client, $prod_id);
+                }
+            }
+        }
         
-        /*--- NOT IMPLEMENTED YET ---*/
-
-        // @todo make a ask prompt for this.
-        // ['1725', '1772', '1772-3']
-        // $purchases = $eactivities_client->getPurchasesList(['1725', '1772', '1772-3'], 1983);
-        // $purchases = $eactivities_client->getPurchasesList(['1725', '1772'], 20226);
-
-        // Lockers in 2015/16 have product ID 13472. This is also defined in app/models/Product.php,
-        // but who knows if this is accessible here.
-        // @TODO; Software engineering... 
+        
+        return; /*END OF CODE*/
        
     }
 
@@ -149,13 +132,18 @@ class SyncEActivitiesSalesCommand extends Command {
            
             $user = User::where('username', '=', $purchase['Customer']['Login'])->first();
             
-            //If not in EESoc dB, create new user record
+            //If not in EESoc dB, create new user record -- need to fix this for people buying membership
             if (!$user) {
                 $user = new User;
                 $user->username = $purchase['Customer']['Login'];
                 $user->cid      = $purchase['Customer']['CID'];
                 $user->name     = "{$purchase['Customer']['FirstName']} {$purchase['Customer']['Surname']}";
                 $user->email    = $purchase['Customer']['Email'];
+                
+                if ($productId == Product::ID_EESOC_MEMBERSHIP){
+                    $user->is_member = true;
+                }
+
                 $user->save();
             }
 
@@ -182,8 +170,11 @@ class SyncEActivitiesSalesCommand extends Command {
                 $newCallback($purchase, $sale, $user);
         }
 
-        $this->info(sprintf("Product: `%s`\tNew Purchases: `%d`\tTotal Purchases: `%d`", $product_info['Name'], (Product::totalQuantity($productId) - $orig_count), Product::totalQuantity($productId)));
-        //$this->info(sprintf('Successfully refreshed `%d` sale entries for product `%s`', count($purchases), $product_info['Name']));
+        $this->info(sprintf("Product: %s\tPurchases: %d (%+d);", 
+                    substr($product_info['Name'], 0, min(strlen($product_info['Name']), 12)), 
+                    Product::totalQuantity($productId), 
+                    (Product::totalQuantity($productId) - $orig_count))
+                );
     }
 
     /**
