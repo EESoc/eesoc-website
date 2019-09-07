@@ -13,7 +13,7 @@
     @endif
     @if ($group->owner_id == Auth::user()->id)
         <br>
-        <span class="alert alert-info">This group belongs to you.</span>
+        <span class="alert alert-info">You may not leave this group as it belongs to you.</span>
         <br><br>
     @endif
     <div class="panel panel-default">
@@ -21,17 +21,22 @@
         <div class="panel-body">
             <p>Please note that the menu option is fixed this year:</p>
             <h5><strong>Starter</strong></h5>
-            <ul>
-                <li><b>Goats Cheese, Onion and Thyme Tart</b> (beetroot and orange salad)</li>
+            <ul style="list-style: none">
+                <p>Goat's Cheese and caramelised red onion tart, seasonal leaves, balasamic glaze</p>
             </ul>
             <h5><strong>Main</strong></h5>
-            <ul>
-                <li><b>Lemon and Garlic Marinated, Sautéed Breast of Free Range (Halal) Chicken</b> (ragout of white bean, mushrooms and cabbage in a tomato shell with olive oil mash)</li>
+            <h6>Vegetarian</h6>
+            <ul style="list-style: none">
+                <li>Roasted butternut squash and Roquette Risotto Red Pepper Coulis </li>
             </ul>
-            <h5><strong>Dessert</strong></h5><ul>
-                <li><strong>Raspberry Treacle Cake</strong> (rhubarb sauce, honeycomb and ice cream)</li>
+            <h6>Non-Vegetarian</h6>
+            <ul style="list-style: none">
+                <li>Corn-fed chicken breast, wholegrain mustard mash, buttered leeks</li>
             </ul>
-
+            <h5><strong>Dessert</strong></h5>
+            <ul style="list-style: none">
+                <li>Lemon Tart, Fresh Cream</li>
+            </ul>
             <p class="help-block">If you have any allergies or dietary requirements, please specify these below. If the above choices are unsuitable for your dietary requirements, we'll get in touch with you to confirm your menu. If you don't have any, please leave blank.</p>
         </div>
     </div>
@@ -52,8 +57,9 @@
                 </strong>
             @endif
             </td><td>
-            <!-- allow purchaser to choose menu choice for guest purchases -->
-            @if ($member->ticket_purchaser_id == Auth::user()->id || Auth::user()->id == 2944 || Auth::user()->id == 2974)
+            <!-- allow admins to see dietary requirementes TODO: Change this every year-->
+            <!-- currently only 2944 (), 2974 & 2918 are allowed to help prevent data misuse -->
+            @if ($member->ticket_purchaser_id == Auth::user()->id || Auth::user()->id == 2944 || Auth::user()->id == 2974 || Auth::user()->id == 2918)
               @include('dinner_groups.menu_choice', ['member' => $member])
             @endif
             </td><td>
@@ -78,7 +84,7 @@
 {{Form::open(['action' => ['DinnerGroupsController@addMember']])}}
 <div class="input-group col-xs-4" style="padding-left: 0; top: 1px;">
     <span class="input-group-addon">Add a new guest (non-member):</span>
-    <input type="text" size="10" class="form-control" name="new_guest" placeholder="Your guest's name">
+    <input type="text" size="10" style="width: 360px;" class="form-control" name="new_guest" placeholder="Your guest's name">
     <input type="hidden" name="group" value="{{$group->id}}">
 </div>
 <button type="submit" class="btn btn-primary">Add guest</button>

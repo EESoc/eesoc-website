@@ -2,16 +2,10 @@
 
 class DinnerGroup extends Eloquent {
 
-    //Max size reduced for BAE delegate at the table
-    //const MAX_SIZE_REDUCED = 7;
     const MAX_NO_OF_GROUPS = 17;
     const MAX_SIZE_FULL    = 10;
-    //const REDUCED_COUNT    = 9;
 
     const CAN_LEAVE_OWN_GRP = false; //only change this temporarily otherwise don't touch this!
-
-    // 'Final year' group IDs from the live database (sorry...)
-    //protected static $finalYearGroups = [3, 4, 5, 7, 8, 11, 12, 13, 14];
 
     /*
     Relations
