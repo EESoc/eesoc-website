@@ -50,28 +50,28 @@
                   <a href="{{{ route('admin.pages.index') }}}">Pages</a>
                 </li>
                 <li>
+                  <a href="{{{ route('admin.sponsors.index') }}}">Sponsors</a>
+                </li>
+                <!--li>
                   <a href="{{{ route('admin.contents.index') }}}">Content Blocks</a>
                 </li>
                 <li>
                   <a href="{{{ route('admin.events.index') }}}">Events</a>
                 </li>
                 <li>
-                  <a href="{{{ route('admin.sponsors.index') }}}">Sponsors</a>
-                </li>
-                <li>
                   <a href="{{{ route('admin.careersfair.index') }}}">Careers Fair</a>
-                </li>
-                <li>
-                  <a href="{{{ URL::action('Admin\InstagramPhotosController@getIndex') }}}">Instagram Photos</a>
                 </li>
                 <li>
                   <a href="{{{ route('admin.posts.index') }}}">Posts</a>
                 </li>
                 <li>
                   <a href="{{{ route('admin.categories.index') }}}">Categories</a>
-                </li>
+                </li-->
                 <li>
                   <a href="{{{ route('admin.committee.index') }}}">Committee Details</a>
+                </li>
+                <li>
+                  <a href="{{{ route('admin.links.index') }}}">Short Links</a>
                 </li>
               </ul>
             </li>
@@ -125,9 +125,9 @@
               </a>
             </li>
             <li>
-              <a href="{{{ url('/beta') }}}">
+              <a href="{{{ url('/home') }}}">
                 <span class="glyphicon glyphicon-home"></span>
-                Beta Site
+                Home
               </a>
             </li>
             <li>

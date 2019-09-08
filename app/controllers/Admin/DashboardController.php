@@ -21,24 +21,31 @@ class DashboardController extends BaseController {
         $results_bar_night = array();
         $date_labels = array();
 
-        for ($i=1; $i<=$number_of_days; $i++){
-          $new_date = date_sub(date_create($date_str), date_interval_create_from_date_string($i . ' days')); #date($current_year . '-' . $month_number . '-' . $i);
-          $new_date_str= date_format($new_date, 'Y-m-d');
-          $results_lockers []= Sale::where('date', '=', $new_date_str)
-                            ->where('product_id', '=', Product::ID_EESOC_DINNER)
-                            ->sum('quantity'); // counting number of sales per day
+        // for ($i=1; $i<=$number_of_days; $i++){
+        //   $new_date = date_sub(date_create($date_str), date_interval_create_from_date_string($i . ' days')); #date($current_year . '-' . $month_number . '-' . $i);
+        //   $new_date_str= date_format($new_date, 'Y-m-d');
+        //   $results_lockers []= Sale::where('date', '=', $new_date_str)
+        //                     ->where('product_id', '=', Product::ID_EESOC_DINNER)
+        //                     ->sum('quantity'); // counting number of sales per day
 
-          $results_bar_night []= Sale::where('date', '=', $new_date_str)
-          ->where('product_id', '=', Product::ID_EESOC_DINNER_NON_MEMBER)
-          ->sum('quantity');
+        //   $results_bar_night []= Sale::where('date', '=', $new_date_str)
+        //   ->where('product_id', '=', Product::ID_EESOC_DINNER_NON_MEMBER)
+        //   ->sum('quantity');
           
-          #echo "<h1>$count_perday | $date_str | $new_date_str</h1>";
+        //   #echo "<h1>$count_perday | $date_str | $new_date_str</h1>";
           
-          $date_labels []= date('jS M',strtotime($new_date_str));
-        }
+        //   $date_labels []= date('jS M',strtotime($new_date_str));
+        // }
 
         $prod_labels = array();
-        $prod_ids = [Product::ID_EESOC_BAR_NIGHT, Product::ID_EESOC_LOCKER, Product::ID_EESOC_HOODIE, Product::ID_EESOC_SWEAT_SHIRT, Product::ID_EESOC_DINNER, Product::ID_EESOC_DINNER_NON_MEMBER, Product::ID_EESOC_MEMBERSHIP];
+
+        //only show valid products
+        $prod_ids = array_keys (
+                        array_filter(Product::is_product_syncable(), function ($is_syncable_value) {
+                            return ($is_syncable_value == 1);
+                        })
+                    );
+
         $prod_count = array();
 
         foreach ($prod_ids as $prod_id) {

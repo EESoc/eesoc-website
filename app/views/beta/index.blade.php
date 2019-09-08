@@ -7,10 +7,10 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>EESoc - Beta Homepage</title>
+	<title>EESoc - Homepage</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Electrical Engineering Society" />
-	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+	<meta name="description" content="Imperial College's Electrical Engineering Society" />
+	<meta name="keywords" content="eesoc, electrical engineering, electronic engineering, imperial college, london" />
 	<meta name="author" content="Haaris" />
 
   <!-- 
@@ -28,7 +28,7 @@
 	 -->
 
   	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
+	<meta property="og:title" content="EESoc"/>
 	<meta property="og:image" content=""/>
 	<meta property="og:url" content=""/>
 	<meta property="og:site_name" content=""/>
@@ -147,30 +147,34 @@
 					
 				</div-->
 				<!--unlike all other items, events is array of named array not object!-->
-				@foreach ($events as $indexKey => $event)
-					
-					<div class="card-media">
-						<!-- media container -->
-						<div class="card-media-object-container">
-						<div class="card-media-object" style="background-image: url({{ asset('assets/beta/images/test.png') }}); background-size: 50%; background-repeat: no-repeat;"></div>
+				@if ($events == [])
+					<script>console.warn("Warning: no events were returned, API key may be outdated.")</script>
+				@else
+					@foreach ($events as $indexKey => $event)
+						
+						<div class="card-media">
+							<!-- media container -->
+							<div class="card-media-object-container">
+							<div class="card-media-object" style="background-image: url({{ asset('assets/beta/images/test.png') }}); background-size: 50%; background-repeat: no-repeat;"></div>
+							</div>
+							<!-- body container -->
+							<div class="card-media-body">
+							<div class="card-media-body-top">
+								<span class="subtle">{{ date("D, d M, g:i A", strtotime($event['start_time'])) }}</span>
+							</div>
+							<span class="card-media-body-heading">{{ $event['name'] }}</span>
+							<div class="card-media-body-supporting-bottom">
+								<span class="card-media-body-supporting-bottom-text subtle">{{ $event['place']['name'] }}</span>
+								<span class="card-media-body-supporting-bottom-text subtle u-float-right">Free</span>
+							</div>
+							<div class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
+								<!--span class="card-media-body-supporting-bottom-text subtle">#Music #Party</span-->
+								<a href="https://facebook.com/events/{{ $event['id'] }}" class="card-media-body-supporting-bottom-text card-media-link u-float-right" target="_blank">VIEW DETAILS</a>
+							</div>
+							</div>
 						</div>
-						<!-- body container -->
-						<div class="card-media-body">
-						<div class="card-media-body-top">
-							<span class="subtle">{{ date("D, d M, g:i A", strtotime($event['start_time'])) }}</span>
-						</div>
-						<span class="card-media-body-heading">{{ $event['name'] }}</span>
-						<div class="card-media-body-supporting-bottom">
-							<span class="card-media-body-supporting-bottom-text subtle">{{ $event['place']['name'] }}</span>
-							<span class="card-media-body-supporting-bottom-text subtle u-float-right">Free</span>
-						</div>
-						<div class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
-							<!--span class="card-media-body-supporting-bottom-text subtle">#Music #Party</span-->
-							<a href="https://facebook.com/events/{{ $event['id'] }}" class="card-media-body-supporting-bottom-text card-media-link u-float-right" target="_blank">VIEW DETAILS</a>
-						</div>
-						</div>
-					</div>
-				@endforeach
+					@endforeach
+				@endif
   
 			</div>
 		</div>

@@ -54,9 +54,9 @@
                   </a>
                 </li>
                 <li>
-                  <a href="{{{ url('/beta') }}}">
+                  <a href="{{{ url('/home') }}}">
                     <span class="glyphicon glyphicon-home"></span>
-                    Beta Site
+                    Home
                   </a>
                 </li>
                 <li>
