@@ -12,8 +12,56 @@
 */
 
 # Home
-Route::controller('home', 'HomeController');
-Route::get('/', 'HomeController@getWelcome');
+Route::controller('home', 'BetaController');
+
+Route::get('/', function()
+{
+    //essentially the concept is that the user views a beta page if not logged in
+    //or else the dashboard if logged in, old welcome page will never be shown
+    if (is_null(Auth::user())){
+        //return Redirect::intended(URL::action('HomeController@getWelcome'));
+        return Redirect::to('https://eesoc.com/home');
+    }
+    else {
+        if(Auth::user()->is_admin){
+            //return Redirect::intended(URL::action('HomeController@getWelcome'));
+            return Redirect::to('https://eesoc.com/admin');
+        }
+        else {
+            return Redirect::to('https://eesoc.com/dashboard');
+        }
+       
+    }
+
+});
+// Route::get('/', 'BetaController@getIndex');
+// // });
+// Route::group(['before' => ''], function() {
+//     Route::get('/', 'BetaController@getIndex');
+//     //Route::get('/', 'HomeController@getWelcome');
+// });
+// Route::group(['middleware' => 'auth.member'], function() {
+//     Route::get('/', 'HomeController@getWelcome');
+// });
+
+
+// Route::group(['middleware' => 'auth.guest'], function() {
+//     // Route::get('/', function()
+//     // {
+//     //     return Redirect::to('https://eesoc.com/beta');
+//     // });
+//     Route::get('/', 'BetaController@getIndex');
+// });
+// Route::group(['middleware' => 'auth.member'], function() {
+//     Route::get('/', function() {
+//         return Redirect::to('https://eesoc.com/admin');
+//     });
+// });
+// Route::get('/', function()
+// {
+//     return Redirect::to('https://eesoc.com/beta');
+// });
+
 
 # Session Management
 Route::get('sign-in',     'SessionsController@getNew');
@@ -41,7 +89,7 @@ Route::controller('careersfair', 'CareersFairController');
 
 # Beta
 # Events
-Route::controller('beta', 'BetaController');
+//Route::controller('beta', 'BetaController');
 
 # API
 # API
@@ -72,23 +120,23 @@ Route::get('bae', function()
     return Redirect::to('https://career012.successfactors.eu/career?company=BAE&site=VjItSE43VDBudHJlU3UwSGpKcUVacWFRQT09', 303, ['X-Why' => 'Yes']);
 });
 
-//Temp short linking
-Route::get('dinner', function()
-{
-    return Redirect::to('https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/19974/eesoc-new-years-dinner-ticket-members', 302);
-});
-Route::get('dinner/non-member', function()
-{
-    return Redirect::to('https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/19973/eesoc-new-years-dinner-ticket-non-members', 302);
-});
-Route::get('dinner/staff', function()
-{
-    return Redirect::to('https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/19975/eesoc-new-years-dinner-ticket-staff', 302);
-});
-Route::get('dinner/afterparty', function()
-{
-    return Redirect::to('https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/20003/eesoc-new-years-dinner-afterparty-ticket-members-only', 302);
-});
+//Temp short linking -- now done properly via db
+// Route::get('dinner', function()
+// {
+//     return Redirect::to('https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/19974/eesoc-new-years-dinner-ticket-members', 302);
+// });
+// Route::get('dinner/non-member', function()
+// {
+//     return Redirect::to('https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/19973/eesoc-new-years-dinner-ticket-non-members', 302);
+// });
+// Route::get('dinner/staff', function()
+// {
+//     return Redirect::to('https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/19975/eesoc-new-years-dinner-ticket-staff', 302);
+// });
+// Route::get('dinner/afterparty', function()
+// {
+//     return Redirect::to('https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/20003/eesoc-new-years-dinner-afterparty-ticket-members-only', 302);
+// });
 Route::get('mumsanddads', function()
 {
     return Redirect::to('https://eesoc.com/mums-and-dads', 302);
@@ -111,6 +159,9 @@ Route::get('lockers', function()
  * Routes for members
  */
 Route::group(['before' => 'auth.member'], function() {
+    # default view for members
+    //Route::get('/', 'HomeController@getWelcome');
+
     # Dashboard sub-links
     Route::group(['prefix' => 'dashboard'], function() {
         # Subscriptions
@@ -192,6 +243,10 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
     # Committee
     Route::resource('committee', 'Admin\CommitteeController', ['except' => ['show']]);
 
+    # Short Links
+    Route::resource('links', 'Admin\LinksController', ['except' => ['show']]);
+    Route::controller('links', 'Admin\LinksController');
+
     # Careers Fair
     Route::resource('careersfair', 'Admin\CareersFairController', ['except' => ['show']]);
 
@@ -213,17 +268,33 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
     Route::get('elfinder/ckeditor',  'Barryvdh\ElfinderBundle\ElfinderController@showCKEditor');
 });
 
+
+// Link::active()
+//             ->get();
+
 # Catch all
 Route::any('{path}', function($path) {
     $path = rtrim($path, '/');
+    $link = null;
     $page = Page::where('slug', '=', $path)->first();
 
     if ( ! $page) {
-        App::abort(404);
+        $link = Link::active()->where('slug', '=', $path)->first();
     }
 
-    return View::make('page')
+    
+    if ( ! $page && ! $link) {
+        App::abort(404);
+    }
+    elseif ($link) {
+        return Redirect::to($link->full_url);
+    }
+    else {
+        return View::make('page')
         ->with('page', $page);
+    }
+
+    
 })->where('path', '.*');
 
 App::missing(function($exception)
