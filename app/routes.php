@@ -12,8 +12,59 @@
 */
 
 # Home
-Route::controller('home', 'HomeController');
-Route::get('/', 'HomeController@getWelcome');
+Route::controller('home', 'BetaController');
+Route::get('/', 'BetaController@getIndex');
+
+// Route::get('/', function()
+// {
+//     //essentially the concept is that the user views a beta page if not logged in
+//     //or else the dashboard if logged in, old welcome page will never be shown
+//     if (is_null(Auth::user())){
+//         //return Redirect::intended(URL::action('HomeController@getWelcome'));
+//         return Redirect::to('https://eesoc.com/home');
+//     }
+//     else {
+//         if(Auth::user()->is_admin){
+//             //return Redirect::intended(URL::action('HomeController@getWelcome'));
+//             return Redirect::to('https://eesoc.com/admin');
+//         }
+//         else {
+//             return Redirect::to('https://eesoc.com/dashboard');
+//         }
+       
+//     }
+
+// });
+
+
+// Route::get('/', 'BetaController@getIndex');
+// // });
+// Route::group(['before' => ''], function() {
+//     Route::get('/', 'BetaController@getIndex');
+//     //Route::get('/', 'HomeController@getWelcome');
+// });
+// Route::group(['middleware' => 'auth.member'], function() {
+//     Route::get('/', 'HomeController@getWelcome');
+// });
+
+
+// Route::group(['middleware' => 'auth.guest'], function() {
+//     // Route::get('/', function()
+//     // {
+//     //     return Redirect::to('https://eesoc.com/beta');
+//     // });
+//     Route::get('/', 'BetaController@getIndex');
+// });
+// Route::group(['middleware' => 'auth.member'], function() {
+//     Route::get('/', function() {
+//         return Redirect::to('https://eesoc.com/admin');
+//     });
+// });
+// Route::get('/', function()
+// {
+//     return Redirect::to('https://eesoc.com/beta');
+// });
+
 
 # Session Management
 Route::get('sign-in',     'SessionsController@getNew');
@@ -41,7 +92,7 @@ Route::controller('careersfair', 'CareersFairController');
 
 # Beta
 # Events
-Route::controller('beta', 'BetaController');
+//Route::controller('beta', 'BetaController');
 
 # API
 # API
