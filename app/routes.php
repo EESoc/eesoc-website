@@ -216,14 +216,26 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
 # Catch all
 Route::any('{path}', function($path) {
     $path = rtrim($path, '/');
+    $link = null;
     $page = Page::where('slug', '=', $path)->first();
 
     if ( ! $page) {
-        App::abort(404);
+        $link = Link::active()->where('slug', '=', $path)->first();
     }
 
-    return View::make('page')
+    
+    if ( ! $page && ! $link) {
+        App::abort(404);
+    }
+    elseif ($link) {
+        return Redirect::to($link->full_url);
+    }
+    else {
+        return View::make('page')
         ->with('page', $page);
+    }
+
+    
 })->where('path', '.*');
 
 App::missing(function($exception)
