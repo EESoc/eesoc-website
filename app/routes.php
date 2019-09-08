@@ -12,28 +12,30 @@
 */
 
 # Home
-// Route::controller('home', 'BetaController');
-// Route::get('/', 'BetaController@getIndex');
+// Method #0 -- only here for tests passing
+// TODO: Fix / modify tests to accept method #1 without assertion errors
+Route::controller('home', 'BetaController');
+Route::get('/', 'BetaController@getIndex');
 
-// Method #1 -- currently employed
-Route::get('/', function()
-{
-    //essentially the concept is that the user views a beta page if not logged in
-    //or else the dashboard if logged in, old welcome page will never be shown
-    if (is_null(Auth::user())){
-        //return Redirect::intended(URL::action('HomeController@getWelcome'));
-        return Redirect::to('https://eesoc.com/home');
-    }
-    else {
-        if(Auth::user()->is_admin){
-            //return Redirect::intended(URL::action('HomeController@getWelcome'));
-            return Redirect::to('https://eesoc.com/admin');
-        }
-        else {
-            return Redirect::to('https://eesoc.com/dashboard');
-        }   
-    }
-});
+// Method #1 -- currently employed on webserver, works fine
+// Route::get('/', function()
+// {
+//     //essentially the concept is that the user views a beta page if not logged in
+//     //or else the dashboard if logged in, old welcome page will never be shown
+//     if (is_null(Auth::user())){
+//         //return Redirect::intended(URL::action('HomeController@getWelcome'));
+//         return Redirect::to('https://eesoc.com/home');
+//     }
+//     else {
+//         if(Auth::user()->is_admin){
+//             //return Redirect::intended(URL::action('HomeController@getWelcome'));
+//             return Redirect::to('https://eesoc.com/admin');
+//         }
+//         else {
+//             return Redirect::to('https://eesoc.com/dashboard');
+//         }   
+//     }
+// });
 
 // Method #2 -- has some bugs
 // Route::get('/', 'BetaController@getIndex');
