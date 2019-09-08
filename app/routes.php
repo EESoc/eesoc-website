@@ -12,31 +12,30 @@
 */
 
 # Home
-Route::controller('home', 'BetaController');
-Route::get('/', 'BetaController@getIndex');
+// Route::controller('home', 'BetaController');
+// Route::get('/', 'BetaController@getIndex');
 
-// Route::get('/', function()
-// {
-//     //essentially the concept is that the user views a beta page if not logged in
-//     //or else the dashboard if logged in, old welcome page will never be shown
-//     if (is_null(Auth::user())){
-//         //return Redirect::intended(URL::action('HomeController@getWelcome'));
-//         return Redirect::to('https://eesoc.com/home');
-//     }
-//     else {
-//         if(Auth::user()->is_admin){
-//             //return Redirect::intended(URL::action('HomeController@getWelcome'));
-//             return Redirect::to('https://eesoc.com/admin');
-//         }
-//         else {
-//             return Redirect::to('https://eesoc.com/dashboard');
-//         }
-       
-//     }
+// Method #1 -- currently employed
+Route::get('/', function()
+{
+    //essentially the concept is that the user views a beta page if not logged in
+    //or else the dashboard if logged in, old welcome page will never be shown
+    if (is_null(Auth::user())){
+        //return Redirect::intended(URL::action('HomeController@getWelcome'));
+        return Redirect::to('https://eesoc.com/home');
+    }
+    else {
+        if(Auth::user()->is_admin){
+            //return Redirect::intended(URL::action('HomeController@getWelcome'));
+            return Redirect::to('https://eesoc.com/admin');
+        }
+        else {
+            return Redirect::to('https://eesoc.com/dashboard');
+        }   
+    }
+});
 
-// });
-
-
+// Method #2 -- has some bugs
 // Route::get('/', 'BetaController@getIndex');
 // // });
 // Route::group(['before' => ''], function() {
@@ -47,7 +46,7 @@ Route::get('/', 'BetaController@getIndex');
 //     Route::get('/', 'HomeController@getWelcome');
 // });
 
-
+// Method #3 -- may have bugs
 // Route::group(['middleware' => 'auth.guest'], function() {
 //     // Route::get('/', function()
 //     // {
@@ -90,9 +89,6 @@ Route::controller('sponsors', 'SponsorsController');
 # Careers Fair
 Route::controller('careersfair', 'CareersFairController');
 
-# Beta
-# Events
-//Route::controller('beta', 'BetaController');
 
 # API
 # API
