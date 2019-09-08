@@ -21,6 +21,7 @@ class DashboardController extends BaseController {
         $results_bar_night = array();
         $date_labels = array();
 
+
         // for ($i=1; $i<=$number_of_days; $i++){
         //   $new_date = date_sub(date_create($date_str), date_interval_create_from_date_string($i . ' days')); #date($current_year . '-' . $month_number . '-' . $i);
         //   $new_date_str= date_format($new_date, 'Y-m-d');
@@ -45,6 +46,7 @@ class DashboardController extends BaseController {
                             return ($is_syncable_value == 1);
                         })
                     );
+
 
         $prod_count = array();
 

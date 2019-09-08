@@ -111,14 +111,18 @@ Route::get('tv', 'TVController@show');
 
 # Bar Night 2017 (temp redirect)
 Route::get('barnight', function()
+
 {
     return Redirect::to('https://www.imperialcollegeunion.org/shop/club-society-project-products/electrical-engineering-products/19111/eesoc-bar-night-tickets');
+
 });
 
 # Sponsor Link
 Route::get('bae', function()
 {
+
     return Redirect::to('https://career012.successfactors.eu/career?company=BAE&site=VjItSE43VDBudHJlU3UwSGpKcUVacWFRQT09', 303, ['X-Why' => 'Yes']);
+
 });
 
 //Temp short linking -- now done properly via db
@@ -241,9 +245,11 @@ Route::group(['before' => 'auth.admin', 'prefix' => 'admin'], function() {
     # Committee
     Route::resource('committee', 'Admin\CommitteeController', ['except' => ['show']]);
 
+
     # Short Links
     Route::resource('links', 'Admin\LinksController', ['except' => ['show']]);
     //Route::controller('links', 'Admin\LinksController');
+
 
     # Careers Fair
     Route::resource('careersfair', 'Admin\CareersFairController', ['except' => ['show']]);

@@ -2,10 +2,12 @@
 
 class DinnerGroup extends Eloquent {
 
+
     const MAX_NO_OF_GROUPS = 17;
     const MAX_SIZE_FULL    = 10;
 
     const CAN_LEAVE_OWN_GRP = false; //only change this temporarily otherwise don't touch this!
+
 
     /*
     Relations

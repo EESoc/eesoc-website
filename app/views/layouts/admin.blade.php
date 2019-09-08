@@ -73,6 +73,9 @@
                 <li>
                   <a href="{{{ route('admin.links.index') }}}">Short Links</a>
                 </li>
+                <li>
+                  <a href="{{{ route('admin.committee.index') }}}">Committee Details</a>
+                </li>
               </ul>
             </li>
             <li class="dropdown">
@@ -125,9 +128,11 @@
               </a>
             </li>
             <li>
+
               <a href="{{{ url('/home') }}}">
                 <span class="glyphicon glyphicon-home"></span>
                 Home
+
               </a>
             </li>
             <li>

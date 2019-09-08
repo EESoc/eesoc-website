@@ -19,6 +19,7 @@
 
         <div class="form-group">
             <!--label for="special_req" class="col-sm-2 control-label" style="text-align: left; top: -8px;">Dietary Requirements</label-->
+
             <div class="col-md-6 col-sm-10">
                 <input type="text" name="special_req" id="special_req" value="{{ $member->special_req }}" maxlength="140" style="width: 90%"/>
             </div>
@@ -32,6 +33,7 @@
 
 
     
+
 
     {{ Form::hidden('member', $member->id) }}
     {{ Form::close() }}

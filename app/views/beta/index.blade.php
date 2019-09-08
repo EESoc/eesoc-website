@@ -11,6 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Imperial College's Electrical Engineering Society" />
 	<meta name="keywords" content="eesoc, electrical engineering, electronic engineering, imperial college, london" />
+
 	<meta name="author" content="Haaris" />
 
   <!-- 
@@ -147,6 +148,7 @@
 					
 				</div-->
 				<!--unlike all other items, events is array of named array not object!-->
+
 				@if ($events == [])
 					<script>console.warn("Warning: no events were returned, API key may be outdated.")</script>
 				@else
@@ -175,6 +177,7 @@
 						</div>
 					@endforeach
 				@endif
+
   
 			</div>
 		</div>

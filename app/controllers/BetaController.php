@@ -12,6 +12,7 @@ class BetaController extends BaseController {
             ),
         ));
 
+
         ## temp fix -- api problem
         $futureEvents = [];
         try {
@@ -23,6 +24,7 @@ class BetaController extends BaseController {
         
 
 
+
         // $client2 = new \Guzzle\Http\Client('https://facebook.com/events');
         // $request2 = $client2->get('151230655829890');
         // $response2 = $request2->send();
@@ -32,7 +34,7 @@ class BetaController extends BaseController {
         //     preg_match('/<p>([^<]+)<\/p>/', $output, $output_array);
         //     $this->debug_to_console($output); 
         // }
-        
+
 
         if ($response->isSuccessful()) {
 

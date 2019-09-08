@@ -6,6 +6,7 @@
   <br >
   <br >
   <div class="container">
+
           <a class="btn btn-info btn-lg" href="{{{ route('admin.emails.index') }}}"><span class="glyphicon glyphicon-envelope"></span> Emails</a>
           <a class="btn btn-info btn-lg" href="{{{ route('dashboard.dinner.groups.index') }}}"><span class="glyphicon glyphicon-glass"></span> Dinner</a>
           <a class="btn btn-info btn-lg" href="{{{ action('LockersController@getIndex') }}}"><span class="glyphicon glyphicon-lock"></span> Lockers</a>
@@ -46,6 +47,7 @@
     //   is_series: 1
     // });
 
+
     var data2 = {
       labels: {{ json_encode($list['prod_labels']) }},
 
@@ -59,7 +61,9 @@
 
     var chart2 = new Chart({
       parent: "#chart2",
+
       title: "Sales Per Product (Only Synced Products)",
+
       data: data2,
       type: 'bar', // or 'line', 'scatter', 'pie', 'percentage'
       height: 250,

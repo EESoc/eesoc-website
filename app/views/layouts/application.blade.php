@@ -57,6 +57,7 @@
                   <a href="{{{ url('/home') }}}">
                     <span class="glyphicon glyphicon-home"></span>
                     Home
+
                   </a>
                 </li>
                 <li>

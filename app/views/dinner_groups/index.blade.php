@@ -3,7 +3,9 @@
 @section('content')
   <div class="page-header">
     <h1>Dinner Seating &amp; Meal Planner</h1>
+
     <p>If you have any allergies or dietary requirements, please click on your table number and add the details next to your name.</p>
+
   </div>
   @if ($user && $user->getUnclaimedDinnerTicketsCountAttribute() && ($unclaimed = $user->unclaimed_dinner_tickets_count))
       <h4 class="alert alert-info">

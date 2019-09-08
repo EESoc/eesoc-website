@@ -21,6 +21,7 @@
         <div class="panel-body">
             <p>Please note that the menu option is fixed this year:</p>
             <h5><strong>Starter</strong></h5>
+
             <ul style="list-style: none">
                 <p>Goat's Cheese and caramelised red onion tart, seasonal leaves, balasamic glaze</p>
             </ul>
@@ -37,6 +38,7 @@
             <ul style="list-style: none">
                 <li>Lemon Tart, Fresh Cream</li>
             </ul>
+
             <p class="help-block">If you have any allergies or dietary requirements, please specify these below. If the above choices are unsuitable for your dietary requirements, we'll get in touch with you to confirm your menu. If you don't have any, please leave blank.</p>
         </div>
     </div>
@@ -57,9 +59,11 @@
                 </strong>
             @endif
             </td><td>
+
             <!-- allow admins to see dietary requirementes TODO: Change this every year-->
             <!-- currently only 2944 (), 2974 & 2918 are allowed to help prevent data misuse -->
             @if ($member->ticket_purchaser_id == Auth::user()->id || Auth::user()->id == 2944 || Auth::user()->id == 2974 || Auth::user()->id == 2918)
+
               @include('dinner_groups.menu_choice', ['member' => $member])
             @endif
             </td><td>
@@ -84,7 +88,9 @@
 {{Form::open(['action' => ['DinnerGroupsController@addMember']])}}
 <div class="input-group col-xs-4" style="padding-left: 0; top: 1px;">
     <span class="input-group-addon">Add a new guest (non-member):</span>
+
     <input type="text" size="10" style="width: 360px;" class="form-control" name="new_guest" placeholder="Your guest's name">
+
     <input type="hidden" name="group" value="{{$group->id}}">
 </div>
 <button type="submit" class="btn btn-primary">Add guest</button>

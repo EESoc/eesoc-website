@@ -39,12 +39,15 @@ class SyncEActivitiesSalesCommand extends Command {
     {
         $this->info('SalesStat@' . date('H:i_d-m-y'));
 
+
         $eactivities_client = new EActivities\Client( new Guzzle\Http\Client);
+
 
         //for debugging
         // UNCOMMENT AND RUN THIS COMMAND IN TERMINAL TO SEE PROD_IDS
         // OR ELSE IF >1 SALES, FIND ID IN EACTIVITES UNION PAGE
         //$this->info(print_r($eactivities_client->getProductList()));
+
 
         // only sync products with well-defined IDs
         foreach (Product::is_product_syncable() as $prod_id => $is_syncable) {
@@ -169,6 +172,7 @@ class SyncEActivitiesSalesCommand extends Command {
             if ($new && $newCallback)
                 $newCallback($purchase, $sale, $user);
         }
+
 
         $this->info(sprintf("Product: %s\tPurchases: %d (%+d);", 
                     substr($product_info['Name'], 0, min(strlen($product_info['Name']), 12)), 

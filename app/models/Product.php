@@ -28,6 +28,7 @@
 class Product {
 
     const ID_EESOC_LOCKER = 28476;
+
     const ID_EESOC_MEMBERSHIP = 26565;
     
     const ID_EESOC_DINNER = 29966;
@@ -56,6 +57,7 @@ class Product {
                         Product::ID_EESOC_SWEAT_SHIRT => 1,
                 );
     }
+
 
 
     public static function totalQuantity($product_id){
