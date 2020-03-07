@@ -8,7 +8,7 @@
     <h2>Group #{{ $group->id }}</h2>
     @if ($group->is_full)
         <br>
-	    <span class="alert alert-danger" style="color:red;">This group is now full, to add yourself or your guest, please select another group.</span>
+        <span class="alert alert-danger" style="color:red;">This group is now full, to add yourself or your guest, please select another group.</span>
         <br><br>
     @endif
     @if ($group->owner_id == Auth::user()->id)
@@ -20,23 +20,30 @@
         <div class="panel-heading"><h4>Menu</h4></div>
         <div class="panel-body">
             <p>Please note that the menu option is fixed this year:</p>
-            <h5><strong>Starter</strong></h5>
 
+            <h5><strong>Starter</strong></h5>
+            <h6>Vegan / Vegetarian</h6>
             <ul style="list-style: none">
-                <p>Goat's Cheese and caramelised red onion tart, seasonal leaves, balasamic glaze</p>
+                <p>Pea and mint tortellini, Cote veloute</p>
             </ul>
-            <h5><strong>Main</strong></h5>
-            <h6>Vegetarian</h6>
+            <h6>Non - Vegan / Vegetarian</h6>
             <ul style="list-style: none">
-                <li>Roasted butternut squash and Roquette Risotto Red Pepper Coulis </li>
+                <p>Lime and soy glazed tuna, spiced fennel salad, ginger confit</p>
+            </ul>
+
+            <h5><strong>Main</strong></h5>
+            <h6>Vegan / Vegetarian</h6>
+            <ul style="list-style: none">
+                <li>Quinoa risotto, tempura vegetables, sauce vierge</li>
             </ul>
             <h6>Non-Vegetarian</h6>
             <ul style="list-style: none">
-                <li>Corn-fed chicken breast, wholegrain mustard mash, buttered leeks</li>
+                <li>Poached breast of free range chicken, ragout of white bean, mushrooms, sun blushed tomatoes and broad beans, pumpkin puree, herb gnocci and tarragon cream sauce</li>
             </ul>
+
             <h5><strong>Dessert</strong></h5>
             <ul style="list-style: none">
-                <li>Lemon Tart, Fresh Cream</li>
+                <li>Bitter Lemon Tart (*vegetarian only), Passionfruit sorbet and raspberry jelly</li>
             </ul>
 
             <p class="help-block">If you have any allergies or dietary requirements, please specify these below. If the above choices are unsuitable for your dietary requirements, we'll get in touch with you to confirm your menu. If you don't have any, please leave blank.</p>
