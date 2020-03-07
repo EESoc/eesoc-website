@@ -536,7 +536,7 @@ echo $html;
 
                             <div style="text-align: center;">
                                 Sponsored by<br><br>
-                                <img src="https://eesoc.com/assets/email/201819/sponsors.png" width="500" height="123" style="width: 500px; height: 123px;">
+                                <img src="https://eesoc.com/assets/email/201920/sponsors.png" width="500" height="123" style="width: 500px; height: 123px;">
                             </div>
 
                         </td>
