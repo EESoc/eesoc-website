@@ -91,7 +91,7 @@
 	  </div>
 	</header>
 	
-	<section id="fh5co-home" data-section="home" style="background-image: url({{ asset('assets/beta/images/soc2018.jpg') }}); background-position-x: 50%;" data-stellar-background-ratio="0.5">
+	<section id="fh5co-home" data-section="home" style="background-image: url({{ asset('assets/beta/images/soc2019.jpg') }}); background-position-x: 50%;" data-stellar-background-ratio="0.5">
 		<div class="gradient"></div>
 		<div class="container">
 			<div class="text-wrap">
